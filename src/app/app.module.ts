@@ -6,12 +6,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from '../login/login.component';
 import { CreateComponent } from '../create/create.component';
+import { ProfileComponent } from '../profile/profile.component';
 
 import { AppService } from './app.service';
 
 @NgModule({
     imports: [ BrowserModule, FormsModule, HttpClientModule ],
-    declarations: [ AppComponent, LoginComponent, CreateComponent ],
+    declarations: [ AppComponent, LoginComponent, CreateComponent, ProfileComponent ],
     bootstrap: [ AppComponent ],
     providers: [ AppService ]
 })

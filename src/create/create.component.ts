@@ -20,19 +20,29 @@ export class CreateComponent {
     };
 
     wrongLogin: boolean = false;
-
-    // disabled = this.partnerInfo.firstName.length === 0 || this.partnerInfo.secondName.length  === 0 || this.partnerInfo.login.length == 0;
+    emptyFirstName: boolean = false;
+    emptySecondName: boolean = false;
+    emptyLogin: boolean = false;
+    errorEmptyMessage: boolean = false;
 
     submitClick () {
-        const data = this.partnerInfo;
-        this.apiService.create(data).subscribe((data) => {
-            console.log('data', data)
-        }, error => {
-            const typeOfFind = typeof (error.error.find((item: any) => {
-                 return (item.field === 'login' && item.error === 'not unique')
-            }));
+        this.emptyFirstName = !this.partnerInfo.firstName.length;
+        this.emptySecondName = !this.partnerInfo.secondName.length;
+        this.emptyLogin = !this.partnerInfo.login.length;
 
-            this.wrongLogin = typeOfFind !== 'undefined';
-        });
+        if(!this.emptyLogin || !this.emptyFirstName || !this.emptySecondName) {
+            const data = this.partnerInfo;
+            this.apiService.create(data).subscribe((data) => {
+                console.log('data', data)
+            }, error => {
+                const typeOfFind = typeof (error.error.find((item: any) => {
+                    return (item.field === 'login' && item.error === 'not unique')
+                }));
+
+                this.wrongLogin = typeOfFind !== 'undefined';
+            });
+        } else {
+            this.errorEmptyMessage = true;
+        }
     }
 }

@@ -1,0 +1,41 @@
+<div class="popup active">
+    <div class="popup__inner">
+        <div class="popup__wrap">
+            <div class="popup__close">
+                <div class="svg-icon svg-icon_icon-close2">
+                    <svg>
+                        <use xlink:href="#icon-close2"></use>
+                    </svg>
+                </div>
+            </div>
+            <h2 class="popup__title">Авторизация</h2>
+            <form class="form" action="#">
+                <div *ngIf="notFound">
+                    <p class="form__error-msg">Аккаунт с таким логином или почтой не существует в системе. Пожалуйста, проверьте правильность написания данных.</p>
+                    <div class="form__separator form__separator_small"></div>
+                </div>
+                <div class="form__group">
+                    <div class="form__name" [ngClass]="{error:notFound}">Ваш логин или почта</div>
+                    <input class="form__control" [ngClass]="{error:notFound}" type="text" [(ngModel)]="login" name="login" />
+                </div>
+                <div class="form__group">
+                    <div class="form__name">Пароль</div>
+                    <div class="form__wrap">
+                        <input class="form__control" type="password" [(ngModel)]="password" name="login" />
+                        <a href="">Забыли пароль?</a>
+                    </div>
+                </div>
+                <div class="form__group">
+                    <button class="btn btn_primary" type="submit" [disabled]="login.length === 0 || password.length === 0" (click)="submitClick()">Вход</button>
+                </div>
+                <div class="form__separator form__separator_small"></div>
+                <div class="form__group form__group_center">
+                    <p>Нет аккаунта BeHappy24?</p>
+                    <div class="form__link">
+                        <a href="">Создать аккаунт »</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

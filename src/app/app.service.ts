@@ -36,4 +36,8 @@ export class AppService {
     create(data: ICreate) {
         return this.http.put('http://localhost:3000/api/partner', data, this._options);
     }
+
+    read() {
+        return this.http.get('http://localhost:3000/api/partner?id=2', this._options);
+    }
 }

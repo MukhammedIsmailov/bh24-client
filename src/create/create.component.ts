@@ -30,7 +30,7 @@ export class CreateComponent {
         this.emptySecondName = !this.partnerInfo.secondName.length;
         this.emptyLogin = !this.partnerInfo.login.length;
 
-        if(!this.emptyLogin || !this.emptyFirstName || !this.emptySecondName) {
+        if (!this.emptyLogin || !this.emptyFirstName || !this.emptySecondName) {
             const data = this.partnerInfo;
             this.apiService.create(data).subscribe((data) => {
                 console.log('data', data)

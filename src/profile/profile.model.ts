@@ -12,4 +12,10 @@ export interface IProfile {
     questionStaff?: string;
     questionResults?: string;
     login: string;
+    facebook?: string;
+    telegram?: string;
+    skype?: string;
+    viber?: string;
+    vk?: string;
+    whatsapp?: string;
 }

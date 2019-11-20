@@ -71,14 +71,9 @@ export class ProfileComponent {
     }
 
 
-    upload (file: any) {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = (_event) => {
-            this.image = reader.result;
-            this.viewImage = true;
-            console.log(this.image);
-            console.log(this.viewImage)
-        }
+    upload (file: File) {
+        this.apiService.upload(file).subscribe((data: any) => {
+            console.log(data.iconName);
+        })
     }
 }

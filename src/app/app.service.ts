@@ -6,9 +6,15 @@ import { ICreate } from '../create/create.model';
 
 @Injectable()
 export class AppService {
-    constructor (private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+    }
 
-    private _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }) };
+    private _options = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+        })
+    };
 
     // private statusCode: number = 200;
     //
@@ -39,5 +45,14 @@ export class AppService {
 
     read() {
         return this.http.get('http://localhost:3000/api/partner?id=2', this._options);
+    }
+
+    upload(data: any) {
+        console.log(data.name)
+        let formData: FormData = new FormData();
+        formData.append('avatar', data, data.name);
+        console.log(formData)
+        // this._options.headers.append('Content-Type', 'multipart/form-data');
+        return this.http.post('http://localhost:3000/api/upload', { content: formData }, this._options);
     }
 }

@@ -10,7 +10,7 @@
     <span>Как повысить эффективность Вашей системы очень ощутимо?
             <br />Граммотно заполните и настройте Ваш профиль.</span>
 </div>
-<form class="form" action="">
+<form class="form" formGroup="uploadForm">
     <div class="row stretch-md">
         <div class="col-md-4 col-lg-3">
             <div class="content__item content__item_num">
@@ -26,9 +26,9 @@
                   </span>
                 </h2>
                 <label class="photo-file">
-                    <input *ngIf="!viewImage" #file class="photo-file__input" type="file" accept="image/*" name="image" [(ngModel)]="image" (change)="upload(file.files[0])"/>
+                    <input id="avatar" *ngIf="!viewImage" #file class="photo-file__input" type="file" accept="image/*" name="avatar" [(ngModel)]="image" (change)="upload(file.files[0])"/>
                     <span class="photo-file__preview">
-                    <img *ngIf="viewImage" [src]="image" alt="" />
+                    <!--<img *ngIf="viewImage" [src]="image" alt="" />-->
                   </span>
                     <span class="photo-file__icon">
                     <div class="svg-icon svg-icon_icon-plus">

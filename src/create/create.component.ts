@@ -33,7 +33,6 @@ export class CreateComponent {
         if (!this.emptyLogin || !this.emptyFirstName || !this.emptySecondName) {
             const data = this.partnerInfo;
             this.apiService.create(data).subscribe((data) => {
-                console.log('data', data)
             }, error => {
                 const typeOfFind = typeof (error.error.find((item: any) => {
                     return (item.field === 'login' && item.error === 'not unique')

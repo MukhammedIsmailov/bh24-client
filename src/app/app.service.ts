@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { ILogin } from '../login/login.model';
 import { ICreate } from '../create/create.model';
-import { IProfile } from '../profile/profile.model';
 
 @Injectable()
 export class AppService {
@@ -30,7 +29,7 @@ export class AppService {
     }
 
 
-    update (data: IProfile) {
+    update (data: any) {
         return this.http.post('http://localhost:3000/api/partner?id=2', { ...data, iconUrl: 'ssdasdasd' }, this._options)
     }
 

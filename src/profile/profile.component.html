@@ -10,7 +10,7 @@
     <span>Как повысить эффективность Вашей системы очень ощутимо?
             <br />Граммотно заполните и настройте Ваш профиль.</span>
 </div>
-<form class="form" formGroup="uploadForm">
+<form class="form">
     <div class="row stretch-md">
         <div class="col-md-4 col-lg-3">
             <div class="content__item content__item_num">
@@ -26,7 +26,7 @@
                   </span>
                 </h2>
                 <label class="photo-file">
-                    <input id="avatar" *ngIf="!viewImage" #file class="photo-file__input" type="file" accept="image/*" name="avatar" [(ngModel)]="image" (change)="upload(file.files[0])"/>
+                    <input id="avatar" #file class="photo-file__input" type="file" accept="image/*" name="avatar"/>
                     <span class="photo-file__preview">
                     <!--<img *ngIf="viewImage" [src]="image" alt="" />-->
                   </span>
@@ -212,12 +212,12 @@
                     <input class="form__control" type="text" name="login" [(ngModel)]="profile.login" [disabled]="profile.login.length > 0" />
                 </div>
                 <div class="form__group">
-                    <div class="form__name" [ngClass]="{error:wrongConfirmPassword}" >Пароль</div>
-                    <input class="form__control" type="password" name="password" [ngClass]="{error:wrongConfirmPassword}" [(ngModel)]="profile.password" [disabled]="disabledPassword"/>
+                    <div class="form__name" [ngClass]="{error:wrongConfirmPassword||emptyPassword}" >Пароль</div>
+                    <input class="form__control" type="password" name="password" [ngClass]="{error:wrongConfirmPassword||emptyPassword}" [(ngModel)]="profile.password" [disabled]="passwordIsExist"/>
                 </div>
-                <div class="form__group">
-                    <div class="form__name" [ngClass]="{error:wrongConfirmPassword}">Повторите пароль</div>
-                    <input class="form__control" type="password" name="confirmPassword" [(ngModel)]="confirmPassword" [ngClass]="{error:wrongConfirmPassword}" [disabled]="disabledPassword"/>
+                <div class="form__group" *ngIf="!passwordIsExist">
+                    <div class="form__name" [ngClass]="{error:wrongConfirmPassword||emptyPassword}">Повторите пароль</div>
+                    <input class="form__control" type="password" name="confirmPassword" [(ngModel)]="confirmPassword" [ngClass]="{error:wrongConfirmPassword||emptyPassword}" [disabled]="passwordIsExist"/>
                 </div>
                 <p *ngIf="wrongConfirmPassword" class="form__error-msg">Пароли не совпадают.</p>
             </div>

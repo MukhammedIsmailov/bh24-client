@@ -29,30 +29,32 @@ export class ProfileComponent {
     emptyReferId: boolean = false;
     emptyPhoneNumber: boolean = false;
     emptyEmail: boolean = false;
+    emptyPassword: boolean = false;
     errorEmptyMessage: boolean = false;
-
-    disabledPassword: boolean = false;
+    passwordIsExist: boolean = false;
 
     submitClick () {
-        this.wrongConfirmPassword = (this.confirmPassword !== this.profile.password);
+        this.wrongConfirmPassword = (this.confirmPassword !== this.profile.password) && !this.passwordIsExist;
         this.emptyFirstName = !this.profile.firstName.length || !this.profile.firstName;
         this.emptySecondName = !this.profile.secondName.length || !this.profile.secondName;
         this.emptyReferId = !this.profile.referId ? true : (this.profile.referId.length === 0);
         this.emptyPhoneNumber = !this.profile.phoneNumber ? true : (this.profile.phoneNumber.length === 0);
         this.emptyEmail = !this.profile.email ? true : (this.profile.email.length === 0);
+        this.emptyPassword = (!this.passwordIsExist && !this.profile.password || this.profile.password.length === 0);
 
-        if (!this.emptyFirstName || !this.emptySecondName || !this.emptyReferId || !this.emptyPhoneNumber || !this.emptyEmail) {
+        if (!this.emptyFirstName && !this.emptySecondName && !this.emptyReferId && !this.emptyPhoneNumber &&
+            !this.emptyEmail && !this.emptyPassword && !this.wrongConfirmPassword) {
             const data = this.profile;
-            this.apiService.update(data).subscribe((response: IProfile) => {
+            const { password, ...dataWithoutPassword } = data;
+            const requestData = !this.passwordIsExist ? data : dataWithoutPassword;
+            this.apiService.update(requestData).subscribe((response: IProfile) => {
                 this.profile = response;
                 this.setMessengersModel(response);
+                this.passwordIsExist = this.checkPasswordFromServer(response.password);
             });
         } else {
             this.errorEmptyMessage = true;
         }
-
-        this.disabledPassword = this.profile.password.length > 0;
-
     }
 
     async copyLink () {
@@ -143,11 +145,13 @@ export class ProfileComponent {
     private getProfileData (apiService: AppService) {
         apiService.read().subscribe((data: IProfile) => {
             this.profile = data;
-
+            this.passwordIsExist = this.checkPasswordFromServer(data.password);
             this.setMessengersModel(data);
-
-            this.disabledPassword = this.profile.password.length > 0;
         });
+    }
+
+    private checkPasswordFromServer (password: string): boolean {
+        return !!password && password.length > 0;
     }
 
     // upload (file: any) {

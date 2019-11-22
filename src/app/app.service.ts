@@ -30,15 +30,10 @@ export class AppService {
 
 
     update (id: number, data: any) {
-        return this.http.post(`http://localhost:3000/api/partner?id=${id}`, { ...data, iconUrl: 'ssdasdasd' }, this._options)
+        return this.http.post(`http://localhost:3000/api/partner?id=${id}`, { ...data }, this._options)
     }
 
-    upload (data: any) {
-        console.log(data.name)
-        let formData: FormData = new FormData();
-        formData.append('avatar', data, data.name);
-        console.log(formData)
-        // this._options.headers.append('Content-Type', 'multipart/form-data');
-        return this.http.post('http://localhost:3000/api/upload', { content: formData }, this._options);
+    upload (data: FormData) {
+        return this.http.post('http://localhost:3000/api/upload', data);
     }
 }

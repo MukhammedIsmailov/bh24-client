@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { AppService } from '../app/app.service';
 
@@ -15,10 +16,10 @@ export class ProfileComponent implements OnInit {
     messengers: IMessenger[];
     profile: IProfile;
     confirmPassword: string;
-
     partnerId: number;
+    uploadForm: FormGroup;
 
-    constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute) { }
+    constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute, private formBuilder: FormBuilder) { }
 
     ngOnInit(): void {
         this.aRouter.queryParams.subscribe(params => {
@@ -27,6 +28,10 @@ export class ProfileComponent implements OnInit {
             this.messengers = this.setInitialMessengersModel();
             this.profile = this.setInitialProfileModel();
             this.confirmPassword = '';
+        });
+
+        this.uploadForm = this.formBuilder.group({
+            avatar: ['']
         });
     }
 
@@ -42,6 +47,18 @@ export class ProfileComponent implements OnInit {
     passwordIsExist: boolean = false;
     disabledReferId: boolean = false;
 
+    onImageSelect (event: any) {
+        if (event.target.files.length > 0) {
+            const image = event.target.files[0];
+            this.uploadForm.get('avatar').setValue(image);
+
+            const formData = new FormData();
+            formData.append('avatar', this.uploadForm.get('avatar').value);
+            this.apiService.upload(formData).subscribe((response: any) => {
+                this.profile.iconUrl = `http://localhost:3000/icons/${response.imageName}`;
+            });
+        }
+    }
 
     submitClick () {
         this.wrongConfirmPassword = (this.confirmPassword !== this.profile.password) && !this.passwordIsExist;
@@ -141,7 +158,7 @@ export class ProfileComponent implements OnInit {
             firstName: '',
             secondName: '',
             email: '',
-            iconUrl: '',
+            iconUrl: null,
             password: '',
             phoneNumber: '',
             questionResults: null,
@@ -172,23 +189,6 @@ export class ProfileComponent implements OnInit {
 
     private checkPasswordFromServer (password: string): boolean {
         return !!password && password.length > 0;
-    }
-
-    // upload (file: any) {
-    //     const reader = new FileReader();
-    //     reader.readAsDataURL(file);
-    //     reader.onload = (_event) => {
-    //         this.image = reader.result;
-    //         this.viewImage = true;
-    //         console.log(this.image);
-    //         console.log(this.viewImage)
-    //     }
-    // }
-
-    upload (file: File) {
-        this.apiService.upload(file).subscribe((data: any) => {
-            console.log(data.iconName);
-        })
     }
 }
 

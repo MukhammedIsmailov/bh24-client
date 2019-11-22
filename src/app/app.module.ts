@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { Routes, RouterModule } from '@angular/router';
@@ -20,7 +20,7 @@ const appRoutes: Routes =[
 ];
 
 @NgModule({
-    imports: [ BrowserModule, FormsModule, HttpClientModule, TooltipModule, RouterModule.forRoot(appRoutes) ],
+    imports: [ BrowserModule, FormsModule, HttpClientModule, TooltipModule, RouterModule.forRoot(appRoutes), ReactiveFormsModule ],
     declarations: [ AppComponent, LoginComponent, CreateComponent, ProfileComponent ],
     bootstrap: [ AppComponent ],
     providers: [ AppService, { provide: APP_BASE_HREF, useValue : '/' } ]

@@ -1,26 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AppService } from '../app/app.service';
 
-import { IProfile} from "./profile.model";
+import { IProfile } from './profile.model';
 
 @Component({
     selector: 'bh24-profile',
     templateUrl: './profile.component.html'
 })
 
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
 
     messengers: IMessenger[];
     profile: IProfile;
     confirmPassword: string;
 
-    constructor (private apiService: AppService) {
-        this.getProfileData(apiService);
+    partnerId: number;
 
-        this.messengers = this.setInitialMessengersModel();
-        this.profile = this.setInitialProfileModel();
-        this.confirmPassword = '';
+    constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute) { }
+
+    ngOnInit(): void {
+        this.aRouter.queryParams.subscribe(params => {
+            this.partnerId = Number.parseInt(params.id);
+            this.getProfileData(this.apiService, this.partnerId);
+            this.messengers = this.setInitialMessengersModel();
+            this.profile = this.setInitialProfileModel();
+            this.confirmPassword = '';
+        });
     }
 
     wrongConfirmPassword: boolean = false;
@@ -30,24 +37,35 @@ export class ProfileComponent {
     emptyPhoneNumber: boolean = false;
     emptyEmail: boolean = false;
     emptyPassword: boolean = false;
+    emptyLogin: boolean = false;
     errorEmptyMessage: boolean = false;
     passwordIsExist: boolean = false;
+    disabledReferId: boolean = false;
+
 
     submitClick () {
         this.wrongConfirmPassword = (this.confirmPassword !== this.profile.password) && !this.passwordIsExist;
         this.emptyFirstName = !this.profile.firstName.length || !this.profile.firstName;
         this.emptySecondName = !this.profile.secondName.length || !this.profile.secondName;
         this.emptyReferId = !this.profile.referId ? true : (this.profile.referId.length === 0);
+        this.disabledReferId = !this.emptyReferId;
         this.emptyPhoneNumber = !this.profile.phoneNumber ? true : (this.profile.phoneNumber.length === 0);
         this.emptyEmail = !this.profile.email ? true : (this.profile.email.length === 0);
         this.emptyPassword = (!this.passwordIsExist && !this.profile.password || this.profile.password.length === 0);
+        this.emptyLogin = !this.profile.login ? true : (this.profile.login.length === 0);
 
         if (!this.emptyFirstName && !this.emptySecondName && !this.emptyReferId && !this.emptyPhoneNumber &&
             !this.emptyEmail && !this.emptyPassword && !this.wrongConfirmPassword) {
             const data = this.profile;
             const { password, ...dataWithoutPassword } = data;
             const requestData = !this.passwordIsExist ? data : dataWithoutPassword;
-            this.apiService.update(requestData).subscribe((response: IProfile) => {
+            requestData.facebook = this.messengers[0].value;
+            requestData.telegram = this.messengers[1].value;
+            requestData.skype = this.messengers[2].value;
+            requestData.vk = this.messengers[3].value;
+            requestData.viber = this.messengers[4].value;
+            requestData.whatsapp = this.messengers[5].value;
+            this.apiService.update(this.partnerId, requestData).subscribe((response: IProfile) => {
                 this.profile = response;
                 this.setMessengersModel(response);
                 this.passwordIsExist = this.checkPasswordFromServer(response.password);
@@ -142,9 +160,11 @@ export class ProfileComponent {
         }
     }
 
-    private getProfileData (apiService: AppService) {
-        apiService.read().subscribe((data: IProfile) => {
+    private getProfileData (apiService: AppService, id: number) {
+        apiService.read(id).subscribe((data: IProfile) => {
             this.profile = data;
+            this.setMessengersModel(data);
+            this.disabledReferId = !!this.profile.referId && this.profile.referId.length > 0;
             this.passwordIsExist = this.checkPasswordFromServer(data.password);
             this.setMessengersModel(data);
         });

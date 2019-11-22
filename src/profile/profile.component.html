@@ -79,10 +79,10 @@
                     </div>
                     <div class="form__wrap form__wrap_link">
                         <div class="form__name form__name_gray">behappy24.com/</div>
-                        <input class="form__control" type="text" name="referId" [ngModel]="profile.referId" [disabled]="profile.login.length > 0" [ngClass]="{error:emptyReferId}"/>
+                        <input class="form__control" type="text" name="referId" [(ngModel)]="profile.referId" [ngClass]="{error:emptyReferId}" [disabled]="disabledReferId"/>
                     </div>
                 </div>
-                <div class="form__group form__group_alert" *ngIf="profile.referId.length > 0">
+                <div class="form__group form__group_alert" *ngIf="disabledReferId">
                     <div class="form__name form__name_auto">Ваша ссылка для приглашений</div>
                     <div class="form__copy">
                         <div class="form__copy-name" id="copy-name" [innerText]="'behappy24.com/' + profile.referId"></div>
@@ -209,7 +209,8 @@
                             <br /> Пример рекомендуемого логина: maksimivanov, mivanov</div>
                     </div>
                     </div>
-                    <input class="form__control" type="text" name="login" [(ngModel)]="profile.login" [disabled]="profile.login.length > 0" />
+
+                    <input class="form__control" type="text" name="login" [(ngModel)]="profile.login" [disabled]="!emptyLogin" />
                 </div>
                 <div class="form__group">
                     <div class="form__name" [ngClass]="{error:wrongConfirmPassword||emptyPassword}" >Пароль</div>

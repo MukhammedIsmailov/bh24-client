@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AppService } from '../app/app.service';
 
-import { ICreate} from "./create.model";
+import { ICreate } from './create.model';
 
 @Component({
     selector: 'bh24-create',
@@ -11,7 +12,7 @@ import { ICreate} from "./create.model";
 
 export class CreateComponent {
 
-    constructor (private apiService: AppService) { }
+    constructor (private apiService: AppService, private router: Router) { }
 
     partnerInfo: ICreate = {
         firstName: '',
@@ -32,7 +33,9 @@ export class CreateComponent {
 
         if (!this.emptyLogin || !this.emptyFirstName || !this.emptySecondName) {
             const data = this.partnerInfo;
-            this.apiService.create(data).subscribe((data) => {
+            this.apiService.create(data).subscribe(async (data: any) => {
+                // await this.router.navigateByUrl('/profile', { queryParams: { 'id': '2' } });
+                this.router.navigateByUrl(`/profile?id=${data.id}`);
             }, error => {
                 const typeOfFind = typeof (error.error.find((item: any) => {
                     return (item.field === 'login' && item.error === 'not unique')

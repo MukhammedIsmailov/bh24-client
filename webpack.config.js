@@ -10,6 +10,9 @@ module.exports = {
         publicPath: '/public/',
         filename: "[name].js"       // название создаваемого файла
     },
+    devServer: {
+        historyApiFallback: true,
+    },
     resolve: {
         extensions: ['.ts', '.js']
     },
@@ -41,5 +44,5 @@ module.exports = {
             path.resolve(__dirname, 'src'), // каталог с исходными файлами
             {} // карта маршрутов
         )
-    ]
-}
+    ],
+};

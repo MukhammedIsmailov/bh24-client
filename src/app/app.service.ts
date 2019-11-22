@@ -24,13 +24,13 @@ export class AppService {
         return this.http.put('http://localhost:3000/api/partner', data, this._options);
     }
 
-    read () {
-        return this.http.get('http://localhost:3000/api/partner?id=2', this._options);
+    read (id: number) {
+        return this.http.get(`http://localhost:3000/api/partner?id=${id}`, this._options);
     }
 
 
-    update (data: any) {
-        return this.http.post('http://localhost:3000/api/partner?id=2', { ...data, iconUrl: 'ssdasdasd' }, this._options)
+    update (id: number, data: any) {
+        return this.http.post(`http://localhost:3000/api/partner?id=${id}`, { ...data, iconUrl: 'ssdasdasd' }, this._options)
     }
 
     upload (data: any) {

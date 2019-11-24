@@ -38,11 +38,11 @@
                     <div class="user">
                         <div class="user__ava">
                             <div class="user__img">
-                                <img src="../../content/pic/user-img2.png" srcset="../../content/pic/user-img2@2x.png 2x" />
+                                <img width="29" [src]="leader.iconUrl" />
                             </div>
                         </div>
                         <div class="user__info">
-                            <div class="user__name">Георгий Соколов</div>
+                            <div class="user__name">{{leader.firstName}} {{leader.secondName}}</div>
                         </div>
                     </div>
                 </div>

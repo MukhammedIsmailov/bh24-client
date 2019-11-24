@@ -178,7 +178,7 @@ export class ProfileComponent implements OnInit {
     }
 
     private getProfileData (apiService: AppService, id: number) {
-        apiService.read(id).subscribe((data: IProfile) => {
+        apiService.readById(id).subscribe((data: IProfile) => {
             this.profile = data;
             this.setMessengersModel(data);
             this.disabledReferId = !!this.profile.referId && this.profile.referId.length > 0;

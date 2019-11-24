@@ -1,4 +1,5 @@
 export interface IProfile {
+    id?: number;
     firstName: string;
     secondName: string;
     referId: string;

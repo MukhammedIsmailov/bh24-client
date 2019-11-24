@@ -24,10 +24,13 @@ export class AppService {
         return this.http.put('http://localhost:3000/api/partner', data, this._options);
     }
 
-    read (id: number) {
+    readById (id: number) {
         return this.http.get(`http://localhost:3000/api/partner?id=${id}`, this._options);
     }
 
+    readByReferId (referId: string) {
+        return this.http.get(`http://localhost:3000/api/partner?referId=${referId}`, this._options);
+    }
 
     update (id: number, data: any) {
         return this.http.post(`http://localhost:3000/api/partner?id=${id}`, { ...data }, this._options)

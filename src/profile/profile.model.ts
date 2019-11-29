@@ -7,11 +7,11 @@ export interface IProfile {
     phoneNumber: string;
     email: string;
     password: string;
-    questionWhoAreYou?: string;
-    questionWhy?: string;
-    questionValue?: string;
-    questionStaff?: string;
-    questionResults?: string;
+    questionWhoAreYou: string;
+    questionWhy: string;
+    questionValue: string;
+    questionStaff: string;
+    questionResults: string;
     login: string;
     facebook?: string;
     telegram?: string;

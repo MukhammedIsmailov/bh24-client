@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { catchError } from 'rxjs/operators';
 
 import { AppService } from '../app/app.service';
+import { NotificationService } from '../app/notification.service';
 
 import { IProfile } from './profile.model';
 
@@ -18,8 +20,10 @@ export class ProfileComponent implements OnInit {
     confirmPassword: string;
     partnerId: number;
     uploadForm: FormGroup;
+    isCopied: boolean;
 
-    constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute, private formBuilder: FormBuilder) { }
+    constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute,
+                 private formBuilder: FormBuilder, private notificationService: NotificationService) { }
 
     ngOnInit(): void {
         this.aRouter.queryParams.subscribe(params => {
@@ -28,6 +32,7 @@ export class ProfileComponent implements OnInit {
             this.messengers = this.setInitialMessengersModel();
             this.profile = this.setInitialProfileModel();
             this.confirmPassword = '';
+            this.isCopied = false;
         });
 
         this.uploadForm = this.formBuilder.group({
@@ -43,9 +48,24 @@ export class ProfileComponent implements OnInit {
     emptyEmail: boolean = false;
     emptyPassword: boolean = false;
     emptyLogin: boolean = false;
+    emptyQuestionWhoAreYou: boolean = false;
+    emptyQuestionWhy: boolean = false;
+    emptyQuestionValue: boolean = false;
+    emptyQuestionStaff: boolean = false;
+    emptyQuestionResults: boolean = false;
     errorEmptyMessage: boolean = false;
+    errorInvalidDataMessage: boolean = false;
     passwordIsExist: boolean = false;
     disabledReferId: boolean = false;
+    disabledLogin: boolean = false;
+    invalidEmail: boolean = false;
+    invalidPassword: boolean = false;
+    invalidLogin: boolean = false;
+    invalidReferId: boolean = false;
+    emptyIconUrl: boolean = false;
+    notUniqueReferId: boolean = false;
+    notUniqueEmail: boolean = false;
+    notUniqueLogin: boolean = false;
 
     onImageSelect (event: any) {
         if (event.target.files.length > 0) {
@@ -65,14 +85,32 @@ export class ProfileComponent implements OnInit {
         this.emptyFirstName = !this.profile.firstName.length || !this.profile.firstName;
         this.emptySecondName = !this.profile.secondName.length || !this.profile.secondName;
         this.emptyReferId = !this.profile.referId ? true : (this.profile.referId.length === 0);
-        this.disabledReferId = !this.emptyReferId;
         this.emptyPhoneNumber = !this.profile.phoneNumber ? true : (this.profile.phoneNumber.length === 0);
         this.emptyEmail = !this.profile.email ? true : (this.profile.email.length === 0);
         this.emptyPassword = (!this.passwordIsExist && !this.profile.password || this.profile.password.length === 0);
         this.emptyLogin = !this.profile.login ? true : (this.profile.login.length === 0);
+        this.emptyQuestionWhoAreYou = !this.profile.questionWhoAreYou ? true : (this.profile.questionWhoAreYou.length === 0);
+        this.emptyQuestionValue = !this.profile.questionValue ? true : (this.profile.questionValue.length === 0);
+        this.emptyQuestionResults =!this.profile.questionResults ? true : (this.profile.questionResults.length === 0);
+        this.emptyQuestionStaff = !this.profile.questionStaff ? true : (this.profile.questionStaff.length === 0);
+        this.emptyQuestionWhy = !this.profile.questionWhy ? true : (this.profile.questionWhy.length === 0);
+        this.emptyIconUrl = !this.profile.iconUrl ? true : (this.profile.iconUrl.length === 0);
+        this.invalidEmail = !this.isValidEmail(this.profile.email);
+        this.invalidPassword = !this.isValidPassword(this.profile.password);
+        this.invalidLogin = !this.isValidLogin(this.profile.login);
+        this.invalidReferId = !this.isValidReferId(this.profile.referId);
 
-        if (!this.emptyFirstName && !this.emptySecondName && !this.emptyReferId && !this.emptyPhoneNumber &&
-            !this.emptyEmail && !this.emptyPassword && !this.wrongConfirmPassword) {
+        this.errorEmptyMessage =
+            this.emptyFirstName || this.emptySecondName || this.emptyReferId || this.emptyPhoneNumber ||
+            this.emptyEmail || this.emptyPassword || this.emptyQuestionResults ||
+            this.emptyQuestionWhy || this.emptyQuestionStaff || this.emptyQuestionWhoAreYou ||
+            this.emptyQuestionValue || this.emptyLogin;
+
+        this.errorInvalidDataMessage =
+            this.invalidEmail || this.wrongConfirmPassword || this.invalidPassword || this.invalidLogin ||
+            this.invalidReferId;
+
+        if (!this.errorEmptyMessage && !this.errorInvalidDataMessage && !this.emptyIconUrl) {
             const data = this.profile;
             const { password, ...dataWithoutPassword } = data;
             const requestData = !this.passwordIsExist ? data : dataWithoutPassword;
@@ -86,14 +124,26 @@ export class ProfileComponent implements OnInit {
                 this.profile = response;
                 this.setMessengersModel(response);
                 this.passwordIsExist = this.checkPasswordFromServer(response.password);
+                this.disabledLogin = !this.emptyLogin;
+                this.disabledReferId = !this.emptyReferId;
+            }, error => {
+                if (error.status === 400 && error.error.length > 0) {
+                    this.notUniqueReferId = error.error.find((item: any) => item.field === 'referId' && item.error === 'not unique');
+                    this.notUniqueLogin = error.error.find((item: any) => item.field === 'login' && item.error === 'not unique');
+                    this.notUniqueEmail = error.error.find((item: any) => item.field === 'email' && item.error === 'not unique');
+                    this.showErrorAlert();
+                }
             });
+            this.errorEmptyMessage = false;
+            this.errorInvalidDataMessage = false;
         } else {
-            this.errorEmptyMessage = true;
+            this.showErrorAlert();
         }
     }
 
     async copyLink () {
         await navigator.clipboard.writeText(`http://bla-bla.bla/${this.profile.referId}`);
+        this.isCopied = true;
     }
 
     private setMessengersModel (data: IProfile) {
@@ -182,6 +232,7 @@ export class ProfileComponent implements OnInit {
             this.profile = data;
             this.setMessengersModel(data);
             this.disabledReferId = !!this.profile.referId && this.profile.referId.length > 0;
+            this.disabledLogin = !!this.profile.login && this.profile.login.length > 0;
             this.passwordIsExist = this.checkPasswordFromServer(data.password);
             this.setMessengersModel(data);
         });
@@ -189,6 +240,46 @@ export class ProfileComponent implements OnInit {
 
     private checkPasswordFromServer (password: string): boolean {
         return !!password && password.length > 0;
+    }
+
+    private isValidEmail (email: string) {
+        //console.log(email.match(regexp).length > 0);
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const result: boolean = !!email ? re.test(email.toLowerCase()) : false;
+        return result;
+    };
+
+    private isValidPassword (password: string) {
+        const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\s]).{6,}/;
+        return (re.test(password) && this.confirmPassword) || this.passwordIsExist;
+    }
+
+    private isValidLogin (login: string) {
+        const re = /(^(?=.*[a-z])|(?=.*[A-Z])|(?=.*[0-9])).{4,}/;
+        return re.test(login) || this.disabledLogin;
+    }
+
+    private isValidReferId (referId: string) {
+        const re = /^[A-Za-z0-9]+$/;
+        return re.test(referId) || this.disabledReferId;
+    }
+
+    private showErrorAlert () {
+        if (this.errorEmptyMessage) {
+            this.notificationService.error('Ошибка!', 'Все поля обязательны для заполнения!');
+        } else {
+            if (this.emptyIconUrl) {
+                this.notificationService.error('Ошибка!', 'Звгрузите пожалуйста фотографию профиля!')
+            } else {
+                if (this.errorInvalidDataMessage) {
+                    this.notificationService.error('Ошибка!', 'Проверьте правильность введенных данных и повторите попытку!');
+                } else {
+                    if (this.notUniqueReferId) this.notificationService.error('Ошибка!', 'Пользователь с таким адресом уже зарегистрирован в системе!');
+                    if (this.notUniqueLogin) this.notificationService.error('Ошибка!', 'Пользователь с таким логином уже зарегистрирован в системе!');
+                    if (this.notUniqueEmail) this.notificationService.error('Ошибка!', 'Пользователь с таким email уже зарегистрирован в системе!');
+                }
+            }
+        }
     }
 }
 

@@ -67,7 +67,7 @@
                     <input class="form__control" type="text" name="secondName" [(ngModel)]="profile.secondName" [ngClass]="{error:emptySecondName}" />
                 </div>
                 <div class="form__group w-76 column-md">
-                    <div class="form__name" [ngClass]="{error:emptyReferId}">Адрес страницы<div class="tooltip" tooltip="<div>Неизменяемое поле, ссылка для приглашений на Ваш сайт</div>" [options]="{'tooltip-class': 'tooltip__content', 'theme': 'light'}">
+                    <div class="form__name" [ngClass]="{error:emptyReferId || invalidReferId || notUniqueReferId}">Адрес страницы<div class="tooltip" tooltip="<div>Неизменяемое поле, ссылка для приглашений на Ваш сайт.<br>Это поле должно состоять только из латинский букв и цифр, пробелы и другие символы запрещены.</div>" [options]="{'tooltip-class': 'tooltip__content', 'theme': 'light'}">
                         <div class="tooltip__icon">
                             <div class="svg-icon svg-icon_icon-inform">
                                 <svg>
@@ -79,7 +79,7 @@
                     </div>
                     <div class="form__wrap form__wrap_link">
                         <div class="form__name form__name_gray">behappy24.com/</div>
-                        <input class="form__control" type="text" name="referId" [(ngModel)]="profile.referId" [ngClass]="{error:emptyReferId}" [disabled]="disabledReferId"/>
+                        <input class="form__control" type="text" name="referId" [(ngModel)]="profile.referId" [ngClass]="{error:emptyReferId || invalidReferId || notUniqueReferId}" [disabled]="disabledReferId"/>
                     </div>
                 </div>
                 <div class="form__group form__group_alert" *ngIf="disabledReferId">
@@ -92,7 +92,8 @@
                                     <use xlink:href="#icon-copy"></use>
                                 </svg>
                             </div>
-                            <span>Копировать</span>
+                            <span *ngIf="!isCopied">Копировать</span>
+                            <span *ngIf="isCopied">Скопировано</span>
                         </div>
                     </div>
                 </div>
@@ -105,7 +106,7 @@
                 <div class="content__num">3</div>
                 <h2 class="form__title">Расскажите о себе</h2>
                 <div class="form__group form__group_column">
-                    <div class="form__name form__name_auto">Кто вы?<div class="tooltip" tooltip="<div>Пару слов о себе. Кто вы? Чем занимаетесь? Какой жизненный опыт у вас за плечами?</div>" [options]="{'tooltip-class': 'tooltip__content', 'theme': 'light'}">
+                    <div class="form__name form__name_auto" [ngClass]="{error:emptyQuestionWhoAreYou}">Кто вы?<div class="tooltip" tooltip="<div>Пару слов о себе. Кто вы? Чем занимаетесь? Какой жизненный опыт у вас за плечами?</div>" [options]="{'tooltip-class': 'tooltip__content', 'theme': 'light'}">
                         <div class="tooltip__icon">
                             <div class="svg-icon svg-icon_icon-inform">
                                 <svg>
@@ -116,10 +117,10 @@
                         <div class="tooltip__content">Пару слов о себе. Кто вы? Чем занимаетесь? Какой жизненный опыт у вас за плечами?</div>
                     </div>
                     </div>
-                    <textarea class="form__control form__control_textarea" name="questionWhoAreYou" [(ngModel)]="profile.questionWhoAreYou"></textarea>
+                    <textarea class="form__control form__control_textarea" name="questionWhoAreYou" [(ngModel)]="profile.questionWhoAreYou"  [ngClass]="{error:emptyQuestionWhoAreYou}"></textarea>
                 </div>
                 <div class="form__group form__group_column">
-                    <div class="form__name form__name_auto">Почему Вы присоединились к BH24?<div class="tooltip" tooltip="<div>Какие ценности, возможности, решения и перспективы Вас привлекли в BeHappy24?</div>" [options]="{'tooltip-class': 'tooltip__content', 'theme': 'light'}">
+                    <div [ngClass]="{error:emptyQuestionValue}" class="form__name form__name_auto">Почему Вы присоединились к BH24?<div class="tooltip" tooltip="<div>Какие ценности, возможности, решения и перспективы Вас привлекли в BeHappy24?</div>" [options]="{'tooltip-class': 'tooltip__content', 'theme': 'light'}">
                         <div class="tooltip__icon">
                             <div class="svg-icon svg-icon_icon-inform">
                                 <svg>
@@ -129,18 +130,18 @@
                         </div>
                     </div>
                     </div>
-                    <textarea class="form__control form__control_textarea" name="questionValue" [(ngModel)]="profile.questionValue"></textarea>
+                    <textarea class="form__control form__control_textarea" name="questionValue" [ngClass]="{error:emptyQuestionValue}" [(ngModel)]="profile.questionValue"></textarea>
                 </div>
                 <div class="form__group form__group_column">
-                    <div class="form__name form__name_auto">Какие качества Вы цените в людях?</div>
-                    <textarea class="form__control form__control_textarea" name="questionStaff" [(ngModel)]="profile.questionStaff"></textarea>
+                    <div [ngClass]="{error:emptyQuestionStaff}" class="form__name form__name_auto">Какие качества Вы цените в людях?</div>
+                    <textarea class="form__control form__control_textarea" name="questionStaff" [ngClass]="{error:emptyQuestionStaff}" [(ngModel)]="profile.questionStaff"></textarea>
                 </div>
                 <div class="form__group form__group_column">
-                    <div class="form__name form__name_auto">С кем бы Вы не хотели сотрудничать?</div>
-                    <textarea class="form__control form__control_textarea" name="questionWhy" [(ngModel)]="profile.questionWhy"></textarea>
+                    <div [ngClass]="{error:emptyQuestionWhy}" class="form__name form__name_auto">С кем бы Вы не хотели сотрудничать?</div>
+                    <textarea class="form__control form__control_textarea" name="questionWhy" [ngClass]="{error:emptyQuestionWhy}" [(ngModel)]="profile.questionWhy"></textarea>
                 </div>
                 <div class="form__group form__group_column">
-                    <div class="form__name form__name_auto">К каким результатам Вы готовы сопроводить?<div class="tooltip" tooltip="<div>Например: Отбираю 5 человек и помогаю выйти на доход от 1,000$ за первые 3 месяца.</div>" [options]="{'tooltip-class': 'tooltip__content', 'theme': 'light'}">
+                    <div [ngClass]="{error:emptyQuestionResults}" class="form__name form__name_auto">К каким результатам Вы готовы сопроводить?<div class="tooltip" tooltip="<div>Например: Отбираю 5 человек и помогаю выйти на доход от 1,000$ за первые 3 месяца.</div>" [options]="{'tooltip-class': 'tooltip__content', 'theme': 'light'}">
                         <div class="tooltip__icon">
                             <div class="svg-icon svg-icon_icon-inform">
                                 <svg>
@@ -150,7 +151,7 @@
                         </div>
                     </div>
                     </div>
-                    <textarea class="form__control form__control_textarea" name="questionResults" [(ngModel)]="profile.questionResults"></textarea>
+                    <textarea class="form__control form__control_textarea" name="questionResults" [ngClass]="{error:emptyQuestionResults}" [(ngModel)]="profile.questionResults"></textarea>
                 </div>
             </div>
         </div>
@@ -163,8 +164,8 @@
                     <input class="form__control" type="tel" name="phoneNumber" [(ngModel)]="profile.phoneNumber" [ngClass]="{error:emptyPhoneNumber}" />
                 </div>
                 <div class="form__group">
-                    <div class="form__name" [ngClass]="{error:emptyEmail}">Email</div>
-                    <input class="form__control" type="email" name="email" [(ngModel)]="profile.email" [ngClass]="{error:emptyEmail}" />
+                    <div class="form__name" [ngClass]="{error:emptyEmail || invalidEmail || notUniqueEmail}">Email</div>
+                    <input class="form__control" type="email" name="email" [(ngModel)]="profile.email" [ngClass]="{error:emptyEmail || invalidEmail || notUniqueEmail}" />
                 </div>
                 <div class="form__separator"></div>
                 <h2 class="form__title">Социальные сети и мессенджеры</h2>
@@ -196,8 +197,8 @@
                 <div class="content__num">5</div>
                 <h2 class="form__title">Ваш логин и пароль для входа в кабинет</h2>
                 <div class="form__group">
-                    <div class="form__name">Логин<div class="tooltip" tooltip="<div>Ваше имя и фамилия - это лучший логин в системе!
-                            <br /> Пример рекомендуемого логина: maksimivanov, mivanov</div>" [options]="{'tooltip-class': 'tooltip__content', 'theme': 'light'}">
+                    <div [ngClass]="{error:emptyLogin || invalidLogin || notUniqueLogin}" class="form__name">Логин<div class="tooltip" tooltip="<div>Ваше имя и фамилия - это лучший логин в системе!
+                            <br /> Пример рекомендуемого логина: maksimivanov, mivanov. Логин не должен содержать пробелы и спецсимволы.</div>" [options]="{'tooltip-class': 'tooltip__content', 'theme': 'light'}">
                         <div class="tooltip__icon">
                             <div class="svg-icon svg-icon_icon-inform">
                                 <svg>
@@ -205,16 +206,24 @@
                                 </svg>
                             </div>
                         </div>
-                        <div class="tooltip__content">Ваше имя и фамилия - это лучший логин в системе!
-                            <br /> Пример рекомендуемого логина: maksimivanov, mivanov</div>
                     </div>
                     </div>
 
-                    <input class="form__control" type="text" name="login" [(ngModel)]="profile.login" [disabled]="!emptyLogin" />
+                    <input class="form__control" type="text" name="login" [ngClass]="{error:emptyLogin || invalidLogin || notUniqueLogin}" [(ngModel)]="profile.login" [disabled]="disabledLogin" />
                 </div>
                 <div class="form__group">
-                    <div class="form__name" [ngClass]="{error:wrongConfirmPassword||emptyPassword}" >Пароль</div>
-                    <input class="form__control" type="password" name="password" [ngClass]="{error:wrongConfirmPassword||emptyPassword}" [(ngModel)]="profile.password" [disabled]="passwordIsExist"/>
+                    <div class="form__name" [ngClass]="{error:wrongConfirmPassword || emptyPassword || invalidPassword}">Пароль<div class="tooltip" tooltip="<div>Пароль должен содержать хотя бы одну заглавную, одну прописную букву латинского алфавита  цифру и спецсимвол. Минимум 6 символов.</div>" [options]="{'tooltip-class': 'tooltip__content', 'theme': 'light'}">
+                        <div class="tooltip__icon">
+                            <div class="svg-icon svg-icon_icon-inform">
+                                <svg>
+                                    <use xlink:href="#icon-inform"></use>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                    <input class="form__control" type="password" name="password" [ngClass]="{error:wrongConfirmPassword || emptyPassword || invalidPassword}" [(ngModel)]="profile.password" [disabled]="passwordIsExist"/>
                 </div>
                 <div class="form__group" *ngIf="!passwordIsExist">
                     <div class="form__name" [ngClass]="{error:wrongConfirmPassword||emptyPassword}">Повторите пароль</div>

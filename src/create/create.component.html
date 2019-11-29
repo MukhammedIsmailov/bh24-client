@@ -11,26 +11,6 @@
             <input class="form__control" type="text" name="secondName" [(ngModel)]="partnerInfo.secondName" [ngClass]="{error:emptySecondName}" />
         </div>
         <div class="form__separator"></div>
-        <h2 class="form__title">Идентификаторы</h2>
-        <p class="form__desc">Идентификаторы однозначно определяют вас и вашего наставника в системе. Двух одинаковых идентификаторов внутри сервиса не существует.</p>
-        <div *ngIf="wrongLogin">
-            <p *ngIf="wrongLogin" class="form__error-msg">Аккаунт с таким логином уже существует в системе.</p>
-            <div class="form__separator form__separator_small"></div>
-        </div>
-        <div class="form__group">
-            <div class="form__name" [ngClass]="{error:emptyLogin}">Ваш логин<div class="tooltip">
-                <div class="tooltip__icon">
-                    <div class="svg-icon svg-icon_icon-inform">
-                        <svg>
-                            <use xlink:href="#icon-inform"></use>
-                        </svg>
-                    </div>
-                </div>
-                <div class="tooltip__content">Какой то текст тултипа</div>
-            </div>
-            </div>
-            <input class="form__control" type="text" name="login" [ngClass]="{error:emptyLogin}" [(ngModel)]="partnerInfo.login" required="required" />
-        </div>
         <div class="form__group">
             <div class="form__name">Наставник</div>
             <div class="form__wrap">

@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@angular/animations": "^8.2.14",
     "@angular/common": "^8.2.14",
     "@angular/compiler": "^8.2.14",
     "@angular/core": "^8.2.14",
@@ -17,6 +18,7 @@
     "@angular/platform-browser": "^8.2.14",
     "@angular/platform-browser-dynamic": "^8.2.14",
     "@angular/router": "^8.2.14",
+    "angular2-notifications": "^2.0.0",
     "core-js": "^3.4.1",
     "ng2-tooltip-directive": "^2.8.17",
     "rxjs": "^6.5.3",

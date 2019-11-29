@@ -16,7 +16,6 @@ export class CreateComponent implements OnInit {
     partnerInfo: ICreate = {
         firstName: '',
         secondName: '',
-        login: '',
     };
 
     leader: IProfile;
@@ -42,7 +41,6 @@ export class CreateComponent implements OnInit {
     submitClick () {
         this.emptyFirstName = !this.partnerInfo.firstName.length;
         this.emptySecondName = !this.partnerInfo.secondName.length;
-        this.emptyLogin = !this.partnerInfo.login.length;
 
         if (!this.emptyLogin || !this.emptyFirstName || !this.emptySecondName) {
             const data = { ...this.partnerInfo, leaderId: this.leader.id };

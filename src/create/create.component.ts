@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { AppService } from '../app/app.service';
 
-import { ICreate } from './create.model';
+import { ICreate, IIP } from './create.model';
 import { IProfile } from "../profile/profile.model";
 
 @Component({
@@ -16,6 +16,7 @@ export class CreateComponent implements OnInit {
     partnerInfo: ICreate = {
         firstName: '',
         secondName: '',
+        ip: null,
     };
 
     leader: IProfile;
@@ -43,15 +44,18 @@ export class CreateComponent implements OnInit {
         this.emptySecondName = !this.partnerInfo.secondName.length;
 
         if (!this.emptyLogin || !this.emptyFirstName || !this.emptySecondName) {
-            const data = { ...this.partnerInfo, leaderId: this.leader.id };
-            this.apiService.create(data).subscribe(async (data: any) => {
-                this.router.navigateByUrl(`/profile?id=${data.id}`);
-            }, error => {
-                const typeOfFind = typeof (error.error.find((item: any) => {
-                    return (item.field === 'login' && item.error === 'not unique')
-                }));
+            this.apiService.getIP().subscribe((response: IIP) => {
+                this.partnerInfo.ip = response.ip;
+                const data = { ...this.partnerInfo, leaderId: this.leader.id };
+                this.apiService.create(data).subscribe(async (data: any) => {
+                    this.router.navigateByUrl(`/profile?id=${data.id}`);
+                }, error => {
+                    const typeOfFind = typeof (error.error.find((item: any) => {
+                        return (item.field === 'login' && item.error === 'not unique')
+                    }));
 
-                this.wrongLogin = typeOfFind !== 'undefined';
+                    this.wrongLogin = typeOfFind !== 'undefined';
+                });
             });
         } else {
             this.errorEmptyMessage = true;

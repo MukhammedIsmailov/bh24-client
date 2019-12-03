@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { catchError } from 'rxjs/operators';
 
 import { AppService } from '../app/app.service';
 import { NotificationService } from '../app/notification.service';

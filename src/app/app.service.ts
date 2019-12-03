@@ -39,4 +39,8 @@ export class AppService {
     upload (data: FormData) {
         return this.http.post('http://localhost:3000/api/upload', data);
     }
+
+    getIP () {
+        return this.http.get('https://api.ipify.org?format=json');
+    }
 }

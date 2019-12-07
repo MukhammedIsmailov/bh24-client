@@ -20,8 +20,8 @@ export class AppService {
         return this.http.post('http://localhost:3000/api/login', data, this._options);
     }
 
-    create (data: ICreate) {
-        return this.http.put('http://localhost:3000/api/partner', data, this._options);
+    create (userId: number, data: ICreate) {
+        return this.http.put(`http://localhost:3000/api/partner?id=${userId}`, data, this._options);
     }
 
     readById (id: number) {

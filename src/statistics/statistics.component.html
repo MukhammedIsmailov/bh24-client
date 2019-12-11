@@ -1,0 +1,181 @@
+<div class="content__title-flex">
+    <h1 class="content__main-title content__main-title_left">Статистика регистраций</h1>
+    <div class="efficiency">
+        <div class="tooltip tooltip_mobile" tooltip="<div>Отношение перешедших к проплатившим</div>" [options]="{'tooltip-class': 'tooltip__content', 'theme': 'light'}">
+            <div class="tooltip__icon">
+                <div class="svg-icon svg-icon_icon-inform">
+                    <svg>
+                        <use xlink:href="#icon-inform"></use>
+                    </svg>
+                </div>
+            </div>
+            <div class="tooltip__content">Отношение перешедших к проплатившим</div>
+        </div>
+        <span>Эффективность</span>
+        <div class="efficiency__num" title="{{plotData.paymentEfficiency}}%">{{plotData.paymentEfficiency}}%</div>
+        <div class="efficiency__arrow">
+            <div class="svg-icon svg-icon_icon-border-arrow">
+                <svg>
+                    <use xlink:href="#icon-border-arrow"></use>
+                </svg>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content__item content__item_no-padding">
+        <div class="chart">
+            <div class="chart__header">
+                <div class="chart__header-block">
+                    <div class="range">
+                        <input class="range__input" type="text" />
+                        <div class="svg-icon svg-icon_icon-date">
+                            <svg>
+                                <use xlink:href="#icon-date"></use>
+                            </svg>
+                        </div>
+                        <div class="range__from">01.06.2018</div>
+                        <div class="range__to">01.07.2018</div>
+                    </div>
+                </div>
+                <div class="chart__header-block">
+                    <div class="chart__stat">
+                        <div class="chart__line"></div>
+                        <div class="chart__num" title="Всего переходов: {{plotData.total}}">Всего переходов: {{plotData.total}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="chart__content">
+                <div class="chart__content-top">
+                    <h3 class="chart__title">График переходов</h3>
+                    <div class="chart__toggle active">
+                        <div class="svg-icon svg-icon_icon-arrow2">
+                            <svg>
+                                <use xlink:href="#icon-arrow2"></use>
+                            </svg>
+                        </div>
+                        <span сд>Скрыть</span>
+                    </div>
+                </div>
+                <div class="chart__wrap">
+                    <div class="chart__container">
+                        <canvas id="myChart" width="100%" height="100%"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="chart__footer">
+                <label class="chart__stat">
+                    <input type="checkbox" data-set="0" checked="checked" />
+                    <div class="checkbox">
+                        <div class="svg-icon svg-icon_icon-check">
+                            <svg>
+                                <use xlink:href="#icon-check"></use>
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="chart__line" style="background-color: #e74c3c"></span>
+                    <span class="chart__num" title="Переходы на сайт: {{plotData.counts[0]['VL']}}">Переходы на сайт: {{plotData.counts[0]['VL']}}</span>
+                </label>
+                <label class="chart__stat">
+                    <input type="checkbox" data-set="1" />
+                    <div class="checkbox">
+                        <div class="svg-icon svg-icon_icon-check">
+                            <svg>
+                                <use xlink:href="#icon-check"></use>
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="chart__line" style="background-color: #e67e22"></span>
+                    <span class="chart__num" title="Регистрации на курс: {{plotData.counts[1]['SC']}}">Регистрации на курс: {{plotData.counts[1]['SC']}}</span>
+                </label>
+                <label class="chart__stat">
+                    <input type="checkbox" data-set="2" checked="checked" />
+                    <div class="checkbox">
+                        <div class="svg-icon svg-icon_icon-check">
+                            <svg>
+                                <use xlink:href="#icon-check"></use>
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="chart__line" style="background-color: #3498db"></span>
+                    <span class="chart__num" title="Закончили курс: {{plotData.counts[2]['CF']}}">Закончили курс: {{plotData.counts[2]['CF']}}</span>
+                </label>
+                <label class="chart__stat">
+                    <input type="checkbox" data-set="3" />
+                    <div class="checkbox">
+                        <div class="svg-icon svg-icon_icon-check">
+                            <svg>
+                                <use xlink:href="#icon-check"></use>
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="chart__line" style="background-color: #2ecc71"></span>
+                    <span class="chart__num" title="Нажали на кнопку обратной связи: {{plotData.counts[3]['FB']}}">Нажали на кнопку обратной связи: {{plotData.counts[3]['FB']}}</span>
+                </label>
+                <label class="chart__stat">
+                    <input type="checkbox" data-set="4" />
+                    <div class="checkbox">
+                        <div class="svg-icon svg-icon_icon-check">
+                            <svg>
+                                <use xlink:href="#icon-check"></use>
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="chart__line" style="background-color: #f1c40f"></span>
+                    <span class="chart__num" title="Клиенты: {{plotData.counts[5]['NL']}}">Клиенты: {{plotData.counts[5]['NL']}}</span>
+                </label>
+                <label class="chart__stat">
+                    <input type="checkbox" data-set="5" />
+                    <div class="checkbox">
+                        <div class="svg-icon svg-icon_icon-check">
+                            <svg>
+                                <use xlink:href="#icon-check"></use>
+                            </svg>
+                        </div>
+                    </div>
+                    <span class="chart__line" style="background-color: #9b59b6"></span>
+                    <span class="chart__num" title="Партнеры: {{plotData.counts[4]['NP']}}">Партнеры: {{plotData.counts[4]['NP']}}</span>
+                </label>
+            </div>
+        </div>
+    </div>
+<div class="content__item content__item_no-padding content__item_flex-between">
+    <div class="last-goal">Дошли до последнего урока <span>{{plotData.courseEfficiency}}%</span>
+    </div>
+    <div class="statuses">
+        <div class="statuses__title">Статусы:</div>
+        <div class="statuses__items">
+            <div class="statuses__item">
+                <div class="svg-icon svg-icon_icon-status-refuse">
+                    <svg>
+                        <use xlink:href="#icon-status-refuse"></use>
+                    </svg>
+                </div>
+                <div class="statuses__name">Отказ</div>
+            </div>
+            <div class="statuses__item">
+                <div class="svg-icon svg-icon_icon-status-call">
+                    <svg>
+                        <use xlink:href="#icon-status-call"></use>
+                    </svg>
+                </div>
+                <div class="statuses__name">Связаться</div>
+            </div>
+            <div class="statuses__item">
+                <div class="svg-icon svg-icon_icon-status-client">
+                    <svg>
+                        <use xlink:href="#icon-status-client"></use>
+                    </svg>
+                </div>
+                <div class="statuses__name">Клиент</div>
+            </div>
+            <div class="statuses__item">
+                <div class="svg-icon svg-icon_icon-status-partner">
+                    <svg>
+                        <use xlink:href="#icon-status-partner"></use>
+                    </svg>
+                </div>
+                <div class="statuses__name">Партнер</div>
+            </div>
+        </div>
+    </div>
+</div>

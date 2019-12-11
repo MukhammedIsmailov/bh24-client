@@ -20,19 +20,19 @@ export class AppService {
         return this.http.post('http://localhost:3000/api/login', data, this._options);
     }
 
-    create (userId: number, data: ICreate) {
+    partnerCreate (userId: number, data: ICreate) {
         return this.http.put(`http://localhost:3000/api/partner?id=${userId}`, data, this._options);
     }
 
-    readById (id: number) {
+    partnerReadById (id: number) {
         return this.http.get(`http://localhost:3000/api/partner?id=${id}`, this._options);
     }
 
-    readByReferId (referId: string) {
+    partnerReadByReferId (referId: string) {
         return this.http.get(`http://localhost:3000/api/partner?referId=${referId}`, this._options);
     }
 
-    update (id: number, data: any) {
+    partnerUpdate (id: number, data: any) {
         return this.http.post(`http://localhost:3000/api/partner?id=${id}`, { ...data }, this._options)
     }
 
@@ -40,7 +40,7 @@ export class AppService {
         return this.http.post('http://localhost:3000/api/upload', data);
     }
 
-    getIP () {
-        return this.http.get('https://api.ipify.org?format=json');
+    statisticsRead () {
+        return this.http.get('http://localhost:3000/api/statistics/plot?startDate=1574640000', this._options);
     }
 }

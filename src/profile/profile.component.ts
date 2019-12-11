@@ -119,7 +119,7 @@ export class ProfileComponent implements OnInit {
             requestData.vk = this.messengers[3].value;
             requestData.viber = this.messengers[4].value;
             requestData.whatsapp = this.messengers[5].value;
-            this.apiService.update(this.partnerId, requestData).subscribe((response: IProfile) => {
+            this.apiService.partnerUpdate(this.partnerId, requestData).subscribe((response: IProfile) => {
                 this.profile = response;
                 this.setMessengersModel(response);
                 this.passwordIsExist = this.checkPasswordFromServer(response.password);
@@ -227,7 +227,7 @@ export class ProfileComponent implements OnInit {
     }
 
     private getProfileData (apiService: AppService, id: number) {
-        apiService.readById(id).subscribe((data: IProfile) => {
+        apiService.partnerReadById(id).subscribe((data: IProfile) => {
             this.profile = data;
             this.setMessengersModel(data);
             this.disabledReferId = !!this.profile.referId && this.profile.referId.length > 0;

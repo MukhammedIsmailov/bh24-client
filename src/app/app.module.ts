@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from '../login/login.component';
 import { CreateComponent } from '../create/create.component';
 import { ProfileComponent } from '../profile/profile.component';
+import { StatisticsComponent } from '../statistics/statistics.component';
 
 import { AppService } from './app.service';
 import { NotificationService } from './notification.service';
@@ -19,13 +20,14 @@ import { NotificationService } from './notification.service';
 const appRoutes: Routes =[
     { path: 'sign-in', component: LoginComponent},
     { path: '', component: CreateComponent},
-    { path: 'profile', component: ProfileComponent }
+    { path: 'profile', component: ProfileComponent },
+    { path: 'statistics', component: StatisticsComponent }
 ];
 
 @NgModule({
     imports: [ BrowserModule, FormsModule, HttpClientModule, TooltipModule, RouterModule.forRoot(appRoutes),
         ReactiveFormsModule, SimpleNotificationsModule.forRoot(), BrowserAnimationsModule],
-    declarations: [ AppComponent, LoginComponent, CreateComponent, ProfileComponent ],
+    declarations: [ AppComponent, LoginComponent, CreateComponent, ProfileComponent, StatisticsComponent ],
     bootstrap: [ AppComponent ],
     providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' } ]
 })

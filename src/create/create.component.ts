@@ -46,7 +46,7 @@ export class CreateComponent implements OnInit {
 
         if (!this.emptyLogin || !this.emptyFirstName || !this.emptySecondName) {
             const data = { ...this.partnerInfo, leaderId: this.leader.id };
-            this.apiService.create(this.userId, data).subscribe(async (data: any) => {
+            this.apiService.partnerCreate(this.userId, data).subscribe(async (data: any) => {
                 this.router.navigateByUrl(`/profile?id=${data.id}`);
             }, error => {
                 const typeOfFind = typeof (error.error.find((item: any) => {
@@ -61,7 +61,7 @@ export class CreateComponent implements OnInit {
     }
 
     private getLeader (apiService: AppService, referId: string) {
-        apiService.readByReferId(referId).subscribe((data: IProfile) => {
+        apiService.partnerReadByReferId(referId).subscribe((data: IProfile) => {
             this.leader = data;
         });
     }

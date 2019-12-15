@@ -4945,6 +4945,7 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
     left: 0;
 
     height: 266px;
+    width: 1100px;
 }
 
 .chart__footer

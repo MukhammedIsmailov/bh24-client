@@ -40,7 +40,11 @@ export class AppService {
         return this.http.post('http://localhost:3000/api/upload', data);
     }
 
-    statisticsRead () {
-        return this.http.get('http://localhost:3000/api/statistics/plot?startDate=1574640000', this._options);
+    statisticsRead (startDate: number, endDate: number) {
+        return this.http.get(`http://localhost:3000/api/statistics/plot?startDate=${startDate}&endDate=${endDate}`, this._options);
+    }
+
+    wardsRead (data: any) {
+        return this.http.post('http://localhost:3000/api/wards', data);
     }
 }

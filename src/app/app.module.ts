@@ -7,6 +7,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChartsModule } from 'ng2-charts';
+import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from '../login/login.component';
@@ -26,7 +28,8 @@ const appRoutes: Routes =[
 
 @NgModule({
     imports: [ BrowserModule, FormsModule, HttpClientModule, TooltipModule, RouterModule.forRoot(appRoutes),
-        ReactiveFormsModule, SimpleNotificationsModule.forRoot(), BrowserAnimationsModule],
+        ReactiveFormsModule, SimpleNotificationsModule.forRoot(), BrowserAnimationsModule,
+        ChartsModule, Ng2FlatpickrModule],
     declarations: [ AppComponent, LoginComponent, CreateComponent, ProfileComponent, StatisticsComponent ],
     bootstrap: [ AppComponent ],
     providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' } ]

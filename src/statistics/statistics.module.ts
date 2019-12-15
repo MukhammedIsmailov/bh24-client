@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from  '@angular/common/http';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { ChartsModule } from 'ng2-charts';
 
 import { StatisticsComponent } from './statistics.component';
 
 @NgModule({
-    imports: [ BrowserModule, FormsModule, HttpClientModule, TooltipModule, SimpleNotificationsModule.forRoot() ],
+    imports: [ BrowserModule, FormsModule, HttpClientModule, TooltipModule, SimpleNotificationsModule.forRoot(),
+        ChartsModule],
     declarations: [ StatisticsComponent ],
 })
 

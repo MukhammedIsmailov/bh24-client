@@ -369,14 +369,14 @@
                         <div *ngFor="let ward of wards;" class="partners__tr">
                             <div class="partners__td">
                                 <a class="partners__image">
-                                    <img [src]="!!ward.icon_url ? baseURL + ward.icon_url : baseURL + '/icons/lead.png'" />
+                                    <img [src]="!!ward.icon_url ? dataBaseUrl + ward.icon_url : dataBaseUrl + '/icons/lead.png'" />
                                 </a>
                                 <div class="partners__name">
                                     <a>{{ ward.second_name }} {{ ward.first_name }}</a>
                                 </div>
                                 <div class="partners__country">
                                     <div class="svg-icon svg-icon_icon-ua">
-                                        <img [src]="baseURL+ '/flags/' + ward.country + '.gif'">
+                                        <img [src]="dataBaseUrl+ '/flags/' + ward.country + '.gif'">
                                     </div>
                                 </div>
                             </div>

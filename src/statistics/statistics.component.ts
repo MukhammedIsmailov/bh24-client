@@ -7,6 +7,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AppService } from '../app/app.service';
 import { IStatisticsData, IDataset, IWard, IWardOptions } from './statistics.model';
 
+import * as config from '../../config.json';
+
 @Component({
     selector: 'bh24-statistics',
     templateUrl: './statistics.component.html',
@@ -14,7 +16,8 @@ import { IStatisticsData, IDataset, IWard, IWardOptions } from './statistics.mod
 })
 export class StatisticsComponent implements OnInit {
     constructor (private apiService: AppService) { }
-    baseURL: string = 'http://localhost:3000';
+
+    dataBaseUrl = config.DATA_BASE_URL;
     isStatisticsDataAvailable: boolean = false;
     isWardsDataAvailable: boolean = false;
     plotData: IStatisticsData;

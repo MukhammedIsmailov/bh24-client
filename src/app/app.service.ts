@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import * as config  from '../../config.json';
 import { ILogin } from '../login/login.model';
 import { ICreate } from '../create/create.model';
 
@@ -17,34 +18,34 @@ export class AppService {
     };
 
     login (data: ILogin) {
-        return this.http.post('http://localhost:3000/api/login', data, this._options);
+        return this.http.post(`${config.API_BASE_URL}/login`, data, this._options);
     }
 
     partnerCreate (userId: number, data: ICreate) {
-        return this.http.put(`http://localhost:3000/api/partner?id=${userId}`, data, this._options);
+        return this.http.put(`${config.API_BASE_URL}/partner?id=${userId}`, data, this._options);
     }
 
     partnerReadById (id: number) {
-        return this.http.get(`http://localhost:3000/api/partner?id=${id}`, this._options);
+        return this.http.get(`${config.API_BASE_URL}/partner?id=${id}`, this._options);
     }
 
     partnerReadByReferId (referId: string) {
-        return this.http.get(`http://localhost:3000/api/partner?referId=${referId}`, this._options);
+        return this.http.get(`${config.API_BASE_URL}/partner?referId=${referId}`, this._options);
     }
 
     partnerUpdate (id: number, data: any) {
-        return this.http.post(`http://localhost:3000/api/partner?id=${id}`, { ...data }, this._options)
+        return this.http.post(`${config.API_BASE_URL}/partner?id=${id}`, { ...data }, this._options)
     }
 
     upload (data: FormData) {
-        return this.http.post('http://localhost:3000/api/upload', data);
+        return this.http.post(`${config.API_BASE_URL}/upload`, data);
     }
 
     statisticsRead (startDate: number, endDate: number) {
-        return this.http.get(`http://localhost:3000/api/statistics/plot?startDate=${startDate}&endDate=${endDate}`, this._options);
+        return this.http.get(`${config.API_BASE_URL}/statistics/plot?startDate=${startDate}&endDate=${endDate}`, this._options);
     }
 
     wardsRead (data: any) {
-        return this.http.post('http://localhost:3000/api/wards', data);
+        return this.http.post(`${config.API_BASE_URL}/wards`, data);
     }
 }

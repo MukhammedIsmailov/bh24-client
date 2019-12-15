@@ -4,7 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppService } from '../app/app.service';
 
 import { ICreate } from './create.model';
-import { IProfile } from "../profile/profile.model";
+import { IProfile } from '../profile/profile.model';
+import * as config from '../../config.json';
 
 @Component({
     selector: 'bh24-create',
@@ -18,10 +19,14 @@ export class CreateComponent implements OnInit {
         secondName: '',
     };
 
+    dataBaseUrl = config.DATA_BASE_URL;
+
     leader: IProfile;
 
     referId: string;
     userId: number;
+
+    viewErrorMessage? :boolean = null;
 
     constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute) { }
 
@@ -29,9 +34,14 @@ export class CreateComponent implements OnInit {
         this.aRouter.queryParams.subscribe(params => {
             this.referId = params.referId;
             this.userId = parseInt(params.id);
-        });
 
-        this.getLeader(this.apiService, this.referId);
+            if (!!this.referId && !!this.userId) {
+                this.getLeader(this.apiService, this.referId);
+                this.viewErrorMessage = false;
+            } else {
+                this.viewErrorMessage = true;
+            }
+        });
     }
 
     wrongLogin: boolean = false;

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AppService } from '../app/app.service';
 
@@ -11,7 +12,7 @@ import { ILogin } from './login.model';
 
 export class LoginComponent {
 
-    constructor (private apiService: AppService) { }
+    constructor (private apiService: AppService, private router: Router) { }
 
     login: string = '';
     password: string = '';
@@ -22,7 +23,7 @@ export class LoginComponent {
     submitClick () {
         const data: ILogin = { login: this.login, password: this.password };
         this.apiService.login(data).subscribe((data) => {
-            console.log('data', data)
+            this.router.navigateByUrl('/statistics')
         }, error => {
             if(error.status === 404) {
                 this.notFound = true;

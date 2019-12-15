@@ -7,6 +7,8 @@ import { NotificationService } from '../app/notification.service';
 
 import { IProfile } from './profile.model';
 
+import * as config from '../../config.json';
+
 @Component({
     selector: 'bh24-profile',
     templateUrl: './profile.component.html'
@@ -74,7 +76,7 @@ export class ProfileComponent implements OnInit {
             const formData = new FormData();
             formData.append('avatar', this.uploadForm.get('avatar').value);
             this.apiService.upload(formData).subscribe((response: any) => {
-                this.profile.iconUrl = `http://localhost:3000/icons/${response.imageName}`;
+                this.profile.iconUrl = `${config.DATA_BASE_URL}/icons/${response.imageName}`;
             });
         }
     }

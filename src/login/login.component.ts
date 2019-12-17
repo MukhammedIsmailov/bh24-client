@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AppService } from '../app/app.service';
+import { TokenStorage } from '../app/token-storage.service';
 
 import { ILogin } from './login.model';
 
@@ -12,7 +13,7 @@ import { ILogin } from './login.model';
 
 export class LoginComponent {
 
-    constructor (private apiService: AppService, private router: Router) { }
+    constructor (private apiService: AppService, private router: Router, private tokenStorage: TokenStorage) { }
 
     login: string = '';
     password: string = '';
@@ -22,8 +23,9 @@ export class LoginComponent {
 
     submitClick () {
         const data: ILogin = { login: this.login, password: this.password };
-        this.apiService.login(data).subscribe((data) => {
-            this.router.navigateByUrl('/statistics')
+        this.apiService.login(data).subscribe((data: any) => {
+            this.tokenStorage.setAccessToken(data.token);
+            this.router.navigateByUrl('/statistics');
         }, error => {
             if(error.status === 404) {
                 this.notFound = true;

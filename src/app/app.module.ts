@@ -18,6 +18,7 @@ import { StatisticsComponent } from '../statistics/statistics.component';
 
 import { AppService } from './app.service';
 import { NotificationService } from './notification.service';
+import { TokenStorage } from './token-storage.service'
 
 const appRoutes: Routes =[
     { path: 'sign-in', component: LoginComponent},
@@ -32,7 +33,7 @@ const appRoutes: Routes =[
         ChartsModule, Ng2FlatpickrModule],
     declarations: [ AppComponent, LoginComponent, CreateComponent, ProfileComponent, StatisticsComponent ],
     bootstrap: [ AppComponent ],
-    providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' } ]
+    providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' }, TokenStorage ]
 })
 
 export class AppModule { }

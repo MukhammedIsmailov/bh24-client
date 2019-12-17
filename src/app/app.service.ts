@@ -1,24 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+import { TokenStorage } from './token-storage.service';
 import * as config  from '../../config.json';
 import { ILogin } from '../login/login.model';
 import { ICreate } from '../create/create.model';
 
 @Injectable()
 export class AppService {
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private tokenStorage: TokenStorage) {
+        tokenStorage.getAccessToken().subscribe((token: string) => {
+            this._options = {
+                headers: new HttpHeaders({
+                    'Authorization': `Bearer ${token}`,
+                }),
+            }
+        });
     }
 
-    private _options = {
-        headers: new HttpHeaders({
-            'Content-Type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest'
-        })
-    };
+    private _options = { };
 
     login (data: ILogin) {
-        return this.http.post(`${config.API_BASE_URL}/login`, data, this._options);
+        return this.http.post(`${config.API_BASE_URL}/login`, data, /*this._options*/);
     }
 
     partnerCreate (userId: number, data: ICreate) {
@@ -38,7 +41,7 @@ export class AppService {
     }
 
     upload (data: FormData) {
-        return this.http.post(`${config.API_BASE_URL}/upload`, data);
+        return this.http.post(`${config.API_BASE_URL}/upload`, data, this._options);
     }
 
     statisticsRead (startDate: number, endDate: number) {
@@ -46,6 +49,6 @@ export class AppService {
     }
 
     wardsRead (data: any) {
-        return this.http.post(`${config.API_BASE_URL}/wards`, data);
+        return this.http.post(`${config.API_BASE_URL}/wards`, data, this._options);
     }
 }

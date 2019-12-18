@@ -13,6 +13,15 @@ export class TokenStorage {
     }
 
     /**
+     * Get user id
+     * @returns {Observable<number>}
+     */
+    public getUserId(): Observable<number> {
+        const userId: number = parseInt(localStorage.getItem('userId'));
+        return of(userId);
+    }
+
+    /**
      * Set access token
      * @returns {TokenStorage}
      */
@@ -22,9 +31,24 @@ export class TokenStorage {
     }
 
     /**
-     * Remove token
+     * Set user id
+     * @returns {TokenStorage}
+     */
+    public setUserId(userId: number): TokenStorage {
+        localStorage.setItem('userId', userId.toString());
+        return this;
+    }
+
+    /**
+     * Remove token and userId
      */
     public clear() {
+        console.log('2222222')
         localStorage.removeItem('accessToken');
+        localStorage.removeItem('userId');
+    }
+
+    public isAuthorized(): boolean {
+        return !!localStorage.getItem('accessToken');
     }
 }

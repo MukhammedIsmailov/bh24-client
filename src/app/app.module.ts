@@ -19,6 +19,7 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 import { CabinetComponent } from '../cabinet/cabinet.component';
 import { CalendarComponent } from '../calendar/calendar.component';
 import { EducationComponent } from '../education/education.component';
+import { UserMenuComponent } from '../user-menu/user-menu.component';
 
 import { AppService } from './app.service';
 import { NotificationService } from './notification.service';
@@ -39,7 +40,7 @@ const appRoutes: Routes =[
         ReactiveFormsModule, SimpleNotificationsModule.forRoot(), BrowserAnimationsModule,
         ChartsModule, Ng2FlatpickrModule],
     declarations: [ AppComponent, LoginComponent, CreateComponent, ProfileComponent, StatisticsComponent,
-        SidebarComponent, CabinetComponent, CalendarComponent, EducationComponent],
+        SidebarComponent, CabinetComponent, CalendarComponent, EducationComponent, UserMenuComponent],
     bootstrap: [ AppComponent ],
     providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' }, TokenStorage ]
 })

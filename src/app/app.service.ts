@@ -8,8 +8,12 @@ import { ICreate } from '../create/create.model';
 
 @Injectable()
 export class AppService {
-    constructor(private http: HttpClient, private tokenStorage: TokenStorage) {
-        tokenStorage.getAccessToken().subscribe((token: string) => {
+    constructor(private http: HttpClient, private tokenStorage: TokenStorage) { }
+
+    private _options = { };
+
+    private setOptions() {
+        this.tokenStorage.getAccessToken().subscribe((token: string) => {
             this._options = {
                 headers: new HttpHeaders({
                     'Authorization': `Bearer ${token}`,
@@ -18,14 +22,17 @@ export class AppService {
         });
     }
 
-    private _options = { };
+    me () {
+        this.setOptions();
+        return this.http.get(`${config.API_BASE_URL}/me`, this._options);
+    }
 
     login (data: ILogin) {
-        return this.http.post(`${config.API_BASE_URL}/login`, data, /*this._options*/);
+        return this.http.post(`${config.API_BASE_URL}/login`, data);
     }
 
     partnerCreate (userId: number, data: ICreate) {
-        return this.http.put(`${config.API_BASE_URL}/partner?id=${userId}`, data, this._options);
+        return this.http.put(`${config.API_BASE_URL}/partner?id=${userId}`, data);
     }
 
     partnerReadById (id: number) {
@@ -44,10 +51,12 @@ export class AppService {
     }
 
     statisticsRead (startDate: number, endDate: number) {
+        this.setOptions();
         return this.http.get(`${config.API_BASE_URL}/statistics/plot?startDate=${startDate}&endDate=${endDate}`, this._options);
     }
 
     wardsRead (data: any) {
+        this.setOptions();
         return this.http.post(`${config.API_BASE_URL}/wards`, data, this._options);
     }
 }

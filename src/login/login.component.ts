@@ -23,9 +23,10 @@ export class LoginComponent {
 
     submitClick () {
         const data: ILogin = { login: this.login, password: this.password };
-        this.apiService.login(data).subscribe((data: any) => {
+        this.apiService.login(data).subscribe(async (data: any) => {
             this.tokenStorage.setAccessToken(data.token);
-            this.router.navigateByUrl('/statistics');
+            this.tokenStorage.setUserId(data.userId);
+            await this.router.navigateByUrl('/cabinet');
         }, error => {
             if(error.status === 404) {
                 this.notFound = true;

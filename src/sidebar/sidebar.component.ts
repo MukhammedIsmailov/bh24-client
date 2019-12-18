@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { MenuItems, routes } from './sidebar.model';
@@ -10,7 +10,6 @@ import { MenuItems, routes } from './sidebar.model';
 export class SidebarComponent {
     menuItemsEnum = MenuItems;
     activeMenuItem = MenuItems.Cabinet;
-    active: boolean = false;
 
     constructor (private router: Router) { }
 
@@ -18,6 +17,4 @@ export class SidebarComponent {
         this.activeMenuItem = item;
         await this.router.navigateByUrl(routes[item.valueOf()]);
     }
-
-
 }

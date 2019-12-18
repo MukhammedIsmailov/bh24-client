@@ -16,7 +16,8 @@
             <img src="../../content/img/logo.png" srcset="../../content/img/logo@2x.png 2x" alt="" />
         </div>
     </header>
-    <bh24-sidebar></bh24-sidebar>
+    <bh24-sidebar *ngIf="authorized"></bh24-sidebar>
+    <bh24-user_menu *ngIf="authorized"></bh24-user_menu>
     <div class="content">
         <div class="content__wrap">
             <router-outlet></router-outlet>

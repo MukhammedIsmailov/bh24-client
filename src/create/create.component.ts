@@ -26,7 +26,8 @@ export class CreateComponent implements OnInit {
     referId: string;
     userId: number;
 
-    viewErrorMessage? :boolean = null;
+    viewErrorMessage?: boolean = null;
+    isLeaderDataAvailable: boolean = false;
 
     constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute) { }
 
@@ -73,6 +74,7 @@ export class CreateComponent implements OnInit {
     private getLeader (apiService: AppService, referId: string) {
         apiService.partnerReadByReferId(referId).subscribe((data: IProfile) => {
             this.leader = data;
+            this.isLeaderDataAvailable = true;
         });
     }
 }

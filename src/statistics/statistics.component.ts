@@ -3,6 +3,7 @@ import { DatePipe } from '@angular/common';
 import { BaseChartDirective } from 'ng2-charts';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { FormControl, FormGroup } from '@angular/forms';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import { AppService } from '../app/app.service';
 import { IStatisticsData, IDataset, IWard, IWardOptions } from './statistics.model';
@@ -13,6 +14,14 @@ import * as config from '../../config.json';
     selector: 'bh24-statistics',
     templateUrl: './statistics.component.html',
     providers: [ DatePipe ],
+    animations: [
+        trigger('slideUpDown', [
+            state('0', style({ 'max-height': '*', opacity: 1 })),
+            state('1', style({ 'max-height': '0px', opacity: 0 })),
+            transition(':enter', animate('700ms ease-in-out')),
+            transition('* => *', animate('700ms ease-in-out')),
+        ])
+    ]
 })
 export class StatisticsComponent implements OnInit {
     constructor (private apiService: AppService) { }
@@ -25,6 +34,9 @@ export class StatisticsComponent implements OnInit {
     fromPlotDate: Date = new Date();
     toWardsDate: Date = new Date();
     fromWardsDate: Date = new Date();
+
+    chartToggleActive: boolean = false;
+    filtersToggleActive: boolean = false;
 
     plotDate: Date[];
     wardsDate: Date[];

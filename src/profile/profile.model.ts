@@ -2,7 +2,6 @@ export interface IProfile {
     id?: number;
     firstName: string;
     secondName: string;
-    referId: string;
     iconUrl: string;
     phoneNumber: string;
     email: string;

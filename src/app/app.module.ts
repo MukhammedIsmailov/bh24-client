@@ -15,6 +15,10 @@ import { LoginComponent } from '../login/login.component';
 import { CreateComponent } from '../create/create.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { StatisticsComponent } from '../statistics/statistics.component';
+import { SidebarComponent } from '../sidebar/sidebar.component';
+import { CabinetComponent } from '../cabinet/cabinet.component';
+import { CalendarComponent } from '../calendar/calendar.component';
+import { EducationComponent } from '../education/education.component';
 
 import { AppService } from './app.service';
 import { NotificationService } from './notification.service';
@@ -24,14 +28,18 @@ const appRoutes: Routes =[
     { path: 'sign-in', component: LoginComponent},
     { path: '', component: CreateComponent},
     { path: 'profile', component: ProfileComponent },
-    { path: 'statistics', component: StatisticsComponent }
+    { path: 'statistics', component: StatisticsComponent },
+    { path: 'cabinet', component: CabinetComponent },
+    { path: 'calendar', component: CalendarComponent },
+    { path: 'education', component: EducationComponent },
 ];
 
 @NgModule({
     imports: [ BrowserModule, FormsModule, HttpClientModule, TooltipModule, RouterModule.forRoot(appRoutes),
         ReactiveFormsModule, SimpleNotificationsModule.forRoot(), BrowserAnimationsModule,
         ChartsModule, Ng2FlatpickrModule],
-    declarations: [ AppComponent, LoginComponent, CreateComponent, ProfileComponent, StatisticsComponent ],
+    declarations: [ AppComponent, LoginComponent, CreateComponent, ProfileComponent, StatisticsComponent,
+        SidebarComponent, CabinetComponent, CalendarComponent, EducationComponent],
     bootstrap: [ AppComponent ],
     providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' }, TokenStorage ]
 })

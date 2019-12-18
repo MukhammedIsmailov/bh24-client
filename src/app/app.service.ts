@@ -29,19 +29,18 @@ export class AppService {
     }
 
     partnerReadById (id: number) {
-        return this.http.get(`${config.API_BASE_URL}/partner?id=${id}`, this._options);
+        return this.http.get(`${config.API_BASE_URL}/partner/byId?id=${id}`);
     }
-
     partnerReadByReferId (referId: string) {
-        return this.http.get(`${config.API_BASE_URL}/partner?referId=${referId}`, this._options);
+        return this.http.get(`${config.API_BASE_URL}/partner/byReferId?referId=${referId}`);
     }
 
     partnerUpdate (id: number, data: any) {
-        return this.http.post(`${config.API_BASE_URL}/partner?id=${id}`, { ...data }, this._options)
+        return this.http.post(`${config.API_BASE_URL}/partner?id=${id}`, { ...data })
     }
 
     upload (data: FormData) {
-        return this.http.post(`${config.API_BASE_URL}/upload`, data, this._options);
+        return this.http.post(`${config.API_BASE_URL}/upload`, data);
     }
 
     statisticsRead (startDate: number, endDate: number) {

@@ -50,16 +50,17 @@
             <div class="chart__content">
                 <div class="chart__content-top">
                     <h3 class="chart__title">График переходов</h3>
-                    <div class="chart__toggle active">
+                    <div class="chart__toggle" [ngClass]="{active: chartToggleActive}" (click)="chartToggleActive = !chartToggleActive">
                         <div class="svg-icon svg-icon_icon-arrow2">
                             <svg>
                                 <use xlink:href="#icon-arrow2"></use>
                             </svg>
                         </div>
-                        <span>Скрыть</span>
+                        <span *ngIf="!chartToggleActive">Скрыть</span>
+                        <span *ngIf="chartToggleActive">Показать</span>
                     </div>
                 </div>
-                <div class="chart__wrap" >
+                <div [@slideUpDown]="chartToggleActive" class="chart__wrap" >
                     <div class="chart__container">
                         <canvas id="myChart"
                                 baseChart
@@ -260,15 +261,16 @@
                             <span>Заказали консультацию</span>
                         </label>
                     </div>
-                    <div class="partners__toggle partners__toggle_desktop active">
-                        <span>Спрятать фильтры</span>
+                    <div class="partners__toggle partners__toggle_desktop" [ngClass]="{active: filtersToggleActive}" (click)="filtersToggleActive = !filtersToggleActive">
+                        <span *ngIf="!filtersToggleActive">Спрятать фильтры</span>
+                        <span *ngIf="filtersToggleActive">Показать фильтры</span>
                         <div class="svg-icon svg-icon_icon-arrow2">
                             <svg>
                                 <use xlink:href="#icon-arrow2"></use>
                             </svg>
                         </div>
                     </div>
-                    <div class="partners__toggle partners__toggle_tablet active">
+                    <div class="partners__toggle partners__toggle_tablet">
                         <span>Фильтры</span>
                         <div class="svg-icon svg-icon_icon-arrow2">
                             <svg>
@@ -285,7 +287,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="partners__filters">
+                <div class="partners__filters" [@slideUpDown]="filtersToggleActive">
                     <div class="partners__filters-wrap">
                         <div class="partners__filter">
                             <div class="partners__filter-name">Мессенджер</div>

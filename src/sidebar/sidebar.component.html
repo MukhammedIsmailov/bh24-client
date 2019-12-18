@@ -1,0 +1,112 @@
+<div class="sidebar" [ngClass]="{active: active}">
+    <div class="sidebar__wrap">
+        <div (click)="active = !active" class="sidebar__item sidebar__item_toggle" >
+            <div class="sidebar__icon">
+                <div class="svg-icon svg-icon_icon-bar">
+                    <svg>
+                        <use xlink:href="#icon-bar"></use>
+                    </svg>
+                </div>
+            </div>
+            <div class="sidebar__arrow">
+                <div class="svg-icon svg-icon_icon-arrow">
+                    <svg>
+                        <use xlink:href="#icon-arrow"></use>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Cabinet.valueOf()}" (click)="goTo(menuItemsEnum.Cabinet)">
+            <div class="sidebar__icon">
+                <div class="svg-icon svg-icon_icon-home">
+                    <svg>
+                        <use xlink:href="#icon-home"></use>
+                    </svg>
+                </div>
+            </div>
+            <div class="sidebar__name">Мой кабинет</div>
+        </div>
+        <div class="sidebar__item sidebar__item_dropdown" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Education.valueOf()}" (click)="goTo(menuItemsEnum.Education)">
+            <div class="sidebar__icon">
+                <div class="svg-icon svg-icon_icon-study">
+                    <svg>
+                        <use xlink:href="#icon-study"></use>
+                    </svg>
+                </div>
+            </div>
+            <div class="sidebar__name">Обучение</div>
+            <div class="sidebar__arrow">
+                <div class="svg-icon svg-icon_icon-arrow">
+                    <svg>
+                        <use xlink:href="#icon-arrow"></use>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Calendar.valueOf()}" (click)="goTo(menuItemsEnum.Calendar)">
+            <div class="sidebar__icon">
+                <div class="svg-icon svg-icon_icon-calendar">
+                    <svg>
+                        <use xlink:href="#icon-calendar"></use>
+                    </svg>
+                </div>
+            </div>
+            <div class="sidebar__name">Календарь событий</div>
+        </div>
+        <div class="sidebar__separator"></div>
+        <!--<div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Promo.valueOf()}" (click)="goTo(menuItemsEnum.Promo)">-->
+        <div class="sidebar__item">
+            <div class="sidebar__icon">
+                <div class="svg-icon svg-icon_icon-rocket">
+                    <svg>
+                        <use xlink:href="#icon-rocket"></use>
+                    </svg>
+                </div>
+            </div>
+            <div class="sidebar__name">Промо</div>
+        </div>
+        <div class="sidebar__separator"></div>
+        <div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Team.valueOf()}" (click)="goTo(menuItemsEnum.Team)">
+            <div class="sidebar__icon">
+                <div class="svg-icon svg-icon_icon-graph">
+                    <svg>
+                        <use xlink:href="#icon-graph"></use>
+                    </svg>
+                </div>
+            </div>
+            <div class="sidebar__name">Моя команда</div>
+        </div>
+        <!--<div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Promotion.valueOf()}" (click)="goTo(menuItemsEnum.Promotion)">-->
+        <div class="sidebar__item">
+            <div class="sidebar__icon">
+                <div class="svg-icon svg-icon_icon-grow">
+                    <svg>
+                        <use xlink:href="#icon-grow"></use>
+                    </svg>
+                </div>
+            </div>
+            <div class="sidebar__name">Продвижение</div>
+        </div>
+        <div class="sidebar__separator"></div>
+        <div class="sidebar__item">
+            <div class="sidebar__icon">
+                <div class="svg-icon svg-icon_icon-round">
+                    <svg>
+                        <use xlink:href="#icon-round"></use>
+                    </svg>
+                </div>
+            </div>
+            <div class="sidebar__name">Ariix</div>
+        </div>
+        <div class="sidebar__item">
+            <div class="sidebar__icon">
+                <div class="svg-icon svg-icon_icon-round">
+                    <svg>
+                        <use xlink:href="#icon-round"></use>
+                    </svg>
+                </div>
+            </div>
+            <div class="sidebar__name">BaHappy 24</div>
+        </div>
+    </div>
+</div>

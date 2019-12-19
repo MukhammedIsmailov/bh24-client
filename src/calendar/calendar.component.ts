@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'bh24-cabinet',
+    selector: 'bh24-calendar',
     templateUrl: './calendar.component.html'
 })
 

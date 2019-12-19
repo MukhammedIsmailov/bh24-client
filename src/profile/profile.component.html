@@ -66,37 +66,25 @@
                     <div class="form__name" [ngClass]="{error:emptySecondName}">Фамилия</div>
                     <input class="form__control" type="text" name="secondName" [(ngModel)]="profile.secondName" [ngClass]="{error:emptySecondName}" />
                 </div>
-                <!--<div class="form__group w-76 column-md">-->
-                    <!--<div class="form__name" [ngClass]="{error:emptyReferId || invalidReferId || notUniqueReferId}">Адрес страницы<div class="tooltip" tooltip="<div>Неизменяемое поле, ссылка для приглашений на Ваш сайт.<br>Это поле должно состоять только из латинский букв и цифр, пробелы и другие символы запрещены.</div>" [options]="{'tooltip-class': 'tooltip__content', 'theme': 'light'}">-->
-                        <!--<div class="tooltip__icon">-->
-                            <!--<div class="svg-icon svg-icon_icon-inform">-->
-                                <!--<svg>-->
-                                    <!--<use xlink:href="#icon-inform"></use>-->
-                                <!--</svg>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="form__wrap form__wrap_link">-->
-                        <!--<div class="form__name form__name_gray">behappy24.com/</div>-->
-                        <!--<input class="form__control" type="text" name="referId" [(ngModel)]="profile.referId" [ngClass]="{error:emptyReferId || invalidReferId || notUniqueReferId}" [disabled]="disabledReferId"/>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="form__group form__group_alert" *ngIf="disabledReferId">-->
-                    <!--<div class="form__name form__name_auto">Ваша ссылка для приглашений</div>-->
-                    <!--<div class="form__copy">-->
-                        <!--<div class="form__copy-name" id="copy-name" [innerText]="'behappy24.com/' + profile.referId"></div>-->
-                        <!--<div class="form__copy-btn" (click)="copyLink()">-->
-                            <!--<div class="svg-icon svg-icon_icon-copy">-->
-                                <!--<svg>-->
-                                    <!--<use xlink:href="#icon-copy"></use>-->
-                                <!--</svg>-->
-                            <!--</div>-->
-                            <!--<span *ngIf="!isCopied">Копировать</span>-->
-                            <!--<span *ngIf="isCopied">Скопировано</span>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
+                <div class="form__group w-76 column-md" *ngIf="!disabledReferId">
+                    <div class="form__name" [ngClass]="{error:emptyReferId || invalidReferId || notUniqueReferId}">Адрес страницы<div class="tooltip" tooltip="<div>Неизменяемое поле, ссылка для приглашений на Ваш сайт.<br>Это поле должно состоять только из латинский букв и цифр, пробелы и другие символы запрещены.</div>" [options]="{'tooltip-class': 'tooltip__content', 'theme': 'light'}">
+                        <div class="tooltip__icon">
+                            <div class="svg-icon svg-icon_icon-inform">
+                                <svg>
+                                    <use xlink:href="#icon-inform"></use>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="form__wrap form__wrap_link">
+                        <div class="form__name form__name_gray">behappy24.com/</div>
+                        <input class="form__control" type="text" name="referId" [(ngModel)]="profile.referId" [ngClass]="{error:emptyReferId || invalidReferId || notUniqueReferId}" [disabled]="disabledReferId"/>
+                    </div>
+                </div>
+                <div class="form__group form__group_alert" *ngIf="disabledReferId">
+                    <div class="form__name form__name_auto">Ваша ссылка для приглашений доступна в разделе "Продвижение"</div>
+                </div>
             </div>
         </div>
     </div>

@@ -10,10 +10,15 @@ export class NotificationService {
         timeOut: 3000,
         showProgressBar: true,
         pauseOnHover: true,
-        clickToClose: true
+        clickToClose: true,
+        theClass: 'notification'
     };
 
     error (title: string, content: string): void {
         this.notificationsService.error(title, content, this.options);
+    }
+
+    success (title: string, content: string): void {
+        this.notificationsService.success(title, content, this.options);
     }
 }

@@ -26,6 +26,7 @@ export class LoginComponent {
         this.apiService.login(data).subscribe(async (data: any) => {
             this.tokenStorage.setAccessToken(data.token);
             this.tokenStorage.setUserId(data.userId);
+            this.tokenStorage.setReferId(data.referId);
             await this.router.navigateByUrl('/cabinet');
         }, error => {
             if(error.status === 404) {

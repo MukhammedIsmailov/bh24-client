@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { AppService } from '../app/app.service';
 import { NotificationService } from '../app/notification.service';
+import { TokenStorage } from '../app/token-storage.service';
 
 import { IProfile } from './profile.model';
 
@@ -25,7 +26,8 @@ export class ProfileComponent implements OnInit {
     dataBaseUrl: string = config.DATA_BASE_URL;
 
     constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute,
-                 private formBuilder: FormBuilder, private notificationService: NotificationService) { }
+                 private formBuilder: FormBuilder, private notificationService: NotificationService,
+                 private tokenStorage: TokenStorage) { }
 
     ngOnInit(): void {
         this.aRouter.queryParams.subscribe(params => {
@@ -45,6 +47,7 @@ export class ProfileComponent implements OnInit {
     wrongConfirmPassword: boolean = false;
     emptyFirstName: boolean = false;
     emptySecondName: boolean = false;
+    emptyReferId: boolean = false;
     emptyPhoneNumber: boolean = false;
     emptyEmail: boolean = false;
     emptyPassword: boolean = false;
@@ -57,11 +60,14 @@ export class ProfileComponent implements OnInit {
     errorEmptyMessage: boolean = false;
     errorInvalidDataMessage: boolean = false;
     passwordIsExist: boolean = false;
+    disabledReferId: boolean = false;
     disabledLogin: boolean = false;
     invalidEmail: boolean = false;
     invalidPassword: boolean = false;
     invalidLogin: boolean = false;
+    invalidReferId: boolean = false;
     emptyIconUrl: boolean = false;
+    notUniqueReferId: boolean = false;
     notUniqueEmail: boolean = false;
     notUniqueLogin: boolean = false;
 
@@ -82,6 +88,7 @@ export class ProfileComponent implements OnInit {
         this.wrongConfirmPassword = (this.confirmPassword !== this.profile.password) && !this.passwordIsExist;
         this.emptyFirstName = !this.profile.firstName.length || !this.profile.firstName;
         this.emptySecondName = !this.profile.secondName.length || !this.profile.secondName;
+        this.emptyReferId = !this.profile.referId ? true : (this.profile.referId.length === 0);
         this.emptyPhoneNumber = !this.profile.phoneNumber ? true : (this.profile.phoneNumber.length === 0);
         this.emptyEmail = !this.profile.email ? true : (this.profile.email.length === 0);
         this.emptyPassword = (!this.passwordIsExist && !this.profile.password || this.profile.password.length === 0);
@@ -95,15 +102,17 @@ export class ProfileComponent implements OnInit {
         this.invalidEmail = !this.isValidEmail(this.profile.email);
         this.invalidPassword = !this.isValidPassword(this.profile.password);
         this.invalidLogin = !this.isValidLogin(this.profile.login);
+        this.invalidReferId = !this.isValidReferId(this.profile.referId);
 
         this.errorEmptyMessage =
-            this.emptyFirstName || this.emptySecondName || this.emptyPhoneNumber ||
+            this.emptyFirstName || this.emptySecondName || this.emptyReferId || this.emptyPhoneNumber ||
             this.emptyEmail || this.emptyPassword || this.emptyQuestionResults ||
             this.emptyQuestionWhy || this.emptyQuestionStaff || this.emptyQuestionWhoAreYou ||
             this.emptyQuestionValue || this.emptyLogin;
 
         this.errorInvalidDataMessage =
-            this.invalidEmail || this.wrongConfirmPassword || this.invalidPassword || this.invalidLogin
+            this.invalidEmail || this.wrongConfirmPassword || this.invalidPassword || this.invalidLogin ||
+            this.invalidReferId;
 
         if (!this.errorEmptyMessage && !this.errorInvalidDataMessage && !this.emptyIconUrl) {
             const data = this.profile;
@@ -116,10 +125,15 @@ export class ProfileComponent implements OnInit {
             requestData.viber = this.messengers[4].value;
             requestData.whatsapp = this.messengers[5].value;
             this.apiService.partnerUpdate(this.partnerId, requestData).subscribe((response: IProfile) => {
-                this.profile = response;
-                this.setMessengersModel(response);
-                this.passwordIsExist = this.checkPasswordFromServer(response.password);
-                this.disabledLogin = !this.emptyLogin;
+                if (!!this.tokenStorage.isAuthorized()) {
+                    this.profile = response;
+                    this.setMessengersModel(response);
+                    this.passwordIsExist = this.checkPasswordFromServer(response.password);
+                    this.disabledLogin = !this.emptyLogin;
+                    this.disabledReferId = true;
+                } else {
+                    this.router.navigateByUrl('/sign-in');
+                }
             }, error => {
                 if (error.status === 400 && error.error.length > 0) {
                     this.notUniqueLogin = error.error.find((item: any) => item.field === 'login' && item.error === 'not unique');
@@ -197,6 +211,7 @@ export class ProfileComponent implements OnInit {
             secondName: '',
             email: '',
             iconUrl: null,
+            referId: '',
             password: '',
             phoneNumber: '',
             questionResults: null,
@@ -216,6 +231,7 @@ export class ProfileComponent implements OnInit {
 
     private getProfileData (apiService: AppService, id: number) {
         apiService.partnerReadById(id).subscribe((data: IProfile) => {
+            this.disabledReferId = this.tokenStorage.isAuthorized();
             this.profile = data;
             this.setMessengersModel(data);
             this.disabledLogin = !!this.profile.login && this.profile.login.length > 0;
@@ -245,6 +261,11 @@ export class ProfileComponent implements OnInit {
         return re.test(login) || this.disabledLogin;
     }
 
+    private isValidReferId (referId: string) {
+        const re = /^[A-Za-z0-9]+$/;
+        return re.test(referId) || this.disabledReferId;
+    }
+
     private showErrorAlert () {
         if (this.errorEmptyMessage) {
             this.notificationService.error('Ошибка!', 'Все поля обязательны для заполнения!');
@@ -255,6 +276,7 @@ export class ProfileComponent implements OnInit {
                 if (this.errorInvalidDataMessage) {
                     this.notificationService.error('Ошибка!', 'Проверьте правильность введенных данных и повторите попытку!');
                 } else {
+                    if (this.notUniqueReferId) this.notificationService.error('Ошибка!', 'Пользователь с таким адресом уже зарегистрирован в системе!');
                     if (this.notUniqueLogin) this.notificationService.error('Ошибка!', 'Пользователь с таким логином уже зарегистрирован в системе!');
                     if (this.notUniqueEmail) this.notificationService.error('Ошибка!', 'Пользователь с таким email уже зарегистрирован в системе!');
                 }

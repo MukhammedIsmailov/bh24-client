@@ -270,7 +270,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="partners__toggle partners__toggle_tablet">
+                    <div class="partners__toggle partners__toggle_tablet" [ngClass]="{active: filtersToggleActive}" (click)="filtersToggleActive = !filtersToggleActive">
                         <span>Фильтры</span>
                         <div class="svg-icon svg-icon_icon-arrow2">
                             <svg>

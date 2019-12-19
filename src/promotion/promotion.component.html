@@ -1,0 +1,70 @@
+<h1 class="content__main-title content__main-title_small2">Мои ссылки для приглашений</h1>
+<div *ngIf="isLeadsDataAvailable">
+    <div class="form__alert form__alert_style4">
+        <div class="form__alert-icon">
+            <div class="svg-icon svg-icon_icon-alert">
+                <svg>
+                    <use xlink:href="#icon-alert"></use>
+                </svg>
+            </div>
+        </div>
+        <span>Реферальные ссылки для распространения среди аудитории ваших потенциальных партнеров.</span>
+    </div>
+    <h2 class="content__title content__title_big">Ссылки для приглашения на курс - универсальная аудитория</h2>
+    <div class="content__item">
+        <div class="links">
+            <div class="links__item">
+                <div class="links__name">Без фото</div>
+                <div class="links__group">
+                    <div class="links__link" id="links__link1">{{landingUrl}}</div>
+                    <a class="links__preview" [href]="landingUrl" target="_blank">
+                        <div class="svg-icon svg-icon_icon-eye">
+                            <svg>
+                                <use xlink:href="#icon-eye"></use>
+                            </svg>
+                        </div>
+                        <span>Предпросмотр</span>
+                    </a>
+                    <div class="links__copy" (click)="copyLink(landingUrl)">
+                        <div class="svg-icon svg-icon_icon-copy">
+                            <svg>
+                                <use xlink:href="#icon-copy"></use>
+                            </svg>
+                        </div>
+                        <span>Копировать ссылку</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2 class="content__title content__title_big">Ссылки для регистрации новых пратнеров BH24 в системе «Мастер
+        Финсвободы»</h2>
+    <div class="content__item">
+        <div class="links">
+            <div class="links__item" *ngFor="let lead of leads">
+                <div class="links__name">Ссылки для регистрации {{lead.fullName}}</div>
+                <div class="links__group">
+                    <div class="links__link" id="links__link3">{{createPartnerUrl + lead.urlForCreate}}
+                    </div>
+                    <a class="links__preview" [href]="createPartnerUrl + lead.urlForCreate" target="_blank">
+                        <div class="svg-icon svg-icon_icon-eye">
+                            <svg>
+                                <use xlink:href="#icon-eye"></use>
+                            </svg>
+                        </div>
+                        <span>Предпросмотр</span>
+                    </a>
+                    <div class="links__copy" (click)="copyLink(createPartnerUrl + lead.urlForCreate)">
+                        <div class="svg-icon svg-icon_icon-copy">
+                            <svg>
+                                <use xlink:href="#icon-copy"></use>
+                            </svg>
+                        </div>
+                        <span>Копировать ссылку</span>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

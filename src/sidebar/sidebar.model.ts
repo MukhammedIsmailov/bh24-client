@@ -4,8 +4,8 @@ export enum MenuItems {
     Calendar = 2,
     // Promo = 3,
     Team = 3,
-    // Promotion = 1,
+    Promotion = 4,
 }
 
-const routes = ['/cabinet', '/education', '/calendar', '/statistics',];
+const routes = ['/cabinet', '/education', '/calendar', '/statistics', '/promotion'];
 export { routes }

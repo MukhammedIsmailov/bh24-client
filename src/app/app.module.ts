@@ -20,6 +20,7 @@ import { CabinetComponent } from '../cabinet/cabinet.component';
 import { CalendarComponent } from '../calendar/calendar.component';
 import { EducationComponent } from '../education/education.component';
 import { UserMenuComponent } from '../user-menu/user-menu.component';
+import { PromotionComponent } from '../promotion/promotion.component';
 
 import { AppService } from './app.service';
 import { NotificationService } from './notification.service';
@@ -27,12 +28,13 @@ import { TokenStorage } from './token-storage.service'
 
 const appRoutes: Routes =[
     { path: 'sign-in', component: LoginComponent},
-    { path: '', component: CreateComponent},
+    { path: 'create', component: CreateComponent},
     { path: 'profile', component: ProfileComponent },
     { path: 'statistics', component: StatisticsComponent },
     { path: 'cabinet', component: CabinetComponent },
     { path: 'calendar', component: CalendarComponent },
     { path: 'education', component: EducationComponent },
+    { path: 'promotion', component: PromotionComponent },
 ];
 
 @NgModule({
@@ -40,7 +42,7 @@ const appRoutes: Routes =[
         ReactiveFormsModule, SimpleNotificationsModule.forRoot(), BrowserAnimationsModule,
         ChartsModule, Ng2FlatpickrModule],
     declarations: [ AppComponent, LoginComponent, CreateComponent, ProfileComponent, StatisticsComponent,
-        SidebarComponent, CabinetComponent, CalendarComponent, EducationComponent, UserMenuComponent],
+        SidebarComponent, CabinetComponent, CalendarComponent, EducationComponent, UserMenuComponent, PromotionComponent],
     bootstrap: [ AppComponent ],
     providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' }, TokenStorage ]
 })

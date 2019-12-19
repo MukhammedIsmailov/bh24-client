@@ -34,37 +34,30 @@ export class CreateComponent implements OnInit {
     ngOnInit(): void {
         this.aRouter.queryParams.subscribe(params => {
             this.referId = params.referId;
-            this.userId = parseInt(params.id);
+            this.userId = parseInt(params.userId);
 
             if (!!this.referId && !!this.userId) {
                 this.getLeader(this.apiService, this.referId);
-                this.viewErrorMessage = false;
             } else {
                 this.viewErrorMessage = true;
             }
         });
     }
 
-    wrongLogin: boolean = false;
     emptyFirstName: boolean = false;
     emptySecondName: boolean = false;
-    emptyLogin: boolean = false;
     errorEmptyMessage: boolean = false;
 
     submitClick () {
         this.emptyFirstName = !this.partnerInfo.firstName.length;
         this.emptySecondName = !this.partnerInfo.secondName.length;
 
-        if (!this.emptyLogin || !this.emptyFirstName || !this.emptySecondName) {
+        if (!this.emptyFirstName || !this.emptySecondName) {
             const data = { ...this.partnerInfo, leaderId: this.leader.id };
             this.apiService.partnerCreate(this.userId, data).subscribe(async (data: any) => {
                 this.router.navigateByUrl(`/profile?id=${data.id}`);
             }, error => {
-                const typeOfFind = typeof (error.error.find((item: any) => {
-                    return (item.field === 'login' && item.error === 'not unique')
-                }));
-
-                this.wrongLogin = typeOfFind !== 'undefined';
+                this. viewErrorMessage = true;
             });
         } else {
             this.errorEmptyMessage = true;
@@ -75,6 +68,7 @@ export class CreateComponent implements OnInit {
         apiService.partnerReadByReferId(referId).subscribe((data: IProfile) => {
             this.leader = data;
             this.isLeaderDataAvailable = true;
+            this.viewErrorMessage = false;
         });
     }
 }

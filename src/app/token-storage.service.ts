@@ -22,6 +22,15 @@ export class TokenStorage {
     }
 
     /**
+     * Get refer id
+     * @returns {Observable<number>}
+     */
+    public getReferId(): Observable<string> {
+        const referId: string = localStorage.getItem('referId');
+        return of(referId);
+    }
+
+    /**
      * Set access token
      * @returns {TokenStorage}
      */
@@ -40,12 +49,21 @@ export class TokenStorage {
     }
 
     /**
+     * Set refer id
+     * @returns {TokenStorage}
+     */
+    public setReferId(referId: string): TokenStorage {
+        localStorage.setItem('referId', referId);
+        return this;
+    }
+
+    /**
      * Remove token and userId
      */
     public clear() {
-        console.log('2222222')
         localStorage.removeItem('accessToken');
         localStorage.removeItem('userId');
+        localStorage.removeItem('referId');
     }
 
     public isAuthorized(): boolean {

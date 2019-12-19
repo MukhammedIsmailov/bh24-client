@@ -59,4 +59,9 @@ export class AppService {
         this.setOptions();
         return this.http.post(`${config.API_BASE_URL}/wards`, data, this._options);
     }
+
+    leadsRead () {
+        this.setOptions();
+        return this.http.get(`${config.API_BASE_URL}/leads`, this._options);
+    }
 }

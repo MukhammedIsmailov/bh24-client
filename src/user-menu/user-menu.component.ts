@@ -6,6 +6,7 @@ import { AppService } from '../app/app.service';
 import { IMe } from './user-menu.model';
 
 import * as config from '../../config.json';
+import {ɵAnimationRendererFactory} from "@angular/platform-browser/animations";
 
 @Component({
     selector: 'bh24-user_menu',
@@ -15,12 +16,14 @@ export class UserMenuComponent implements OnInit {
     active: boolean = false;
     me: IMe;
     dataBaseUrl = config.DATA_BASE_URL;
+    isDataAvailable = false;
 
     constructor (private router: Router, private tokenStorage: TokenStorage, private apiService: AppService) { }
 
     ngOnInit(): void {
         this.apiService.me().subscribe((data: any) => {
             this.me = data;
+            this.isDataAvailable = true;
         });
     }
 

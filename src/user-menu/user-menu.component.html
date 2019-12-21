@@ -1,4 +1,4 @@
-<div class="umenu" [ngClass]="{active: active}">
+<div class="umenu" [ngClass]="{active: active}" *ngIf="isDataAvailable">
     <div class="umenu__header" (click)="userMenuActive()">
         <div class="user">
             <div class="user__arrow user__arrow_open">
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="user__info">
-                <div class="user__name">{{me.secondName}} {{me.firstName}}</div>
+                <div class="user__name">{{me.firstName}} {{me.secondName}}</div>
                 <div class="user__id">Логин: {{me.login}}</div>
             </div>
             <div class="user__arrow">
@@ -46,158 +46,182 @@
                     </div>
                     <span>Выйти</span>
                 </div>
+            </div>
+            <div class="umenu__separator"></div>
+            <div class="umenu__link umenu__link_full">
+                <div class="svg-icon svg-icon_icon-dollar">
+                    <svg>
+                        <use xlink:href="#icon-dollar"></use>
+                    </svg>
+                </div>
+                <span>Оплата системы</span>
+                <div class="umenu__status"></div>
+            </div>
+            <div class="umenu__item">
+                <h3 class="umenu__title">Ваш наставник</h3>
+                <div class="user">
+                    <div class="user__ava">
+                        <div class="user__img">
+                            <img [src]="dataBaseUrl + me.leaderIconUrl" />
+                        </div>
+                    </div>
+                    <div class="user__info">
+                        <div class="user__name">{{me.leaderFirstName}} {{me.leaderSecondName}}</div>
+                        <div class="user__id">Логин: {{me.leaderLogin}}</div>
+                    </div>
+                    <div class="user__arrow">
+                        <div class="svg-icon svg-icon_icon-arrow">
+                            <svg>
+                                <use xlink:href="#icon-arrow"></use>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="umenu__links umenu__links_column">
+                    <a class="umenu__link umenu__link_contact" href="#">
+                        <div class="svg-icon svg-icon_icon-mail">
+                            <svg>
+                                <use xlink:href="#icon-mail"></use>
+                            </svg>
+                        </div>
+                        <span>{{me.leaderEmail}}</span>
+                    </a>
+                    <a class="umenu__link umenu__link_contact" href="#">
+                        <div class="svg-icon svg-icon_icon-phone">
+                            <svg>
+                                <use xlink:href="#icon-phone"></use>
+                            </svg>
+                        </div>
+                        <span>{{me.leaderPhoneNumber}}</span>
+                    </a>
+                </div>
+                <div class="social">
+                    <a class="social__item" href="#" *ngIf="!!me.telegram">
+                        <div class="svg-icon svg-icon_icon-tg">
+                            <svg>
+                                <use xlink:href="#icon-tg"></use>
+                            </svg>
+                        </div>
+                    </a>
+                    <a class="social__item" href="#" *ngIf="!!me.facebook">
+                        <div class="svg-icon svg-icon_icon-fb">
+                            <svg>
+                                <use xlink:href="#icon-fb"></use>
+                            </svg>
+                        </div>
+                    </a>
+                    <a class="social__item" href="#" *ngIf="me.skype">
+                        <div class="svg-icon svg-icon_icon-sk">
+                            <svg>
+                                <use xlink:href="#icon-sk"></use>
+                            </svg>
+                        </div>
+                    </a>
+                    <a class="social__item" href="#" *ngIf="me.viber">
+                        <div class="svg-icon svg-icon_icon-vb">
+                            <svg>
+                                <use xlink:href="#icon-vb"></use>
+                            </svg>
+                        </div>
+                    </a>
+                    <a class="social__item" href="#" *ngIf="me.vk">
+                        <div class="svg-icon svg-icon_icon-vk">
+                            <svg>
+                                <use xlink:href="#icon-vk"></use>
+                            </svg>
+                        </div>
+                    </a>
+                    <a class="social__item" href="#" *ngIf="me.whatsapp">
+                        <div class="svg-icon svg-icon_icon-ws">
+                            <svg>
+                                <use xlink:href="#icon-ws"></use>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+
                 <!--</div>-->
-                <!--<div class="umenu__separator"></div>-->
-                <!--<div class="umenu__link umenu__link_full">-->
-                <!--<div class="svg-icon svg-icon_icon-dollar">-->
-                <!--<svg>-->
-                <!--<use xlink:href="#icon-dollar"></use>-->
-                <!--</svg>-->
-                <!--</div>-->
-                <!--<span>Оплата системы</span>-->
-                <!--<div class="umenu__status"></div>-->
-                <!--</div>-->
-                <!--<div class="umenu__item">-->
-                <!--<h3 class="umenu__title">Ваш наставник</h3>-->
-                <!--<div class="user">-->
-                <!--<div class="user__ava">-->
-                <!--<div class="user__img">-->
-                <!--<img src="pic/user-img2.png" srcset="pic/user-img2@2x.png 2x" alt="" />-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--<div class="user__info">-->
-                <!--<div class="user__name">George Rodriquez</div>-->
-                <!--<div class="user__id">Логин: business.greg</div>-->
-                <!--</div>-->
-                <!--<div class="user__arrow">-->
-                <!--<div class="svg-icon svg-icon_icon-arrow">-->
-                <!--<svg>-->
-                <!--<use xlink:href="#icon-arrow"></use>-->
-                <!--</svg>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--<div class="umenu__links umenu__links_column">-->
-                <!--<a class="umenu__link umenu__link_contact" href="mailto:jeff.wiljerson@yazmin.biz">-->
-                <!--<div class="svg-icon svg-icon_icon-mail">-->
-                <!--<svg>-->
-                <!--<use xlink:href="#icon-mail"></use>-->
-                <!--</svg>-->
-                <!--</div>-->
-                <!--<span>jeff.wiljerson@yazmin.biz</span>-->
-                <!--</a>-->
-                <!--<a class="umenu__link umenu__link_contact" href="tel:2225718571">-->
-                <!--<div class="svg-icon svg-icon_icon-phone">-->
-                <!--<svg>-->
-                <!--<use xlink:href="#icon-phone"></use>-->
-                <!--</svg>-->
-                <!--</div>-->
-                <!--<span>222-571-8571</span>-->
-                <!--</a>-->
-                <!--</div>-->
-                <!--<div class="social">-->
-                <!--<a class="social__item" href="">-->
-                <!--<div class="svg-icon svg-icon_icon-tg">-->
-                <!--<svg>-->
-                <!--<use xlink:href="#icon-tg"></use>-->
-                <!--</svg>-->
-                <!--</div>-->
-                <!--</a>-->
-                <!--<a class="social__item" href="">-->
-                <!--<div class="svg-icon svg-icon_icon-fb">-->
-                <!--<svg>-->
-                <!--<use xlink:href="#icon-fb"></use>-->
-                <!--</svg>-->
-                <!--</div>-->
-                <!--</a>-->
-                <!--<a class="social__item" href="">-->
-                <!--<div class="svg-icon svg-icon_icon-sk">-->
-                <!--<svg>-->
-                <!--<use xlink:href="#icon-sk"></use>-->
-                <!--</svg>-->
-                <!--</div>-->
-                <!--</a>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--<div class="umenu__item umenu__item_orange">-->
+            <!--</div>-->
+            <!--<div class="umenu__item umenu__item_orange">-->
                 <!--<div class="umenu__date">12.10.2019 | 13:30</div>-->
                 <!--<div class="user">-->
-                <!--<div class="user__ava">-->
-                <!--<div class="user__img">-->
-                <!--<img src="pic/user-img3.png" srcset="pic/user-img3@2x.png 2x" alt="" />-->
+                    <!--<div class="user__ava">-->
+                        <!--<div class="user__img">-->
+                            <!--<img src="pic/user-img3.png" srcset="pic/user-img3@2x.png 2x" alt=""/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="user__info">-->
+                        <!--<div class="user__name">Isaac Murray</div>-->
+                        <!--<div class="user__text">Нужна консультация</div>-->
+                    <!--</div>-->
+                    <!--<div class="user__arrow">-->
+                        <!--<div class="svg-icon svg-icon_icon-arrow">-->
+                            <!--<svg>-->
+                                <!--<use xlink:href="#icon-arrow"></use>-->
+                            <!--</svg>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 <!--</div>-->
-                <!--</div>-->
-                <!--<div class="user__info">-->
-                <!--<div class="user__name">Isaac Murray</div>-->
-                <!--<div class="user__text">Нужна консультация</div>-->
-                <!--</div>-->
-                <!--<div class="user__arrow">-->
-                <!--<div class="svg-icon svg-icon_icon-arrow">-->
-                <!--<svg>-->
-                <!--<use xlink:href="#icon-arrow"></use>-->
-                <!--</svg>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--<div class="umenu__item umenu__item_orange">-->
+            <!--</div>-->
+            <!--<div class="umenu__item umenu__item_orange">-->
                 <!--<div class="umenu__date">12.10.2019 | 13:30</div>-->
                 <!--<div class="user">-->
-                <!--<div class="user__ava">-->
-                <!--<div class="user__img">-->
-                <!--<img src="pic/user-img4.png" srcset="pic/user-img4@2x.png 2x" alt="" />-->
+                    <!--<div class="user__ava">-->
+                        <!--<div class="user__img">-->
+                            <!--<img src="pic/user-img4.png" srcset="pic/user-img4@2x.png 2x" alt=""/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="user__info">-->
+                        <!--<div class="user__name">Lena Simon</div>-->
+                        <!--<div class="user__text">Нужна консультация</div>-->
+                    <!--</div>-->
+                    <!--<div class="user__arrow">-->
+                        <!--<div class="svg-icon svg-icon_icon-arrow">-->
+                            <!--<svg>-->
+                                <!--<use xlink:href="#icon-arrow"></use>-->
+                            <!--</svg>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 <!--</div>-->
-                <!--</div>-->
-                <!--<div class="user__info">-->
-                <!--<div class="user__name">Lena Simon</div>-->
-                <!--<div class="user__text">Нужна консультация</div>-->
-                <!--</div>-->
-                <!--<div class="user__arrow">-->
-                <!--<div class="svg-icon svg-icon_icon-arrow">-->
-                <!--<svg>-->
-                <!--<use xlink:href="#icon-arrow"></use>-->
-                <!--</svg>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--<div class="umenu__item umenu__item_orange">-->
+            <!--</div>-->
+            <!--<div class="umenu__item umenu__item_orange">-->
                 <!--<div class="umenu__date">12.10.2019 | 13:30</div>-->
                 <!--<div class="user">-->
-                <!--<div class="user__ava">-->
-                <!--<div class="user__img">-->
-                <!--<img src="pic/user-img5.png" srcset="pic/user-img5@2x.png 2x" alt="" />-->
+                    <!--<div class="user__ava">-->
+                        <!--<div class="user__img">-->
+                            <!--<img src="pic/user-img5.png" srcset="pic/user-img5@2x.png 2x" alt=""/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="user__info">-->
+                        <!--<div class="user__name">Leroy Colon</div>-->
+                        <!--<div class="user__text">Нужна консультация</div>-->
+                    <!--</div>-->
+                    <!--<div class="user__arrow">-->
+                        <!--<div class="svg-icon svg-icon_icon-arrow">-->
+                            <!--<svg>-->
+                                <!--<use xlink:href="#icon-arrow"></use>-->
+                            <!--</svg>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 <!--</div>-->
-                <!--</div>-->
-                <!--<div class="user__info">-->
-                <!--<div class="user__name">Leroy Colon</div>-->
-                <!--<div class="user__text">Нужна консультация</div>-->
-                <!--</div>-->
-                <!--<div class="user__arrow">-->
-                <!--<div class="svg-icon svg-icon_icon-arrow">-->
-                <!--<svg>-->
-                <!--<use xlink:href="#icon-arrow"></use>-->
-                <!--</svg>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--<div class="umenu__separator"></div>-->
-                <!--<div class="umenu__item umenu__item_green">-->
+            <!--</div>-->
+            <div class="umenu__separator"></div>
+            <!--<div class="umenu__item umenu__item_green">-->
                 <!--<div class="umenu__alert">-->
-                <!--<div class="svg-icon svg-icon_icon-check-stroke">-->
-                <!--<svg>-->
-                <!--<use xlink:href="#icon-check-stroke"></use>-->
-                <!--</svg>-->
+                    <!--<div class="svg-icon svg-icon_icon-check-stroke">-->
+                        <!--<svg>-->
+                            <!--<use xlink:href="#icon-check-stroke"></use>-->
+                        <!--</svg>-->
+                    <!--</div>-->
+                    <!--<span>Ваша оплата прошла успешно</span>-->
                 <!--</div>-->
-                <!--<span>Ваша оплата прошла успешно</span>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--<div class="umenu__footer">-->
-                <!--<h3>Нашли ошибку?</h3>-->
-                <!--<p>Сообщите нашим системным администраторам</p>-->
-                <!--<a class="btn btn_default" href="">сообщить об ошибке</a>-->
-                <!--</div>-->
+            <!--</div>-->
+            <div class="umenu__footer">
+                <h3>Нашли ошибку?</h3>
+                <p>Сообщите нашим системным администраторам</p>
+                <a class="btn btn_default" href="#">сообщить об ошибке</a>
             </div>
         </div>
     </div>

@@ -26,7 +26,8 @@
             </div>
             <div class="sidebar__name">Мой кабинет</div>
         </div>
-        <div class="sidebar__item sidebar__item_dropdown" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Education.valueOf()}" (click)="goTo(menuItemsEnum.Education)">
+        <!--<div class="sidebar__item sidebar__item_dropdown" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Education.valueOf()}" (click)="goTo(menuItemsEnum.Education)">-->
+        <div class="sidebar__item">
             <div class="sidebar__icon">
                 <div class="svg-icon svg-icon_icon-study">
                     <svg>
@@ -43,7 +44,8 @@
                 </div>
             </div>
         </div>
-        <div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Calendar.valueOf()}" (click)="goTo(menuItemsEnum.Calendar)">
+        <!--<div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Calendar.valueOf()}" (click)="goTo(menuItemsEnum.Calendar)">-->
+        <div class="sidebar__item">
             <div class="sidebar__icon">
                 <div class="svg-icon svg-icon_icon-calendar">
                     <svg>

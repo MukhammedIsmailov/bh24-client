@@ -31,8 +31,8 @@ export class AppService {
         return this.http.post(`${config.API_BASE_URL}/login`, data);
     }
 
-    partnerCreate (userId: number, data: ICreate) {
-        return this.http.put(`${config.API_BASE_URL}/partner?id=${userId}`, data);
+    partnerCreate (data: ICreate) {
+        return this.http.put(`${config.API_BASE_URL}/partner`, data);
     }
 
     partnerReadById (id: number) {
@@ -63,5 +63,9 @@ export class AppService {
     leadsRead () {
         this.setOptions();
         return this.http.get(`${config.API_BASE_URL}/leads`, this._options);
+    }
+
+    getIP () {
+        return this.http.get('https://api.ipify.org?format=json');
     }
 }

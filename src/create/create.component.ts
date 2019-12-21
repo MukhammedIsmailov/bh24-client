@@ -17,6 +17,7 @@ export class CreateComponent implements OnInit {
     partnerInfo: ICreate = {
         firstName: '',
         secondName: '',
+        ip: null,
     };
 
     dataBaseUrl = config.DATA_BASE_URL;
@@ -24,7 +25,6 @@ export class CreateComponent implements OnInit {
     leader: IProfile;
 
     referId: string;
-    userId: number;
 
     viewErrorMessage?: boolean = null;
     isLeaderDataAvailable: boolean = false;
@@ -34,9 +34,8 @@ export class CreateComponent implements OnInit {
     ngOnInit(): void {
         this.aRouter.queryParams.subscribe(params => {
             this.referId = params.referId;
-            this.userId = parseInt(params.userId);
 
-            if (!!this.referId && !!this.userId) {
+            if (!!this.referId) {
                 this.getLeader(this.apiService, this.referId);
             } else {
                 this.viewErrorMessage = true;
@@ -53,11 +52,14 @@ export class CreateComponent implements OnInit {
         this.emptySecondName = !this.partnerInfo.secondName.length;
 
         if (!this.emptyFirstName || !this.emptySecondName) {
-            const data = { ...this.partnerInfo, leaderId: this.leader.id };
-            this.apiService.partnerCreate(this.userId, data).subscribe(async (data: any) => {
-                this.router.navigateByUrl(`/profile?id=${data.id}`);
-            }, error => {
-                this. viewErrorMessage = true;
+            this.apiService.getIP().subscribe((response: any) => {
+                this.partnerInfo.ip = response.ip;
+                const data = {...this.partnerInfo, leaderId: this.leader.id};
+                this.apiService.partnerCreate(data).subscribe(async (data: any) => {
+                    this.router.navigateByUrl(`/profile?id=${data.id}`);
+                }, error => {
+                    this.viewErrorMessage = true;
+                });
             });
         } else {
             this.errorEmptyMessage = true;

@@ -34,4 +34,15 @@ export class UserMenuComponent implements OnInit {
             await this.router.navigateByUrl(`/profile?id=${userId}`);
         });
     }
+
+    userMenuActive() {
+        this.active = !this.active;
+        if (this.active) {
+            document.getElementsByClassName('content')[0].classList.add('content_umenu-padding');
+            document.getElementsByClassName('header')[0].classList.add('header_umenu-padding');
+        } else {
+            document.getElementsByClassName('content')[0].classList.remove('content_umenu-padding');
+            document.getElementsByClassName('header')[0].classList.remove('header_umenu-padding');
+        }
+    }
 }

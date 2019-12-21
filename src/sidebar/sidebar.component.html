@@ -78,7 +78,17 @@
             </div>
             <div class="sidebar__name">Моя команда</div>
         </div>
-        <div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Promotion.valueOf()}" (click)="goTo(menuItemsEnum.Promotion)">
+        <!--<div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Promotion.valueOf()}" (click)="goTo(menuItemsEnum.Promotion)">-->
+            <!--<div class="sidebar__icon">-->
+                <!--<div class="svg-icon svg-icon_icon-grow">-->
+                    <!--<svg>-->
+                        <!--<use xlink:href="#icon-grow"></use>-->
+                    <!--</svg>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="sidebar__name">Продвижение</div>-->
+        <!--</div>-->
+        <div class="sidebar__item sidebar__item_dropdown" [ngClass]="{drop:promotionDrop}" (click)="promotionDropActive()">
             <div class="sidebar__icon">
                 <div class="svg-icon svg-icon_icon-grow">
                     <svg>
@@ -87,6 +97,19 @@
                 </div>
             </div>
             <div class="sidebar__name">Продвижение</div>
+            <div class="sidebar__arrow">
+                <div class="svg-icon svg-icon_icon-arrow">
+                    <svg>
+                        <use xlink:href="#icon-arrow"></use>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar__dropdown" [style.display]="promotionDrop==true?'block':'none'">
+            <div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Promotion.valueOf()}" (click)="goTo(menuItemsEnum.Promotion)">
+                <div class="sidebar__icon"></div>
+                <div class="sidebar__name">Мои ссылки</div>
+            </div>
         </div>
         <div class="sidebar__separator"></div>
         <div class="sidebar__item">

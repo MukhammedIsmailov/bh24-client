@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { MenuItems, routes } from './sidebar.model';
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
     selector: 'bh24-sidebar',
@@ -11,6 +12,7 @@ export class SidebarComponent {
     menuItemsEnum = MenuItems;
     activeMenuItem = MenuItems.Cabinet;
     active = false;
+    promotionDrop = false;
 
     constructor (private router: Router) { }
 
@@ -21,6 +23,10 @@ export class SidebarComponent {
         } else {
             document.getElementsByClassName('content')[0].classList.remove('content_sidebar-padding');
         }
+    }
+
+    promotionDropActive() {
+        this.promotionDrop = !this.promotionDrop;
     }
 
     async goTo(item: MenuItems) {

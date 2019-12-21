@@ -1,5 +1,5 @@
 <h1 class="content__main-title content__main-title_small2">Мои ссылки для приглашений</h1>
-<div *ngIf="isLeadsDataAvailable">
+<div *ngIf="isLinksDataAvailable">
     <div class="form__alert form__alert_style4">
         <div class="form__alert-icon">
             <div class="svg-icon svg-icon_icon-alert">
@@ -10,11 +10,12 @@
         </div>
         <span>Реферальные ссылки для распространения среди аудитории ваших потенциальных партнеров.</span>
     </div>
-    <h2 class="content__title content__title_big">Ссылки для приглашения на курс - универсальная аудитория</h2>
+    <h2 class="content__title content__title_big">Ссылка для приглашения на курс - универсальная аудитория</h2>
     <div class="content__item">
         <div class="links">
             <div class="links__item">
-                <div class="links__name">Без фото</div>
+                <div class="links__num">1</div>
+                <div class="links__name">Моя ссылка</div>
                 <div class="links__group">
                     <div class="links__link" id="links__link1">{{landingUrl}}</div>
                     <a class="links__preview" [href]="landingUrl" target="_blank">
@@ -41,12 +42,12 @@
         Финсвободы»</h2>
     <div class="content__item">
         <div class="links">
-            <div class="links__item" *ngFor="let lead of leads">
-                <div class="links__name">Ссылки для регистрации {{lead.fullName}}</div>
+            <div class="links__item">
+                <div class="links__num">2</div>
+                <div class="links__name">Ссылка для регистрации новых партнеров</div>
                 <div class="links__group">
-                    <div class="links__link" id="links__link3">{{createPartnerUrl + lead.urlForCreate}}
-                    </div>
-                    <a class="links__preview" [href]="createPartnerUrl + lead.urlForCreate" target="_blank">
+                    <div class="links__link" id="links__link2">{{createUrl}}</div>
+                    <a class="links__preview" [href]="createUrl" target="_blank">
                         <div class="svg-icon svg-icon_icon-eye">
                             <svg>
                                 <use xlink:href="#icon-eye"></use>
@@ -54,7 +55,7 @@
                         </div>
                         <span>Предпросмотр</span>
                     </a>
-                    <div class="links__copy" (click)="copyLink(createPartnerUrl + lead.urlForCreate)">
+                    <div class="links__copy" (click)="copyLink(createUrl)">
                         <div class="svg-icon svg-icon_icon-copy">
                             <svg>
                                 <use xlink:href="#icon-copy"></use>

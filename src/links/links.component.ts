@@ -1,33 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AppService } from '../app/app.service';
-import { ILead } from './promotion.model';
 import * as config  from '../../config.json';
 import { NotificationService } from "../app/notification.service";
 import { TokenStorage } from "../app/token-storage.service";
 
 @Component({
-    selector: 'bh24-promotion',
-    templateUrl: './promotion.component.html'
+    selector: 'bh24-links',
+    templateUrl: './links.component.html'
 })
 
-export class PromotionComponent implements OnInit {
+export class LinksComponent implements OnInit {
     constructor (private apiService: AppService, private notificationService: NotificationService,
                  private tokenStorage: TokenStorage) {}
-    leads: ILead[];
-    referId: string;
-    isLeadsDataAvailable: boolean = false;
-    createPartnerUrl = config.CREATE_PARTNER_URL;
+
+    isLinksDataAvailable: boolean = false;
     landingUrl: string ;
+    createUrl: string;
 
     ngOnInit(): void {
-        this.apiService.leadsRead().subscribe((data: any) => {
-            this.leads = data;
-            this.tokenStorage.getReferId().subscribe((referId: string) => {
-                this.referId = referId;
-                this.landingUrl = `${config.LANDING_URL}?referId=${this.referId}`;
-                this.isLeadsDataAvailable = true;
-            });
+        this.tokenStorage.getReferId().subscribe((referId: string) => {
+            this.createUrl = `${config.CREATE_PARTNER_URL}?referId=${referId}`;
+            this.landingUrl = `${config.LANDING_URL}?referId=${referId}`;
+            this.isLinksDataAvailable = true;
         });
     }
 

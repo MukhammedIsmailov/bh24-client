@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { PromotionComponent } from './promotion.component';
+import { LinksComponent } from './links.component';
 
 
 @NgModule({
     imports: [ BrowserModule ],
-    declarations: [ PromotionComponent ],
+    declarations: [ LinksComponent ],
 })
 
-export class PromotionModule { }
+export class LinksModule { }

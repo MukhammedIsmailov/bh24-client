@@ -1,0 +1,6 @@
+{
+  "API_BASE_URL": "http://localhost:3000/api",
+  "DATA_BASE_URL": "http://localhost:3000",
+  "CREATE_PARTNER_URL": "http://localhost:8080/create",
+  "LANDING_URL": "http://localhost:3000/landing.html"
+}

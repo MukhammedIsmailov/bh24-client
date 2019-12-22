@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 import * as config from '../../config.json';
 import { AppService } from '../app/app.service';
@@ -18,7 +19,7 @@ export class CabinetComponent implements OnInit{
     latestRegistrations: ILatestRegistration[];
     statistics: {};
 
-    constructor (private apiService: AppService) {}
+    constructor (private apiService: AppService, private router: Router) {}
 
     ngOnInit(): void {
         this.apiService.latestRegistrationsRead().subscribe((data: ILatestRegistration[]) => {
@@ -57,5 +58,9 @@ export class CabinetComponent implements OnInit{
 
             this.isStatisticsDataAvailable = true;
         });
+    }
+
+    goToStatisticsPage() {
+        this.router.navigateByUrl('statistics');
     }
 }

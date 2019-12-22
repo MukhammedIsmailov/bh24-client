@@ -131,6 +131,7 @@ export class ProfileComponent implements OnInit {
                     this.passwordIsExist = this.checkPasswordFromServer(response.password);
                     this.disabledLogin = !this.emptyLogin;
                     this.disabledReferId = true;
+                    this.router.navigateByUrl('/cabinet')
                 } else {
                     this.router.navigateByUrl('/sign-in');
                 }
@@ -252,7 +253,7 @@ export class ProfileComponent implements OnInit {
     };
 
     private isValidPassword (password: string) {
-        const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\s]).{6,}/;
+        const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{6,}/;
         return (re.test(password) && this.confirmPassword) || this.passwordIsExist;
     }
 

@@ -193,7 +193,7 @@
                     <input class="form__control" type="text" name="login" [ngClass]="{error:emptyLogin || invalidLogin || notUniqueLogin}" [(ngModel)]="profile.login" [disabled]="disabledLogin" />
                 </div>
                 <div class="form__group">
-                    <div class="form__name" [ngClass]="{error:wrongConfirmPassword || emptyPassword || invalidPassword}">Пароль<div class="tooltip" tooltip="<div>Пароль должен содержать хотя бы одну заглавную, одну прописную букву латинского алфавита  цифру и спецсимвол. Минимум 6 символов.</div>" [options]="{'tooltip-class': 'tooltip__content', 'theme': 'light'}">
+                    <div class="form__name" [ngClass]="{error:wrongConfirmPassword || emptyPassword || invalidPassword}">Пароль<div class="tooltip" tooltip="<div>Пароль должен содержать хотя бы одну заглавную, одну прописную букву латинского алфавита и цифру. Минимум 6 символов.</div>" [options]="{'tooltip-class': 'tooltip__content', 'theme': 'light'}">
                         <div class="tooltip__icon">
                             <div class="svg-icon svg-icon_icon-inform">
                                 <svg>

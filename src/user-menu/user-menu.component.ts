@@ -6,7 +6,6 @@ import { AppService } from '../app/app.service';
 import { IMe } from './user-menu.model';
 
 import * as config from '../../config.json';
-import {ɵAnimationRendererFactory} from "@angular/platform-browser/animations";
 
 @Component({
     selector: 'bh24-user_menu',

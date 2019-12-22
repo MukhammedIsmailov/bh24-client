@@ -1,1 +1,245 @@
-<h1>Страница в разработке</h1>
+<div *ngIf="isRegistrationsDataAvailable">
+    <div class="content__item content__item_center">
+        <h2 class="content__title content__title_big">Узнайте как обойти самые болезненные грабли на старте и МОЩНО запустить Ваш бизнес с нуля!</h2>
+        <h3 class="content__subtitle">Приветствие от основателей сообщества BeHapyy24</h3>
+        <div class="video">
+            <!--<div class="video__preview" style="background-image: url(../../content/pic/video-preview.jpg)"></div>-->
+            <div class="video__source" data-src="https://www.youtube.com/embed/Ei1s4eHTlmg">
+                <iframe src='https://www.youtube.com/embed/Ei1s4eHTlmg?rel=0&autoplay=1' frameborder='0' allowfullscreen></iframe>
+            </div>
+        </div>
+        <h2 class="content__title content__title_big">Как выйти на Вашу первую 1,000$, 10.000$ и более в месяц?</h2>
+        <h3 class="content__subtitle">Действуйте по Пошаговой системе обучения</h3>
+        <div class="content__link">
+            <a href="#">Продолжить обучение<div class="svg-icon svg-icon_icon-link-arrow">
+                <svg>
+                    <use xlink:href="#icon-link-arrow"></use>
+                </svg>
+            </div>
+            </a>
+        </div>
+    </div>
+    <div class="content__item">
+        <h2 class="content__title">Ближайшие события</h2>
+        <div class="content__calendar">
+            <img src="../../content/pic/g-calendar.jpg" alt="" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="content__item">
+                <h2 class="content__title">Воронка продаж</h2>
+                <div class="stats">
+                    <div class="stats__item">
+                        <div class="stats__title">Переходы</div>
+                        <div class="stats__num">{{statistics.vl.value}}</div>
+                        <div class="stats__line-wrap">
+                            <div class="stats__line stats__line_color100" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    <div class="stats__item">
+                        <div class="stats__title">Смотрят курс</div>
+                        <div class="stats__num">{{statistics.sc.value}}</div>
+                        <div class="stats__line-wrap">
+                            <div class="stats__line stats__line_color25" [style.width]="statistics.sc.percent + '%'"></div>
+                        </div>
+                    </div>
+                    <div class="stats__item">
+                        <div class="stats__title">Посмотрели курс</div>
+                        <div class="stats__num">{{statistics.cf.value}}</div>
+                        <div class="stats__line-wrap">
+                            <div class="stats__line stats__line_color20" [style.width]="statistics.cf.percent + '%'"></div>
+                        </div>
+                    </div>
+                    <div class="stats__item">
+                        <div class="stats__title">Заказали консультацию</div>
+                        <div class="stats__num">{{statistics.rc.value}}</div>
+                        <div class="stats__line-wrap">
+                            <div class="stats__line stats__line_color5" [style.width]="statistics.rc.percent + '%'"></div>
+                        </div>
+                    </div>
+                    <div class="stats__item">
+                        <div class="stats__title">Оплатили портфель</div>
+                        <div class="stats__num">{{statistics.pa.value}}</div>
+                        <div class="stats__line-wrap">
+                            <div class="stats__line stats__line_color2" [style.width]="statistics.pa.percent + '%'"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content__bottom">
+                    <div class="content__link">
+                        <a href="">Вся статистика<div class="svg-icon svg-icon_icon-link-arrow">
+                            <svg>
+                                <use xlink:href="#icon-link-arrow"></use>
+                            </svg>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="content__item">
+                <h2 class="content__title">Регистрации по партнерам</h2>
+                <div class="tabs">
+                    <div class="tabs__item active" data-tab="#register-tab1">Неделя</div>
+                    <div class="tabs__item" data-tab="#register-tab2">Месяц</div>
+                    <div class="tabs__item" data-tab="#register-tab3">Квартал</div>
+                </div>
+                <!--<div class="tab__content">-->
+                    <!--<div class="tab__pane active" id="register-tab1">-->
+                        <!--<div class="people">-->
+                            <!--<div class="people__item">-->
+                                <!--<div class="people__img">-->
+                                    <!--<img src="pic/people-img1.png" srcset="pic/people-img1@2x.png 2x" alt="" />-->
+                                <!--</div>-->
+                                <!--<div class="people__name">George Weber</div>-->
+                                <!--<div class="people__value">Регистраций: <span>34</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="people__item">-->
+                                <!--<div class="people__img">-->
+                                    <!--<img src="pic/people-img2.png" srcset="pic/people-img2@2x.png 2x" alt="" />-->
+                                <!--</div>-->
+                                <!--<div class="people__name">Isaac Murray</div>-->
+                                <!--<div class="people__value">Регистраций: <span>27</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="people__item">-->
+                                <!--<div class="people__img">-->
+                                    <!--<img src="pic/people-img3.png" srcset="pic/people-img3@2x.png 2x" alt="" />-->
+                                <!--</div>-->
+                                <!--<div class="people__name">Eugene Wallace</div>-->
+                                <!--<div class="people__value">Регистраций: <span>18</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="people__item">-->
+                                <!--<div class="people__img">-->
+                                    <!--<img src="pic/people-img4.png" srcset="pic/people-img4@2x.png 2x" alt="" />-->
+                                <!--</div>-->
+                                <!--<div class="people__name">Christine French</div>-->
+                                <!--<div class="people__value">Регистраций: <span>16</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="people__item">-->
+                                <!--<div class="people__img">-->
+                                    <!--<img src="pic/people-img5.png" srcset="pic/people-img5@2x.png 2x" alt="" />-->
+                                <!--</div>-->
+                                <!--<div class="people__name">Elsie Park</div>-->
+                                <!--<div class="people__value">Регистраций: <span>8</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="tab__pane" id="register-tab2">-->
+                        <!--<div class="people">-->
+                            <!--<div class="people__item">-->
+                                <!--<div class="people__img">-->
+                                    <!--<img src="pic/people-img3.png" srcset="pic/people-img3@2x.png 2x" alt="" />-->
+                                <!--</div>-->
+                                <!--<div class="people__name">Eugene Wallace</div>-->
+                                <!--<div class="people__value">Регистраций: <span>18</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="people__item">-->
+                                <!--<div class="people__img">-->
+                                    <!--<img src="pic/people-img1.png" srcset="pic/people-img1@2x.png 2x" alt="" />-->
+                                <!--</div>-->
+                                <!--<div class="people__name">George Weber</div>-->
+                                <!--<div class="people__value">Регистраций: <span>34</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="people__item">-->
+                                <!--<div class="people__img">-->
+                                    <!--<img src="pic/people-img4.png" srcset="pic/people-img4@2x.png 2x" alt="" />-->
+                                <!--</div>-->
+                                <!--<div class="people__name">Christine French</div>-->
+                                <!--<div class="people__value">Регистраций: <span>16</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="people__item">-->
+                                <!--<div class="people__img">-->
+                                    <!--<img src="pic/people-img2.png" srcset="pic/people-img2@2x.png 2x" alt="" />-->
+                                <!--</div>-->
+                                <!--<div class="people__name">Isaac Murray</div>-->
+                                <!--<div class="people__value">Регистраций: <span>27</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="people__item">-->
+                                <!--<div class="people__img">-->
+                                    <!--<img src="pic/people-img5.png" srcset="pic/people-img5@2x.png 2x" alt="" />-->
+                                <!--</div>-->
+                                <!--<div class="people__name">Elsie Park</div>-->
+                                <!--<div class="people__value">Регистраций: <span>8</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="tab__pane" id="register-tab3">-->
+                        <!--<div class="people">-->
+                            <!--<div class="people__item">-->
+                                <!--<div class="people__img">-->
+                                    <!--<img src="pic/people-img3.png" srcset="pic/people-img3@2x.png 2x" alt="" />-->
+                                <!--</div>-->
+                                <!--<div class="people__name">Eugene Wallace</div>-->
+                                <!--<div class="people__value">Регистраций: <span>18</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="people__item">-->
+                                <!--<div class="people__img">-->
+                                    <!--<img src="pic/people-img4.png" srcset="pic/people-img4@2x.png 2x" alt="" />-->
+                                <!--</div>-->
+                                <!--<div class="people__name">Christine French</div>-->
+                                <!--<div class="people__value">Регистраций: <span>16</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="people__item">-->
+                                <!--<div class="people__img">-->
+                                    <!--<img src="pic/people-img5.png" srcset="pic/people-img5@2x.png 2x" alt="" />-->
+                                <!--</div>-->
+                                <!--<div class="people__name">Elsie Park</div>-->
+                                <!--<div class="people__value">Регистраций: <span>8</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="people__item">-->
+                                <!--<div class="people__img">-->
+                                    <!--<img src="pic/people-img1.png" srcset="pic/people-img1@2x.png 2x" alt="" />-->
+                                <!--</div>-->
+                                <!--<div class="people__name">George Weber</div>-->
+                                <!--<div class="people__value">Регистраций: <span>34</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="people__item">-->
+                                <!--<div class="people__img">-->
+                                    <!--<img src="pic/people-img2.png" srcset="pic/people-img2@2x.png 2x" alt="" />-->
+                                <!--</div>-->
+                                <!--<div class="people__name">Isaac Murray</div>-->
+                                <!--<div class="people__value">Регистраций: <span>27</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="content__item">
+                <h2 class="content__title">Последние регистрации в системе BeHappy24</h2>
+                <p class="content__desc">Всего новых за месяц: {{latestRegistrations.length}}</p>
+                <div class="people" *ngFor="let registration of latestRegistrations">
+                    <div class="people__item">
+                        <div class="people__img">
+                            <img [src]="dataBaseUrl + registration.iconUrl" alt="" />
+                        </div>
+                        <div class="people__name">{{registration.firstName}} {{registration.secondName}}</div>
+                        <div class="people__value">
+                            <div class="people__icon">
+                                <div class="svg-icon svg-icon_icon-ua">
+                                    <img [src]="dataBaseUrl+ '/flags/' + registration.country + '.gif'">
+                                </div>
+                            </div>{{ registration.createdDate | date:'hh:mm' }} | {{ registration.createdDate | date:'dd.MM.yyy' }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -52,7 +52,13 @@ export class AppService {
 
     statisticsRead (startDate: number, endDate: number) {
         this.setOptions();
-        return this.http.get(`${config.API_BASE_URL}/statistics/plot?startDate=${startDate}&endDate=${endDate}`, this._options);
+        let url = '';
+        if (!!startDate && !!endDate) {
+            url = `${config.API_BASE_URL}/statistics?startDate=${startDate}&endDate=${endDate}`;
+        } else {
+            url = `${config.API_BASE_URL}/statistics`;
+        }
+        return this.http.get(url, this._options);
     }
 
     wardsRead (data: any) {
@@ -67,5 +73,10 @@ export class AppService {
 
     getIP () {
         return this.http.get('https://api.ipify.org?format=json');
+    }
+
+    latestRegistrationsRead () {
+        this.setOptions();
+        return this.http.get(`${config.API_BASE_URL}/latest-registrations`, this._options);
     }
 }

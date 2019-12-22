@@ -36,7 +36,7 @@ export class CabinetComponent implements OnInit{
                 },
                 sc: {
                     value: data.counts[1].SC,
-                    percent: (data.counts[1].SC / vl) * 100,
+                    percent: ((data.counts[1].SC - data.counts[2].CF) / vl) * 100,
                 },
                 cf: {
                     value: data.counts[2].CF,

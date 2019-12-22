@@ -6175,8 +6175,6 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 .lesson__teacher-image{
     overflow: hidden;
 
-    width: 190px;
-    height: 259px;
     margin-left: 85px;
 
     border-radius: 4px;

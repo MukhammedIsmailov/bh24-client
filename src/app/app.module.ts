@@ -21,6 +21,7 @@ import { CalendarComponent } from '../calendar/calendar.component';
 import { EducationComponent } from '../education/education.component';
 import { UserMenuComponent } from '../user-menu/user-menu.component';
 import { LinksComponent } from '../links/links.component';
+import { LessonsComponent } from '../lessons/lessons.component';
 
 import { AppService } from './app.service';
 import { NotificationService } from './notification.service';
@@ -35,6 +36,7 @@ const appRoutes: Routes =[
     { path: 'calendar', component: CalendarComponent },
     { path: 'education', component: EducationComponent },
     { path: 'links', component: LinksComponent },
+    { path: 'lesson', component: LessonsComponent}
 ];
 
 @NgModule({
@@ -42,7 +44,8 @@ const appRoutes: Routes =[
         ReactiveFormsModule, SimpleNotificationsModule.forRoot(), BrowserAnimationsModule,
         ChartsModule, Ng2FlatpickrModule],
     declarations: [ AppComponent, LoginComponent, CreateComponent, ProfileComponent, StatisticsComponent,
-        SidebarComponent, CabinetComponent, CalendarComponent, EducationComponent, UserMenuComponent, LinksComponent],
+        SidebarComponent, CabinetComponent, CalendarComponent, EducationComponent, UserMenuComponent, LinksComponent,
+        LessonsComponent],
     bootstrap: [ AppComponent ],
     providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' }, TokenStorage ]
 })

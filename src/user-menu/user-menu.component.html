@@ -57,7 +57,7 @@
                 <span>Оплата системы</span>
                 <div class="umenu__status"></div>
             </div>
-            <div class="umenu__item">
+            <div class="umenu__item" *ngIf="!!me.leaderLogin">
                 <h3 class="umenu__title">Ваш наставник</h3>
                 <div class="user">
                     <div class="user__ava">

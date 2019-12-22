@@ -25,7 +25,7 @@
             <img src="../../content/pic/g-calendar.jpg" alt="" />
         </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="isStatisticsDataAvailable">
         <div class="col-6">
             <div class="content__item">
                 <h2 class="content__title">Воронка продаж</h2>
@@ -53,9 +53,9 @@
                     </div>
                     <div class="stats__item">
                         <div class="stats__title">Заказали консультацию</div>
-                        <div class="stats__num">{{statistics.rc.value}}</div>
+                        <div class="stats__num">{{statistics.fb.value}}</div>
                         <div class="stats__line-wrap">
-                            <div class="stats__line stats__line_color5" [style.width]="statistics.rc.percent + '%'"></div>
+                            <div class="stats__line stats__line_color5" [style.width]="statistics.fb.percent + '%'"></div>
                         </div>
                     </div>
                     <div class="stats__item">

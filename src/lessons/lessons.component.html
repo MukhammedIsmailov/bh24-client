@@ -1,0 +1,167 @@
+<div *ngIf="isLessonDataAvailable">
+    <div class="lesson-pagination">
+        <div class="lesson-pagination__prev">
+            <a *ngIf="lesson.lessonId > 1" (click)="previous()">« занятие {{lesson.lessonId - 1}}</a>
+        </div>
+        <div class="lesson-pagination__middle">занятие {{lesson.lessonId}} из {{lesson.max}}</div>
+        <div class="lesson-pagination__next">
+            <a *ngIf="lesson.lessonId < lesson.max" (click)="next()">занятие {{lesson.lessonId + 1}} »</a>
+        </div>
+    </div>
+    <div class="lesson-title">{{lesson.title}}</div>
+    <div class="content__item content__item_lesson">
+        <div class="lesson">
+            <div class="video">
+                <div class="video__preview" style="background-image: url(../../content/pic/video-preview.jpg)"></div>
+                <div class="video__source">
+                    <iframe width="100%" height="100%" [src]="sanitize(lesson.video)" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen=""></iframe>
+                </div>
+            </div>
+            <p>{{lesson.body}}</p>
+            <div class="lesson__separator"></div>
+            <p>Если у вас остались вопросы, закажите бесплатную информациюнную помощь у своего консультанта</p>
+            <div class="lesson__btn">
+                <button class="btn btn_primary popup-btn" data-src="#lesson-popup" (click)="feedbackButtonEvent()">бесплатная консультация</button>
+            </div>
+            <div *ngIf="isLeaderDataAvailable">
+                <p>Также вы можете самостоятельно связаться с вашим личным консультантом по любому из удобных
+                    контактов</p>
+                <div class="lesson__separator-triangle"></div>
+                <h2 class="lesson__title">Ваш консультант</h2>
+                <div class="lesson__teacher" id="teacher">
+                    <div class="lesson__teacher-image">
+                        <img [src]="dataBaseUrl + leader.iconUrl" alt="" style="width: auto; height: auto; max-height: 300px;"/>
+                    </div>
+                    <div class="lesson__teacher-info">
+                        <div class="lesson__teacher-name">{{leader.firstName}} {{leader.secondName}}</div>
+                        <!--<div class="lesson__teacher-desc">Владелец 4-х бизнесов, инструктор, программист и просто-->
+                            <!--хороший человек-->
+                        <!--</div>-->
+                        <br>
+                        <div class="lesson__contacts-toggle" (click)="contactsActive = !contactsActive" [ngClass]="{active: contactsActive}">
+                            <div class="active-state" *ngIf="contactsActive">скрыть контакты</div>
+                            <div class="normal-state btn btn_primary" *ngIf="!contactsActive" (click)="contactsSeeEvent()">посмотреть контакты</div>
+                        </div>
+                        <div class="lesson__contacts" [ngClass]="{active: contactsActive}">
+                            <a class="lesson__contact">
+                                <div class="icon">
+                                    <div class="svg-icon svg-icon_icon-mail">
+                                        <svg>
+                                            <use xlink:href="#icon-mail"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <span>{{leader.email}}</span>
+                            </a>
+                            <a class="lesson__contact">
+                                <div class="icon">
+                                    <div class="svg-icon svg-icon_icon-phone">
+                                        <svg>
+                                            <use xlink:href="#icon-phone"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <span>{{leader.phoneNumber}}</span>
+                            </a>
+                            <div class="lesson__separator-contacts"></div>
+                            <a class="lesson__contact" *ngIf="!!leader.telegram">
+                                <div class="icon">
+                                    <div class="svg-icon svg-icon_icon-tg">
+                                        <svg>
+                                            <use xlink:href="#icon-tg"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <span>{{leader.telegram}}</span>
+                            </a>
+                            <a class="lesson__contact" *ngIf="!!leader.facebook">
+                                <div class="icon">
+                                    <div class="svg-icon svg-icon_icon-fb">
+                                        <svg>
+                                            <use xlink:href="#icon-fb"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <span>{{leader.facebook}}</span>
+                            </a>
+                            <a class="lesson__contact" *ngIf="!!leader.skype">
+                                <div class="icon">
+                                    <div class="svg-icon svg-icon_icon-sk">
+                                        <svg>
+                                            <use xlink:href="#icon-sk"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <span>{{leader.skype}}</span>
+                            </a>
+                            <a class="lesson__contact" *ngIf="!!leader.vk">
+                                <div class="icon">
+                                    <div class="svg-icon svg-icon_icon-vk">
+                                        <svg>
+                                            <use xlink:href="#icon-vk"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <span>{{leader.vk}}</span>
+                            </a>
+                            <a class="lesson__contact" *ngIf="!!leader.viber">
+                                <div class="icon">
+                                    <div class="svg-icon svg-icon_icon-vb">
+                                        <svg>
+                                            <use xlink:href="#icon-vb"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <span>{{leader.viber}}</span>
+                            </a>
+                            <a class="lesson__contact" *ngIf="!!leader.whatsapp">
+                                <div class="icon">
+                                    <div class="svg-icon svg-icon_icon-ws">
+                                        <svg>
+                                            <use xlink:href="#icon-ws"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <span>{{leader.whatsapp}}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div class="consult">-->
+    <!--<div class="container">-->
+        <!--<div class="consult__left">-->
+            <!--<div class="form__alert form__alert_style3">-->
+                <!--<div class="form__alert-icon">-->
+                    <!--<div class="svg-icon svg-icon_icon-alert">-->
+                        <!--<svg>-->
+                            <!--<use xlink:href="#icon-alert"></use>-->
+                        <!--</svg>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<span>По всем возникшим вопросам обращайтесь к своему наставнику</span>-->
+            <!--</div>-->
+            <!--<div class="user">-->
+                <!--<div class="user__ava">-->
+                    <!--<div class="user__img">-->
+                        <!--<img src="pic/consult-image.png" srcset="pic/consult-image@2x.png 2x" alt="" />-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="user__info">-->
+                    <!--<div class="user__id">Ваш наставник</div>-->
+                    <!--<div class="user__name">Jeffrey Wilkerson</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="consult__right">-->
+            <!--<button class="btn btn_primary popup-btn" data-src="#lesson-popup">бесплатная консультация</button>-->
+            <!--<a class="btn btn_primary scroll-to" href="#teacher">посмотреть контакты</a>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->

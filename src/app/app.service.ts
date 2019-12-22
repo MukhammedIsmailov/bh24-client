@@ -79,4 +79,24 @@ export class AppService {
         this.setOptions();
         return this.http.get(`${config.API_BASE_URL}/latest-registrations`, this._options);
     }
+
+    lessonRead (userId: number, lessonId: number) {
+        return this.http.get(`${config.API_BASE_URL}/lesson?userId=${userId}&lessonId=${lessonId}`);
+    }
+
+    leaderReadByUserId (userId: number) {
+        return this.http.get(`${config.API_BASE_URL}/partner/byUserId?userId=${userId}`);
+    }
+
+    feedbackButtonClick (userId: number) {
+        return this.http.put(`${config.API_BASE_URL}/event/feedback-button-click`, { userId })
+    }
+
+    contactsSeeClick (userId: number) {
+        return this.http.put(`${config.API_BASE_URL}/event/contacts-see`, { userId })
+    }
+
+    lessonEvent (id: number, step: number) {
+        return this.http.put(`${config.API_BASE_URL}/lesson-event`, { id, step, extern: true })
+    }
 }

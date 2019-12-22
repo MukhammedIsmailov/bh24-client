@@ -46,10 +46,6 @@ export class CabinetComponent implements OnInit{
                     value: data.counts[3].FB,
                     percent: (data.counts[3].FB / vl) * 100,
                 },
-                rc: {
-                    value: 0,
-                    percent: 0,
-                },
                 pa: {
                     value: data.counts[6].PA,
                     percent: (data.counts[6].PA / vl) * 100,

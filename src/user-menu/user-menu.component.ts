@@ -40,8 +40,12 @@ export class UserMenuComponent implements OnInit {
     userMenuActive() {
         this.active = !this.active;
         if (this.active) {
+            console.log('dsfdsfsfsdffdsf')
             document.getElementsByClassName('content')[0].classList.add('content_umenu-padding');
             document.getElementsByClassName('header')[0].classList.add('header_umenu-padding');
+            if (window.innerWidth < 768) {
+                document.getElementsByClassName('sidebar')[0].classList.remove('active');
+            }
         } else {
             document.getElementsByClassName('content')[0].classList.remove('content_umenu-padding');
             document.getElementsByClassName('header')[0].classList.remove('header_umenu-padding');

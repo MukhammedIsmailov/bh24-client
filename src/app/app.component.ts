@@ -16,4 +16,20 @@ export class AppComponent {
     }
 
     authorized = this.tokenStorage.isAuthorized();
+
+    mobiSidebarActive = false;
+
+    mobileSidebarActive() {
+        this.mobiSidebarActive = !this.mobiSidebarActive;
+        if(window.innerWidth < 768) {
+            document.getElementsByClassName('umenu')[0].classList.remove('active');
+            document.getElementsByClassName('content')[0].classList.remove('content_umenu-padding');
+            document.getElementsByClassName('header')[0].classList.remove('header_umenu-padding');
+            if (this.mobiSidebarActive) {
+                document.getElementsByClassName('sidebar')[0].classList.add('active');
+            } else {
+                document.getElementsByClassName('sidebar')[0].classList.remove('active');
+            }
+        }
+    }
 }

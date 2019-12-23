@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { MenuItems, routes } from './sidebar.model';
-import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
     selector: 'bh24-sidebar',

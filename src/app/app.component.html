@@ -1,6 +1,6 @@
 <div class="app">
     <header class="header">
-        <div class="header__sidebar-toggle">
+        <div class="header__sidebar-toggle" [ngClass]="{active: mobiSidebarActive}" (click)="mobileSidebarActive()">
             <div class="svg-icon svg-icon_icon-bar">
                 <svg>
                     <use xlink:href="#icon-bar"></use>

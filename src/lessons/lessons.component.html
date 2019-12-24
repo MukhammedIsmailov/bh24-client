@@ -36,9 +36,7 @@
                     </div>
                     <div class="lesson__teacher-info">
                         <div class="lesson__teacher-name">{{leader.firstName}} {{leader.secondName}}</div>
-                        <!--<div class="lesson__teacher-desc">Владелец 4-х бизнесов, инструктор, программист и просто-->
-                            <!--хороший человек-->
-                        <!--</div>-->
+                        <div class="lesson__teacher-desc">{{leader.leaderDescription}}</div>
                         <br>
                         <div class="lesson__contacts-toggle" (click)="contactsActive = !contactsActive" [ngClass]="{active: contactsActive}">
                             <div class="active-state" *ngIf="contactsActive">скрыть контакты</div>

@@ -38,6 +38,7 @@ export interface IWard {
     phone_number: string;
     last_send_time: Date;
     role: string;
+    mobiPartnerInfoActive?: boolean;
 }
 
 export interface IWardOptions {

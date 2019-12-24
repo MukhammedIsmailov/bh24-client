@@ -20,4 +20,5 @@ export interface ILeader {
     viber: string;
     vk: string;
     whatsapp: string;
+    leaderDescription: string;
 }

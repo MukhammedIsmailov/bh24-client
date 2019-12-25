@@ -104,6 +104,7 @@ export class StatisticsComponent implements OnInit {
         endDateFilter: null,
         leadFilter: true,
         partnerFilter: true,
+        feedbackFilter: true,
     };
 
     @ViewChild(BaseChartDirective, { static: false })

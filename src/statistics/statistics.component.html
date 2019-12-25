@@ -250,7 +250,7 @@
                             <span>Просмотрели контакты</span>
                         </label>
                         <label class="partners__label">
-                            <input type="checkbox" checked/>
+                            <input type="checkbox" [(ngModel)]="options.feedbackFilter" (change)="onChangeFilter()">
                             <div class="checkbox">
                                 <div class="svg-icon svg-icon_icon-check">
                                     <svg>

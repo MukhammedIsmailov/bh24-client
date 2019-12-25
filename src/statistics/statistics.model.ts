@@ -50,4 +50,5 @@ export interface IWardOptions {
     endDateFilter?: string;
     leadFilter: boolean;
     partnerFilter: boolean;
+    feedbackFilter: boolean;
 }

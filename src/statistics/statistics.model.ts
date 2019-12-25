@@ -51,4 +51,6 @@ export interface IWardOptions {
     leadFilter: boolean;
     partnerFilter: boolean;
     feedbackFilter: boolean;
+    contactsFilter: boolean;
+    lessonFinishFilter: boolean;
 }

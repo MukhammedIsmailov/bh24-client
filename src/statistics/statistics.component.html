@@ -206,7 +206,7 @@
                 <div class="partners__top">
                     <div class="partners__labels">
                         <label class="partners__label">
-                            <input type="checkbox" checked/>
+                            <input type="checkbox" [(ngModel)]="options.lessonFinishFilter" (change)="onChangeFilter()"/>
                             <div class="checkbox">
                                 <div class="svg-icon svg-icon_icon-check">
                                     <svg>
@@ -239,7 +239,7 @@
                             <span>Партнеры</span>
                         </label>
                         <label class="partners__label">
-                            <input type="checkbox" checked/>
+                            <input type="checkbox" [(ngModel)]="options.contactsFilter" (change)="onChangeFilter()"/>
                             <div class="checkbox">
                                 <div class="svg-icon svg-icon_icon-check">
                                     <svg>

@@ -53,4 +53,5 @@ export interface IWardOptions {
     feedbackFilter: boolean;
     contactsFilter: boolean;
     lessonFinishFilter: boolean;
+    searchFilter?: string;
 }

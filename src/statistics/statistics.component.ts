@@ -26,7 +26,6 @@ import * as config from '../../config.json';
     ]
 })
 export class StatisticsComponent implements OnInit {
-    search: string;
     searchChangedSubject: Subject<string> = new Subject<string>();
 
     constructor (private apiService: AppService) { }
@@ -112,6 +111,7 @@ export class StatisticsComponent implements OnInit {
         feedbackFilter: true,
         contactsFilter: true,
         lessonFinishFilter: true,
+        searchFilter: null,
     };
 
     @ViewChild(BaseChartDirective, { static: false })
@@ -124,9 +124,10 @@ export class StatisticsComponent implements OnInit {
         this.getWards(this.fromWardsDate, this.toWardsDate);
 
         this.searchChangedSubject
-            .pipe(debounceTime(1000), distinctUntilChanged())
+            .pipe(debounceTime(500), distinctUntilChanged())
             .subscribe((searchQuery: string) => {
-                console.log(searchQuery)
+                this.options.searchFilter = searchQuery;
+                this.getWards(this.fromWardsDate, this.toWardsDate);
             });
     }
 

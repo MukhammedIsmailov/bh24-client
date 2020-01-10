@@ -80,6 +80,11 @@ export class AppService {
         return this.http.get(`${config.API_BASE_URL}/latest-registrations`, this._options);
     }
 
+    latestRegistrationsByLeadersRead (interval: string) {
+        this.setOptions();
+        return this.http.get(`${config.API_BASE_URL}/latest-registrations-by-leaders?interval=${interval}`, this._options);
+    }
+
     lessonRead (userId: number, lessonId: number) {
         return this.http.get(`${config.API_BASE_URL}/lesson?userId=${userId}&lessonId=${lessonId}`);
     }

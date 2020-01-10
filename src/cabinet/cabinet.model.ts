@@ -9,3 +9,10 @@ export interface ILatestRegistration {
 export interface IStatistics {
     counts: any[];
 }
+
+export interface ILatestRegistrationByLeaders {
+    firstName: string;
+    secondName: string;
+    iconUrl: string;
+    count: string;
+}

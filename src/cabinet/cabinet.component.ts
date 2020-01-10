@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import * as config from '../../config.json';
 import { AppService } from '../app/app.service';
-import { ILatestRegistration, IStatistics } from './cabinet.model';
+import { ILatestRegistration, IStatistics, ILatestRegistrationByLeaders } from './cabinet.model';
 
 @Component({
     selector: 'bh24-cabinet',
@@ -15,9 +15,25 @@ import { ILatestRegistration, IStatistics } from './cabinet.model';
 export class CabinetComponent implements OnInit{
     dataBaseUrl = config.DATA_BASE_URL;
     isRegistrationsDataAvailable: boolean = false;
+    isRegistrationsByLeadersDataAvailable: boolean = false;
     isStatisticsDataAvailable: boolean = false;
     latestRegistrations: ILatestRegistration[];
+    laatestRegistrationByLeaders: ILatestRegistrationByLeaders[];
     statistics: {};
+    registrationByLeadersConfig = [
+        {
+            active: true,
+            interval: '7%20days',
+        },
+        {
+            active: false,
+            interval: '30%20days',
+        },
+        {
+            active: false,
+            interval: '90%20days',
+        }
+    ];
 
     constructor (private apiService: AppService, private router: Router) {}
 
@@ -25,6 +41,11 @@ export class CabinetComponent implements OnInit{
         this.apiService.latestRegistrationsRead().subscribe((data: ILatestRegistration[]) => {
             this.latestRegistrations = data;
             this.isRegistrationsDataAvailable = true;
+        });
+        this.apiService.latestRegistrationsByLeadersRead(this.registrationByLeadersConfig[0].interval)
+            .subscribe((data: ILatestRegistrationByLeaders[]) => {
+            this.laatestRegistrationByLeaders = data;
+            this.isRegistrationsByLeadersDataAvailable = true;
         });
         this.apiService.statisticsRead(null, null).subscribe((data: IStatistics) => {
             const vl = data.counts[0].VL;
@@ -58,5 +79,16 @@ export class CabinetComponent implements OnInit{
 
     goToStatisticsPage() {
         this.router.navigateByUrl('statistics');
+    }
+
+    tabClick(tabItem: number) {
+        this.registrationByLeadersConfig.forEach(configItem => {
+            configItem.active = false;
+        });
+        this.registrationByLeadersConfig[tabItem].active = true;
+        this.apiService.latestRegistrationsByLeadersRead(this.registrationByLeadersConfig[tabItem].interval)
+            .subscribe((data: ILatestRegistrationByLeaders[]) => {
+                this.laatestRegistrationByLeaders = data;
+            });
     }
 }

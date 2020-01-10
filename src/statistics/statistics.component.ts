@@ -4,6 +4,8 @@ import { BaseChartDirective } from 'ng2-charts';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { FormControl, FormGroup } from '@angular/forms';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Subject} from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { AppService } from '../app/app.service';
 import { IStatisticsData, IDataset, IWard, IWardOptions } from './statistics.model';
@@ -24,6 +26,9 @@ import * as config from '../../config.json';
     ]
 })
 export class StatisticsComponent implements OnInit {
+    search: string;
+    searchChangedSubject: Subject<string> = new Subject<string>();
+
     constructor (private apiService: AppService) { }
 
     dataBaseUrl = config.DATA_BASE_URL;
@@ -117,6 +122,12 @@ export class StatisticsComponent implements OnInit {
         this.fromWardsDate.setDate(this.toWardsDate.getDate() - 30);
         this.getStatistics(this.fromPlotDate, this.toPlotDate);
         this.getWards(this.fromWardsDate, this.toWardsDate);
+
+        this.searchChangedSubject
+            .pipe(debounceTime(1000), distinctUntilChanged())
+            .subscribe((searchQuery: string) => {
+                console.log(searchQuery)
+            });
     }
 
     updateChart (): void {
@@ -148,5 +159,9 @@ export class StatisticsComponent implements OnInit {
 
     onChangeFilter (): void {
         this.getWards(this.fromWardsDate, this.toWardsDate);
+    }
+
+    searchChanged(searchQueryEvent: any): void {
+        this.searchChangedSubject.next(searchQueryEvent.target.value);
     }
 }

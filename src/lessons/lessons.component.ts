@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import videojs from 'video.js';
 
 import { AppService } from '../app/app.service';
 import { ILesson, ILeader } from './lessons.model';
@@ -20,31 +21,35 @@ export class LessonsComponent implements OnInit {
     isLessonDataAvailable = false;
     isLeaderDataAvailable = false;
     contactsActive = false;
+    player: videojs.Player;
+    video: string;
 
     constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute,
                  private sanitizer: DomSanitizer) { }
     ngOnInit(): void {
         this.aRouter.queryParams.subscribe(params => {
-           this.lessonId = parseInt(params.lessonId);
-           this.userId = parseInt(params.userId);
-           this.apiService.lessonRead(this.userId, this.lessonId).subscribe((data: ILesson) => {
-               this.lesson = data;
-               this.isLessonDataAvailable = true;
-           });
-           this.apiService.leaderReadByUserId(this.userId).subscribe((data: ILeader) => {
+            this.lessonId = parseInt(params.lessonId);
+            this.userId = parseInt(params.userId);
+            this.apiService.lessonRead(this.userId, this.lessonId).subscribe((data: ILesson) => {
+                this.lesson = data;
+                this.isLessonDataAvailable = true;
+            });
+            this.apiService.leaderReadByUserId(this.userId).subscribe((data: ILeader) => {
                 this.leader = data;
                 this.isLeaderDataAvailable = true;
-           });
+            });
         });
+        this.setupPlayer();
     }
 
-    next() {
-        this.router.navigateByUrl(`/lesson?userId=${this.userId}&lessonId=${this.lessonId+1}`);
-        this.apiService.lessonEvent(this.userId, this.lessonId+1).subscribe();
+    async next() {
+        await this.router.navigateByUrl(`/lesson?userId=${this.userId}&lessonId=${this.lessonId+1}`);
+        this.setupPlayer();
     }
 
     previous() {
         this.router.navigateByUrl(`/lesson?userId=${this.userId}&lessonId=${this.lessonId-1}`);
+        this.setupPlayer();
     }
 
     sanitize(url: string) {
@@ -60,6 +65,29 @@ export class LessonsComponent implements OnInit {
     contactsSeeEvent() {
         this.apiService.contactsSeeClick(this.userId).subscribe(() => {
 
+        });
+    }
+
+    setupPlayer() {
+        setTimeout(() => {
+            this.player = videojs('video-player', { autoplay: true });
+            this.player.src(this.dataBaseUrl + this.lesson.video);
+            this.player.load();
+            this.checkPlayerStatus();
+        }, 400);
+    }
+
+    checkPlayerStatus() {
+        this.player.ready(() => {
+            const interval = setInterval(() => {
+                const currentTime = this.player.currentTime();
+                const duration = this.player.duration();
+                console.log(currentTime / duration * 100);
+                if ((currentTime / duration * 100) >= 10) {
+                    this.apiService.lessonEvent(this.userId, this.lessonId).subscribe();
+                    clearInterval(interval);
+                }
+            }, 30000);
         });
     }
 }

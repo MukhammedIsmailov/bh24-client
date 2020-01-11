@@ -1,11 +1,11 @@
 <div *ngIf="isLessonDataAvailable">
     <div class="lesson-pagination">
-        <div class="lesson-pagination__prev">
-            <a *ngIf="lesson.lessonId > 1" (click)="previous()">« занятие {{lesson.lessonId - 1}}</a>
+        <div class="lesson-pagination__prev" *ngIf="lesson.lessonId > 1">
+            <a (click)="previous()">« занятие {{lesson.lessonId - 1}}</a>
         </div>
         <div class="lesson-pagination__middle">занятие {{lesson.lessonId}} из {{lesson.max}}</div>
-        <div class="lesson-pagination__next">
-            <a *ngIf="lesson.lessonId < lesson.max" (click)="next()">занятие {{lesson.lessonId + 1}} »</a>
+        <div class="lesson-pagination__next" *ngIf="lesson.lessonId < lesson.max">
+            <a (click)="next()">занятие {{lesson.lessonId + 1}} »</a>
         </div>
     </div>
     <div class="lesson-title">{{lesson.title}}</div>
@@ -14,9 +14,13 @@
             <div class="video">
                 <div class="video__preview" style="background-image: url(../../content/pic/video-preview.jpg)"></div>
                 <div class="video__source">
-                    <iframe width="100%" height="100%" [src]="sanitize(lesson.video)" frameborder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen=""></iframe>
+                    <!--<iframe width="100%" height="100%" [src]="sanitize(lesson.video)" frameborder="0"-->
+                            <!--allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"-->
+                            <!--allowfullscreen=""></iframe>-->
+                    <video id="video-player"
+                           class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9"
+                           controls preload="auto"  width="100%" height="100%">
+                    </video>
                 </div>
             </div>
             <p>{{lesson.body}}</p>

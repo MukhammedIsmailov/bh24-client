@@ -26,6 +26,7 @@ export interface IStatisticsData {
 }
 
 export interface IWard {
+    id: number;
     first_name: string;
     second_name: string;
     icon_url: string;
@@ -54,4 +55,23 @@ export interface IWardOptions {
     contactsFilter: boolean;
     lessonFinishFilter: boolean;
     searchFilter?: string;
+}
+
+export interface ILesson {
+    lessonNumber: number;
+    readingDate: Date;
+}
+
+export interface ILessonInfo {
+    firstName: string;
+    secondName: string;
+    iconUrl?: string;
+    lessons: ILesson[];
+}
+
+export enum Status {
+    renouncement = 'renouncement',
+    contact = 'contact',
+    client = 'client',
+    partner = 'partner',
 }

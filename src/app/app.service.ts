@@ -66,6 +66,11 @@ export class AppService {
         return this.http.post(`${config.API_BASE_URL}/wards`, data, this._options);
     }
 
+    wardUpdate (id: number, data: any) {
+        this.setOptions();
+        return this.http.post(`${config.API_BASE_URL}/ward?id=${id}`, data, this._options);
+    }
+
     leadsRead () {
         this.setOptions();
         return this.http.get(`${config.API_BASE_URL}/leads`, this._options);
@@ -94,14 +99,19 @@ export class AppService {
     }
 
     feedbackButtonClick (userId: number) {
-        return this.http.put(`${config.API_BASE_URL}/event/feedback-button-click`, { userId })
+        return this.http.put(`${config.API_BASE_URL}/event/feedback-button-click`, { userId });
     }
 
     contactsSeeClick (userId: number) {
-        return this.http.put(`${config.API_BASE_URL}/event/contacts-see`, { userId })
+        return this.http.put(`${config.API_BASE_URL}/event/contacts-see`, { userId });
     }
 
     lessonEvent (id: number, step: number) {
-        return this.http.put(`${config.API_BASE_URL}/lesson-event`, { id, step, extern: true })
+        return this.http.put(`${config.API_BASE_URL}/lesson-event`, { id, step, extern: true });
+    }
+
+    lessonEventsRead (id: number) {
+        this.setOptions();
+        return this.http.get(`${config.API_BASE_URL}/lesson-events?id=${id}`, this._options);
     }
 }

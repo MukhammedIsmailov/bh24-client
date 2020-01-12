@@ -314,12 +314,12 @@
                         <div class="partners__filter">
                             <div class="partners__filter-name">Статус</div>
                             <div class="partners__select">
-                                <select data-search="false">
-                                    <option value="Все">Все</option>
-                                    <option value="Отказ">Отказ</option>
-                                    <option value="Связаться">Связаться</option>
-                                    <option value="Клиент">Клиент</option>
-                                    <option value="Партнер">Партнер</option>
+                                <select [(ngModel)]="options.statusFilter" (change)="onChangeFilter()">
+                                    <option [value]="null">Все</option>
+                                    <option [value]="status.renouncement">Отказ</option>
+                                    <option [value]="status.contact">Связаться</option>
+                                    <option [value]="status.client">Клиент</option>
+                                    <option [value]="status.partner">Партнер</option>
                                 </select>
                             </div>
                         </div>
@@ -371,6 +371,28 @@
                 <div class="partners__tbody">
                     <div *ngFor="let ward of wards;" class="partners__tr">
                         <div class="partners__td">
+                            <div class="partners__status">
+                                <div *ngIf="ward.status === status.renouncement" class="svg-icon svg-icon_icon-status-refuse">
+                                    <svg>
+                                        <use xlink:href="#icon-status-refuse"></use>
+                                    </svg>
+                                </div>
+                                <div *ngIf="ward.status === status.contact" class="svg-icon svg-icon_icon-status-call">
+                                    <svg>
+                                        <use xlink:href="#icon-status-call"></use>
+                                    </svg>
+                                </div>
+                                <div *ngIf="ward.status === status.client" class="svg-icon svg-icon_icon-status-client">
+                                    <svg>
+                                        <use xlink:href="#icon-status-client"></use>
+                                    </svg>
+                                </div>
+                                <div *ngIf="ward.status === status.partner" class="svg-icon svg-icon_icon-status-partner">
+                                    <svg>
+                                        <use xlink:href="#icon-status-partner"></use>
+                                    </svg>
+                                </div>
+                            </div>
                             <a class="partners__image">
                                 <img [src]="!!ward.icon_url ? dataBaseUrl + ward.icon_url : dataBaseUrl + '/icons/lead.png'" />
                             </a>
@@ -404,7 +426,7 @@
                         </div>
                         <div class="partners__td">
                             <div class="partners__lesson">
-                                <div class="partners__lesson-icon popup-btn" data-src="#lessons-popup">
+                                <div class="partners__lesson-icon popup-btn" data-src="#lessons-popup" (click)="openLessonsPopup(ward.id)">
                                     <div class="svg-icon svg-icon_icon-inform">
                                         <svg>
                                             <use xlink:href="#icon-inform"></use>
@@ -425,7 +447,7 @@
                                     </svg>
                                 </div>
                             </div>
-                            <div class="partners__edit">
+                            <div class="partners__edit" (click)="openStatusPopup(ward)">
                                 <div class="svg-icon svg-icon_icon-pen">
                                     <svg>
                                         <use xlink:href="#icon-pen"></use>
@@ -500,6 +522,136 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="lessonPopupStatus" class="popup" id="lessons-popup" [ngClass]="{active: lessonPopupStatus}">
+    <div class="popup__inner">
+        <div class="popup__wrap popup__wrap_small">
+            <h2 class="popup__title">Список уроков</h2>
+            <div class="lessons">
+                <div class="lessons__user">
+                    <div class="lessons__user-image">
+                        <img [src]="!!lessonsInfo.iconUrl ? dataBaseUrl + lessonsInfo.iconUrl : dataBaseUrl + '/icons/lead.png'" />
+                    </div>
+                    <div class="lessons__user-name">{{lessonsInfo.firstName}} {{lessonsInfo.secondName}}</div>
+                </div>
+                <p *ngIf="lessonsInfo.lessons.length === 0">Лид не просмотрел ни одного урока</p>
+                <table class="lessons__table" *ngIf="lessonsInfo.lessons.length > 0">
+                    <thead>
+                    <tr>
+                        <td>Урок</td>
+                        <td>Дата просмотра</td>
+                    </tr>
+                    </thead>
+                    <tbody *ngFor="let lesson of lessonsInfo.lessons">
+                    <tr>
+                        <td>
+                            <div class="lessons__status">
+                                <div class="svg-icon svg-icon_icon-check">
+                                    <svg>
+                                        <use xlink:href="#icon-check"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="lessons__name">Урок №{{lesson.lessonNumber}}</div>
+                        </td>
+                        <td>{{lesson.readingDate | date:'dd.MM.yyy'}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="popup__close popup__close_text" (click)="lessonPopupStatus = false">Закрыть</div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="statusPopupStatus" class="popup" id="status-popup" [ngClass]="{active: statusPopupStatus}">
+    <div class="popup__inner">
+        <div class="popup__wrap popup__wrap_medium3">
+            <h2 class="popup__title">Редактирование статуса</h2>
+            <form class="form">
+                <div class="user2">
+                    <div class="user2__image">
+                        <img [src]="!!currentWard.icon_url ? dataBaseUrl + currentWard.icon_url : dataBaseUrl + '/icons/lead.png'" />
+                    </div>
+                    <div class="user2__name">{{currentWard.first_name}} {{currentWard.second_name}}</div>
+                </div>
+                <div class="form__group">
+                    <label class="status-radio">
+                        <input type="radio" name="status" [checked]="currentWard.status === status.renouncement"
+                            [value]="status.renouncement" [(ngModel)]="currentWard.status"/>
+                        <div class="radio"></div>
+                        <span class="status-radio__icon">
+                      <div class="svg-icon svg-icon_icon-status-refuse">
+                        <svg>
+                          <use xlink:href="#icon-status-refuse"></use>
+                        </svg>
+                      </div>
+                    </span>
+                        <span class="status-radio__name">Отказ</span>
+                        <span class="status-radio__desc">Отказ пользователю в том, чтобы он стал вашим партнером</span>
+                    </label>
+                </div>
+                <div class="form__group">
+                    <label class="status-radio">
+                        <input type="radio" name="status" [checked]="currentWard.status === status.contact"
+                            [value]="status.contact" [(ngModel)]="currentWard.status"/>
+                        <div class="radio"></div>
+                        <span class="status-radio__icon">
+                      <div class="svg-icon svg-icon_icon-status-call">
+                        <svg>
+                          <use xlink:href="#icon-status-call"></use>
+                        </svg>
+                      </div>
+                    </span>
+                        <span class="status-radio__name">Связаться</span>
+                        <span class="status-radio__desc">Необходимость связаться с пользователем и обсудить партнерство</span>
+                    </label>
+                </div>
+                <div class="form__group">
+                    <label class="status-radio">
+                        <input type="radio" name="status" [checked]="currentWard.status === status.client"
+                            [value]="status.client" [(ngModel)]="currentWard.status"/>
+                        <div class="radio"></div>
+                        <span class="status-radio__icon">
+                      <div class="svg-icon svg-icon_icon-status-client">
+                        <svg>
+                          <use xlink:href="#icon-status-client"></use>
+                        </svg>
+                      </div>
+                    </span>
+                        <span class="status-radio__name">Клиент</span>
+                        <span class="status-radio__desc">Пользователь идет на контакт, адекватен и претендует на партнерство</span>
+                    </label>
+                </div>
+                <div class="form__group">
+                    <label class="status-radio">
+                        <input type="radio" name="status" [checked]="currentWard.status === status.partner"
+                            [value]="status.partner" [(ngModel)]="currentWard.status"/>
+                        <div class="radio"></div>
+                        <span class="status-radio__icon">
+                      <div class="svg-icon svg-icon_icon-status-partner">
+                        <svg>
+                          <use xlink:href="#icon-status-partner"></use>
+                        </svg>
+                      </div>
+                    </span>
+                        <span class="status-radio__name">Партнер</span>
+                        <span class="status-radio__desc">Пользователь стал вашим деловым партнером в системе</span>
+                    </label>
+                </div>
+                <div class="form__group form__group_comment">
+                    <div class="form__name">Комментарий</div>
+                    <div class="form__desc">Ваши рабочие заметки относительно пользователя</div>
+                    <textarea name="note" class="form__control form__control_textarea" [(ngModel)]="currentWard.note"></textarea>
+                </div>
+            </form>
+            <div class="popup__close popup__close_btns2">
+                <div class="popup__close-btn popup__close-btn_gray" (click)="statusPopupStatus = false">отмена</div>
+                <div class="popup__close-btn" (click)="saveStatus()">применить</div>
             </div>
         </div>
     </div>

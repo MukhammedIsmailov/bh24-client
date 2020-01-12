@@ -64,7 +64,7 @@
     }
 
     .partners__drop{
-
+        display: none !important;
     }
 
     .partners__drop-toggle{
@@ -674,6 +674,27 @@
         padding-top: 40px;
     }
 
+    .popup__wrap_medium3{
+        padding: 20px 30px;
+    }
+
+    .popup__wrap_medium3 .popup__title{
+        font-size: 18px;
+
+        text-align: left;
+    }
+
+    .popup__close_btns2{
+        margin: 0 -10px;
+        margin-bottom: 5px;
+        padding-top: 23px;
+    }
+
+    .popup__close_btns2 .popup__close-btn{
+        font-size: 14px;
+        font-weight: 400;
+    }
+
     .popup .form__name{
         width: 100%;
     }
@@ -912,6 +933,22 @@
         -webkit-box-orient: horizontal;
         -webkit-box-direction: normal;
         -ms-flex-direction: row;
+    }
+
+    .form__group_comment{
+        padding-top: 20px;
+        padding-left: 0;
+    }
+
+    .form__group_comment:before,
+    .form__group_comment:after{
+        right: auto;
+
+        margin: 0;
+    }
+
+    .form__group_comment .form__control{
+        padding-top: 5px;
     }
 
     .form__name{
@@ -1533,6 +1570,8 @@
     }
 
     .lesson__teacher-image{
+        width: 140px;
+        height: 190px;
         margin-bottom: 23px;
         margin-left: 0;
 
@@ -1904,6 +1943,41 @@
         -webkit-box-pack: center;
         -ms-flex-pack: center;
         justify-content: center;
+    }
+
+    .user2{
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+
+        margin-bottom: 30px;
+
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+    }
+
+    .user2__image{
+        margin: 0;
+        margin-right: 19px;
+
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+    }
+
+    .status-radio{
+        padding-left: 47px;
+    }
+
+    .status-radio .radio{
+        left: 0;
+    }
+
+    .status-radio__icon{
+        left: 23px;
     }
 }
 

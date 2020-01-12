@@ -8,7 +8,7 @@ import { Subject} from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { AppService } from '../app/app.service';
-import { IStatisticsData, IDataset, IWard, IWardOptions } from './statistics.model';
+import { IStatisticsData, IDataset, IWard, IWardOptions, ILessonInfo, Status } from './statistics.model';
 
 import * as config from '../../config.json';
 
@@ -113,6 +113,11 @@ export class StatisticsComponent implements OnInit {
         lessonFinishFilter: true,
         searchFilter: null,
     };
+    lessonsInfo: ILessonInfo;
+    lessonPopupStatus: boolean = false;
+    statusPopupStatus: boolean = false;
+    currentWard: IWard;
+    status = Status;
 
     @ViewChild(BaseChartDirective, { static: false })
     public chart: BaseChartDirective;
@@ -164,5 +169,27 @@ export class StatisticsComponent implements OnInit {
 
     searchChanged(searchQueryEvent: any): void {
         this.searchChangedSubject.next(searchQueryEvent.target.value);
+    }
+
+    openLessonsPopup(id: number) {
+        this.lessonPopupStatus = true;
+        this.apiService.lessonEventsRead(id).subscribe((data: ILessonInfo) => {
+            this.lessonsInfo = data;
+        });
+    }
+
+    openStatusPopup(ward: IWard) {
+        this.statusPopupStatus = true;
+        this.currentWard = ward;
+    }
+
+    saveStatus() {
+        this.statusPopupStatus = false;
+        this.apiService.wardUpdate(this.currentWard.id, {
+            status: this.currentWard.status,
+            note: this.currentWard.note
+        }).subscribe(() => {
+            this.onChangeFilter();
+        });
     }
 }

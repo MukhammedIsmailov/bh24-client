@@ -27,7 +27,7 @@ export class LoginComponent {
             this.tokenStorage.setAccessToken(data.token);
             this.tokenStorage.setUserId(data.userId);
             this.tokenStorage.setReferId(data.referId);
-            await this.router.navigateByUrl('/cabinet');
+            await this.router.navigateByUrl('/index');
         }, error => {
             if(error.status === 404) {
                 this.notFound = true;

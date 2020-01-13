@@ -28,11 +28,11 @@ import { NotificationService } from './notification.service';
 import { TokenStorage } from './token-storage.service'
 
 const appRoutes: Routes =[
-    { path: 'sign-in', component: LoginComponent},
+    { path: 'sign-in', component: LoginComponent, },
     { path: 'create', component: CreateComponent},
     { path: 'profile', component: ProfileComponent },
     { path: 'statistics', component: StatisticsComponent },
-    { path: 'cabinet', component: CabinetComponent },
+    { path: 'index', component: CabinetComponent },
     { path: 'calendar', component: CalendarComponent },
     { path: 'education', component: EducationComponent },
     { path: 'links', component: LinksComponent },
@@ -47,7 +47,7 @@ const appRoutes: Routes =[
         SidebarComponent, CabinetComponent, CalendarComponent, EducationComponent, UserMenuComponent, LinksComponent,
         LessonsComponent],
     bootstrap: [ AppComponent ],
-    providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' }, TokenStorage ]
+    providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/cabinet' }, TokenStorage ]
 })
 
 export class AppModule { }

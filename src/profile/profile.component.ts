@@ -131,7 +131,7 @@ export class ProfileComponent implements OnInit {
                     this.passwordIsExist = this.checkPasswordFromServer(response.password);
                     this.disabledLogin = !this.emptyLogin;
                     this.disabledReferId = true;
-                    this.router.navigateByUrl('/cabinet')
+                    this.router.navigateByUrl('/index')
                 } else {
                     this.router.navigateByUrl('/sign-in');
                 }

@@ -70,6 +70,7 @@ export class ProfileComponent implements OnInit {
     notUniqueReferId: boolean = false;
     notUniqueEmail: boolean = false;
     notUniqueLogin: boolean = false;
+    previewPhoto: boolean = false;
 
     onImageSelect (event: any) {
         if (event.target.files.length > 0) {
@@ -81,6 +82,7 @@ export class ProfileComponent implements OnInit {
             this.apiService.upload(formData).subscribe((response: any) => {
                 this.profile.iconUrl = `/icons/${response.imageName}`;
             });
+            this.previewPhoto = true;
         }
     }
 

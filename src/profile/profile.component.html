@@ -25,9 +25,10 @@
                     </span>
                   </span>
                 </h2>
-                <label *ngIf="!profile.iconUrl" class="photo-file">
+                <label class="photo-file" [ngClass]="{active: previewPhoto || !!profile.iconUrl}">
                     <input id="avatar" class="photo-file__input" type="file" accept="image/*" name="avatar" (change)="onImageSelect($event)"/>
                     <span class="photo-file__preview">
+                        <img [src]="dataBaseUrl + profile.iconUrl">
                   </span>
                     <span class="photo-file__icon">
                     <div class="svg-icon svg-icon_icon-plus">
@@ -49,9 +50,9 @@
                       </svg>
                     </div>
                   </span>
-                    <span class="photo-file__text">Добавить фото</span>
+                    <span *ngIf="!profile.iconUrl" class="photo-file__text">Добавить фото</span>
+                    <span *ngIf="!!profile.iconUrl" class="photo-file__text">Изменить фото</span>
                 </label>
-                <img *ngIf="!!profile.iconUrl" [src]="dataBaseUrl + profile.iconUrl" width="150">
             </div>
         </div>
         <div class="col-md-8 col-lg-9">

@@ -1,8 +1,0 @@
-
-
-{
-  "API_BASE_URL": "http://194.67.105.156:3000/api",
-  "DATA_BASE_URL": "http://194.67.105.156:3000",
-  "CREATE_PARTNER_URL": "http://194.67.105.156/create",
-  "LANDING_URL": "http://194.67.105.156:3000/landing.html"
-}

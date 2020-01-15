@@ -1168,7 +1168,7 @@
         align-items: center;
     }
 
-    .chart__header .range{
+    .range{
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -1224,7 +1224,7 @@
     }
 
     .range__input{
-        text-indent: -999em;
+        /*text-indent: -999em;*/
 
         color: transparent;
         border: none;

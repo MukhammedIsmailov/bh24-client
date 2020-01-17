@@ -47,7 +47,7 @@ const appRoutes: Routes =[
         SidebarComponent, CabinetComponent, CalendarComponent, EducationComponent, UserMenuComponent, LinksComponent,
         LessonsComponent],
     bootstrap: [ AppComponent ],
-    providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/cabinet' }, TokenStorage ]
+    providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' }, TokenStorage ]
 })
 
 export class AppModule { }

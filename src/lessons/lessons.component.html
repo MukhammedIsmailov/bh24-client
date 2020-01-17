@@ -4,7 +4,7 @@
             <a (click)="previous()">« занятие {{lesson.lessonId - 1}}</a>
         </div>
         <div class="lesson-pagination__middle">занятие {{lesson.lessonId}} из {{lesson.max}}</div>
-        <div class="lesson-pagination__next" *ngIf="lesson.lessonId < lesson.max">
+        <div class="lesson-pagination__next" *ngIf="lesson.lessonId < lesson.max && nextComplete">
             <a (click)="next()">занятие {{lesson.lessonId + 1}} »</a>
         </div>
     </div>

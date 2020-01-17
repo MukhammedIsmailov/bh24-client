@@ -22,7 +22,7 @@ export class LessonsComponent implements OnInit {
     isLeaderDataAvailable = false;
     contactsActive = false;
     player: videojs.Player;
-    video: string;
+    nextComplete = false;
 
     constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute,
                  private sanitizer: DomSanitizer) { }
@@ -83,8 +83,9 @@ export class LessonsComponent implements OnInit {
                 const currentTime = this.player.currentTime();
                 const duration = this.player.duration();
                 console.log(currentTime / duration * 100);
-                if ((currentTime / duration * 100) >= 10) {
+                if ((currentTime / duration * 100) >= 80) {
                     this.apiService.lessonEvent(this.userId, this.lessonId).subscribe();
+                    this.nextComplete = true;
                     clearInterval(interval);
                 }
             }, 30000);

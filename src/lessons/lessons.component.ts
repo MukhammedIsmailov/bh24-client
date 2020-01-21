@@ -83,7 +83,7 @@ export class LessonsComponent implements OnInit {
                 const currentTime = this.player.currentTime();
                 const duration = this.player.duration();
                 console.log(currentTime / duration * 100);
-                if ((currentTime / duration * 100) >= 80) {
+                if ((currentTime / duration * 100) >= 10) {
                     this.apiService.lessonEvent(this.userId, this.lessonId).subscribe();
                     this.nextComplete = true;
                     clearInterval(interval);

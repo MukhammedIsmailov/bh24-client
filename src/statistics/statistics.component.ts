@@ -116,6 +116,7 @@ export class StatisticsComponent implements OnInit {
     lessonsInfo: ILessonInfo;
     lessonPopupStatus: boolean = false;
     statusPopupStatus: boolean = false;
+    filtersPopupStatus: boolean = false;
     currentWard: IWard;
     status = Status;
 
@@ -183,6 +184,11 @@ export class StatisticsComponent implements OnInit {
         this.currentWard = ward;
     }
 
+    openFiltersPopup() {
+        this.filtersToggleActive = !this.filtersToggleActive;
+        this.filtersPopupStatus = true;
+    }
+
     saveStatus() {
         this.statusPopupStatus = false;
         this.apiService.wardUpdate(this.currentWard.id, {
@@ -191,5 +197,27 @@ export class StatisticsComponent implements OnInit {
         }).subscribe(() => {
             this.onChangeFilter();
         });
+    }
+
+    saveFilters() {
+        this.filtersPopupStatus = false;
+        this.onChangeFilter();
+    }
+
+    discardFilters() {
+        this.filtersPopupStatus = false;
+        this.options = {
+            messengerFilter: null,
+            lessonFilter: null,
+            statusFilter: null,
+            startDateFilter: null,
+            endDateFilter: null,
+            leadFilter: true,
+            partnerFilter: true,
+            feedbackFilter: true,
+            contactsFilter: true,
+            lessonFinishFilter: true,
+            searchFilter: null,
+        };
     }
 }

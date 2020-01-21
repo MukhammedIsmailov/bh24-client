@@ -278,7 +278,7 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="partners__toggle partners__toggle_mobile popup-btn" data-src="#filters-popup">
+                    <div class="partners__toggle partners__toggle_mobile popup-btn" (click)="openFiltersPopup()">
                         <span>Фильтры</span>
                         <div class="svg-icon svg-icon_icon-arrow2">
                             <svg>
@@ -469,7 +469,7 @@
                                             <div class="partners__lesson popup-btn" data-src="#lessons-popup">
                                                 <div class="partners__lesson-name">Урок №{{ ward.step }}</div>
                                                 <div class="partners__lesson-date">{{ ward.last_send_time | date: 'dd.MM.yyyy' }}</div>
-                                                <div class="partners__lesson-icon">
+                                                <div class="partners__lesson-icon" (click)="openLessonsPopup(ward.id)">
                                                     <div class="svg-icon svg-icon_icon-arrow2">
                                                         <svg>
                                                             <use xlink:href="#icon-arrow2"></use>
@@ -652,6 +652,128 @@
             <div class="popup__close popup__close_btns2">
                 <div class="popup__close-btn popup__close-btn_gray" (click)="statusPopupStatus = false">отмена</div>
                 <div class="popup__close-btn" (click)="saveStatus()">применить</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="filtersPopupStatus" class="popup" [ngClass]="{active: filtersPopupStatus}" id="filters-popup">
+    <div class="popup__inner">
+        <div class="popup__wrap popup__wrap_small">
+            <h2 class="popup__title">Фильтры</h2>
+            <div class="partners partners_popup">
+                <div class="partners__labels">
+                    <label class="partners__label">
+                        <input type="checkbox" [(ngModel)]="options.lessonFinishFilter"/>
+                        <div class="checkbox">
+                            <div class="svg-icon svg-icon_icon-check">
+                                <svg>
+                                    <use xlink:href="#icon-check"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        <span>Закончили курс</span>
+                    </label>
+                    <label class="partners__label">
+                        <input type="checkbox" [(ngModel)]="options.leadFilter"/>
+                        <div class="checkbox">
+                            <div class="svg-icon svg-icon_icon-check">
+                                <svg>
+                                    <use xlink:href="#icon-check"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        <span>Клиенты</span>
+                    </label>
+                    <label class="partners__label">
+                        <input type="checkbox" [(ngModel)]="options.partnerFilter"/>
+                        <div class="checkbox">
+                            <div class="svg-icon svg-icon_icon-check">
+                                <svg>
+                                    <use xlink:href="#icon-check"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        <span>Партнеры</span>
+                    </label>
+                    <label class="partners__label">
+                        <input type="checkbox" [(ngModel)]="options.contactsFilter"/>
+                        <div class="checkbox">
+                            <div class="svg-icon svg-icon_icon-check">
+                                <svg>
+                                    <use xlink:href="#icon-check"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        <span>Просмотрели контакты</span>
+                    </label>
+                    <label class="partners__label">
+                        <input type="checkbox" [(ngModel)]="options.feedbackFilter"/>
+                        <div class="checkbox">
+                            <div class="svg-icon svg-icon_icon-check">
+                                <svg>
+                                    <use xlink:href="#icon-check"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        <span>Заказали консультацию</span>
+                    </label>
+                </div>
+                <div class="partners__filters">
+                    <div class="partners__filters-wrap">
+                        <div class="partners__filter">
+                            <div class="partners__filter-name">Мессенджер</div>
+                            <div class="partners__select">
+                                <select data-search="false" [(ngModel)]="options.messengerFilter">
+                                    <option [value]="null">Все</option>
+                                    <option value="telegram">Telegram</option>
+                                    <option value="facebook">Facebook</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="partners__filter">
+                            <div class="partners__filter-name">Урок</div>
+                            <div class="partners__select">
+                                <select [(ngModel)]="options.lessonFilter">
+                                    <option [value]="null">Все</option>
+                                    <option value="1">Урок №1</option>
+                                    <option value="2">Урок №2</option>
+                                    <option value="3">Урок №3</option>
+                                    <option value="4">Урок №4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="partners__filter">
+                            <div class="partners__filter-name">Статус</div>
+                            <div class="partners__select">
+                                <select [(ngModel)]="options.statusFilter">
+                                    <option [value]="null">Все</option>
+                                    <option [value]="status.renouncement">Отказ</option>
+                                    <option [value]="status.contact">Связаться</option>
+                                    <option [value]="status.client">Клиент</option>
+                                    <option [value]="status.partner">Партнер</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="partners__filter">
+                            <div class="range">
+                                <input class="range__input" type="text" />
+                                <div class="svg-icon svg-icon_icon-date">
+                                    <svg>
+                                        <use xlink:href="#icon-date"></use>
+                                    </svg>
+                                </div>
+                                <div class="range__from">01.06.2018</div>
+                                <div class="range__to">01.07.2018</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="popup__close popup__close_btns">
+                <div class="popup__close-btn popup__close-btn_gray" (click)="discardFilters()">отмена</div>
+                <div class="popup__close-btn" (click)="saveFilters()">применить</div>
+
             </div>
         </div>
     </div>

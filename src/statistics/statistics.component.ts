@@ -48,8 +48,8 @@ export class StatisticsComponent implements OnInit {
     plotFlatpickrOptions: FlatpickrOptions = {
         mode: 'range',
         onClose: () => {
-            this.fromPlotDate = this.plotDate[0];
-            this.toPlotDate = this.plotDate[1];
+            this.fromPlotDate = !!this.plotDate[0] ? this.plotDate[0] : this.fromPlotDate;
+            this.toPlotDate = !!this.plotDate[1] ? this.plotDate[1] : this.toPlotDate;
             this.getStatistics(this.fromPlotDate, this.toPlotDate);
         },
     };
@@ -57,8 +57,8 @@ export class StatisticsComponent implements OnInit {
     wardsFlatpickrOptions: FlatpickrOptions = {
         mode: 'range',
         onClose: () => {
-            this.fromWardsDate = this.wardsDate[0];
-            this.toWardsDate = this.wardsDate[1];
+            this.fromWardsDate = !!this.wardsDate[0] ? this.wardsDate[0] : this.fromWardsDate;
+            this.toWardsDate = this.wardsDate[1] ? this.wardsDate[1] : this.toWardsDate;
             this.getWards(this.fromWardsDate, this.toWardsDate);
         },
     };

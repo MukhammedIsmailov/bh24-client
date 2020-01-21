@@ -756,15 +756,16 @@
                             </div>
                         </div>
                         <div class="partners__filter">
-                            <div class="range">
-                                <input class="range__input" type="text" />
+                            <div [formGroup]="rangeWardsGroup" class="range">
+                                <ng2-flatpickr [(ngModel)]="wardsDate" class="range__input flatpickr-input" [config]="wardsFlatpickrOptions"
+                                               formControlName="rangeWards"></ng2-flatpickr>
                                 <div class="svg-icon svg-icon_icon-date">
                                     <svg>
                                         <use xlink:href="#icon-date"></use>
                                     </svg>
                                 </div>
-                                <div class="range__from">01.06.2018</div>
-                                <div class="range__to">01.07.2018</div>
+                                <div class="range__from">{{ fromWardsDate | date:'dd.MM.yyy' }}</div>
+                                <div class="range__to">{{ toWardsDate | date:'dd.MM.yyy' }}</div>
                             </div>
                         </div>
                     </div>

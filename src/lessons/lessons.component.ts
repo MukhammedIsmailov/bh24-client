@@ -13,7 +13,7 @@ import * as config from '../../config.json';
 })
 
 export class LessonsComponent implements OnInit {
-    dataBaseUrl = config.DATA_BASE_URL;
+    dataBaseUrl = config.VIDEO_BASE_URL;
     lessonId: number;
     userId: number;
     lesson: ILesson;
@@ -84,8 +84,7 @@ export class LessonsComponent implements OnInit {
             const interval = setInterval(() => {
                 const currentTime = this.player.currentTime();
                 const duration = this.player.duration();
-                console.log(currentTime / duration * 100);
-                if ((currentTime / duration * 100) >= 5) {
+                if ((currentTime / duration * 100) >= 90) {
                     this.apiService.lessonEvent(this.userId, this.lessonId).subscribe();
                     this.nextComplete = true;
                     clearInterval(interval);

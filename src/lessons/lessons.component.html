@@ -1,7 +1,10 @@
 <div *ngIf="isLessonDataAvailable">
     <div class="lesson-pagination">
-        <div class="lesson-pagination__prev" *ngIf="lesson.lessonId > 1">
+        <div class="lesson-pagination__prev" *ngIf="lesson.lessonId > 1 && isMobile && nextComplete">
             <a (click)="previous()">« занятие {{lesson.lessonId - 1}}</a>
+        </div>
+        <div class="lesson-pagination__prev" *ngIf=" !isMobile">
+            <a *ngIf="lesson.lessonId > 1" (click)="previous()">« занятие {{lesson.lessonId - 1}}</a>
         </div>
         <div class="lesson-pagination__middle">занятие {{lesson.lessonId}} из {{lesson.max}}</div>
         <div class="lesson-pagination__next" *ngIf="lesson.lessonId < lesson.max && nextComplete">
@@ -135,35 +138,3 @@
         </div>
     </div>
 </div>
-
-<!--<div class="consult">-->
-    <!--<div class="container">-->
-        <!--<div class="consult__left">-->
-            <!--<div class="form__alert form__alert_style3">-->
-                <!--<div class="form__alert-icon">-->
-                    <!--<div class="svg-icon svg-icon_icon-alert">-->
-                        <!--<svg>-->
-                            <!--<use xlink:href="#icon-alert"></use>-->
-                        <!--</svg>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<span>По всем возникшим вопросам обращайтесь к своему наставнику</span>-->
-            <!--</div>-->
-            <!--<div class="user">-->
-                <!--<div class="user__ava">-->
-                    <!--<div class="user__img">-->
-                        <!--<img src="pic/consult-image.png" srcset="pic/consult-image@2x.png 2x" alt="" />-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="user__info">-->
-                    <!--<div class="user__id">Ваш наставник</div>-->
-                    <!--<div class="user__name">Jeffrey Wilkerson</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="consult__right">-->
-            <!--<button class="btn btn_primary popup-btn" data-src="#lesson-popup">бесплатная консультация</button>-->
-            <!--<a class="btn btn_primary scroll-to" href="#teacher">посмотреть контакты</a>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->

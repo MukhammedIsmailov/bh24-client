@@ -23,6 +23,7 @@ export class LessonsComponent implements OnInit {
     contactsActive = false;
     player: videojs.Player;
     nextComplete = false;
+    isMobile = window.innerWidth < 768;
 
     constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute,
                  private sanitizer: DomSanitizer) { }
@@ -44,6 +45,7 @@ export class LessonsComponent implements OnInit {
 
     async next() {
         await this.router.navigateByUrl(`/lesson?userId=${this.userId}&lessonId=${this.lessonId+1}`);
+        this.nextComplete = false;
         this.setupPlayer();
     }
 
@@ -83,7 +85,7 @@ export class LessonsComponent implements OnInit {
                 const currentTime = this.player.currentTime();
                 const duration = this.player.duration();
                 console.log(currentTime / duration * 100);
-                if ((currentTime / duration * 100) >= 10) {
+                if ((currentTime / duration * 100) >= 5) {
                     this.apiService.lessonEvent(this.userId, this.lessonId).subscribe();
                     this.nextComplete = true;
                     clearInterval(interval);

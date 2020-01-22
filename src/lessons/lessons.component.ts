@@ -13,7 +13,8 @@ import * as config from '../../config.json';
 })
 
 export class LessonsComponent implements OnInit {
-    dataBaseUrl = config.VIDEO_BASE_URL;
+    dataBaseUrl = config.DATA_BASE_URL;
+    videoBaseUrl = config.VIDEO_BASE_URL;
     lessonId: number;
     userId: number;
     lesson: ILesson;
@@ -73,7 +74,7 @@ export class LessonsComponent implements OnInit {
     setupPlayer() {
         setTimeout(() => {
             this.player = videojs('video-player', { autoplay: true });
-            this.player.src(this.dataBaseUrl + this.lesson.video);
+            this.player.src(this.videoBaseUrl + this.lesson.video);
             this.player.load();
             this.checkPlayerStatus();
         }, 400);

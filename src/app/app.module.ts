@@ -22,6 +22,7 @@ import { EducationComponent } from '../education/education.component';
 import { UserMenuComponent } from '../user-menu/user-menu.component';
 import { LinksComponent } from '../links/links.component';
 import { LessonsComponent } from '../lessons/lessons.component';
+import { IndexComponent } from '../index/index.component';
 
 import { AppService } from './app.service';
 import { NotificationService } from './notification.service';
@@ -36,7 +37,8 @@ const appRoutes: Routes =[
     { path: 'calendar', component: CalendarComponent },
     { path: 'education', component: EducationComponent },
     { path: 'links', component: LinksComponent },
-    { path: 'lesson', component: LessonsComponent}
+    { path: 'lesson', component: LessonsComponent },
+    { path: '', component: IndexComponent }
 ];
 
 @NgModule({
@@ -45,7 +47,7 @@ const appRoutes: Routes =[
         ChartsModule, Ng2FlatpickrModule],
     declarations: [ AppComponent, LoginComponent, CreateComponent, ProfileComponent, StatisticsComponent,
         SidebarComponent, CabinetComponent, CalendarComponent, EducationComponent, UserMenuComponent, LinksComponent,
-        LessonsComponent],
+        LessonsComponent, IndexComponent],
     bootstrap: [ AppComponent ],
     providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' }, TokenStorage ]
 })

@@ -77,7 +77,7 @@ export class LessonsComponent implements OnInit {
             this.player.src(this.videoBaseUrl + this.lesson.video);
             this.player.load();
             this.checkPlayerStatus();
-        }, 400);
+        }, 800);
     }
 
     checkPlayerStatus() {

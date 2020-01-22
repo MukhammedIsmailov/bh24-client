@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import videojs from 'video.js';
 
 import { AppService } from '../app/app.service';
+import { TokenStorage } from '../app/token-storage.service';
 import { ILesson, ILeader } from './lessons.model';
 import * as config from '../../config.json';
 
@@ -27,7 +28,7 @@ export class LessonsComponent implements OnInit {
     isMobile = window.innerWidth < 768;
 
     constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute,
-                 private sanitizer: DomSanitizer) { }
+                 private sanitizer: DomSanitizer, private tokenStorage: TokenStorage) { }
     ngOnInit(): void {
         this.aRouter.queryParams.subscribe(params => {
             this.lessonId = parseInt(params.lessonId);
@@ -76,6 +77,11 @@ export class LessonsComponent implements OnInit {
             this.player = videojs('video-player', { autoplay: true });
             this.player.src(this.videoBaseUrl + this.lesson.video);
             this.player.load();
+            this.tokenStorage.getVideoTime(`${this.userId},${this.lessonId}`).subscribe((time: string) => {
+                if(!!time) {
+                    this.player.currentTime(parseFloat(time));
+                }
+            });
             this.checkPlayerStatus();
         }, 800);
     }
@@ -85,6 +91,7 @@ export class LessonsComponent implements OnInit {
             const interval = setInterval(() => {
                 const currentTime = this.player.currentTime();
                 const duration = this.player.duration();
+                this.tokenStorage.setVideoTime(`${this.userId},${this.lessonId}`, currentTime.toString());
                 if ((currentTime / duration * 100) >= 90) {
                     this.apiService.lessonEvent(this.userId, this.lessonId).subscribe();
                     this.nextComplete = true;

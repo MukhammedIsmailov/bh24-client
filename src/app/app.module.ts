@@ -9,6 +9,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartsModule } from 'ng2-charts';
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from '../login/login.component';
@@ -28,6 +29,8 @@ import { AppService } from './app.service';
 import { NotificationService } from './notification.service';
 import { TokenStorage } from './token-storage.service'
 
+import * as config from '../../config.json';
+
 const appRoutes: Routes =[
     { path: 'sign-in', component: LoginComponent, },
     { path: 'create', component: CreateComponent},
@@ -41,10 +44,12 @@ const appRoutes: Routes =[
     { path: '', component: IndexComponent }
 ];
 
+const socketConfig: SocketIoConfig = { url: config.SERVER };
+
 @NgModule({
     imports: [ BrowserModule, FormsModule, HttpClientModule, TooltipModule, RouterModule.forRoot(appRoutes),
         ReactiveFormsModule, SimpleNotificationsModule.forRoot(), BrowserAnimationsModule,
-        ChartsModule, Ng2FlatpickrModule],
+        ChartsModule, Ng2FlatpickrModule, SocketIoModule.forRoot(socketConfig) ],
     declarations: [ AppComponent, LoginComponent, CreateComponent, ProfileComponent, StatisticsComponent,
         SidebarComponent, CabinetComponent, CalendarComponent, EducationComponent, UserMenuComponent, LinksComponent,
         LessonsComponent, IndexComponent],

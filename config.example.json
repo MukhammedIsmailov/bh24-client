@@ -1,6 +1,8 @@
 {
   "API_BASE_URL": "http://localhost:3000/api",
-  "DATA_BASE_URL": "http://localhost:3000",
+  "DATA_BASE_URL": "http://localhost:3000/data",
+  "VIDEO_BASE_URL": "https://data.bh24.biz",
   "CREATE_PARTNER_URL": "http://localhost:8080/create",
-  "LANDING_URL": "http://localhost:3000/landing.html"
+  "LANDING_URL": "http://localhost:9090",
+  "SERVER": "http://localhost:3000"
 }

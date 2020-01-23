@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { Socket } from 'ngx-socket-io';
 
 import * as config from '../../config.json';
 import { AppService } from '../app/app.service';
@@ -35,7 +36,7 @@ export class CabinetComponent implements OnInit{
         }
     ];
 
-    constructor (private apiService: AppService, private router: Router) {}
+    constructor (private apiService: AppService, private router: Router, private socket: Socket) {}
 
     ngOnInit(): void {
         this.apiService.latestRegistrationsRead().subscribe((data: ILatestRegistration[]) => {
@@ -90,5 +91,7 @@ export class CabinetComponent implements OnInit{
             .subscribe((data: ILatestRegistrationByLeaders[]) => {
                 this.laatestRegistrationByLeaders = data;
             });
+
+        this.socket.emit('message', { id: 'dgsfgdshfg' });
     }
 }

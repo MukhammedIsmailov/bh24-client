@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import videojs from 'video.js';
+import { Socket } from 'ngx-socket-io';
 
 import { AppService } from '../app/app.service';
 import { TokenStorage } from '../app/token-storage.service';
@@ -28,7 +29,7 @@ export class LessonsComponent implements OnInit {
     isMobile = window.innerWidth < 768;
 
     constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute,
-                 private sanitizer: DomSanitizer, private tokenStorage: TokenStorage) { }
+                 private sanitizer: DomSanitizer, private tokenStorage: TokenStorage, private socket: Socket) { }
     ngOnInit(): void {
         this.aRouter.queryParams.subscribe(params => {
             this.lessonId = parseInt(params.lessonId);

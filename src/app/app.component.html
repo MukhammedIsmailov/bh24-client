@@ -28,6 +28,21 @@
             </div>
         </footer>
     </div>
+
+    <div *ngIf="onNotification" class="notification" [ngClass]="{ active: onNotification }">
+        <div class="notification__wrap">
+            <div class="notification__item" [ngClass]="{ active: onNotification }">
+                <div class="notification__icon">
+                    <div class="svg-icon svg-icon_icon-info">
+                        <svg>
+                            <use xlink:href="#icon-info"></use>
+                        </svg>
+                    </div>
+                </div>
+                <span>{{ notificationInfo.firstName}} {{notificationInfo.secondName}}. Нужна консультация!</span>
+            </div>
+        </div>
+    </div>
 </div>
 
 <simple-notifications></simple-notifications>

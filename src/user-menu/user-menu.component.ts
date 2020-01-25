@@ -56,7 +56,6 @@ export class UserMenuComponent implements OnInit {
     userMenuActive() {
         this.active = !this.active;
         if (this.active) {
-            console.log('dsfdsfsfsdffdsf')
             document.getElementsByClassName('content')[0].classList.add('content_umenu-padding');
             document.getElementsByClassName('header')[0].classList.add('header_umenu-padding');
             if (window.innerWidth < 768) {

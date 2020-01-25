@@ -141,25 +141,27 @@
                 </div>
             </div>
                 <div class="umenu__item umenu__item_orange" *ngFor="let notification of notifications">
-                    <div class="umenu__date">{{ notification.date | date:'dd.MM.yyy' }} | {{ notification.date | date:'hh:mm' }}</div>
-                    <div class="user">
-                        <div class="user__ava">
-                            <div class="user__img">
-                                <img [src]="dataBaseUrl + '/icons/lead.png'">
+                    <a [href]="'https://tg.me/' + notification.username" target="_blank">
+                        <div class="umenu__date">{{ notification.date | date:'dd.MM.yyy' }} | {{ notification.date | date:'hh:mm' }}</div>
+                        <div class="user">
+                            <div class="user__ava">
+                                <div class="user__img">
+                                    <img [src]="dataBaseUrl + '/icons/lead.png'">
+                                </div>
+                            </div>
+                            <div class="user__info">
+                                <div class="user__name">{{ notification.firstName }} {{ notification.secondName }}</div>
+                                <div class="user__text">Нужна консультация</div>
+                            </div>
+                            <div class="user__arrow">
+                                <div class="svg-icon svg-icon_icon-arrow">
+                                    <svg>
+                                        <use xlink:href="#icon-arrow"></use>
+                                    </svg>
+                                </div>
                             </div>
                         </div>
-                        <div class="user__info">
-                            <div class="user__name">{{ notification.firstName }} {{ notification.secondName }}</div>
-                            <div class="user__text">Нужна консультация</div>
-                        </div>
-                        <div class="user__arrow">
-                            <div class="svg-icon svg-icon_icon-arrow">
-                                <svg>
-                                    <use xlink:href="#icon-arrow"></use>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             <div class="umenu__separator"></div>
             <!--<div class="umenu__item umenu__item_green">-->

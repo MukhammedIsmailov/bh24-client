@@ -3,4 +3,6 @@ export interface IFeedbackNotificationDTO {
     firstName: string;
     secondName: string;
     date: string;
+    from: string;
+    username: string;
 }

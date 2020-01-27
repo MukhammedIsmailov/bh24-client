@@ -41,6 +41,7 @@ export interface IWard {
     role: string;
     username: string;
     mobiPartnerInfoActive?: boolean;
+    active: boolean;
 }
 
 export interface IWardOptions {

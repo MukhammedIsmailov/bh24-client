@@ -30,7 +30,7 @@
             <div class="lesson__separator"></div>
             <p>Если у вас остались вопросы, закажите бесплатную информациюнную помощь у своего консультанта</p>
             <div class="lesson__btn">
-                <button class="btn btn_primary popup-btn" data-src="#lesson-popup" (click)="feedbackButtonEvent()">бесплатная консультация</button>
+                <button class="btn btn_primary popup-btn" data-src="#lesson-popup" (click)="lessonPopupActive = true">бесплатная консультация</button>
             </div>
             <div *ngIf="isLeaderDataAvailable">
                 <p>Также вы можете самостоятельно связаться с вашим личным консультантом по любому из удобных
@@ -133,6 +133,35 @@
                             </a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isLeaderDataAvailable" class="popup" id="lesson-popup" [ngClass]="{active:lessonPopupActive}">
+    <div class="popup__inner">
+        <div class="popup__wrap popup__wrap_medium">
+            <h2 class="popup__title">Заказ консультации</h2>
+            <p class="popup__desc">Вы собираетесь заказать консультацию у</p>
+            <div class="consult2">
+                <div class="consult2__image">
+                    <img [src]="dataBaseUrl + leader.iconUrl" />
+                </div>
+                <div class="consult2__name">{{ leader.firstName }} {{ leader.secondName }}</div>
+                <div class="form__alert form__alert_style3">
+                    <div class="form__alert-icon">
+                        <div class="svg-icon svg-icon_icon-alert">
+                            <svg>
+                                <use xlink:href="#icon-alert"></use>
+                            </svg>
+                        </div>
+                    </div>
+                    <span>Консультация бесплатна и ни к чему не обязывает</span>
+                </div>
+                <div class="consult2__btns">
+                    <button class="btn btn_primary" (click)="feedbackButtonEvent()">Заказать</button>
+                    <button class="btn btn_link popup__close-btn" (click)="lessonPopupActive = false">Отмена</button>
                 </div>
             </div>
         </div>

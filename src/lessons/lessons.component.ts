@@ -27,6 +27,8 @@ export class LessonsComponent implements OnInit {
     player: videojs.Player;
     nextComplete = false;
     isMobile = window.innerWidth < 768;
+    lessonPopupActive = false;
+    isDone = false;
 
     constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute,
                  private sanitizer: DomSanitizer, private tokenStorage: TokenStorage, private socket: Socket) { }
@@ -38,6 +40,10 @@ export class LessonsComponent implements OnInit {
                 this.lesson = data;
                 this.isLessonDataAvailable = true;
             });
+            this.apiService.lessonIsDone(this.userId, this.lessonId).subscribe((data: any) => {
+                this.isDone = data.isDone;
+                this.nextComplete = data.isDone;
+            });
             this.apiService.leaderReadByUserId(this.userId).subscribe((data: ILeader) => {
                 this.leader = data;
                 this.isLeaderDataAvailable = true;
@@ -47,14 +53,21 @@ export class LessonsComponent implements OnInit {
     }
 
     async next() {
-        await this.router.navigateByUrl(`/lesson?userId=${this.userId}&lessonId=${this.lessonId+1}`);
-        this.nextComplete = false;
-        this.setupPlayer();
+        this.apiService.lessonIsDone(this.userId, this.lessonId).subscribe(async (data: any) => {
+            this.isDone = data.isDone;
+            await this.router.navigateByUrl(`/lesson?userId=${this.userId}&lessonId=${this.lessonId+1}`);
+            this.nextComplete = this.isDone;
+            this.setupPlayer();
+        });
     }
 
     previous() {
-        this.router.navigateByUrl(`/lesson?userId=${this.userId}&lessonId=${this.lessonId-1}`);
-        this.setupPlayer();
+        this.apiService.lessonIsDone(this.userId, this.lessonId).subscribe(async (data: any) => {
+            this.isDone = data.isDone;
+            this.nextComplete = this.isDone;
+            await this.router.navigateByUrl(`/lesson?userId=${this.userId}&lessonId=${this.lessonId-1}`);
+            this.setupPlayer();
+        });
     }
 
     sanitize(url: string) {
@@ -62,6 +75,7 @@ export class LessonsComponent implements OnInit {
     }
 
     feedbackButtonEvent() {
+        this.lessonPopupActive = false;
         this.apiService.feedbackButtonClick(this.userId).subscribe(() => {
 
         });
@@ -84,7 +98,7 @@ export class LessonsComponent implements OnInit {
                 }
             });
             this.checkPlayerStatus();
-        }, 800);
+        }, 1000);
     }
 
     checkPlayerStatus() {
@@ -94,7 +108,9 @@ export class LessonsComponent implements OnInit {
                 const duration = this.player.duration();
                 this.tokenStorage.setVideoTime(`${this.userId},${this.lessonId}`, currentTime.toString());
                 if ((currentTime / duration * 100) >= 90) {
-                    this.apiService.lessonEvent(this.userId, this.lessonId).subscribe();
+                    if(!this.isDone) {
+                        this.apiService.lessonEvent(this.userId, this.lessonId).subscribe();
+                    }
                     this.nextComplete = true;
                     clearInterval(interval);
                 }

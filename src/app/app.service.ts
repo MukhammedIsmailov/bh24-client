@@ -94,6 +94,10 @@ export class AppService {
         return this.http.get(`${config.API_BASE_URL}/lesson?userId=${userId}&lessonId=${lessonId}`);
     }
 
+    lessonIsDone (userId: number, lessonId: number) {
+        return this.http.get(`${config.API_BASE_URL}/lesson/is-done?userId=${userId}&lessonId=${lessonId}`);
+    }
+
     leaderReadByUserId (userId: number) {
         return this.http.get(`${config.API_BASE_URL}/partner/byUserId?userId=${userId}`);
     }

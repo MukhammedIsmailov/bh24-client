@@ -17,7 +17,7 @@ export class CabinetComponent implements OnInit{
     isRegistrationsDataAvailable: boolean = false;
     isRegistrationsByLeadersDataAvailable: boolean = false;
     isStatisticsDataAvailable: boolean = false;
-    latestRegistrations: ILatestRegistration[];
+    latestRegistrations: ILatestRegistration;
     laatestRegistrationByLeaders: ILatestRegistrationByLeaders[];
     statistics: {};
     registrationByLeadersConfig = [
@@ -38,7 +38,7 @@ export class CabinetComponent implements OnInit{
     constructor (private apiService: AppService, private router: Router) {}
 
     ngOnInit(): void {
-        this.apiService.latestRegistrationsRead().subscribe((data: ILatestRegistration[]) => {
+        this.apiService.latestRegistrationsRead().subscribe((data: ILatestRegistration) => {
             this.latestRegistrations = data;
             this.isRegistrationsDataAvailable = true;
         });

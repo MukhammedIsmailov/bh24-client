@@ -2082,9 +2082,10 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 
     margin-bottom: 22px;
     margin-left: 20px;
+    margin-right: 20px;
     padding: 14px 20px;
 
-    border-radius: 4px 0 0 4px;
+    border-radius: 4px 4px 4px 4px;
     background: #fff;
     -webkit-box-shadow: 0 2px 6px rgba(0, 0, 0, .07);
     box-shadow: 0 2px 6px rgba(0, 0, 0, .07);

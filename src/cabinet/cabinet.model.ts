@@ -1,7 +1,11 @@
 export interface ILatestRegistration {
+    registrations: ILatestRegistrationItem[];
+    count: string;
+}
+
+export interface ILatestRegistrationItem {
     firstName: string;
     secondName: string;
-    iconUrl: string;
     country: string;
     createdDate: string;
 }

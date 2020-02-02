@@ -82,7 +82,7 @@ export class AppService {
 
     latestRegistrationsRead () {
         this.setOptions();
-        return this.http.get(`${config.API_BASE_URL}/latest-registrations`, this._options);
+        return this.http.get(`${config.API_BASE_URL}/latest-registrations?limit=10`);
     }
 
     latestRegistrationsByLeadersRead (interval: string) {

@@ -398,7 +398,7 @@
                             </a>
                             <div class="partners__name">
                                 <a>{{ ward.second_name }} {{ ward.first_name }}</a>
-                                <a *ngIf="ward.active" class="partners__call" [href]="'https://t.me/' + ward.username" target="_blank">
+                                <a *ngIf="ward.active" class="partners__call" [href]="'https://tele.gs/' + ward.username" target="_blank">
                                     <div class="svg-icon svg-icon_icon-phone">
                                         <svg>
                                             <use xlink:href="#icon-phone"></use>
@@ -419,7 +419,7 @@
                         </div>
                         <div class="partners__td">{{ ward.phone_number }}</div>
                         <div class="partners__td">
-                            <a class="partners__social" [href]="'https://t.me/' + ward.username" target="_blank">
+                            <a class="partners__social" [href]="'https://tele.gs/' + ward.username" target="_blank">
                                 <div *ngIf="ward.from === 'telegram'" class="svg-icon svg-icon_icon-tg">
                                     <svg>
                                         <use xlink:href="#icon-tg"></use>
@@ -496,7 +496,7 @@
                                     <div class="partners__drop-td">
                                         <div class="partners__drop-title">Переход</div>
                                         <div class="partners__drop-value">
-                                            <a class="partners__social" href="" *ngIf="ward.from === 'telegram'" [href]="'https://t.me/' + ward.username" target="_blank">
+                                            <a class="partners__social" href="" *ngIf="ward.from === 'telegram'" [href]="'https://tele.gs/' + ward.username" target="_blank">
                                                 <div class="svg-icon svg-icon_icon-tg">
                                                     <svg>
                                                         <use xlink:href="#icon-tg"></use>

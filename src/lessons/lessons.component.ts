@@ -1,8 +1,7 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import videojs from 'video.js';
-import { Socket } from 'ngx-socket-io';
 
 import { AppService } from '../app/app.service';
 import { TokenStorage } from '../app/token-storage.service';

@@ -89,7 +89,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <a class="lesson__contact" style="max-width: 1px; padding-left: 0px;" *ngIf="!!leader.skype" [href]="'skype:' + prepareSocialNetworking(leader.skype)">
+                            <a class="lesson__contact" style="max-width: 1px; padding-left: 0px;" *ngIf="!!leader.skype" [href]="sanitize('skype:' + prepareSocialNetworking(leader.skype))">
                                 <div class="icon" style="position: relative;">
                                     <div class="svg-icon svg-icon_icon-sk">
                                         <svg>
@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <a class="lesson__contact" style="max-width: 1px; padding-left: 0px;" *ngIf="!!leader.viber" [href]="'viber:' + prepareSocialNetworking(leader.viber)">
+                            <a class="lesson__contact" style="max-width: 1px; padding-left: 0px;" *ngIf="!!leader.viber" [href]="sanitize('viber:' + prepareSocialNetworking(leader.viber))">
                                 <div class="icon" style="position: relative;">
                                     <div class="svg-icon svg-icon_icon-vb">
                                         <svg>

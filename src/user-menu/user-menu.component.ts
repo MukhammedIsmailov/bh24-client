@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Socket } from 'ngx-socket-io';
 import { DatePipe } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { TokenStorage } from '../app/token-storage.service';
 import { AppService } from '../app/app.service';
@@ -26,7 +27,7 @@ export class UserMenuComponent implements OnInit {
     prepareSocialNetworking: any = null;
 
     constructor (private router: Router, private tokenStorage: TokenStorage, private apiService: AppService,
-                 private socket: Socket, utilsService: UtilsService) {
+                 private socket: Socket, utilsService: UtilsService, private sanitizer: DomSanitizer) {
         this.prepareSocialNetworking = utilsService.prepareSocialNetworking;
     }
 
@@ -55,6 +56,10 @@ export class UserMenuComponent implements OnInit {
         this.tokenStorage.getUserId().subscribe(async (userId: number) => {
             await this.router.navigateByUrl(`/profile?id=${userId}`);
         });
+    }
+
+    sanitize(url: string) {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(url);
     }
 
     userMenuActive() {

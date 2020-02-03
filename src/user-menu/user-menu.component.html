@@ -110,14 +110,14 @@
                             </svg>
                         </div>
                     </a>
-                    <a class="social__item" href="#" *ngIf="me.skype" [href]="'skype:' + prepareSocialNetworking(me.skype)">
+                    <a class="social__item" href="#" *ngIf="me.skype" [href]="sanitize('skype:' + prepareSocialNetworking(me.skype))">
                         <div class="svg-icon svg-icon_icon-sk">
                             <svg>
                                 <use xlink:href="#icon-sk"></use>
                             </svg>
                         </div>
                     </a>
-                    <a class="social__item" href="#" *ngIf="me.viber" [href]="'viber:' + prepareSocialNetworking(me.viber)">
+                    <a class="social__item" href="#" *ngIf="me.viber" [href]="sanitize('viber:' + prepareSocialNetworking(me.viber))">
                         <div class="svg-icon svg-icon_icon-vb">
                             <svg>
                                 <use xlink:href="#icon-vb"></use>

@@ -70,7 +70,7 @@ export class CabinetComponent implements OnInit{
                 },
                 pa: {
                     value: data.counts[4].NP + data.counts[5].NC,
-                    percent: ((data.counts[4].NP + data.counts[5].NC) / vl) * percent;
+                    percent: ((data.counts[4].NP + data.counts[5].NC) / vl) * percent
                 }
             };
 

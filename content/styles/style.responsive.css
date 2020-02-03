@@ -1479,7 +1479,7 @@
     }
 
     .lesson-pagination{
-        padding-top: 24px;
+        padding-top: 30px;
     }
 
     .lesson-pagination__middle{
@@ -1490,26 +1490,12 @@
 
     .lesson-pagination__prev,
     .lesson-pagination__next{
-        font-size: 0;
-
         position: absolute;
-        top: 100%;
-        left: -4px;
+        top: 0;
+        left: 0;
 
-        width: 10px;
-        height: 4px;
-        margin-top: 11px;
+        width: 50%;
 
-        -webkit-transition: all .2s ease;
-        -o-transition: all .2s ease;
-        transition: all .2s ease;
-        -webkit-transform: rotate(90deg) scale(1, 1.2);
-        -ms-transform: rotate(90deg) scale(1, 1.2);
-        transform: rotate(90deg) scale(1, 1.2);
-
-        color: rgba(0, 0, 0, 0);
-        background: url('../img/icon-triangle.svg') no-repeat;
-        background-size: 100% 100%;
     }
 
     .lesson-pagination__prev:hover,
@@ -1526,12 +1512,8 @@
     }
 
     .lesson-pagination__next{
-        right: -4px;
+        right: 0;
         left: auto;
-
-        -webkit-transform: rotate(-90deg) scale(1, 1.2);
-        -ms-transform: rotate(-90deg) scale(1, 1.2);
-        transform: rotate(-90deg) scale(1, 1.2);
     }
 
     .lesson-title{

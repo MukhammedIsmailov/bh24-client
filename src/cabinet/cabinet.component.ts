@@ -48,6 +48,7 @@ export class CabinetComponent implements OnInit{
             this.isRegistrationsByLeadersDataAvailable = true;
         });
         this.apiService.statisticsRead(null, null).subscribe((data: IStatistics) => {
+            console.log(data);
             const vl = data.counts[0].VL;
             const percent = 100;
             this.statistics = {
@@ -56,20 +57,20 @@ export class CabinetComponent implements OnInit{
                     percent,
                 },
                 sc: {
-                    value: data.counts[1].SC,
-                    percent: ((data.counts[1].SC - data.counts[2].CF) / vl) * 100,
+                    value: data.counts[1].SC - data.counts[2].CF,
+                    percent: ((data.counts[1].SC - data.counts[2].CF) / vl) * percent,
                 },
                 cf: {
                     value: data.counts[2].CF,
-                    percent: (data.counts[2].CF / vl) * 100,
+                    percent: (data.counts[2].CF / vl) * percent,
                 },
                 fb: {
                     value: data.counts[3].FB,
-                    percent: (data.counts[3].FB / vl) * 100,
+                    percent: (data.counts[3].FB / vl) * percent,
                 },
                 pa: {
-                    value: data.counts[6].PA,
-                    percent: (data.counts[6].PA / vl) * 100,
+                    value: data.counts[4].NP + data.counts[5].NC,
+                    percent: ((data.counts[4].NP + data.counts[5].NC) / vl) * percent;
                 }
             };
 

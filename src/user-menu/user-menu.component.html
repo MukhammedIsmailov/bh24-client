@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <div class="umenu__links umenu__links_column">
-                    <a class="umenu__link umenu__link_contact" href="#">
+                    <a class="umenu__link umenu__link_contact">
                         <div class="svg-icon svg-icon_icon-mail">
                             <svg>
                                 <use xlink:href="#icon-mail"></use>
@@ -86,7 +86,7 @@
                         </div>
                         <span>{{me.leaderEmail}}</span>
                     </a>
-                    <a class="umenu__link umenu__link_contact" href="#">
+                    <a class="umenu__link umenu__link_contact">
                         <div class="svg-icon svg-icon_icon-phone">
                             <svg>
                                 <use xlink:href="#icon-phone"></use>
@@ -96,42 +96,42 @@
                     </a>
                 </div>
                 <div class="social">
-                    <a class="social__item" href="#" *ngIf="!!me.telegram">
+                    <a class="social__item" href="#" *ngIf="!!me.telegram" [href]="'https://tele.gs/' + prepareSocialNetworking(me.telegram)" target="_blank">
                         <div class="svg-icon svg-icon_icon-tg">
                             <svg>
                                 <use xlink:href="#icon-tg"></use>
                             </svg>
                         </div>
                     </a>
-                    <a class="social__item" href="#" *ngIf="!!me.facebook">
+                    <a class="social__item" href="#" *ngIf="!!me.facebook" [href]="'https://facebook.com/' + prepareSocialNetworking(me.facebook)" target="_blank">
                         <div class="svg-icon svg-icon_icon-fb">
                             <svg>
                                 <use xlink:href="#icon-fb"></use>
                             </svg>
                         </div>
                     </a>
-                    <a class="social__item" href="#" *ngIf="me.skype">
+                    <a class="social__item" href="#" *ngIf="me.skype" [href]="'skype:' + prepareSocialNetworking(me.skype)">
                         <div class="svg-icon svg-icon_icon-sk">
                             <svg>
                                 <use xlink:href="#icon-sk"></use>
                             </svg>
                         </div>
                     </a>
-                    <a class="social__item" href="#" *ngIf="me.viber">
+                    <a class="social__item" href="#" *ngIf="me.viber" [href]="'viber:' + prepareSocialNetworking(me.viber)">
                         <div class="svg-icon svg-icon_icon-vb">
                             <svg>
                                 <use xlink:href="#icon-vb"></use>
                             </svg>
                         </div>
                     </a>
-                    <a class="social__item" href="#" *ngIf="me.vk">
+                    <a class="social__item" href="#" *ngIf="me.vk" [href]="'https://vk.com/' + prepareSocialNetworking(me.vk)" target="_blank">
                         <div class="svg-icon svg-icon_icon-vk">
                             <svg>
                                 <use xlink:href="#icon-vk"></use>
                             </svg>
                         </div>
                     </a>
-                    <a class="social__item" href="#" *ngIf="me.whatsapp">
+                    <a class="social__item" href="#" *ngIf="me.whatsapp" [href]="'https://wa.me/'+me.whatsapp" target="_blank">
                         <div class="svg-icon">
                         </div>
                     </a>

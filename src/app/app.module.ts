@@ -28,6 +28,7 @@ import { IndexComponent } from '../index/index.component';
 import { AppService } from './app.service';
 import { NotificationService } from './notification.service';
 import { TokenStorage } from './token-storage.service'
+import { UtilsService } from './utils.service';
 
 import * as config from '../../config.json';
 
@@ -54,7 +55,7 @@ const socketConfig: SocketIoConfig = { url: config.SERVER };
         SidebarComponent, CabinetComponent, CalendarComponent, EducationComponent, UserMenuComponent, LinksComponent,
         LessonsComponent, IndexComponent],
     bootstrap: [ AppComponent ],
-    providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' }, TokenStorage ]
+    providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' }, TokenStorage, UtilsService ]
 })
 
 export class AppModule { }

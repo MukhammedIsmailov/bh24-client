@@ -8,6 +8,7 @@ import { AppService } from '../app/app.service';
 import { TokenStorage } from '../app/token-storage.service';
 import { ILesson, ILeader } from './lessons.model';
 import * as config from '../../config.json';
+import { UtilsService } from '../app/utils.service';
 
 @Component({
     selector: 'bh24-lesson',
@@ -29,9 +30,12 @@ export class LessonsComponent implements OnInit {
     isMobile = window.innerWidth < 768;
     lessonPopupActive = false;
     isDone = false;
+    prepareSocialNetworking: any = null;
 
     constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute,
-                 private sanitizer: DomSanitizer, private tokenStorage: TokenStorage, private socket: Socket) { }
+                 private sanitizer: DomSanitizer, private tokenStorage: TokenStorage, utilsService: UtilsService) {
+        this.prepareSocialNetworking = utilsService.prepareSocialNetworking;
+    }
     ngOnInit(): void {
         this.aRouter.queryParams.subscribe(params => {
             this.lessonId = parseInt(params.lessonId);

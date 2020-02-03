@@ -103,19 +103,22 @@
         <div class="col-6">
             <div class="content__item">
                 <h2 class="content__title">Последние регистрации на курс</h2>
-                <p class="content__desc">Всего новых за месяц: {{latestRegistrations.count}}</p>
+                <p class="content__desc">Всего получили курс: {{latestRegistrations.count}} чел.</p>
                 <div class="people" *ngFor="let registration of latestRegistrations.registrations">
                     <div class="people__item">
                         <div class="people__img" style="text-align: center;">
                             <img [src]="dataBaseUrl + '/icons/lead.png'" alt="" style="max-width: 75%;"/>
                         </div>
                         <div class="people__name">{{registration.firstName}} {{registration.secondName}}</div>
-                        <div class="people__value">
+                        <div class="people__value" style="display: -webkit-inline-box;">
                             <div class="people__icon">
                                 <div class="svg-icon svg-icon_icon-ua">
                                     <img [src]="dataBaseUrl+ '/flags/' + registration.country + '.gif'">
                                 </div>
-                            </div>{{ registration.createdDate | date:'hh:mm' }} | {{ registration.createdDate | date:'dd.MM.yyy' }}
+                            </div>
+                            <div style="width: 112px;">
+                                {{ registration.createdDate | date:'hh:mm' }} | {{ registration.createdDate | date:'dd.MM.yyy' }}
+                            </div>
                         </div>
                     </div>
                 </div>

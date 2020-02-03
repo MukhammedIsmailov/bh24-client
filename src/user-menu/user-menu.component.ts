@@ -7,6 +7,7 @@ import { TokenStorage } from '../app/token-storage.service';
 import { AppService } from '../app/app.service';
 import { IMe } from './user-menu.model';
 import { IFeedbackNotificationDTO } from '../app/app.model';
+import { UtilsService } from '../app/utils.service';
 
 import * as config from '../../config.json';
 
@@ -22,9 +23,12 @@ export class UserMenuComponent implements OnInit {
     isDataAvailable = false;
     notifications: IFeedbackNotificationDTO[] = [];
     onNotifications: boolean = false;
+    prepareSocialNetworking: any = null;
 
     constructor (private router: Router, private tokenStorage: TokenStorage, private apiService: AppService,
-                 private socket: Socket) { }
+                 private socket: Socket, utilsService: UtilsService) {
+        this.prepareSocialNetworking = utilsService.prepareSocialNetworking;
+    }
 
     ngOnInit(): void {
         this.apiService.me().subscribe((data: any) => {

@@ -71,60 +71,62 @@
                                 <span>{{leader.phoneNumber}}</span>
                             </a>
                             <div class="lesson__separator-contacts"></div>
-                            <a class="lesson__contact" style="max-width: 1px; padding-left: 0px;" *ngIf="!!leader.telegram" [href]="'https://tele.gs/' + prepareSocialNetworking(leader.telegram)" target="_blank">
-                                <div class="icon" style="position: relative;">
-                                    <div class="svg-icon svg-icon_icon-tg">
-                                        <svg>
-                                            <use xlink:href="#icon-tg"></use>
-                                        </svg>
+                            <div style="display: inline-flex;">
+                                <a class="lesson__contact" style="max-width: 41px; padding-left: 12px;" *ngIf="!!leader.telegram" [href]="'https://tele.gs/' + prepareSocialNetworking(leader.telegram)" target="_blank">
+                                    <div class="icon" style="position: relative;">
+                                        <div class="svg-icon svg-icon_icon-tg" style="width: 30px; height: 30px;">
+                                            <svg>
+                                                <use xlink:href="#icon-tg"></use>
+                                            </svg>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                            <a class="lesson__contact" style="max-width: 1px; padding-left: 0px;" *ngIf="!!leader.facebook" [href]="'https://facebook.com/' + prepareSocialNetworking(leader.facebook)" target="_blank">
-                                <div class="icon" style="position: relative;">
-                                    <div class="svg-icon svg-icon_icon-fb">
-                                        <svg>
-                                            <use xlink:href="#icon-fb"></use>
-                                        </svg>
+                                </a>
+                                <a class="lesson__contact" style="max-width: 41px; padding-left: 12px;" *ngIf="!!leader.facebook" [href]="'https://facebook.com/' + prepareSocialNetworking(leader.facebook)" target="_blank">
+                                    <div class="icon" style="position: relative;">
+                                        <div class="svg-icon svg-icon_icon-fb" style="width: 30px; height: 30px;">
+                                            <svg>
+                                                <use xlink:href="#icon-fb"></use>
+                                            </svg>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                            <a class="lesson__contact" style="max-width: 1px; padding-left: 0px;" *ngIf="!!leader.skype" [href]="sanitize('skype:' + prepareSocialNetworking(leader.skype))">
-                                <div class="icon" style="position: relative;">
-                                    <div class="svg-icon svg-icon_icon-sk">
-                                        <svg>
-                                            <use xlink:href="#icon-sk"></use>
-                                        </svg>
+                                </a>
+                                <a class="lesson__contact" style="max-width: 41px; padding-left: 12px;" *ngIf="!!leader.skype" [href]="sanitize('skype:' + prepareSocialNetworking(leader.skype))">
+                                    <div class="icon" style="position: relative;">
+                                        <div class="svg-icon svg-icon_icon-sk" style="width: 30px; height: 30px;">
+                                            <svg>
+                                                <use xlink:href="#icon-sk"></use>
+                                            </svg>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                            <a class="lesson__contact" style="max-width: 1px; padding-left: 0px;" *ngIf="!!leader.vk" [href]="'https://vk.com/' + prepareSocialNetworking(leader.vk)" target="_blank">
-                                <div class="icon" style="position: relative;">
-                                    <div class="svg-icon svg-icon_icon-vk">
-                                        <svg>
-                                            <use xlink:href="#icon-vk"></use>
-                                        </svg>
+                                </a>
+                                <a class="lesson__contact" style="max-width: 41px; padding-left: 12px;" *ngIf="!!leader.vk" [href]="'https://vk.com/' + prepareSocialNetworking(leader.vk)" target="_blank">
+                                    <div class="icon" style="position: relative;">
+                                        <div class="svg-icon svg-icon_icon-vk" style="width: 30px; height: 30px;">
+                                            <svg>
+                                                <use xlink:href="#icon-vk"></use>
+                                            </svg>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                            <a class="lesson__contact" style="max-width: 1px; padding-left: 0px;" *ngIf="!!leader.viber" [href]="sanitize('viber:' + prepareSocialNetworking(leader.viber))">
-                                <div class="icon" style="position: relative;">
-                                    <div class="svg-icon svg-icon_icon-vb">
-                                        <svg>
-                                            <use xlink:href="#icon-vb"></use>
-                                        </svg>
+                                </a>
+                                <a class="lesson__contact" style="max-width: 41px; padding-left: 12px;" *ngIf="!!leader.viber" [href]="sanitize('viber:' + prepareSocialNetworking(leader.viber))">
+                                    <div class="icon" style="position: relative;">
+                                        <div class="svg-icon svg-icon_icon-vb" style="width: 30px; height: 30px;">
+                                            <svg>
+                                                <use xlink:href="#icon-vb"></use>
+                                            </svg>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
-                            <a class="lesson__contact" style="max-width: 1px; padding-left: 0px;" *ngIf="!!leader.whatsapp" [href]="'https://wa.me/'+leader.whatsapp" target="_blank">
-                                <div class="icon" style="position: relative;">
-                                    <div class="svg-icon svg-icon_icon-ws">
-                                        <svg>
-                                            <use xlink:href="#icon-ws"></use>
-                                        </svg>
+                                </a>
+                                <a class="lesson__contact" style="max-width: 41px; padding-left: 12px;" *ngIf="!!leader.whatsapp" [href]="'https://wa.me/'+leader.whatsapp" target="_blank">
+                                    <div class="icon" style="position: relative;">
+                                        <div class="svg-icon svg-icon_icon-ws" style="width: 30px; height: 30px;">
+                                            <svg>
+                                                <use xlink:href="#icon-ws"></use>
+                                            </svg>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

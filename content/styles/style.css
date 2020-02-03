@@ -4709,9 +4709,6 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
     -webkit-transition: all .2s ease;
     -o-transition: all .2s ease;
     transition: all .2s ease;
-
-    border-radius: 2px;
-    background: #d8d8d8;
 }
 
 .chart__num{
@@ -6133,7 +6130,7 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
     height: 1px;
     margin-top: 13px;
     margin-bottom: 13px;
-    margin-left: 41px;
+    margin-left: 70px;
 
     background-color: #e1e1e1;
 }
@@ -6329,6 +6326,7 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
     padding: 27px 47px;
     padding-right: 0;
     padding-bottom: 10px;
+    padding-left: 0;
 }
 
 .lesson__contacts.active{

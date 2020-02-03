@@ -42,8 +42,6 @@
                 <div class="chart__header-block">
                     <div class="chart__stat">
                         <div class="chart__line"></div>
-                        <div class="chart__num" title="Всего переходов: {{plotData.total}}">Всего
-                            переходов: {{plotData.total}}</div>
                     </div>
                 </div>
             </div>
@@ -124,7 +122,7 @@
                         </div>
                     </div>
                     <span class="chart__line" style="background-color: #2ecc71"></span>
-                    <span class="chart__num" title="Нажали на кнопку обратной связи: {{plotData.counts[3]['FB']}}">Нажали на кнопку обратной связи: {{plotData.counts[3]['FB']}}</span>
+                    <span class="chart__num" title="Заказали консультацию: {{plotData.counts[3]['FB']}}">Заказали консультацию: {{plotData.counts[3]['FB']}}</span>
                 </label>
                 <label class="chart__stat">
                     <input type="checkbox" name="nl" [checked]="chartData[5].showLine"

@@ -107,7 +107,11 @@
                 <div class="people" *ngFor="let registration of latestRegistrations.registrations">
                     <div class="people__item">
                         <div class="people__img" style="text-align: center;">
-                            <img [src]="dataBaseUrl + '/icons/lead.png'" alt="" style="max-width: 75%;"/>
+                            <div class="svg-icon svg-icon_icon-partner-ava">
+                                <svg>
+                                    <use xlink:href="#icon-partner-ava"></use>
+                                </svg>
+                            </div>
                         </div>
                         <div class="people__name">{{registration.firstName}} {{registration.secondName}}</div>
                         <div class="people__value" style="display: -webkit-inline-box;">

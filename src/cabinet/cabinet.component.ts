@@ -47,8 +47,7 @@ export class CabinetComponent implements OnInit{
             this.laatestRegistrationByLeaders = data;
             this.isRegistrationsByLeadersDataAvailable = true;
         });
-        this.apiService.statisticsRead(null, null).subscribe((data: IStatistics) => {
-            console.log(data);
+        this.apiService.statisticsRead(null, null, null).subscribe((data: IStatistics) => {
             const vl = data.counts[0].VL;
             const percent = 100;
             this.statistics = {

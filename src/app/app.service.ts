@@ -50,11 +50,11 @@ export class AppService {
         return this.http.post(`${config.API_BASE_URL}/upload`, data);
     }
 
-    statisticsRead (startDate: number, endDate: number) {
+    statisticsRead (startDate: number, endDate: number, interval: string) {
         this.setOptions();
         let url = '';
         if (!!startDate && !!endDate) {
-            url = `${config.API_BASE_URL}/statistics?startDate=${startDate}&endDate=${endDate}`;
+            url = `${config.API_BASE_URL}/statistics?startDate=${startDate}&endDate=${endDate}&interval=${interval}`;
         } else {
             url = `${config.API_BASE_URL}/statistics`;
         }

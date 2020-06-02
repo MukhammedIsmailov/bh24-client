@@ -76,8 +76,8 @@ export class AppService {
         return this.http.get(`${config.API_BASE_URL}/leads`, this._options);
     }
 
-    getIP () {
-        return this.http.get('https://api.ipify.org?format=json');
+    getCountry () {
+        return this.http.get('http://www.geoplugin.net/json.gp');
     }
 
     latestRegistrationsRead () {

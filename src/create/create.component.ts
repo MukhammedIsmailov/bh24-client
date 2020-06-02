@@ -17,7 +17,7 @@ export class CreateComponent implements OnInit {
     partnerInfo: ICreate = {
         firstName: '',
         secondName: '',
-        ip: null,
+        country: null,
     };
 
     dataBaseUrl = config.DATA_BASE_URL;
@@ -52,8 +52,8 @@ export class CreateComponent implements OnInit {
         this.emptySecondName = !this.partnerInfo.secondName.length;
 
         if (!this.emptyFirstName || !this.emptySecondName) {
-            this.apiService.getIP().subscribe((response: any) => {
-                this.partnerInfo.ip = response.ip;
+            this.apiService.getCountry().subscribe((response: any) => {
+                this.partnerInfo.country = !!response.geoplugin_countryCode ? response.geoplugin_countryCode.toLowerCase() : 'ua';
                 const data = {...this.partnerInfo, leaderId: this.leader.id};
                 this.apiService.partnerCreate(data).subscribe(async (data: any) => {
                     this.router.navigateByUrl(`/profile?id=${data.id}`);

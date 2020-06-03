@@ -110,13 +110,18 @@ export class LessonsComponent implements OnInit {
                 const currentTime = this.player.currentTime();
                 const duration = this.player.duration();
                 if ((currentTime / duration * 100) >= 80) {
-                    this.player.currentTime(duration  * 80 / 100);
+                    this.tokenStorage.getVideoTime(`${this.userId},${this.lessonId}`).subscribe((time: string) => {
+                        if(!!time) {
+                            this.player.currentTime(parseFloat(time));
+                        }
+                    });
                 }
             });
             const interval = setInterval(() => {
                 const currentTime = this.player.currentTime();
                 const duration = this.player.duration();
                 this.tokenStorage.setVideoTime(`${this.userId},${this.lessonId}`, currentTime.toString());
+                console.log(currentTime);
                 if ((currentTime / duration * 100) >= 95) {
                     if(!this.isDone) {
                         this.apiService.lessonEvent(this.userId, this.lessonId).subscribe();
@@ -124,7 +129,7 @@ export class LessonsComponent implements OnInit {
                     this.nextComplete = true;
                     clearInterval(interval);
                 }
-            }, 30000);
+            }, 3000);
         });
     }
 }

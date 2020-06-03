@@ -106,11 +106,18 @@ export class LessonsComponent implements OnInit {
 
     checkPlayerStatus() {
         this.player.ready(() => {
+            this.player.on('seeking', () => {
+                const currentTime = this.player.currentTime();
+                const duration = this.player.duration();
+                if ((currentTime / duration * 100) >= 80) {
+                    this.player.currentTime(duration  * 80 / 100);
+                }
+            });
             const interval = setInterval(() => {
                 const currentTime = this.player.currentTime();
                 const duration = this.player.duration();
                 this.tokenStorage.setVideoTime(`${this.userId},${this.lessonId}`, currentTime.toString());
-                if ((currentTime / duration * 100) >= 90) {
+                if ((currentTime / duration * 100) >= 95) {
                     if(!this.isDone) {
                         this.apiService.lessonEvent(this.userId, this.lessonId).subscribe();
                     }

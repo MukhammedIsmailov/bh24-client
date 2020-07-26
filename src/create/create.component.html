@@ -36,11 +36,27 @@
                     </div>
                     <span>Убедитесь, что наставник дал вам корректную ссылку. ФИО и человек на аватаре должны совпадать с тем, кто дал вам ссылку</span>
                 </div>
+                <label class="form__check mt-20">
+                    <input type="checkbox" required="required" name="privacypolicy" [(ngModel)]="privacyPolicy"/>
+                    <div class="checkbox">
+                        <div class="svg-icon svg-icon_icon-check">
+                            <svg>
+                                <use xlink:href="#icon-check"></use>
+                            </svg>
+                        </div>
+                    </div>
+                    <span>Соглашаюсь с <a href="https://gohappy.team/privacypolicy/" target="_blank">Политикой Конфиденциальности</a>
+                  </span>
+                </label>
             </div>
         </div>
         <div class="form__separator"></div>
         <div *ngIf="errorEmptyMessage">
             <p class="form__error-msg">Все поля обязательны для заполнения</p>
+            <div class="form__separator form__separator_small"></div>
+        </div>
+        <div *ngIf="errorPrivacyPolicyMessage">
+            <p class="form__error-msg">Для продолжения регистрации подтвердите Ваше согласие с нашей "Политикой Конфиденциальности"</p>
             <div class="form__separator form__separator_small"></div>
         </div>
         <div class="form__group">

@@ -45,22 +45,28 @@ export class CreateComponent implements OnInit {
 
     emptyFirstName: boolean = false;
     emptySecondName: boolean = false;
+    privacyPolicy: boolean = false;
     errorEmptyMessage: boolean = false;
+    errorPrivacyPolicyMessage: boolean = false;
 
     submitClick () {
         this.emptyFirstName = !this.partnerInfo.firstName.length;
         this.emptySecondName = !this.partnerInfo.secondName.length;
 
         if (!this.emptyFirstName || !this.emptySecondName) {
-            this.apiService.getCountry().subscribe((response: any) => {
-                this.partnerInfo.country = !!response.geoplugin_countryCode ? response.geoplugin_countryCode.toLowerCase() : 'ua';
-                const data = {...this.partnerInfo, leaderId: this.leader.id};
-                this.apiService.partnerCreate(data).subscribe(async (data: any) => {
-                    this.router.navigateByUrl(`/profile?id=${data.id}`);
-                }, error => {
-                    this.viewErrorMessage = true;
+            if (!this.privacyPolicy) {
+                this.errorPrivacyPolicyMessage = true;
+            } else {
+                this.apiService.getCountry().subscribe((response: any) => {
+                    this.partnerInfo.country = !!response.geoplugin_countryCode ? response.geoplugin_countryCode.toLowerCase() : 'ua';
+                    const data = {...this.partnerInfo, leaderId: this.leader.id};
+                    this.apiService.partnerCreate(data).subscribe(async (data: any) => {
+                        this.router.navigateByUrl(`/profile?id=${data.id}`);
+                    }, error => {
+                        this.viewErrorMessage = true;
+                    });
                 });
-            });
+            }
         } else {
             this.errorEmptyMessage = true;
         }

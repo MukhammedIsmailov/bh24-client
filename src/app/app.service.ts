@@ -77,7 +77,7 @@ export class AppService {
     }
 
     getCountry () {
-        return this.http.get('http://www.geoplugin.net/json.gp');
+        return this.http.get('https://api.myip.com/');
     }
 
     latestRegistrationsRead () {

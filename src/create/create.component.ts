@@ -57,15 +57,16 @@ export class CreateComponent implements OnInit {
             if (!this.privacyPolicy) {
                 this.errorPrivacyPolicyMessage = true;
             } else {
-                this.apiService.getCountry().subscribe((response: any) => {
-                    this.partnerInfo.country = !!response.geoplugin_countryCode ? response.geoplugin_countryCode.toLowerCase() : 'ua';
+                //this.apiService.getCountry().subscribe((response: any) => {
+                    //this.partnerInfo.country = !!response.cc ? response.cc.toLowerCase() : 'ua';
+                    this.partnerInfo.country = 'ua';
                     const data = {...this.partnerInfo, leaderId: this.leader.id};
                     this.apiService.partnerCreate(data).subscribe(async (data: any) => {
                         this.router.navigateByUrl(`/profile?id=${data.id}`);
                     }, error => {
                         this.viewErrorMessage = true;
                     });
-                });
+                //});
             }
         } else {
             this.errorEmptyMessage = true;

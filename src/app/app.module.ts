@@ -24,6 +24,7 @@ import { UserMenuComponent } from '../user-menu/user-menu.component';
 import { LinksComponent } from '../links/links.component';
 import { LessonsComponent } from '../lessons/lessons.component';
 import { IndexComponent } from '../index/index.component';
+import { AriixComponent } from '../ariix/ariix.component';
 
 import { AppService } from './app.service';
 import { NotificationService } from './notification.service';
@@ -42,7 +43,8 @@ const appRoutes: Routes =[
     { path: 'education', component: EducationComponent },
     { path: 'links', component: LinksComponent },
     { path: 'lesson', component: LessonsComponent },
-    { path: '', component: IndexComponent }
+    { path: '', component: IndexComponent },
+    { path: 'ariix', component: AriixComponent },
 ];
 
 const socketConfig: SocketIoConfig = { url: config.SERVER };
@@ -53,7 +55,7 @@ const socketConfig: SocketIoConfig = { url: config.SERVER };
         ChartsModule, Ng2FlatpickrModule, SocketIoModule.forRoot(socketConfig) ],
     declarations: [ AppComponent, LoginComponent, CreateComponent, ProfileComponent, StatisticsComponent,
         SidebarComponent, CabinetComponent, CalendarComponent, EducationComponent, UserMenuComponent, LinksComponent,
-        LessonsComponent, IndexComponent],
+        LessonsComponent, IndexComponent, AriixComponent, ],
     bootstrap: [ AppComponent ],
     providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' }, TokenStorage, UtilsService ]
 })

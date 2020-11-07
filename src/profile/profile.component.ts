@@ -229,6 +229,8 @@ export class ProfileComponent implements OnInit {
             viber: null,
             vk: null,
             whatsapp: null,
+            subscription_end: null,
+            subscription_name: null
         }
     }
 

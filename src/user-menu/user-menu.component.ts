@@ -58,6 +58,10 @@ export class UserMenuComponent implements OnInit {
         });
     }
 
+    async payment(){
+        await this.router.navigateByUrl('/payment');
+    }
+
     sanitize(url: string) {
         return this.sanitizer.bypassSecurityTrustResourceUrl(url);
     }

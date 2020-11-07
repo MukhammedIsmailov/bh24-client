@@ -26,6 +26,7 @@
     "ng2-charts": "^2.3.0",
     "ng2-flatpickr": "^8.0.5",
     "ng2-tooltip-directive": "^2.8.17",
+    "ngx-socket-io": "^3.0.1",
     "rxjs": "^6.5.3",
     "video.js": "^7.6.6",
     "zone.js": "^0.10.2"

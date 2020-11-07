@@ -1,6 +1,8 @@
 {
-  "API_BASE_URL": "http://localhost:3000/api",
-  "DATA_BASE_URL": "http://localhost:3000",
-  "CREATE_PARTNER_URL": "http://localhost:8080/create",
-  "LANDING_URL": "http://localhost:3000/landing.html"
+  "API_BASE_URL": "http://api.gohappy.team/api",
+  "DATA_BASE_URL": "http://api.gohappy.team/data",
+  "VIDEO_BASE_URL": "http://data.gohappy.team",
+  "CREATE_PARTNER_URL": "http://cabinet.gohappy.team/create",
+  "LANDING_URL": "http://gohappy.team",
+  "SERVER": "http://api.gohappy.team"
 }

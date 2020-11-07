@@ -1,12 +1,12 @@
 <div *ngIf="isRegistrationsDataAvailable">
     <div class="content__item content__item_center">
         <h2 class="content__title content__title_big">Узнайте как обойти самые болезненные грабли на старте и МОЩНО запустить Ваш бизнес с нуля!</h2>
-        <h3 class="content__subtitle">Приветствие от основателей сообщества BeHapyy24</h3>
+        <h3 class="content__subtitle">Приветствие от основателей сообщества BeHappy24</h3>
         <div class="video">
-            <!--<div class="video__preview" style="background-image: url(../../content/pic/video-preview.jpg)"></div>-->
-            <div class="video__source" data-src="https://www.youtube.com/embed/G2aOuo1D4p8">
-                <iframe src='https://www.youtube.com/embed/Ei1s4eHTlmg?rel=0&autoplay=1' frameborder='0' allowfullscreen></iframe>
-            </div>
+            <div class="video__preview" style="background-image: url(../../content/pic/video-preview.jpg)"></div>
+            <!--<div aria-disabled="true" class="video__source" data-src="https://www.youtube.com/embed/G2aOuo1D4p8">-->
+                <!--<iframe src='https://www.youtube.com/embed/Ei1s4eHTlmg?rel=0&autoplay=1' frameborder='0' allowfullscreen></iframe>-->
+            <!--</div>-->
         </div>
         <h2 class="content__title content__title_big">Как выйти на Вашу первую 1,000$, 10.000$ и более в месяц?</h2>
         <h3 class="content__subtitle">Действуйте по Пошаговой системе обучения</h3>
@@ -41,28 +41,28 @@
                         <div class="stats__title">Смотрят курс</div>
                         <div class="stats__num">{{statistics.sc.value}}</div>
                         <div class="stats__line-wrap">
-                            <div class="stats__line stats__line_color25" [style.width]="statistics.sc.percent + '%'"></div>
+                            <div class="stats__line stats__line_color25" [style.width]="statistics.sc.percent + '%'" style="max-width: 100%"></div>
                         </div>
                     </div>
                     <div class="stats__item">
                         <div class="stats__title">Посмотрели курс</div>
                         <div class="stats__num">{{statistics.cf.value}}</div>
                         <div class="stats__line-wrap">
-                            <div class="stats__line stats__line_color20" [style.width]="statistics.cf.percent + '%'"></div>
+                            <div class="stats__line stats__line_color20" [style.width]="statistics.cf.percent + '%'" style="max-width: 100%"></div>
                         </div>
                     </div>
                     <div class="stats__item">
                         <div class="stats__title">Заказали консультацию</div>
                         <div class="stats__num">{{statistics.fb.value}}</div>
                         <div class="stats__line-wrap">
-                            <div class="stats__line stats__line_color5" [style.width]="statistics.fb.percent + '%'"></div>
+                            <div class="stats__line stats__line_color5" [style.width]="statistics.fb.percent + '%'" style="max-width: 100%"></div>
                         </div>
                     </div>
                     <div class="stats__item">
                         <div class="stats__title">Оплатили портфель</div>
                         <div class="stats__num">{{statistics.pa.value}}</div>
                         <div class="stats__line-wrap">
-                            <div class="stats__line stats__line_color2" [style.width]="statistics.pa.percent + '%'"></div>
+                            <div class="stats__line stats__line_color2" [style.width]="statistics.pa.percent + '%'"style="max-width: 100%"></div>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <div class="content__item" *ngIf="isRegistrationsByLeadersDataAvailable">
-                <h2 class="content__title">Регистрации по партнерам</h2>
+                <h2 class="content__title">ТОП 5 партнеров по регистрациям на курс</h2>
                 <div class="tabs">
                     <div class="tabs__item" (click)="tabClick(0)" [ngClass]="{active: registrationByLeadersConfig[0].active}">Неделя</div>
                     <div class="tabs__item" (click)="tabClick(1)" [ngClass]="{active: registrationByLeadersConfig[1].active}">Месяц</div>
@@ -88,8 +88,8 @@
                     <div class="tab__pane active" id="register-tab1">
                         <div class="people" *ngFor="let registration of laatestRegistrationByLeaders">
                             <div class="people__item">
-                                <div class="people__img">
-                                    <img [src]="dataBaseUrl + registration.iconUrl" alt="" />
+                                <div class="people__img" style="text-align: center;">
+                                    <img [src]="dataBaseUrl + registration.iconUrl" alt="" style="max-width: 100%;"/>
                                 </div>
                                 <div class="people__name">{{registration.firstName}} {{registration.secondName}}</div>
                                 <div class="people__value">Регистраций: <span>{{registration.count}}</span>
@@ -102,20 +102,27 @@
         </div>
         <div class="col-6">
             <div class="content__item">
-                <h2 class="content__title">Последние регистрации в системе BeHappy24</h2>
-                <p class="content__desc">Всего новых за месяц: {{latestRegistrations.length}}</p>
-                <div class="people" *ngFor="let registration of latestRegistrations">
+                <h2 class="content__title">Последние регистрации на курс</h2>
+                <p class="content__desc">Всего получили курс: {{latestRegistrations.count}} чел.</p>
+                <div class="people" *ngFor="let registration of latestRegistrations.registrations">
                     <div class="people__item">
-                        <div class="people__img">
-                            <img [src]="dataBaseUrl + registration.iconUrl" alt="" />
+                        <div class="people__img" style="text-align: center;">
+                            <div class="svg-icon svg-icon_icon-partner-ava">
+                                <svg>
+                                    <use xlink:href="#icon-partner-ava"></use>
+                                </svg>
+                            </div>
                         </div>
                         <div class="people__name">{{registration.firstName}} {{registration.secondName}}</div>
-                        <div class="people__value">
+                        <div class="people__value" style="display: -webkit-inline-box;">
                             <div class="people__icon">
                                 <div class="svg-icon svg-icon_icon-ua">
                                     <img [src]="dataBaseUrl+ '/flags/' + registration.country + '.gif'">
                                 </div>
-                            </div>{{ registration.createdDate | date:'hh:mm' }} | {{ registration.createdDate | date:'dd.MM.yyy' }}
+                            </div>
+                            <div style="width: 130px;">
+                                {{ registration.createdDate | date:'hh:mm' }} | {{ registration.createdDate | date:'dd.MM.yyy' }}
+                            </div>
                         </div>
                     </div>
                 </div>

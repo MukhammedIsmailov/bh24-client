@@ -69,4 +69,14 @@ export class TokenStorage {
     public isAuthorized(): boolean {
         return !!localStorage.getItem('accessToken');
     }
+
+    public setVideoTime(id: string, currentTime: string): TokenStorage {
+        localStorage.setItem(`lesson_${id}`, currentTime);
+        return this;
+    }
+
+    public getVideoTime(id: string): Observable<string> {
+        const videoTime: string = localStorage.getItem(`lesson_${id}`);
+        return of(videoTime);
+    }
 }

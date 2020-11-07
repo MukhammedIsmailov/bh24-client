@@ -1,31 +1,51 @@
 <div *ngIf="isStatisticsDataAvailable">
     <div class="content__title-flex">
-        <h1 class="content__main-title content__main-title_left">Статистика регистраций</h1>
-        <div class="efficiency">
-            <div class="tooltip tooltip_mobile" tooltip="<div>Отношение перешедших к проплатившим</div>" [options]="{'tooltip-class': 'tooltip__content', 'theme': 'light'}">
-                <div class="tooltip__icon">
-                    <div class="svg-icon svg-icon_icon-inform">
+        <h1 class="content__main-title content__main-title_left">Моя статистика</h1>
+        <div class="efficiency-wrap">
+            <div class="efficiency">
+                <div class="tooltip tooltip_mobile" tooltip="<div>Отношение перешедших к проплатившим</div>" [options]="{'tooltip-class': 'tooltip__content', 'theme': 'light'}">
+                    <div class="tooltip__icon">
+                        <div class="svg-icon svg-icon_icon-inform">
+                            <svg>
+                                <use xlink:href="#icon-inform"></use>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="tooltip__content">Отношение перешедших к проплатившим</div>
+                </div>
+                <span>Эффективность</span>
+                <div class="efficiency__num" title="{{plotData.paymentEfficiency}}%">{{plotData.paymentEfficiency}}%</div>
+                <div class="efficiency__arrow">
+                    <div class="svg-icon svg-icon_icon-border-arrow">
                         <svg>
-                            <use xlink:href="#icon-inform"></use>
+                            <use xlink:href="#icon-border-arrow"></use>
                         </svg>
                     </div>
                 </div>
-                <div class="tooltip__content">Отношение перешедших к проплатившим</div>
             </div>
-            <span>Эффективность</span>
-            <div class="efficiency__num" title="{{plotData.paymentEfficiency}}%">{{plotData.paymentEfficiency}}%</div>
-            <div class="efficiency__arrow">
-                <div class="svg-icon svg-icon_icon-border-arrow">
-                    <svg>
-                        <use xlink:href="#icon-border-arrow"></use>
-                    </svg>
+            <div class="efficiency">
+                <span>Дошли до последнего урока</span>
+                <div class="efficiency__num" title="{{plotData.courseEfficiency}}%"><span>{{plotData.courseEfficiency}}%</span></div>
+                <div class="efficiency__arrow">
+                    <div class="svg-icon svg-icon_icon-border-arrow">
+                        <svg>
+                            <use xlink:href="#icon-border-arrow"></use>
+                        </svg>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="content__item content__item_no-padding">
+    <div class="content__item content__item_no-padding content__item_no-margin">
         <div class="chart">
             <div class="chart__header">
+                <div class="chart__header-block chart__header-block_dates">
+                    <div class="chart__dates">
+                        <div class="chart__date" (click)="tabClick(0)" [ngClass]="{active: intervalsConfig[0].active}">Неделя</div>
+                        <div class="chart__date" (click)="tabClick(1)" [ngClass]="{active: intervalsConfig[1].active}">Месяц</div>
+                        <div class="chart__date" (click)="tabClick(2)" [ngClass]="{active: intervalsConfig[2].active}">Год</div>
+                    </div>
+                </div>
                 <div class="chart__header-block">
                     <div [formGroup]="rangePlotGroup" class="range">
                         <ng2-flatpickr [(ngModel)]="plotDate" class="range__input flatpickr-input" [config]="plotFlatpickrOptions"
@@ -37,37 +57,6 @@
                         </div>
                         <div class="range__from">{{ fromPlotDate | date:'dd.MM.yyy' }}</div>
                         <div class="range__to">{{ toPlotDate | date:'dd.MM.yyy' }}</div>
-                    </div>
-                </div>
-                <div class="chart__header-block">
-                    <div class="chart__stat">
-                        <div class="chart__line"></div>
-                        <div class="chart__num" title="Всего переходов: {{plotData.total}}">Всего
-                            переходов: {{plotData.total}}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="chart__content">
-                <div class="chart__content-top">
-                    <h3 class="chart__title">График переходов</h3>
-                    <div class="chart__toggle" [ngClass]="{active: chartToggleActive}" (click)="chartToggleActive = !chartToggleActive">
-                        <div class="svg-icon svg-icon_icon-arrow2">
-                            <svg>
-                                <use xlink:href="#icon-arrow2"></use>
-                            </svg>
-                        </div>
-                        <span *ngIf="!chartToggleActive">Скрыть</span>
-                        <span *ngIf="chartToggleActive">Показать</span>
-                    </div>
-                </div>
-                <div [@slideUpDown]="chartToggleActive" class="chart__wrap" >
-                    <div class="chart__container">
-                        <canvas id="myChart"
-                                baseChart
-                                [datasets]="chartData"
-                                [labels]="chartLabels"
-                                [options]="chartOptions"
-                                [chartType]="chartType"></canvas>
                     </div>
                 </div>
             </div>
@@ -124,7 +113,7 @@
                         </div>
                     </div>
                     <span class="chart__line" style="background-color: #2ecc71"></span>
-                    <span class="chart__num" title="Нажали на кнопку обратной связи: {{plotData.counts[3]['FB']}}">Нажали на кнопку обратной связи: {{plotData.counts[3]['FB']}}</span>
+                    <span class="chart__num" title="Заказали консультацию: {{plotData.counts[3]['FB']}}">Заказали консультацию: {{plotData.counts[3]['FB']}}</span>
                 </label>
                 <label class="chart__stat">
                     <input type="checkbox" name="nl" [checked]="chartData[5].showLine"
@@ -138,7 +127,7 @@
                     </div>
                     <span class="chart__line" style="background-color: #f1c40f"></span>
                     <span class="chart__num"
-                          title="Клиенты: {{plotData.counts[5]['NL']}}">Клиенты: {{plotData.counts[5]['NL']}}</span>
+                          title="Клиенты: {{plotData.counts[5]['NC']}}">Клиенты: {{plotData.counts[5]['NC']}}</span>
                 </label>
                 <label class="chart__stat">
                     <input type="checkbox" name="np" [checked]="chartData[4].showLine"
@@ -155,49 +144,33 @@
                           title="Партнеры: {{plotData.counts[4]['NP']}}">Партнеры: {{plotData.counts[4]['NP']}}</span>
                 </label>
             </div>
-        </div>
-    </div>
-    <div class="content__item content__item_no-padding content__item_flex-between">
-        <div class="last-goal">Дошли до последнего урока <span>{{plotData.courseEfficiency}}%</span>
-        </div>
-        <div class="statuses">
-            <div class="statuses__title">Статусы:</div>
-            <div class="statuses__items">
-                <div class="statuses__item">
-                    <div class="svg-icon svg-icon_icon-status-refuse">
-                        <svg>
-                            <use xlink:href="#icon-status-refuse"></use>
-                        </svg>
+            <div class="chart__content">
+                <div class="chart__content-top">
+                    <h3 class="chart__title">График</h3>
+                    <div class="chart__toggle" [ngClass]="{active: chartToggleActive}" (click)="chartToggleActive = !chartToggleActive">
+                        <div class="svg-icon svg-icon_icon-arrow2">
+                            <svg>
+                                <use xlink:href="#icon-arrow2"></use>
+                            </svg>
+                        </div>
+                        <span *ngIf="!chartToggleActive">Скрыть</span>
+                        <span *ngIf="chartToggleActive">Показать</span>
                     </div>
-                    <div class="statuses__name">Отказ</div>
                 </div>
-                <div class="statuses__item">
-                    <div class="svg-icon svg-icon_icon-status-call">
-                        <svg>
-                            <use xlink:href="#icon-status-call"></use>
-                        </svg>
+                <div [@slideUpDown]="chartToggleActive" class="chart__wrap" >
+                    <div class="chart__container">
+                        <canvas id="myChart"
+                                baseChart
+                                [datasets]="chartData"
+                                [labels]="chartLabels"
+                                [options]="chartOptions"
+                                [chartType]="chartType"></canvas>
                     </div>
-                    <div class="statuses__name">Связаться</div>
-                </div>
-                <div class="statuses__item">
-                    <div class="svg-icon svg-icon_icon-status-client">
-                        <svg>
-                            <use xlink:href="#icon-status-client"></use>
-                        </svg>
-                    </div>
-                    <div class="statuses__name">Клиент</div>
-                </div>
-                <div class="statuses__item">
-                    <div class="svg-icon svg-icon_icon-status-partner">
-                        <svg>
-                            <use xlink:href="#icon-status-partner"></use>
-                        </svg>
-                    </div>
-                    <div class="statuses__name">Партнер</div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="content__item content__item_no-padding content__item_flex-between"></div>
 </div>
 <div *ngIf="isWardsDataAvailable">
     <div class="content__item content__item_no-padding">
@@ -206,7 +179,7 @@
                 <div class="partners__top">
                     <div class="partners__labels">
                         <label class="partners__label">
-                            <input type="checkbox" [(ngModel)]="options.lessonFinishFilter" (change)="onChangeFilter()"/>
+                            <input type="checkbox"  [(ngModel)]="options.contactsSeeFilter" (change)="onChangeFilter()" />
                             <div class="checkbox">
                                 <div class="svg-icon svg-icon_icon-check">
                                     <svg>
@@ -214,10 +187,16 @@
                                     </svg>
                                 </div>
                             </div>
-                            <span>Закончили курс</span>
+                            <span>
+                      <div class="svg-icon svg-icon_icon-status-show">
+                        <svg>
+                          <use xlink:href="#icon-status-show"></use>
+                        </svg>
+                      </div>Просмотрели контакты
+                    </span>
                         </label>
                         <label class="partners__label">
-                            <input type="checkbox" [(ngModel)]="options.leadFilter" (change)="onChangeFilter()"/>
+                            <input type="checkbox"[(ngModel)]="options.feedbackFilter" (change)="onChangeFilter()" />
                             <div class="checkbox">
                                 <div class="svg-icon svg-icon_icon-check">
                                     <svg>
@@ -225,10 +204,16 @@
                                     </svg>
                                 </div>
                             </div>
-                            <span>Клиенты</span>
+                            <span>
+                      <div class="svg-icon svg-icon_icon-status-order">
+                        <svg>
+                          <use xlink:href="#icon-status-order"></use>
+                        </svg>
+                      </div>Заказали консультацию
+                    </span>
                         </label>
                         <label class="partners__label">
-                            <input type="checkbox" [(ngModel)]="options.partnerFilter" (change)="onChangeFilter()"/>
+                            <input type="checkbox" [(ngModel)]="options.contactFilter" (change)="onChangeFilter()" />
                             <div class="checkbox">
                                 <div class="svg-icon svg-icon_icon-check">
                                     <svg>
@@ -236,10 +221,16 @@
                                     </svg>
                                 </div>
                             </div>
-                            <span>Партнеры</span>
+                            <span>
+                      <div class="svg-icon svg-icon_icon-status-call">
+                        <svg>
+                          <use xlink:href="#icon-status-call"></use>
+                        </svg>
+                      </div>Связаться
+                    </span>
                         </label>
                         <label class="partners__label">
-                            <input type="checkbox" [(ngModel)]="options.contactsFilter" (change)="onChangeFilter()"/>
+                            <input type="checkbox" [(ngModel)]="options.renouncementFilter" (change)="onChangeFilter()"/>
                             <div class="checkbox">
                                 <div class="svg-icon svg-icon_icon-check">
                                     <svg>
@@ -247,10 +238,16 @@
                                     </svg>
                                 </div>
                             </div>
-                            <span>Просмотрели контакты</span>
+                            <span>
+                      <div class="svg-icon svg-icon_icon-status-refuse">
+                        <svg>
+                          <use xlink:href="#icon-status-refuse"></use>
+                        </svg>
+                      </div>Отказ
+                    </span>
                         </label>
                         <label class="partners__label">
-                            <input type="checkbox" [(ngModel)]="options.feedbackFilter" (change)="onChangeFilter()">
+                            <input type="checkbox" [(ngModel)]="options.clientFilter" (change)="onChangeFilter()">
                             <div class="checkbox">
                                 <div class="svg-icon svg-icon_icon-check">
                                     <svg>
@@ -258,27 +255,33 @@
                                     </svg>
                                 </div>
                             </div>
-                            <span>Заказали консультацию</span>
+                            <span>
+                      <div class="svg-icon svg-icon_icon-status-client2">
+                        <svg>
+                          <use xlink:href="#icon-status-client2"></use>
+                        </svg>
+                      </div>Клиенты
+                    </span>
+                        </label>
+                        <label class="partners__label">
+                            <input type="checkbox" [(ngModel)]="options.partnerFilter" (change)="onChangeFilter()" />
+                            <div class="checkbox">
+                                <div class="svg-icon svg-icon_icon-check">
+                                    <svg>
+                                        <use xlink:href="#icon-check"></use>
+                                    </svg>
+                                </div>
+                            </div>
+                            <span>
+                      <div class="svg-icon svg-icon_icon-status-partner2">
+                        <svg>
+                          <use xlink:href="#icon-status-partner2"></use>
+                        </svg>
+                      </div>Партнеры
+                    </span>
                         </label>
                     </div>
-                    <div class="partners__toggle partners__toggle_desktop" [ngClass]="{active: filtersToggleActive}" (click)="filtersToggleActive = !filtersToggleActive">
-                        <span *ngIf="!filtersToggleActive">Спрятать фильтры</span>
-                        <span *ngIf="filtersToggleActive">Показать фильтры</span>
-                        <div class="svg-icon svg-icon_icon-arrow2">
-                            <svg>
-                                <use xlink:href="#icon-arrow2"></use>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="partners__toggle partners__toggle_tablet" [ngClass]="{active: filtersToggleActive}" (click)="filtersToggleActive = !filtersToggleActive">
-                        <span>Фильтры</span>
-                        <div class="svg-icon svg-icon_icon-arrow2">
-                            <svg>
-                                <use xlink:href="#icon-arrow2"></use>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="partners__toggle partners__toggle_mobile popup-btn" data-src="#filters-popup">
+                    <div class="partners__toggle partners__toggle_mobile popup-btn" (click)="openFiltersPopup()">
                         <span>Фильтры</span>
                         <div class="svg-icon svg-icon_icon-arrow2">
                             <svg>
@@ -290,36 +293,52 @@
                 <div class="partners__filters" [@slideUpDown]="filtersToggleActive">
                     <div class="partners__filters-wrap">
                         <div class="partners__filter">
-                            <div class="partners__filter-name">Мессенджер</div>
-                            <div class="partners__select">
-                                <select data-search="false" [(ngModel)]="options.messengerFilter" (change)="onChangeFilter()">
-                                    <option [value]="null">Все</option>
-                                    <option value="telegram">Telegram</option>
-                                    <option value="facebook">Facebook</option>
-                                </select>
+                            <div class="partners__filter-name">Мессенджеры</div>
+                            <div class="partners__labels partners__labels_msg">
+                                <label class="partners__label">
+                                    <input type="checkbox" [(ngModel)]="options.telegramFilter" (change)="onChangeFilter()" />
+                                    <div class="checkbox">
+                                        <div class="svg-icon svg-icon_icon-check">
+                                            <svg>
+                                                <use xlink:href="#icon-check"></use>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <span>
+                          <div class="svg-icon svg-icon_icon-tg">
+                            <svg>
+                              <use xlink:href="#icon-tg"></use>
+                            </svg>
+                          </div>
+                        </span>
+                                </label>
+                                <label class="partners__label">
+                                    <input type="checkbox"  [(ngModel)]="options.facebookFilter" (change)="onChangeFilter()" />
+                                    <div class="checkbox">
+                                        <div class="svg-icon svg-icon_icon-check">
+                                            <svg>
+                                                <use xlink:href="#icon-check"></use>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <span>
+                          <div class="svg-icon svg-icon_icon-msg">
+                            <svg>
+                              <use xlink:href="#icon-msg"></use>
+                            </svg>
+                          </div>
+                        </span>
+                                </label>
                             </div>
                         </div>
                         <div class="partners__filter">
                             <div class="partners__filter-name">Урок</div>
                             <div class="partners__select">
                                 <select [(ngModel)]="options.lessonFilter" (change)="onChangeFilter()">
-                                    <option [value]="null">Все</option>
+                                    <option value="4">Закончили курс</option>
                                     <option value="1">Урок №1</option>
                                     <option value="2">Урок №2</option>
                                     <option value="3">Урок №3</option>
-                                    <option value="4">Урок №4</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="partners__filter">
-                            <div class="partners__filter-name">Статус</div>
-                            <div class="partners__select">
-                                <select [(ngModel)]="options.statusFilter" (change)="onChangeFilter()">
-                                    <option [value]="null">Все</option>
-                                    <option [value]="status.renouncement">Отказ</option>
-                                    <option [value]="status.contact">Связаться</option>
-                                    <option [value]="status.client">Клиент</option>
-                                    <option [value]="status.partner">Партнер</option>
                                 </select>
                             </div>
                         </div>
@@ -343,8 +362,8 @@
                 <div class="partners__thead">
                     <div class="partners__td">
                         <div class="partners__search">
-                            <input class="partners__search-input" type="text" placeholder="Введите имя или ник" (keyup)="searchChanged($event)"/>
-                            <div class="partners__search-placeholder">Партнер</div>
+                            <input class="partners__search-input" type="text" placeholder="Введите имя или ник"  (keyup)="searchChanged($event)" />
+                            <div class="partners__search-placeholder">Поиск</div>
                             <div class="partners__search-icon">
                                 <div class="svg-icon svg-icon_icon-search">
                                     <svg>
@@ -369,7 +388,7 @@
                     <div class="partners__td"></div>
                 </div>
                 <div class="partners__tbody">
-                    <div *ngFor="let ward of wards;" class="partners__tr">
+                    <div *ngFor="let ward of wards;" class="partners__tr" [ngClass]="{active: ward.active}">
                         <div class="partners__td">
                             <div class="partners__status">
                                 <div *ngIf="ward.status === status.renouncement" class="svg-icon svg-icon_icon-status-refuse">
@@ -394,10 +413,32 @@
                                 </div>
                             </div>
                             <a class="partners__image">
-                                <img [src]="!!ward.icon_url ? dataBaseUrl + ward.icon_url : dataBaseUrl + '/icons/lead.png'" />
+                                <div *ngIf="ward.status === 'client'" class="svg-icon svg-icon_icon-partner-ava-client">
+                                    <svg>
+                                        <use xlink:href="#icon-partner-ava-client"></use>
+                                    </svg>
+                                </div>
+                                <div *ngIf="ward.status === 'partner'" class="svg-icon svg-icon_icon-partner-ava-partner">
+                                    <svg>
+                                        <use xlink:href="#icon-partner-ava-partner"></use>
+                                    </svg>
+                                </div>
+                                <div *ngIf="ward.status !== 'partner' && ward.status !== 'client'" class="svg-icon svg-icon_icon-partner-ava">
+                                    <svg>
+                                        <use xlink:href="#icon-partner-ava"></use>
+                                    </svg>
+                                </div>
                             </a>
                             <div class="partners__name">
                                 <a>{{ ward.second_name }} {{ ward.first_name }}</a>
+                                <a *ngIf="ward.active" class="partners__call" [href]="'https://tele.gs/' + ward.username" target="_blank">
+                                    <div class="svg-icon svg-icon_icon-phone">
+                                        <svg>
+                                            <use xlink:href="#icon-phone"></use>
+                                        </svg>
+                                    </div>
+                                    <span>Связаться »</span>
+                                </a>
                             </div>
                             <div class="partners__country">
                                 <div class="svg-icon svg-icon_icon-ua">
@@ -411,7 +452,7 @@
                         </div>
                         <div class="partners__td">{{ ward.phone_number }}</div>
                         <div class="partners__td">
-                            <a class="partners__social" [href]="'https://t.me/' + ward.username" target="_blank">
+                            <a class="partners__social" [href]="'https://tele.gs/' + ward.username" target="_blank">
                                 <div *ngIf="ward.from === 'telegram'" class="svg-icon svg-icon_icon-tg">
                                     <svg>
                                         <use xlink:href="#icon-tg"></use>
@@ -469,7 +510,7 @@
                                             <div class="partners__lesson popup-btn" data-src="#lessons-popup">
                                                 <div class="partners__lesson-name">Урок №{{ ward.step }}</div>
                                                 <div class="partners__lesson-date">{{ ward.last_send_time | date: 'dd.MM.yyyy' }}</div>
-                                                <div class="partners__lesson-icon">
+                                                <div class="partners__lesson-icon" (click)="openLessonsPopup(ward.id)">
                                                     <div class="svg-icon svg-icon_icon-arrow2">
                                                         <svg>
                                                             <use xlink:href="#icon-arrow2"></use>
@@ -488,7 +529,7 @@
                                     <div class="partners__drop-td">
                                         <div class="partners__drop-title">Переход</div>
                                         <div class="partners__drop-value">
-                                            <a class="partners__social" href="" *ngIf="ward.from === 'telegram'" [href]="'https://t.me/' + ward.username" target="_blank">
+                                            <a class="partners__social" href="" *ngIf="ward.from === 'telegram'" [href]="'https://tele.gs/' + ward.username" target="_blank">
                                                 <div class="svg-icon svg-icon_icon-tg">
                                                     <svg>
                                                         <use xlink:href="#icon-tg"></use>
@@ -652,6 +693,192 @@
             <div class="popup__close popup__close_btns2">
                 <div class="popup__close-btn popup__close-btn_gray" (click)="statusPopupStatus = false">отмена</div>
                 <div class="popup__close-btn" (click)="saveStatus()">применить</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="filtersPopupStatus" class="popup" [ngClass]="{active: filtersPopupStatus}" id="filters-popup">
+    <div class="popup__inner">
+        <div class="popup__wrap popup__wrap_small">
+            <h2 class="popup__title">Фильтры</h2>
+            <div class="partners partners_popup">
+                <div class="partners__labels">
+                    <label class="partners__label">
+                        <input type="checkbox" [(ngModel)]="options.contactsSeeFilter"/>
+                        <div class="checkbox">
+                            <div class="svg-icon svg-icon_icon-check">
+                                <svg>
+                                    <use xlink:href="#icon-check"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        <span>
+                      <div class="svg-icon svg-icon_icon-status-show">
+                        <svg>
+                          <use xlink:href="#icon-status-show"></use>
+                        </svg>
+                      </div>Просмотрели контакты
+                    </span>
+                    </label>
+                    <label class="partners__label">
+                        <input type="checkbox" [(ngModel)]="options.feedbackFilter" />
+                        <div class="checkbox">
+                            <div class="svg-icon svg-icon_icon-check">
+                                <svg>
+                                    <use xlink:href="#icon-check"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        <span>
+                      <div class="svg-icon svg-icon_icon-status-order">
+                        <svg>
+                          <use xlink:href="#icon-status-order"></use>
+                        </svg>
+                      </div>Заказали консультацию
+                    </span>
+                    </label>
+                    <label class="partners__label">
+                        <input type="checkbox"  [(ngModel)]="options.contactFilter"/>
+                        <div class="checkbox">
+                            <div class="svg-icon svg-icon_icon-check">
+                                <svg>
+                                    <use xlink:href="#icon-check"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        <span>
+                      <div class="svg-icon svg-icon_icon-status-call">
+                        <svg>
+                          <use xlink:href="#icon-status-call"></use>
+                        </svg>
+                      </div>Связаться
+                    </span>
+                    </label>
+                    <label class="partners__label">
+                        <input type="checkbox" [(ngModel)]="options.renouncementFilter"/>
+                        <div class="checkbox">
+                            <div class="svg-icon svg-icon_icon-check">
+                                <svg>
+                                    <use xlink:href="#icon-check"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        <span>
+                      <div class="svg-icon svg-icon_icon-status-refuse">
+                        <svg>
+                          <use xlink:href="#icon-status-refuse"></use>
+                        </svg>
+                      </div>Отказ
+                    </span>
+                    </label>
+                    <label class="partners__label">
+                        <input type="checkbox" [(ngModel)]="options.clientFilter"/>
+                        <div class="checkbox">
+                            <div class="svg-icon svg-icon_icon-check">
+                                <svg>
+                                    <use xlink:href="#icon-check"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        <span>
+                      <div class="svg-icon svg-icon_icon-status-client2">
+                        <svg>
+                          <use xlink:href="#icon-status-client2"></use>
+                        </svg>
+                      </div>Клиенты
+                    </span>
+                    </label>
+                    <label class="partners__label">
+                        <input type="checkbox" [(ngModel)]="options.partnerFilter"/>
+                        <div class="checkbox">
+                            <div class="svg-icon svg-icon_icon-check">
+                                <svg>
+                                    <use xlink:href="#icon-check"></use>
+                                </svg>
+                            </div>
+                        </div>
+                        <span>
+                      <div class="svg-icon svg-icon_icon-status-partner2">
+                        <svg>
+                          <use xlink:href="#icon-status-partner2"></use>
+                        </svg>
+                      </div>Партнеры
+                    </span>
+                    </label>
+                </div>
+                <div class="partners__filters">
+                    <div class="partners__filters-wrap">
+                        <div class="partners__filter">
+                            <div class="partners__filter-name">Мессенджер</div>
+                            <div class="partners__labels partners__labels_msg">
+                                <label class="partners__label">
+                                    <input type="checkbox"  [(ngModel)]="options.telegramFilter"/>
+                                    <div class="checkbox">
+                                        <div class="svg-icon svg-icon_icon-check">
+                                            <svg>
+                                                <use xlink:href="#icon-check"></use>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <span>
+                            <div class="svg-icon svg-icon_icon-tg">
+                              <svg>
+                                <use xlink:href="#icon-tg"></use>
+                              </svg>
+                            </div>
+                          </span>
+                                </label>
+                                <label class="partners__label">
+                                    <input type="checkbox"  [(ngModel)]="options.facebookFilter"/>
+                                    <div class="checkbox">
+                                        <div class="svg-icon svg-icon_icon-check">
+                                            <svg>
+                                                <use xlink:href="#icon-check"></use>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <span>
+                            <div class="svg-icon svg-icon_icon-msg">
+                              <svg>
+                                <use xlink:href="#icon-msg"></use>
+                              </svg>
+                            </div>
+                          </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="partners__filter">
+                            <div class="partners__filter-name">Урок</div>
+                            <div class="partners__select">
+                                <select [(ngModel)]="options.lessonFilter">
+                                    <option value="4">Закончили курс</option>
+                                    <option value="1">Урок №1</option>
+                                    <option value="2">Урок №2</option>
+                                    <option value="3">Урок №3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="partners__filter">
+                            <div [formGroup]="rangeWardsGroup" class="range">
+                                <ng2-flatpickr [(ngModel)]="wardsDate" class="range__input flatpickr-input" [config]="wardsFlatpickrOptions"
+                                               formControlName="rangeWards"></ng2-flatpickr>
+                                <div class="svg-icon svg-icon_icon-date">
+                                    <svg>
+                                        <use xlink:href="#icon-date"></use>
+                                    </svg>
+                                </div>
+                                <div class="range__from">{{ fromWardsDate | date:'dd.MM.yyy' }}</div>
+                                <div class="range__to">{{ toWardsDate | date:'dd.MM.yyy' }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="popup__close popup__close_btns">
+                <div class="popup__close-btn popup__close-btn_gray" (click)="discardFilters()">отмена</div>
+                <div class="popup__close-btn" (click)="saveFilters()">применить</div>
+
             </div>
         </div>
     </div>

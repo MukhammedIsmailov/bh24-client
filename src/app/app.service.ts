@@ -50,11 +50,11 @@ export class AppService {
         return this.http.post(`${config.API_BASE_URL}/upload`, data);
     }
 
-    statisticsRead (startDate: number, endDate: number) {
+    statisticsRead (startDate: number, endDate: number, interval: string) {
         this.setOptions();
         let url = '';
         if (!!startDate && !!endDate) {
-            url = `${config.API_BASE_URL}/statistics?startDate=${startDate}&endDate=${endDate}`;
+            url = `${config.API_BASE_URL}/statistics?startDate=${startDate}&endDate=${endDate}&interval=${interval}`;
         } else {
             url = `${config.API_BASE_URL}/statistics`;
         }
@@ -76,13 +76,13 @@ export class AppService {
         return this.http.get(`${config.API_BASE_URL}/leads`, this._options);
     }
 
-    getIP () {
-        return this.http.get('https://api.ipify.org?format=json');
+    getCountry () {
+        return this.http.get('https://api.myip.com/');
     }
 
     latestRegistrationsRead () {
         this.setOptions();
-        return this.http.get(`${config.API_BASE_URL}/latest-registrations`, this._options);
+        return this.http.get(`${config.API_BASE_URL}/latest-registrations?limit=10`);
     }
 
     latestRegistrationsByLeadersRead (interval: string) {
@@ -92,6 +92,10 @@ export class AppService {
 
     lessonRead (userId: number, lessonId: number) {
         return this.http.get(`${config.API_BASE_URL}/lesson?userId=${userId}&lessonId=${lessonId}`);
+    }
+
+    lessonIsDone (userId: number, lessonId: number) {
+        return this.http.get(`${config.API_BASE_URL}/lesson/is-done?userId=${userId}&lessonId=${lessonId}`);
     }
 
     leaderReadByUserId (userId: number) {
@@ -113,5 +117,10 @@ export class AppService {
     lessonEventsRead (id: number) {
         this.setOptions();
         return this.http.get(`${config.API_BASE_URL}/lesson-events?id=${id}`, this._options);
+    }
+
+    paymentCreate (product: number, autorenewal: boolean){
+        this.setOptions();
+        return this.http.post(`${config.API_BASE_URL}/order`, {product, autorenewal}, this._options);
     }
 }

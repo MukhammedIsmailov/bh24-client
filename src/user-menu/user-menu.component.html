@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="umenu__separator"></div>
-            <div class="umenu__link umenu__link_full">
+            <div class="umenu__link umenu__link_full" (click)="payment()">
                 <div class="svg-icon svg-icon_icon-dollar">
                     <svg>
                         <use xlink:href="#icon-dollar"></use>
@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <div class="umenu__links umenu__links_column">
-                    <a class="umenu__link umenu__link_contact" href="#">
+                    <a class="umenu__link umenu__link_contact">
                         <div class="svg-icon svg-icon_icon-mail">
                             <svg>
                                 <use xlink:href="#icon-mail"></use>
@@ -86,7 +86,7 @@
                         </div>
                         <span>{{me.leaderEmail}}</span>
                     </a>
-                    <a class="umenu__link umenu__link_contact" href="#">
+                    <a class="umenu__link umenu__link_contact">
                         <div class="svg-icon svg-icon_icon-phone">
                             <svg>
                                 <use xlink:href="#icon-phone"></use>
@@ -96,117 +96,70 @@
                     </a>
                 </div>
                 <div class="social">
-                    <a class="social__item" href="#" *ngIf="!!me.telegram">
+                    <a class="social__item" href="#" *ngIf="!!me.telegram" [href]="'https://tele.gs/' + prepareSocialNetworking(me.telegram)" target="_blank">
                         <div class="svg-icon svg-icon_icon-tg">
                             <svg>
                                 <use xlink:href="#icon-tg"></use>
                             </svg>
                         </div>
                     </a>
-                    <a class="social__item" href="#" *ngIf="!!me.facebook">
+                    <a class="social__item" href="#" *ngIf="!!me.facebook" [href]="'https://facebook.com/' + prepareSocialNetworking(me.facebook)" target="_blank">
                         <div class="svg-icon svg-icon_icon-fb">
                             <svg>
                                 <use xlink:href="#icon-fb"></use>
                             </svg>
                         </div>
                     </a>
-                    <a class="social__item" href="#" *ngIf="me.skype">
+                    <a class="social__item" href="#" *ngIf="me.skype" [href]="sanitize('skype:' + prepareSocialNetworking(me.skype))">
                         <div class="svg-icon svg-icon_icon-sk">
                             <svg>
                                 <use xlink:href="#icon-sk"></use>
                             </svg>
                         </div>
                     </a>
-                    <a class="social__item" href="#" *ngIf="me.viber">
+                    <a class="social__item" href="#" *ngIf="me.viber" [href]="sanitize('viber:' + prepareSocialNetworking(me.viber))">
                         <div class="svg-icon svg-icon_icon-vb">
                             <svg>
                                 <use xlink:href="#icon-vb"></use>
                             </svg>
                         </div>
                     </a>
-                    <a class="social__item" href="#" *ngIf="me.vk">
+                    <a class="social__item" href="#" *ngIf="me.vk" [href]="'https://vk.com/' + prepareSocialNetworking(me.vk)" target="_blank">
                         <div class="svg-icon svg-icon_icon-vk">
                             <svg>
                                 <use xlink:href="#icon-vk"></use>
                             </svg>
                         </div>
                     </a>
-                    <a class="social__item" href="#" *ngIf="me.whatsapp">
-                        <div class="svg-icon svg-icon_icon-ws">
-                            <svg>
-                                <use xlink:href="#icon-ws"></use>
-                            </svg>
+                    <a class="social__item" href="#" *ngIf="me.whatsapp" [href]="'https://wa.me/'+me.whatsapp" target="_blank">
+                        <div class="svg-icon">
                         </div>
                     </a>
                 </div>
             </div>
-
-
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="umenu__item umenu__item_orange">-->
-                <!--<div class="umenu__date">12.10.2019 | 13:30</div>-->
-                <!--<div class="user">-->
-                    <!--<div class="user__ava">-->
-                        <!--<div class="user__img">-->
-                            <!--<img src="pic/user-img3.png" srcset="pic/user-img3@2x.png 2x" alt=""/>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="user__info">-->
-                        <!--<div class="user__name">Isaac Murray</div>-->
-                        <!--<div class="user__text">Нужна консультация</div>-->
-                    <!--</div>-->
-                    <!--<div class="user__arrow">-->
-                        <!--<div class="svg-icon svg-icon_icon-arrow">-->
-                            <!--<svg>-->
-                                <!--<use xlink:href="#icon-arrow"></use>-->
-                            <!--</svg>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="umenu__item umenu__item_orange">-->
-                <!--<div class="umenu__date">12.10.2019 | 13:30</div>-->
-                <!--<div class="user">-->
-                    <!--<div class="user__ava">-->
-                        <!--<div class="user__img">-->
-                            <!--<img src="pic/user-img4.png" srcset="pic/user-img4@2x.png 2x" alt=""/>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="user__info">-->
-                        <!--<div class="user__name">Lena Simon</div>-->
-                        <!--<div class="user__text">Нужна консультация</div>-->
-                    <!--</div>-->
-                    <!--<div class="user__arrow">-->
-                        <!--<div class="svg-icon svg-icon_icon-arrow">-->
-                            <!--<svg>-->
-                                <!--<use xlink:href="#icon-arrow"></use>-->
-                            <!--</svg>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="umenu__item umenu__item_orange">-->
-                <!--<div class="umenu__date">12.10.2019 | 13:30</div>-->
-                <!--<div class="user">-->
-                    <!--<div class="user__ava">-->
-                        <!--<div class="user__img">-->
-                            <!--<img src="pic/user-img5.png" srcset="pic/user-img5@2x.png 2x" alt=""/>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="user__info">-->
-                        <!--<div class="user__name">Leroy Colon</div>-->
-                        <!--<div class="user__text">Нужна консультация</div>-->
-                    <!--</div>-->
-                    <!--<div class="user__arrow">-->
-                        <!--<div class="svg-icon svg-icon_icon-arrow">-->
-                            <!--<svg>-->
-                                <!--<use xlink:href="#icon-arrow"></use>-->
-                            <!--</svg>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
+                <div class="umenu__item umenu__item_orange" *ngFor="let notification of notifications">
+                        <div class="umenu__date">{{ notification.date | date:'dd.MM.yyy' }} | {{ notification.date | date:'hh:mm' }}</div>
+                        <div class="user">
+                            <div class="user__ava">
+                                <div class="user__img">
+                                    <img [src]="dataBaseUrl + '/icons/lead.png'">
+                                </div>
+                            </div>
+                            <div class="user__info">
+                                <div class="user__name">{{ notification.firstName }} {{ notification.secondName }}</div>
+                                <div class="user__text">Нужна консультация</div>
+                            </div>
+                            <div class="user__arrow">
+                                <a [href]="'https://tele.gs/' + notification.username" target="_blank">
+                                    <div class="svg-icon svg-icon_icon-arrow">
+                                        <svg>
+                                            <use xlink:href="#icon-arrow"></use>
+                                        </svg>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                </div>
             <div class="umenu__separator"></div>
             <!--<div class="umenu__item umenu__item_green">-->
                 <!--<div class="umenu__alert">-->

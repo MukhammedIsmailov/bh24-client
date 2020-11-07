@@ -9,6 +9,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartsModule } from 'ng2-charts';
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from '../login/login.component';
@@ -22,32 +23,43 @@ import { EducationComponent } from '../education/education.component';
 import { UserMenuComponent } from '../user-menu/user-menu.component';
 import { LinksComponent } from '../links/links.component';
 import { LessonsComponent } from '../lessons/lessons.component';
+import { IndexComponent } from '../index/index.component';
+import { AriixComponent } from '../ariix/ariix.component';
+import { PaymentComponent } from '../payment/payment.component';
 
 import { AppService } from './app.service';
 import { NotificationService } from './notification.service';
 import { TokenStorage } from './token-storage.service'
+import { UtilsService } from './utils.service';
+
+import * as config from '../../config.json';
 
 const appRoutes: Routes =[
-    { path: 'sign-in', component: LoginComponent},
+    { path: 'sign-in', component: LoginComponent, },
     { path: 'create', component: CreateComponent},
     { path: 'profile', component: ProfileComponent },
     { path: 'statistics', component: StatisticsComponent },
-    { path: 'cabinet', component: CabinetComponent },
+    { path: 'index', component: CabinetComponent },
     { path: 'calendar', component: CalendarComponent },
     { path: 'education', component: EducationComponent },
     { path: 'links', component: LinksComponent },
-    { path: 'lesson', component: LessonsComponent}
+    { path: 'lesson', component: LessonsComponent },
+    { path: '', component: IndexComponent },
+    { path: 'ariix', component: AriixComponent },
+    { path: 'payment', component: PaymentComponent },
 ];
+
+const socketConfig: SocketIoConfig = { url: config.SERVER };
 
 @NgModule({
     imports: [ BrowserModule, FormsModule, HttpClientModule, TooltipModule, RouterModule.forRoot(appRoutes),
         ReactiveFormsModule, SimpleNotificationsModule.forRoot(), BrowserAnimationsModule,
-        ChartsModule, Ng2FlatpickrModule],
+        ChartsModule, Ng2FlatpickrModule, SocketIoModule.forRoot(socketConfig) ],
     declarations: [ AppComponent, LoginComponent, CreateComponent, ProfileComponent, StatisticsComponent,
         SidebarComponent, CabinetComponent, CalendarComponent, EducationComponent, UserMenuComponent, LinksComponent,
-        LessonsComponent],
+        LessonsComponent, IndexComponent, AriixComponent, PaymentComponent],
     bootstrap: [ AppComponent ],
-    providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' }, TokenStorage ]
+    providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' }, TokenStorage, UtilsService ]
 })
 
 export class AppModule { }

@@ -1,17 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Socket } from 'ngx-socket-io';
 
 import { TokenStorage } from './token-storage.service';
+import { IFeedbackNotificationDTO } from './app.model';
 
 @Component({
     selector: 'bh24-app',
     templateUrl: './app.component.html'
 })
 
-export class AppComponent {
-    constructor (private router: Router, private tokenStorage: TokenStorage) {
+export class AppComponent implements OnInit {
+
+    onNotification: boolean = false;
+
+    notificationInfo: IFeedbackNotificationDTO;
+
+    constructor (private router: Router, private tokenStorage: TokenStorage, private socket: Socket) {
         router.events.subscribe(() => {
             this.authorized = tokenStorage.isAuthorized();
+        });
+    }
+
+    ngOnInit(): void {
+        this.socket.on('feedbackClick', (msg: IFeedbackNotificationDTO) => {
+            this.tokenStorage.getUserId().subscribe((userId) => {
+                if (userId === msg.partnerId) {
+                    this.notificationInfo = msg;
+                    this.onNotification = true;
+
+                    setTimeout(() => {
+                        this.onNotification = false;
+
+                    }, 10000);
+                }
+            });
         });
     }
 
@@ -32,4 +55,6 @@ export class AppComponent {
             }
         }
     }
+
+
 }

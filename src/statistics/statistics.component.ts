@@ -36,6 +36,7 @@ export class StatisticsComponent implements OnInit {
     plotData: IStatisticsData;
     toPlotDate: Date = new Date();
     fromPlotDate: Date = new Date();
+    intervalForPlot: string = '';
     toWardsDate: Date = new Date();
     fromWardsDate: Date = new Date();
 
@@ -48,17 +49,21 @@ export class StatisticsComponent implements OnInit {
     plotFlatpickrOptions: FlatpickrOptions = {
         mode: 'range',
         onClose: () => {
-            this.fromPlotDate = this.plotDate[0];
-            this.toPlotDate = this.plotDate[1];
-            this.getStatistics(this.fromPlotDate, this.toPlotDate);
+            this.fromPlotDate = !!this.plotDate[0] ? this.plotDate[0] : this.fromPlotDate;
+            this.toPlotDate = !!this.plotDate[1] ? this.plotDate[1] : this.toPlotDate;
+            this.getStatistics(this.fromPlotDate, this.toPlotDate, null);
+            this.intervalsConfig = this.intervalsConfig.map(interval => {
+                interval.active = false;
+                return interval;
+            });
         },
     };
 
     wardsFlatpickrOptions: FlatpickrOptions = {
         mode: 'range',
         onClose: () => {
-            this.fromWardsDate = this.wardsDate[0];
-            this.toWardsDate = this.wardsDate[1];
+            this.fromWardsDate = !!this.wardsDate[0] ? this.wardsDate[0] : this.fromWardsDate;
+            this.toWardsDate = this.wardsDate[1] ? this.wardsDate[1] : this.toWardsDate;
             this.getWards(this.fromWardsDate, this.toWardsDate);
         },
     };
@@ -101,23 +106,40 @@ export class StatisticsComponent implements OnInit {
     wards: IWard[];
 
     options: IWardOptions = {
-        messengerFilter: null,
-        lessonFilter: null,
-        statusFilter: null,
+        facebookFilter: true,
+        telegramFilter: true,
+        lessonFilter: '4',
         startDateFilter: null,
         endDateFilter: null,
-        leadFilter: true,
+        clientFilter: true,
         partnerFilter: true,
-        feedbackFilter: true,
-        contactsFilter: true,
-        lessonFinishFilter: true,
+        renouncementFilter: true,
+        contactFilter: true,
+        contactsSeeFilter: true,
         searchFilter: null,
+        feedbackFilter: true,
     };
     lessonsInfo: ILessonInfo;
     lessonPopupStatus: boolean = false;
     statusPopupStatus: boolean = false;
+    filtersPopupStatus: boolean = false;
     currentWard: IWard;
     status = Status;
+
+    intervalsConfig = [
+        {
+            active: false,
+            interval: 'week',
+        },
+        {
+            active: true,
+            interval: 'month',
+        },
+        {
+            active: false,
+            interval: 'year',
+        }
+    ];
 
     @ViewChild(BaseChartDirective, { static: false })
     public chart: BaseChartDirective;
@@ -125,7 +147,7 @@ export class StatisticsComponent implements OnInit {
     ngOnInit (): void {
         this.fromPlotDate.setDate(this.toPlotDate.getDate() - 30);
         this.fromWardsDate.setDate(this.toWardsDate.getDate() - 30);
-        this.getStatistics(this.fromPlotDate, this.toPlotDate);
+        this.getStatistics(this.fromPlotDate, this.toPlotDate, 'month');
         this.getWards(this.fromWardsDate, this.toWardsDate);
 
         this.searchChangedSubject
@@ -140,10 +162,10 @@ export class StatisticsComponent implements OnInit {
         this.chart.update();
     }
 
-    getStatistics (startDate: Date, endDate: Date): void {
+    getStatistics (startDate: Date, endDate: Date, interval: string): void {
         const startTimestamp = Math.round(startDate.getTime() / 1000);
         const endTimestamp = Math.round(endDate.getTime() / 1000);
-        this.apiService.statisticsRead(startTimestamp, endTimestamp).subscribe((data: IStatisticsData) => {
+        this.apiService.statisticsRead(startTimestamp, endTimestamp, interval).subscribe((data: IStatisticsData) => {
             this.plotData = data;
             this.chartLabels = data.plotData.labels;
             this.chartData = data.plotData.dataset;
@@ -183,6 +205,11 @@ export class StatisticsComponent implements OnInit {
         this.currentWard = ward;
     }
 
+    openFiltersPopup() {
+        this.filtersToggleActive = !this.filtersToggleActive;
+        this.filtersPopupStatus = true;
+    }
+
     saveStatus() {
         this.statusPopupStatus = false;
         this.apiService.wardUpdate(this.currentWard.id, {
@@ -191,5 +218,35 @@ export class StatisticsComponent implements OnInit {
         }).subscribe(() => {
             this.onChangeFilter();
         });
+    }
+
+    saveFilters() {
+        this.filtersPopupStatus = false;
+        this.onChangeFilter();
+    }
+
+    discardFilters() {
+        this.filtersPopupStatus = false;
+        this.options = {
+            facebookFilter: true,
+            telegramFilter: true,
+            lessonFilter: null,
+            startDateFilter: null,
+            endDateFilter: null,
+            clientFilter: true,
+            partnerFilter: true,
+            renouncementFilter: true,
+            contactFilter: true,
+            contactsSeeFilter: true,
+            searchFilter: null,
+            feedbackFilter: true,
+        };
+    }
+    tabClick(tabItem: number) {
+        this.intervalsConfig.forEach(configItem => {
+            configItem.active = false;
+        });
+        this.intervalsConfig[tabItem].active = true;
+        this.getStatistics(this.fromPlotDate, this.toPlotDate, this.intervalsConfig[tabItem].interval)
     }
 }

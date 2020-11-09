@@ -1,0 +1,111 @@
+<div class="content__wrap">
+	<h1 class="content__main-title content__main-title_small2">Оплата системы</h1>
+	<div class="form__alert form__alert_style4" *ngIf="!payed">
+		<div class="form__alert-icon">
+			<div class="svg-icon svg-icon_icon-alert">
+				<svg>
+					<use xlink:href="#icon-alert"></use>
+				</svg>
+			</div>
+		</div> 
+		<span>Доступ к функционалу системы ограничен и будет доступен после покупки одного из четырех доступных тарифов.</span> 
+	</div>
+	<div class="plan" *ngIf="payed">
+		<div class="plan__left">
+		  <div class="plan__icon">
+			<div class="svg-icon svg-icon_icon-plans2">
+			  <svg>
+				<use xlink:href="#icon-plans2"></use>
+			  </svg>
+			</div>
+		  </div>
+		  <div class="plan__text">
+			<div class="plan__current">Текущий пакет</div>
+			<div class="plan__title">{{subscription_name}}</div>
+		  </div>
+		</div>
+		<div class="plan__right">
+		  <div class="plan__time-text">
+			<div class="plan__time-title">Осталось времени</div>
+			<div class="plan__time-subtitle">Окончание текущей подписки</div>
+		  </div>
+		  <div class="plan__time-wrap">
+			<div class="plan__time">
+			  <div class="plan__time-num">11</div>
+			  <div class="plan__time-val">Дней</div>
+			</div>
+			<div class="plan__time">
+			  <div class="plan__time-num">03</div>
+			  <div class="plan__time-val">часов</div>
+			</div>
+		  </div>
+		  <div class="plan__progress-wrap">
+			<div class="plan__progress">
+			  <div class="bar" style="width: 70%;"></div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	<div class="plans">
+		<div class="plans__item">
+			<div class="plans__header plans__header_gray">
+				<div class="plans__icon">
+					<div class="svg-icon svg-icon_icon-plans1">
+						<svg>
+							<use xlink:href="#icon-plans1"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="plans__title">Базовый</div>
+			</div>
+			<div class="plans__content">
+				<div class="plans__period">1 месяц</div>
+				<div class="plans__price">$12</div>
+				<div class="plans__desc">Базовая цена при
+					<br />месячной оплате</div>
+				<button [disabled]="payed" class="btn btn_primary popup-btn" (click)="buy(1)">купить</button>
+			</div>
+		</div>
+		<div class="plans__item">
+			<div class="plans__header plans__header_purple">
+				<div class="plans__icon">
+					<div class="svg-icon svg-icon_icon-plans3">
+						<svg width="33" height="35" viewBox="0 0 33 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M22.7505 2V2H24.0002C25.1047 2 26.0002 2.89543 26.0002 4V15.6229V15.6229" stroke="inherit" />
+							<path d="M22.6885 2V2H26.0002C27.1047 2 28.0002 2.89543 28.0002 4V17.7738V17.7738V31" stroke="inherit" />
+							<path d="M23.0151 2V2H27.9998C29.1043 2 29.9998 2.89543 29.9998 4V31C29.9998 32.1046 29.1043 33 27.9998 33H27.8409V33" stroke="inherit" />
+							<path d="M23.1719 2V2H30.0002C31.1048 2 32.0002 2.89543 32.0002 4V31C32.0002 32.1046 31.1048 33 30.0002 33H27.8765V33" stroke="inherit" />
+							<path d="M26.4851 15.6213L26.3638 16.1063L26.4851 15.6213ZM23 14.75H22.5V15.1404L22.8787 15.2351L23 14.75ZM1.5 3C1.5 2.17157 2.17157 1.5 3 1.5V0.5C1.61929 0.5 0.5 1.61929 0.5 3H1.5ZM1.5 32V3H0.5V32H1.5ZM3 33.5C2.17157 33.5 1.5 32.8284 1.5 32H0.5C0.5 33.3807 1.61929 34.5 3 34.5V33.5ZM14 33.5H3V34.5H14V33.5ZM21 33.5H14V34.5H21V33.5ZM26 33.5H21V34.5H26V33.5ZM27.5 32C27.5 32.8284 26.8284 33.5 26 33.5V34.5C27.3807 34.5 28.5 33.3807 28.5 32H27.5ZM27.5 17.5616V32H28.5V17.5616H27.5ZM26.3638 16.1063C27.0316 16.2733 27.5 16.8733 27.5 17.5616H28.5C28.5 16.4144 27.7193 15.4144 26.6063 15.1362L26.3638 16.1063ZM22.8787 15.2351L26.3638 16.1063L26.6063 15.1362L23.1213 14.2649L22.8787 15.2351ZM22.5 3V14.75H23.5V3H22.5ZM21 1.5C21.8284 1.5 22.5 2.17157 22.5 3H23.5C23.5 1.61929 22.3807 0.5 21 0.5V1.5ZM3 1.5H21V0.5H3V1.5Z" fill="inherit" />
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M5.5 13C6.32843 13 7 12.3284 7 11.5C7 10.6716 6.32843 10 5.5 10C4.67157 10 4 10.6716 4 11.5C4 12.3284 4.67157 13 5.5 13Z" stroke="inherit" />
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M5.5 25C6.32843 25 7 24.3284 7 23.5C7 22.6716 6.32843 22 5.5 22C4.67157 22 4 22.6716 4 23.5C4 24.3284 4.67157 25 5.5 25Z" stroke="inherit" /> </svg>
+					</div>
+				</div>
+				<div class="plans__title">Оптимальный</div>
+			</div>
+			<div class="plans__content">
+				<div class="plans__period">6 месяцев</div>
+				<div class="plans__price">$72</div>
+				<div class="plans__desc plans__desc_big">+2 месяца В ПОДАРОК</div>
+				<button [disabled]="payed" class="btn btn_primary popup-btn" (click)="buy(2)">купить</button>
+			</div>
+		</div>
+		<div class="plans__item">
+			<div class="plans__header plans__header_green">
+				<div class="plans__icon">
+					<div class="svg-icon svg-icon_icon-plans4">
+						<svg>
+							<use xlink:href="#icon-plans4"></use>
+						</svg>
+					</div>
+				</div>
+				<div class="plans__title">Лидерский</div>
+			</div>
+			<div class="plans__content">
+				<div class="plans__period">1 год</div>
+				<div class="plans__price">$144</div>
+				<div class="plans__desc plans__desc_big">+6 месяцев В ПОДАРОК</div>
+				<button [disabled]="payed" class="btn btn_primary popup-btn" (click)="buy(3)">купить</button>
+			</div>
+		</div>
+	</div>
+</div>

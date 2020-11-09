@@ -118,4 +118,9 @@ export class AppService {
         this.setOptions();
         return this.http.get(`${config.API_BASE_URL}/lesson-events?id=${id}`, this._options);
     }
+
+    paymentCreate (product: number, autorenewal: boolean){
+        this.setOptions();
+        return this.http.post(`${config.API_BASE_URL}/order`, {product, autorenewal}, this._options);
+    }
 }

@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 
-import { MenuItems, routes } from './sidebar.model';
+import {TokenStorage} from '../app/token-storage.service';
+import {MenuItems, routes} from './sidebar.model';
 
 @Component({
     selector: 'bh24-sidebar',
@@ -13,7 +14,16 @@ export class SidebarComponent {
     active = false;
     promotionDrop = false;
 
-    constructor (private router: Router) { }
+    constructor (private router: Router, private tokenStorage: TokenStorage) { }
+
+    isEnabled (): boolean {
+        let result = false;
+        const subEndDate = this.tokenStorage.getSubEnd();
+        if (subEndDate) {
+            result = +new Date(subEndDate) > Date.now();
+        }
+        return result;
+    }
 
     sidebarActive() {
         this.active = !this.active;
@@ -29,7 +39,9 @@ export class SidebarComponent {
     }
 
     async goTo(item: MenuItems) {
-        this.activeMenuItem = item;
-        await this.router.navigateByUrl(routes[item.valueOf()]);
+        if (this.isEnabled()) {
+            this.activeMenuItem = item;
+            await this.router.navigateByUrl(routes[item.valueOf()]);
+        }
     }
 }

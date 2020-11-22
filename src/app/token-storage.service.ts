@@ -79,4 +79,13 @@ export class TokenStorage {
         const videoTime: string = localStorage.getItem(`lesson_${id}`);
         return of(videoTime);
     }
+
+    public setSubEnd(subEnd: string): TokenStorage {
+        localStorage.setItem('subEnd', subEnd);
+        return this;
+    }
+
+    public getSubEnd(): string {
+        return localStorage.getItem('subEnd');
+    }
 }

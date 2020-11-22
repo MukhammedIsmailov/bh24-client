@@ -35,6 +35,7 @@ export class UserMenuComponent implements OnInit {
         this.apiService.me().subscribe((data: any) => {
             this.me = data;
             this.isDataAvailable = true;
+            this.tokenStorage.setSubEnd(data.subscription_end);
         });
 
         this.socket.on('feedbackClick', (msg: IFeedbackNotificationDTO) => {

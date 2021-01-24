@@ -33,6 +33,8 @@ import { TokenStorage } from './token-storage.service'
 import { UtilsService } from './utils.service';
 
 import * as config from '../../config.json';
+import {PasswordResetQueryComponent} from "../password-reset-query/password-reset-query.component";
+import {PasswordResetComponent} from "../password-reset/password-reset.component";
 
 const appRoutes: Routes =[
     { path: 'sign-in', component: LoginComponent, },
@@ -47,6 +49,8 @@ const appRoutes: Routes =[
     { path: '', component: IndexComponent },
     { path: 'ariix', component: AriixComponent },
     { path: 'payment', component: PaymentComponent },
+    { path: 'password-reset-query', component: PasswordResetQueryComponent },
+    { path: 'password-reset', component: PasswordResetComponent }
 ];
 
 const socketConfig: SocketIoConfig = { url: config.SERVER };
@@ -57,7 +61,7 @@ const socketConfig: SocketIoConfig = { url: config.SERVER };
         ChartsModule, Ng2FlatpickrModule, SocketIoModule.forRoot(socketConfig) ],
     declarations: [ AppComponent, LoginComponent, CreateComponent, ProfileComponent, StatisticsComponent,
         SidebarComponent, CabinetComponent, CalendarComponent, EducationComponent, UserMenuComponent, LinksComponent,
-        LessonsComponent, IndexComponent, AriixComponent, PaymentComponent],
+        LessonsComponent, IndexComponent, AriixComponent, PaymentComponent, PasswordResetQueryComponent, PasswordResetComponent ],
     bootstrap: [ AppComponent ],
     providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' }, TokenStorage, UtilsService ]
 })

@@ -25,4 +25,8 @@ export class PasswordResetComponent {
             this.sent = true;
         });
     }
+
+    goToMain () {
+        location.href = '/';
+    }
 }

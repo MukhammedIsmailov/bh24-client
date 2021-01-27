@@ -2636,6 +2636,14 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 	margin-top: 30px;
 }
 
+.content__item ol {
+	margin-bottom: 0;
+}
+
+.content__item ul {
+	margin-bottom: 0;
+}
+
 .content__num{
 	font-size: 66px;
 	font-weight: 600;

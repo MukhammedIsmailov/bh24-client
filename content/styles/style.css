@@ -2553,6 +2553,15 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 	-ms-flex-direction: column;
 }
 
+.about strong {
+	color: #FF9905;
+}
+
+.about a {
+	text-decoration: none;
+	color: #FF9905;
+}
+
 .content__item_center{
 	padding: 23px;
 

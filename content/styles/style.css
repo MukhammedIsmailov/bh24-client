@@ -1558,6 +1558,22 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 	height: 12px;
 }
 
+.square-pic-purple {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background: #B7429B;
+	margin-right: 10px;
+}
+
+.square-pic-yellow {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background: #FAB848;
+	margin-right: 10px;
+}
+
 .sidebar__icon .svg-icon_icon-calendar{
 	width: 16px;
 	height: 14px;

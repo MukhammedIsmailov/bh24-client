@@ -5,6 +5,11 @@ import { Component } from '@angular/core';
     templateUrl: './education.component.html'
 })
 
+
 export class EducationComponent {
-    
+    nextPage: boolean = false;
+
+    continueEducation () {
+        this.nextPage = true;
+    }
 }

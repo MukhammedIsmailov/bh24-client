@@ -1,5 +1,5 @@
 <div>
-    <div class="content__item">
+    <div class="content__item" *ngIf="!nextPage">
         <h2 class="content__title content__title_big">Первые шаги участника-партнера GoHappy в Ariix<br>
             <strong>ВНИМАНИЕ!</strong> Никому НЕ говорите о бизнесе до тех пор,
             пока не пройдете первые шаги обучения GoHappy</h2>
@@ -57,7 +57,15 @@
         </ol>
 
         <p style="margin-left:0.5in">Это большой кладезь знаний и мощный фундамент для Вашего процветания. Время и дату узнайте лично у Вашего куратора.</p>
-
+        <button class="btn btn_primary" type="submit" (click)="continueEducation()">Продолжить обучение</button>
+    </div>
+    <div class="content__item" *ngIf="nextPage">
+        <h3>Посмотрите видео запись встречи "Цели и Видение Предстарта GoHappy" и пропишите
+            Вашему куратору-наставнику:  в чем хотите быть полезны команде GoHappy:</h3>
+        <div class="video">
+            <div class="video__preview" style="background-image: url(../../content/pic/video-preview.jpg)"></div>
+        </div>
+        <button class="btn btn_primary" type="submit">Продолжить обучение</button>
     </div>
     <div class="content__item">
         <h3>База знаний для партнеров GoHappy</h3>

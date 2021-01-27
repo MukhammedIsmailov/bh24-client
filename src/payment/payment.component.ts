@@ -19,6 +19,7 @@ export class PaymentComponent implements OnInit {
 
     payed: boolean;
     subscription_name: string;
+    agreementChecked: boolean = false;
 
     async ngOnInit(){
         const user: any = await this.apiService.me().toPromise();

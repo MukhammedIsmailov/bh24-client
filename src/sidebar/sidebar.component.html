@@ -27,7 +27,7 @@
             <div class="sidebar__name">Мой кабинет</div>
         </div>
         <!--<div class="sidebar__item sidebar__item_dropdown" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Education.valueOf()}" (click)="goTo(menuItemsEnum.Education)">-->
-        <div class="sidebar__item">
+        <div class="sidebar__item" (click)="goTo(menuItemsEnum.Education)">
             <div class="sidebar__icon">
                 <div class="svg-icon svg-icon_icon-study">
                     <svg>
@@ -57,7 +57,7 @@
         </div>
         <div class="sidebar__separator"></div>
         <!--<div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Promo.valueOf()}" (click)="goTo(menuItemsEnum.Promo)">-->
-        <div class="sidebar__item">
+        <div class="sidebar__item" (click)="goTo(menuItemsEnum.Promo)">
             <div class="sidebar__icon">
                 <div class="svg-icon svg-icon_icon-rocket">
                     <svg>
@@ -107,7 +107,13 @@
         </div>
         <div class="sidebar__dropdown" [style.display]="promotionDrop==true?'block':'none'">
             <div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Promotion.valueOf()}" (click)="goTo(menuItemsEnum.Promotion)">
-                <div class="sidebar__icon"></div>
+                <div class="sidebar__icon">
+                    <div class="svg-icon svg-icon_icon-round">
+                        <svg>
+                            <use xlink:href="#icon-link-arrow"></use>
+                        </svg>
+                    </div>
+                </div>
                 <div class="sidebar__name">Мои ссылки</div>
             </div>
         </div>
@@ -122,7 +128,7 @@
             </div>
             <div class="sidebar__name">Ariix</div>
         </div>
-        <div class="sidebar__item">
+        <div class="sidebar__item" (click)="goTo(menuItemsEnum.About)">
             <div class="sidebar__icon">
                 <div class="svg-icon svg-icon_icon-round">
                     <svg>

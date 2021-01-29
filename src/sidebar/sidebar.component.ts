@@ -38,10 +38,12 @@ export class SidebarComponent {
         this.promotionDrop = !this.promotionDrop;
     }
 
-    async goTo(item: MenuItems) {
-        if (this.isEnabled()) {
+    async goTo(item: MenuItems, allowUnpayed?: boolean) {
+        if (this.isEnabled() || allowUnpayed) {
             this.activeMenuItem = item;
             await this.router.navigateByUrl(routes[item.valueOf()]);
+        } else {
+            await this.router.navigateByUrl(routes[MenuItems.Payment]);
         }
     }
 }

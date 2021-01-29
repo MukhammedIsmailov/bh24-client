@@ -10,6 +10,6 @@ export class EducationComponent {
     nextPage: boolean = false;
 
     continueEducation () {
-        this.nextPage = true;
+        this.nextPage = !this.nextPage;
     }
 }

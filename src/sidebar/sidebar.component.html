@@ -45,7 +45,7 @@
             </div>
         </div>
         <!--<div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Calendar.valueOf()}" (click)="goTo(menuItemsEnum.Calendar)">-->
-        <div class="sidebar__item" (click)="goTo(menuItemsEnum.Calendar)">
+        <div class="sidebar__item" (click)="goTo(menuItemsEnum.Calendar, true)">
             <div class="sidebar__icon">
                 <div class="svg-icon svg-icon_icon-calendar">
                     <svg>
@@ -57,7 +57,7 @@
         </div>
         <div class="sidebar__separator"></div>
         <!--<div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Promo.valueOf()}" (click)="goTo(menuItemsEnum.Promo)">-->
-        <div class="sidebar__item" (click)="goTo(menuItemsEnum.Promo)">
+        <div class="sidebar__item" (click)="goTo(menuItemsEnum.Promo, true)">
             <div class="sidebar__icon">
                 <div class="svg-icon svg-icon_icon-rocket">
                     <svg>
@@ -106,7 +106,7 @@
             </div>
         </div>
         <div class="sidebar__dropdown" [style.display]="promotionDrop==true?'block':'none'">
-            <div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Promotion.valueOf()}" (click)="goTo(menuItemsEnum.Promotion)">
+            <div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Promotion.valueOf()}" (click)="goTo(menuItemsEnum.Promotion, true)">
                 <div class="sidebar__icon">
                     <div class="svg-icon svg-icon_icon-round">
                         <svg>
@@ -118,7 +118,7 @@
             </div>
         </div>
         <div class="sidebar__separator"></div>
-        <div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Ariix.valueOf()}" (click)="goTo(menuItemsEnum.Ariix)">
+        <div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Ariix.valueOf()}" (click)="goTo(menuItemsEnum.Ariix, true)">
             <div class="sidebar__icon">
                 <div class="svg-icon svg-icon_icon-round">
                     <svg>
@@ -128,7 +128,7 @@
             </div>
             <div class="sidebar__name">Ariix</div>
         </div>
-        <div class="sidebar__item" (click)="goTo(menuItemsEnum.About)">
+        <div class="sidebar__item" (click)="goTo(menuItemsEnum.About, true)">
             <div class="sidebar__icon">
                 <div class="svg-icon svg-icon_icon-round">
                     <svg>

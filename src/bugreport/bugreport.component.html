@@ -1,0 +1,23 @@
+<div class="popup active">
+    <div class="popup__inner">
+        <div class="popup__wrap">
+            <h2 class="popup__title" *ngIf="!sent">Сообщить об ошибке</h2>
+            <h1 class="popup__title" *ngIf="sent">Сообщение отправлено.</h1>
+            <form class="form" action="#" *ngIf="!sent">
+                <div class="form__group">
+                    <div class="form__name">Email или телефон</div>
+                    <input class="form__control" type="text" [(ngModel)]="contact" name="bugreport" />
+                </div>
+                <div class="form__group">
+                    <div class="form__name">Сообщение</div>
+                    <div class="form__wrap">
+                        <textarea class="form__control form__control_textarea" name="contact" [(ngModel)]="message"></textarea>
+                    </div>
+                </div>
+                <div class="form__group">
+                    <button class="btn btn_primary" type="submit" [disabled]="message.length === 0" (click)="submitClick()">Вход</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

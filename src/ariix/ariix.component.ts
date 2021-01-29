@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import {TokenStorage} from "../app/token-storage.service";
 
 @Component({
     selector: 'bh24-ariix',
@@ -8,8 +9,12 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class AriixComponent implements OnInit {
     url: string = 'https://drive.google.com/embeddedfolderview?id=1yQ61_abdK9uzK3Co9h3EOR32JAlGgHST#list';
     urlSafe: SafeResourceUrl;
+    isPayed: boolean = false;
 
-    constructor(private readonly sanitizer: DomSanitizer) { }
+    constructor(private readonly sanitizer: DomSanitizer, private tokenStorage: TokenStorage) {
+        const subEndDate = this.tokenStorage.getSubEnd();
+        this.isPayed =  +new Date(subEndDate) > Date.now() ?? false;
+    }
 
     ngOnInit() {
         this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);

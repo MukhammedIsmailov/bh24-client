@@ -5,8 +5,11 @@ export enum MenuItems {
     // Promo = 3,
     Team = 3,
     Promotion = 4,
-    Ariix = 5
+    Ariix = 5,
+    About = 6,
+    Promo = 7,
+    Payment = 8
 }
 
-const routes = ['/index', '/education', '/calendar', '/statistics', '/links', '/ariix',];
+const routes = ['/index', '/education', '/calendar', '/statistics', '/links', '/ariix', '/about', '/promo', '/payment'];
 export { routes }

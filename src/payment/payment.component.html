@@ -8,7 +8,23 @@
 				</svg>
 			</div>
 		</div> 
-		<span>Доступ к функционалу системы ограничен и будет доступен после покупки одного из четырех доступных тарифов.</span> 
+		<span>Ваш доступ к обучению и к функциям системы ограничен! Чтобы начать или продолжить обучение с
+			использованием системы GoHappy, оплатите один из трёх доступных тарифов.</span>
+	</div>
+	<div class="form__alert form__alert_style4 payment__checkbox">
+		<label class="form__check mt-20">
+			<input type="checkbox" required="required" name="agreement" [(ngModel)]="agreementChecked" />
+			<div class="checkbox">
+				<div class="svg-icon svg-icon_icon-check">
+					<svg>
+						<use xlink:href="#icon-check"></use>
+					</svg>
+				</div>
+			</div>
+			<span>Я принимаю условия <a href="https://gohappy.team/public_agreement" target="_blank">Пользовательского соглашения</a>
+							и даю согласие на обработку моих персональных данных согласно с <a href="https://gohappy.team/privacypolicy" target="_blank">Политикой конфиденциальности</a>
+					  </span>
+		</label>
 	</div>
 	<div class="plan" *ngIf="payed">
 		<div class="plan__left">
@@ -79,11 +95,11 @@
 				<div class="plans__title">Базовый</div>
 			</div>
 			<div class="plans__content">
-				<div class="plans__period">1 месяц</div>
-				<div class="plans__price">$12</div>
+				<div class="plans__period">3 месяца</div>
+				<div class="plans__price">$36</div>
 				<div class="plans__desc">Базовая цена при
 					<br />месячной оплате</div>
-				<button [disabled]="payed" class="btn btn_primary popup-btn" (click)="buy(1)">купить</button>
+				<button [disabled]="payed || !agreementChecked" class="btn btn_primary popup-btn" (click)="buy(1)">купить</button>
 			</div>
 		</div>
 		<div class="plans__item">
@@ -105,8 +121,9 @@
 			<div class="plans__content">
 				<div class="plans__period">6 месяцев</div>
 				<div class="plans__price">$72</div>
-				<div class="plans__desc plans__desc_big">+2 месяца В ПОДАРОК</div>
-				<button [disabled]="payed" class="btn btn_primary popup-btn" (click)="buy(2)">купить</button>
+				<div class="plans__desc plans__desc_big">+1 месяц Бонус</div>
+				<div class="plans__desc plans__desc_big">Экономия 14%</div>
+				<button [disabled]="payed || !agreementChecked" class="btn btn_primary popup-btn" (click)="buy(2)">купить</button>
 			</div>
 		</div>
 		<div class="plans__item">
@@ -123,9 +140,54 @@
 			<div class="plans__content">
 				<div class="plans__period">1 год</div>
 				<div class="plans__price">$144</div>
-				<div class="plans__desc plans__desc_big">+6 месяцев В ПОДАРОК</div>
-				<button [disabled]="payed" class="btn btn_primary popup-btn" (click)="buy(3)">купить</button>
+				<div class="plans__desc plans__desc_big">+3 месяца Бонус</div>
+				<div class="plans__desc">Запуск рекламы с Page Facebook GoHappy<br>
+				*Рекламный бюджет оплачивается отдельно</div>
+				<div class="plans__desc">Участие в розыграшах от сообщества GoHappy</div>
+				<div class="plans__desc plans__desc_big">Экономия 20%</div>
+				<button [disabled]="payed || !agreementChecked" class="btn btn_primary popup-btn" (click)="buy(3)">купить</button>
 			</div>
 		</div>
+	</div>
+	<div class="content__item content__item-payment">
+		<div class="payment__partners">
+			<img src="../../content/img/svg/icon-visa.svg" alt="">
+		</div>
+		<div class="payment__partners">
+			<img src="../../content/img/svg/icon-visav.svg" alt="">
+		</div>
+		<div class="payment__partners">
+			<img src="../../content/img/svg/icon-mastercard.svg" alt="">
+		</div>
+		<div class="payment__partners">
+			<img src="../../content/img/svg/icon-mastercardsc.svg" alt="">
+		</div>
+		<div class="payment__partners">
+			<img src="../../content/img/svg/icon-prostir.svg" alt="">
+		</div>
+		<div class="payment__partners">
+			<img src="../../content/img/svg/icon-psi.svg" alt="">
+		</div>
+	</div>
+	<div class="form__alert form__alert_style4">
+		<div class="form__alert-icon">
+			<div class="svg-icon svg-icon_icon-alert">
+				<svg>
+					<use xlink:href="#icon-alert"></use>
+				</svg>
+			</div>
+		</div>
+		<span>Оплатить обучение Вы можете, используя Вашу платежную карту VISA или MasterCard. Сайт GoHappy.team не
+			собирает и не хранит данных платежных карт. Безопасность передачи данных платежных карт осуществляется
+			платежной системой Fondy.io, на сайт которой Вы перейдете после нажатия кнопки “КУПИТЬ”.
+			Условия предоставления
+			обучения, гарантии покупки, политика возврата средств, информация
+			про защиту Ваших личных данных и иная важная информация<br>
+			указаны в <a href="https://gohappy.team/public_agreement" target="_blank">“Пользовательском соглашении”</a><br>
+			Наши контакты для обратной связи: <br>
+			Telegram: <a href="https://t.me/gohappyteam24" target="_blank">https://t.me/gohappyteam24</a> <br>
+			Тел. <a href="tel:+380683001033">+380 (68) 300 10 33</a> <br>
+			E-mail: <a href="mailto: gohappyteam24@gmail.com">gohappyteam24@gmail.com</a> <br>
+		</span>
 	</div>
 </div>

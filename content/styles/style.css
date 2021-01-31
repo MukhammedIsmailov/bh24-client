@@ -1355,7 +1355,7 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 	display: -ms-flexbox;
 	display: flex;
 
-	width: 125px;
+	width: 120px;
 	height: 100%;
 	margin: auto;
 
@@ -1373,7 +1373,7 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 }
 
 .header__logo img{
-	max-width: 100%;
+	max-width: 75%;
 }
 
 .header__sidebar-toggle{
@@ -1556,6 +1556,22 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 .sidebar__icon .svg-icon_icon-study{
 	width: 16px;
 	height: 12px;
+}
+
+.square-pic-purple {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background: #B7429B;
+	margin-right: 10px;
+}
+
+.square-pic-yellow {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	background: #FAB848;
+	margin-right: 10px;
 }
 
 .sidebar__icon .svg-icon_icon-calendar{
@@ -2537,6 +2553,15 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 	-ms-flex-direction: column;
 }
 
+.about strong {
+	color: #FF9905;
+}
+
+.about a {
+	text-decoration: none;
+	color: #FF9905;
+}
+
 .content__item_center{
 	padding: 23px;
 
@@ -2618,6 +2643,14 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 
 .content__item	+ .content__title{
 	margin-top: 30px;
+}
+
+.content__item ol {
+	margin-bottom: 0;
+}
+
+.content__item ul {
+	margin-bottom: 0;
 }
 
 .content__num{
@@ -2765,8 +2798,9 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 	opacity: .7;
 }
 
-.content__calendar img{
-	max-width: 100%;
+.content__calendar iframe{
+	width: 100%;
+	height: 25vw;
 }
 
 .content__bottom{
@@ -2781,12 +2815,12 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 }
 
 .video{
+	display: inline-block;
 	position: relative;
-
-	width: 100%;
-	max-width: 363px;
-	height: 200px;
+	width: 320px;
+	height: 180px;
 	margin-bottom: 23px;
+	margin-right: 23px;
 }
 
 .video__preview{
@@ -4126,6 +4160,10 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 	        transform: scale(1, -1);
 
 	fill: #049fdb;
+}
+
+.payment__checkbox {
+	padding-top: 7px;
 }
 
 .form a{
@@ -7595,6 +7633,11 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 
 	-ms-flex-negative: 0;
 	flex-shrink: 0;
+}
+
+.content__item-payment{
+	flex-direction: row;
+	justify-content: space-around;
 }
 
 .colvo{

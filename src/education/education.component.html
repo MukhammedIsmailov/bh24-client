@@ -1,1 +1,76 @@
-<h1>Страница в разработке</h1>
+<div>
+    <div class="content__item" *ngIf="!nextPage">
+        <h2 class="content__title content__title_big">Первые шаги участника-партнера GoHappy в Ariix<br>
+            <strong>ВНИМАНИЕ!</strong> Никому НЕ говорите о бизнесе до тех пор,
+            пока не пройдете первые шаги обучения GoHappy</h2>
+        <ol>
+            <li>
+                <p><strong>Установите <a href="https://telegram.org/" target="_blank">Телеграмм</a> на телефон и ПК</strong></p>
+            </li>
+        </ol>
+
+        <ul>
+            <li>
+                <p> Как установить Телеграмм? <a href="https://youtu.be/8F3yWnWc7GU" target="_blank">Инструкция</a> по установке и настройке</p>
+            </li>
+        </ul>
+
+        <ol start="2">
+            <li>
+                <p><strong>Подключитесь к чату Первой Линии своего наставника</strong> и <u>закрепите его вверху списка чатов.</u></p>
+            </li>
+            <li>
+                <p><strong>Запишите аудио/видео 1-2 минуты</strong> своих ощущений, осознаний после регистрации и опубликуйте в чат Первой линии наставника.</p>
+            </li>
+            <li>
+                <p><strong>Подключитесь к <a href="https://t.me/joinchat/AAAAAEfiUNtRFTKJg3ir9Q" target="_blank">каналу</a> GoHappy Ariix - Партнеры и клиенты - только для оплаченных Клиентов и Партнеров</strong> и <u>закрепите его вверху списка чатов.</u></p>
+            </li>
+        </ol>
+
+        <ol start="5">
+            <li>
+                <p><strong>Подключитесь к каналу <a href="https://t.me/bh24_ariix_products" target="_blank">Продукты Ariix GoHappy</a></strong></p>
+            </li>
+        </ol>
+
+        <p style="margin-left:0.5in">(В данный канал Вы можете приглашать своих потенциальных и действующих клиентов, которые хотят подробнее узнать о продуктах Ariix, а также получать аудио и видео отзывы об использовании продукции)</p>
+
+        <ol start="6">
+            <li>
+                <p><strong>Изучите документ <a href="https://bit.ly/Ariix_FAQ" target="_blank">&ldquo;Ответы на частые вопросы&rdquo;</a>.</strong> Это позволит Вам лучше ориентироваться в Вашем бизнесе с Ariix:</p>
+            </li>
+            <li>
+                <p><strong>Подпишитесь в каждую группу и получайте новости, отчёты, полезности и анонсы мероприятий.</strong> Оставляйте комментарии, ставьте лайки. Ваша активность всегда повышает посещение Ваших ресурсов, а также развивает Ваш личный бренд и бренд сообщества.</p>
+            </li>
+        </ol>
+
+        <p style="margin-left:0.5in"><a href="https://www.facebook.com/GoHappyTm" target="_blank">Facebook</a><br />
+            <a href="https://t.me/gohappyteam" target="_blank">Инфо-Канал Telegram</a></p>
+
+        <ol start="8">
+            <li>
+                <p><strong>Подпишитесь на <a href="https://t.me/ariixcis" target="_blank">официальный телеграмм канал Ariix в СНГ</a></strong></p>
+            </li>
+            <li>
+                <p><strong>Посетите первую командную планерку у Вашего Наставника. </strong></p>
+            </li>
+        </ol>
+
+        <p style="margin-left:0.5in">Это большой кладезь знаний и мощный фундамент для Вашего процветания. Время и дату узнайте лично у Вашего куратора.</p>
+        <button class="btn btn_primary" type="submit" (click)="continueEducation()">Продолжить обучение</button>
+    </div>
+    <div class="content__item" *ngIf="nextPage">
+        <h3>Посмотрите видео запись встречи "Цели и Видение Предстарта GoHappy" и пропишите
+            Вашему куратору-наставнику:  в чем хотите быть полезны команде GoHappy:</h3>
+        <div class="video">
+            <div class="video__preview" style="background-image: url(../../content/pic/video-preview.jpg)"></div>
+        </div>
+        <button class="btn btn_primary" type="submit" (click)="continueEducation()">Продолжить обучение</button>
+    </div>
+    <div class="content__item">
+        <h3>База знаний для партнеров GoHappy</h3>
+        <div class="content__calendar">
+            <iframe src="https://drive.google.com/embeddedfolderview?id=1UG-pI5FmcEIO7ZVPe83na5zNY8951vsm"></iframe>
+        </div>
+    </div>
+</div>

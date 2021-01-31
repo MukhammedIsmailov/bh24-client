@@ -53,6 +53,10 @@ export class UserMenuComponent implements OnInit {
         await this.router.navigateByUrl('/sign-in');
     }
 
+    async bugreport () {
+        await this.router.navigateByUrl('/bugreport');
+    }
+
     async update() {
         this.tokenStorage.getUserId().subscribe(async (userId: number) => {
             await this.router.navigateByUrl(`/profile?id=${userId}`);

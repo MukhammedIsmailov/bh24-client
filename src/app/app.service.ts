@@ -5,6 +5,7 @@ import { TokenStorage } from './token-storage.service';
 import * as config  from '../../config.json';
 import { ILogin } from '../login/login.model';
 import { ICreate } from '../create/create.model';
+import {IBugreport} from "../bugreport/bugreport.model";
 
 @Injectable()
 export class AppService {
@@ -129,5 +130,9 @@ export class AppService {
     paymentCreate (product: number, autorenewal: boolean){
         this.setOptions();
         return this.http.post(`${config.API_BASE_URL}/order`, {product, autorenewal}, this._options);
+    }
+
+    bugreport (data: IBugreport) {
+        return this.http.post(`${config.API_BASE_URL}/bugreport`, data);
     }
 }

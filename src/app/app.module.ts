@@ -7,7 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ChartsModule } from 'ng2-charts';
+import {ChartsModule, ThemeService} from 'ng2-charts';
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
@@ -69,7 +69,7 @@ const socketConfig: SocketIoConfig = { url: config.SERVER };
         SidebarComponent, CabinetComponent, CalendarComponent, EducationComponent, UserMenuComponent, LinksComponent,
         LessonsComponent, IndexComponent, AriixComponent, PaymentComponent, PasswordResetQueryComponent, PasswordResetComponent, PromoComponent, AboutComponent, BugreportComponent ],
     bootstrap: [ AppComponent ],
-    providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' }, TokenStorage, UtilsService ]
+    providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' }, TokenStorage, UtilsService, ThemeService ]
 })
 
 export class AppModule { }

@@ -85,7 +85,7 @@ export class AppService {
     }
 
     getCountry () {
-        return this.http.get('https://api.myip.com/');
+        return this.http.get('https://ipapi.co/json/');
     }
 
     latestRegistrationsRead () {

@@ -114,6 +114,12 @@
 }
 
 @media (max-width: 1179px){
+
+	.content__calendar iframe{
+		width: 100%;
+		height: 50vw;
+	}
+
 	.partners__label{
 		margin-right: 20px;
 	}
@@ -625,6 +631,10 @@
 }
 
 @media (max-width: 819px){
+	.promo-image {
+		display: block;
+	}
+
 	.partners__filter:nth-child(2n){
 		padding-right: 0;
 

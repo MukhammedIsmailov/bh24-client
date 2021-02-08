@@ -45,6 +45,7 @@ export class StatisticsComponent implements OnInit {
 
     plotDate: Date[];
     wardsDate: Date[];
+    courseEfficiency: number;
 
     plotFlatpickrOptions: FlatpickrOptions = {
         mode: 'range',

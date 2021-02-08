@@ -20,6 +20,7 @@ interface IPlotData {
 export interface IStatisticsData {
     counts: any[];
     total: number;
+    courseFinished: number;
     courseEfficiency: number;
     paymentEfficiency: number;
     plotData: IPlotData;

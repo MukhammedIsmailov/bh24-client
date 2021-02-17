@@ -7093,6 +7093,7 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 }
 
 .plans__item{
+	max-width: 99vw;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -7635,9 +7636,12 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 	flex-shrink: 0;
 }
 
-.content__item-payment{
-	flex-direction: row;
-	justify-content: space-around;
+.content__item-payments{
+	display: block;
+}
+
+.payment__partners {
+	display: inline-block;
 }
 
 .colvo{
@@ -8820,4 +8824,8 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 .error-msg__desc:after{
 	top: auto;
 	bottom: 0;
+}
+
+.promo-image {
+	display: flex;
 }

@@ -25,7 +25,7 @@
             </div>
             <div class="efficiency">
                 <span>Дошли до последнего урока</span>
-                <div class="efficiency__num" title="{{plotData.courseEfficiency}}%"><span>{{plotData.courseEfficiency}}%</span></div>
+                <div class="efficiency__num" title="{{(plotData.courseFinished / plotData.counts[1]['SC'] * 100).toFixed()}}%"><span>{{(plotData.courseFinished / plotData.counts[1]['SC'] * 100).toFixed()}}%</span></div>
                 <div class="efficiency__arrow">
                     <div class="svg-icon svg-icon_icon-border-arrow">
                         <svg>
@@ -100,7 +100,7 @@
                     </div>
                     <span class="chart__line" style="background-color: #3498db"></span>
                     <span class="chart__num"
-                          title="Закончили курс: {{plotData.counts[2]['CF']}}">Закончили курс: {{plotData.counts[2]['CF']}}</span>
+                          title="Закончили курс: {{plotData.courseFinished}}">Закончили курс: {{plotData.courseFinished}}</span>
                 </label>
                 <label class="chart__stat">
                     <input type="checkbox" name="fb" [checked]="chartData[3].showLine"

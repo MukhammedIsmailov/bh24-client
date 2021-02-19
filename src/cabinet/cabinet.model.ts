@@ -11,6 +11,7 @@ export interface ILatestRegistrationItem {
 }
 
 export interface IStatistics {
+    courseFinished: string;
     counts: any[];
 }
 

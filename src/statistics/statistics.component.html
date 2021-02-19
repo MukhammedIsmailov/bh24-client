@@ -335,6 +335,7 @@
                             <div class="partners__filter-name">Урок</div>
                             <div class="partners__select">
                                 <select [(ngModel)]="options.lessonFilter" (change)="onChangeFilter()">
+                                    <option value="any">Все</option>
                                     <option value="4">Закончили курс</option>
                                     <option value="1">Урок №1</option>
                                     <option value="2">Урок №2</option>

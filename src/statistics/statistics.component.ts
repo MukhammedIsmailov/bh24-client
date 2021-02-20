@@ -109,16 +109,16 @@ export class StatisticsComponent implements OnInit {
     options: IWardOptions = {
         facebookFilter: true,
         telegramFilter: true,
-        lessonFilter: '4',
+        lessonFilter: 'any',
         startDateFilter: null,
         endDateFilter: null,
         clientFilter: true,
         partnerFilter: true,
         renouncementFilter: true,
         contactFilter: true,
-        contactsSeeFilter: true,
+        contactsSeeFilter: false,
         searchFilter: null,
-        feedbackFilter: true,
+        feedbackFilter: false,
     };
     lessonsInfo: ILessonInfo;
     lessonPopupStatus: boolean = false;

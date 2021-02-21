@@ -58,7 +58,8 @@ export class CreateComponent implements OnInit {
                 this.errorPrivacyPolicyMessage = true;
             } else {
                 this.apiService.getCountry().subscribe((response: any) => {
-                    this.partnerInfo.country = !!response.country_code ? response.country_code.toLowerCase() : 'ua';
+                    this.partnerInfo.country = response.country_code.toLowerCase();
+                    console.log(response.country_code)
                     const data = {...this.partnerInfo, leaderId: this.leader.id};
                     this.apiService.partnerCreate(data).subscribe(async (data: any) => {
                         this.router.navigateByUrl(`/profile?id=${data.id}`);

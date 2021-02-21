@@ -7046,6 +7046,11 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 	border-radius: 50%;
 }
 
+.consult2__image img{
+	width: 70px;
+	height: 70px;
+}
+
 .consult2__name{
 	font-size: 16px;
 	font-weight: 600;

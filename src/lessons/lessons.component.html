@@ -156,6 +156,10 @@
                     <span>Консультация бесплатна и ни к чему не обязывает</span>
                 </div>
                 <div class="consult2__btns">
+                    <div *ngIf="user.messengers[0].from=='telegram'&&!user.messengers[0].username">
+                        <p>Номер телефона в международном формате</p>
+                        <p><input class="form__control" type="tel" name="phoneNumber" [(ngModel)]="phoneNumberField" /></p>
+                    </div>
                     <button class="btn btn_primary" (click)="feedbackButtonEvent()">Заказать</button>
                     <button class="btn btn_link popup__close-btn" (click)="lessonPopupActive = false">Отмена</button>
                 </div>

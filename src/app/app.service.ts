@@ -110,8 +110,8 @@ export class AppService {
         return this.http.get(`${config.API_BASE_URL}/partner/byUserId?userId=${userId}`);
     }
 
-    feedbackButtonClick (userId: number) {
-        return this.http.put(`${config.API_BASE_URL}/event/feedback-button-click`, { userId });
+    feedbackButtonClick (body: any) {
+        return this.http.put(`${config.API_BASE_URL}/event/feedback-button-click`, body);
     }
 
     contactsSeeClick (userId: number) {

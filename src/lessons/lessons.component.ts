@@ -30,6 +30,8 @@ export class LessonsComponent implements OnInit {
     lessonPopupActive = false;
     isDone = false;
     prepareSocialNetworking: any = null;
+    user: any = {}
+    phoneNumberField: string = '';
 
     constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute,
                  private sanitizer: DomSanitizer, private tokenStorage: TokenStorage, utilsService: UtilsService) {
@@ -50,6 +52,10 @@ export class LessonsComponent implements OnInit {
             this.apiService.leaderReadByUserId(this.userId).subscribe((data: ILeader) => {
                 this.leader = data;
                 this.isLeaderDataAvailable = true;
+            });
+            this.apiService.partnerReadById(this.userId).subscribe(data => {
+                this.user = data;
+                console.log(data)
             });
         });
         this.setupPlayer();
@@ -79,7 +85,7 @@ export class LessonsComponent implements OnInit {
 
     feedbackButtonEvent() {
         this.lessonPopupActive = false;
-        this.apiService.feedbackButtonClick(this.userId).subscribe(() => {
+        this.apiService.feedbackButtonClick({userId: this.userId, phoneNumber: this.phoneNumberField}).subscribe(() => {
 
         });
     }

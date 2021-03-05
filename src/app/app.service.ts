@@ -51,7 +51,7 @@ export class AppService {
     }
 
     partnerUpdate (id: number, data: any) {
-        return this.http.post(`${config.API_BASE_URL}/partner?id=${id}`, { ...data })
+        return this.http.post(`${config.API_BASE_URL}/partner?id=${id}`, { ...data, messengers: undefined })
     }
 
     upload (data: FormData) {

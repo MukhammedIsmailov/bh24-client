@@ -2818,7 +2818,6 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 	display: inline-block;
 	position: relative;
 	width: 320px;
-	height: 180px;
 	margin-bottom: 23px;
 	margin-right: 23px;
 }
@@ -2855,19 +2854,11 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 }
 
 .video__source{
-	position: absolute;
-	z-index: 0;
-	top: 0;
-	left: 0;
-
 	width: 100%;
 	height: 100%;
 }
 
 .video__source iframe{
-	position: absolute;
-	top: 0;
-	left: 0;
 
 	width: 100%;
 	height: 100%;
@@ -6631,7 +6622,6 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 .lesson .video{
 	max-width: 947px;
 	height: auto;
-	height: 520px;
 	margin: auto;
 	margin-bottom: 22px;
 }

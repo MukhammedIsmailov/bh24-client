@@ -85,7 +85,7 @@ export class AppService {
     }
 
     getCountry () {
-        return this.http.get('https://ipapi.co/json/');
+        return this.http.get(`${config.API_BASE_URL}/getCountryByIp`);
     }
 
     latestRegistrationsRead () {

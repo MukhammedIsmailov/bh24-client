@@ -1,14 +1,14 @@
 <div *ngIf="isLessonDataAvailable">
     <div class="lesson-pagination">
         <div class="lesson-pagination__prev" *ngIf="lesson.lessonId > 1 && isMobile && nextComplete">
-            <a (click)="previous()">« занятие {{lesson.lessonId - 1}}</a>
+            <a (click)="previous()">« часть {{lesson.lessonId - 1}}</a>
         </div>
         <div class="lesson-pagination__prev" *ngIf=" !isMobile">
-            <a *ngIf="lesson.lessonId > 1" (click)="previous()">« занятие {{lesson.lessonId - 1}}</a>
+            <a *ngIf="lesson.lessonId > 1" (click)="previous()">« часть {{lesson.lessonId - 1}}</a>
         </div>
-        <div class="lesson-pagination__middle">занятие {{lesson.lessonId}} из {{lesson.max}}</div>
+        <div class="lesson-pagination__middle">часть {{lesson.lessonId}} из {{lesson.max}}</div>
         <div class="lesson-pagination__next" *ngIf="lesson.lessonId < lesson.max && nextComplete">
-            <a (click)="next()">занятие {{lesson.lessonId + 1}} »</a>
+            <a (click)="next()">часть {{lesson.lessonId + 1}} »</a>
         </div>
     </div>
     <div class="lesson-title">{{lesson.title}}</div>

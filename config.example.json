@@ -1,8 +1,0 @@
-{
-  "API_BASE_URL": "http://api.gohappy.team/api",
-  "DATA_BASE_URL": "http://api.gohappy.team/data",
-  "VIDEO_BASE_URL": "http://data.gohappy.team",
-  "CREATE_PARTNER_URL": "http://cabinet.gohappy.team/create",
-  "LANDING_URL": "http://gohappy.team",
-  "SERVER": "http://api.gohappy.team"
-}

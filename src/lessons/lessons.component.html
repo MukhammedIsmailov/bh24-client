@@ -130,10 +130,10 @@
                         </div>
                     </div>
                 </div>
-                <div>
+                <div *ngIf="!commentSent">
                     <h2 class="lesson__title">Оставьте комментарий</h2>
-                    <p><textarea class="form__control form__control_textarea" name="questionWhoAreYou" style="width: 50%"></textarea></p>
-                    <p><button class="btn btn_primary popup-btn" data-src="#lesson-popup">бесплатная консультация</button></p>
+                    <p><textarea class="form__control form__control_textarea" name="questionWhoAreYou" style="width: 50%" [(ngModel)]="commentText"></textarea></p>
+                    <p><button class="btn btn_primary popup-btn" data-src="#lesson-popup" (click)="sendComment()">отправить</button></p>
                 </div>
             </div>
         </div>

@@ -135,4 +135,12 @@ export class AppService {
     bugreport (data: IBugreport) {
         return this.http.post(`${config.API_BASE_URL}/bugreport`, data);
     }
+
+    commentCreate (data: any) {
+        return this.http.post(`${config.API_BASE_URL}/comments`, data);
+    }
+
+    commentRead (lessonId: number) {
+        return this.http.get(`${config.API_BASE_URL}/comments?lessonId=${lessonId}`, this._options);
+    }
 }

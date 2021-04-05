@@ -32,6 +32,8 @@ export class LessonsComponent implements OnInit {
     prepareSocialNetworking: any = null;
     user: any = {}
     phoneNumberField: string = '';
+    commentText: string = '';
+    commentSent: boolean = false;
 
     constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute,
                  private sanitizer: DomSanitizer, private tokenStorage: TokenStorage, utilsService: UtilsService) {
@@ -137,5 +139,14 @@ export class LessonsComponent implements OnInit {
                 }
             }, 3000);
         });
+    }
+
+    sendComment() {
+        this.apiService.commentCreate({
+            lessonId: this.lessonId,
+            userId: this.userId,
+            text: this.commentText
+        }).subscribe(() => undefined);
+        this.commentSent = true;
     }
 }

@@ -146,7 +146,6 @@ export class LessonsComponent implements OnInit {
             lessonId: this.lessonId,
             userId: this.userId,
             text: this.commentText
-        }).subscribe(() => undefined);
-        this.commentSent = true;
+        }).subscribe(() => this.commentSent = true);
     }
 }

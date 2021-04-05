@@ -9,8 +9,14 @@ import { ActivatedRoute } from '@angular/router';
 export class CommentComponent implements OnInit{
     constructor (private apiService: AppService, private route: ActivatedRoute) { }
 
-    ngOnInit () {
+    lessonId: number = 1;
+    comments: any;
 
+    ngOnInit () {
+        this.apiService.commentRead(1).subscribe(respData => this.comments = respData);
     }
 
+    selectChange () {
+        this.apiService.commentRead(this.lessonId).subscribe(respData => this.comments = respData);
+    }
 }

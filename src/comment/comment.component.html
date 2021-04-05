@@ -2,15 +2,26 @@
     <h1>Комментарии</h1>
     <label>
         Урок:
-        <select>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
+        <select [(ngModel)]="lessonId" (ngModelChange)="selectChange()">
+            <option [ngValue]="1">1</option>
+            <option [ngValue]="2">2</option>
+            <option [ngValue]="3">3</option>
+            <option [ngValue]="4">4</option>
+            <option [ngValue]="5">5</option>
         </select>
     </label>
-    <table>
-        <tr></tr>
+    <table class="comments__table">
+        <tr>
+            <th>Урок</th>
+            <th>ФИО</th>
+            <th>Дата создания</th>
+            <th>Текст</th>
+        </tr>
+        <tr *ngFor="let item of comments">
+            <td>{{item.lesson.lessonId}}</td>
+            <td>{{item.user.firstName + ' ' + item.user.secondName}}</td>
+            <td>{{item.createdDate}}</td>
+            <td>{{item.text}}</td>
+        </tr>
     </table>
 </div>

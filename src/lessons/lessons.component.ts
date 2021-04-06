@@ -33,7 +33,7 @@ export class LessonsComponent implements OnInit {
     user: any = {}
     phoneNumberField: string = '';
     commentText: string = '';
-    commentSent: boolean = false;
+    commentOpened: boolean = false;
 
     constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute,
                  private sanitizer: DomSanitizer, private tokenStorage: TokenStorage, utilsService: UtilsService) {
@@ -146,6 +146,7 @@ export class LessonsComponent implements OnInit {
             lessonId: this.lessonId,
             userId: this.userId,
             text: this.commentText
-        }).subscribe(() => this.commentSent = true);
+        }).subscribe();
+        this.commentOpened = false;
     }
 }

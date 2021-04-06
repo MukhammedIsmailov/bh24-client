@@ -26,6 +26,7 @@
                     </video>
                 </div>
             </div>
+            <button class="btn btn_link popup__close-btn" (click)="commentOpened = true">Оставить комментарий</button>
             <div [innerHTML]=lesson.body style="text-align: left"></div>
             <div class="lesson__separator"></div>
             <p>Если у вас остались вопросы, закажите бесплатную информациюнную помощь у своего консультанта</p>
@@ -130,11 +131,6 @@
                         </div>
                     </div>
                 </div>
-                <div *ngIf="!commentSent">
-                    <h2 class="lesson__title">Оставьте комментарий</h2>
-                    <p><textarea class="form__control form__control_textarea" name="questionWhoAreYou" style="width: 50%" [(ngModel)]="commentText"></textarea></p>
-                    <p><button class="btn btn_primary popup-btn" data-src="#lesson-popup" (click)="sendComment()">отправить</button></p>
-                </div>
             </div>
         </div>
     </div>
@@ -169,6 +165,17 @@
                     <button class="btn btn_link popup__close-btn" (click)="lessonPopupActive = false">Отмена</button>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="popup" id="comment-popup" [ngClass]="{active:commentOpened}">
+    <div class="popup__inner">
+        <div class="popup__wrap popup__wrap_medium">
+            <h2 class="popup__title">Оставьте комментарий</h2>
+            <p><textarea class="form__control form__control_textarea" name="questionWhoAreYou" [(ngModel)]="commentText"></textarea></p>
+            <p><button class="btn btn_primary popup-btn" data-src="#lesson-popup" (click)="sendComment()">отправить</button></p>
+            <button class="btn btn_link popup__close-btn" (click)="commentOpened = false">Отмена</button>
         </div>
     </div>
 </div>

@@ -50,8 +50,16 @@ export class AppService {
         return this.http.get(`${config.API_BASE_URL}/partner/byReferId?referId=${referId}`);
     }
 
-    partnerUpdate (id: number, data: any) {
-        return this.http.post(`${config.API_BASE_URL}/partner?id=${id}`, { ...data, messengers: undefined })
+    partnerUpdate (id: number, data: any, token?: string) {
+        let opts = this._options;
+        if (token) {
+            opts = {
+                headers: new HttpHeaders({
+                    'Authorization': `Bearer ${token}`,
+                }),
+            }
+        }
+        return this.http.post(`${config.API_BASE_URL}/partner?id=${id}`, { ...data, messengers: undefined }, opts);
     }
 
     upload (data: FormData) {

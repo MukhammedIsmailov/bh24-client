@@ -126,7 +126,7 @@ export class ProfileComponent implements OnInit {
             requestData.vk = this.messengers[3].value;
             requestData.viber = this.messengers[4].value;
             requestData.whatsapp = this.messengers[5].value;
-            this.apiService.partnerUpdate(this.partnerId, requestData).subscribe((response: IProfile) => {
+            this.apiService.partnerUpdate(this.partnerId, requestData, localStorage.token).subscribe((response: IProfile) => {
                 if (!!this.tokenStorage.isAuthorized()) {
                     this.profile = response;
                     this.setMessengersModel(response);

@@ -6,6 +6,7 @@ import { AppService } from '../app/app.service';
 import { ICreate } from './create.model';
 import { IProfile } from '../profile/profile.model';
 import * as config from '../../config.json';
+import { TokenStorage } from '../app/token-storage.service';
 
 @Component({
     selector: 'bh24-create',
@@ -29,7 +30,7 @@ export class CreateComponent implements OnInit {
     viewErrorMessage?: boolean = null;
     isLeaderDataAvailable: boolean = false;
 
-    constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute) { }
+    constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute, private tokenService: TokenStorage) { }
 
     ngOnInit(): void {
         this.aRouter.queryParams.subscribe(params => {
@@ -62,6 +63,7 @@ export class CreateComponent implements OnInit {
                     console.log(response.country)
                     const data = {...this.partnerInfo, leaderId: this.leader.id};
                     this.apiService.partnerCreate(data).subscribe(async (data: any) => {
+                        localStorage.setItem('token', data.token);
                         this.router.navigateByUrl(`/profile?id=${data.id}`);
                     }, error => {
                         this.viewErrorMessage = true;

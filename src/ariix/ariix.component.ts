@@ -1,22 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import {TokenStorage} from "../app/token-storage.service";
+import { IPage } from '../calendar/calendar.model';
+import { AppService } from '../app/app.service';
 
 @Component({
     selector: 'bh24-ariix',
     templateUrl: './ariix.component.html'
 })
 export class AriixComponent implements OnInit {
-    url: string = 'https://drive.google.com/embeddedfolderview?id=1yQ61_abdK9uzK3Co9h3EOR32JAlGgHST#list';
-    urlSafe: SafeResourceUrl;
-    isPayed: boolean = false;
+    page: IPage;
+    constructor (private apiService: AppService) {}
 
-    constructor(private readonly sanitizer: DomSanitizer, private tokenStorage: TokenStorage) {
-        const subEndDate = this.tokenStorage.getSubEnd();
-        this.isPayed =  +new Date(subEndDate) > Date.now() ?? false;
-    }
-
-    ngOnInit() {
-        this.urlSafe = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
+    ngOnInit (): void {
+        this.apiService.pageReadByName('ariix').subscribe((data: IPage) => {
+            this.page = data;
+        });
     }
 }

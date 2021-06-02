@@ -151,4 +151,16 @@ export class AppService {
     commentRead (lessonId: number) {
         return this.http.get(`${config.API_BASE_URL}/comments?lessonId=${lessonId}`, this._options);
     }
+
+    pageReadById (pageId: string) {
+        return this.http.get(`${config.API_BASE_URL}/page?id=${pageId}`);
+    }
+
+    pageReadByName (name: string) {
+        return this.http.get(`${config.API_BASE_URL}/page?name=${name}`);
+    }
+
+    pageReadAll () {
+        return this.http.get(`${config.API_BASE_URL}/page/all`);
+    }
 }

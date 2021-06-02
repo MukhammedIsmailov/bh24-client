@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import * as config from '../../config.json';
 import { AppService } from '../app/app.service';
-import { ILatestRegistration, IStatistics, ILatestRegistrationByLeaders } from './cabinet.model';
+import { ILatestRegistration, IStatistics, ILatestRegistrationByLeaders, IPage } from './cabinet.model';
 
 @Component({
     selector: 'bh24-cabinet',
@@ -34,6 +34,7 @@ export class CabinetComponent implements OnInit{
             interval: '90%20days',
         }
     ];
+    page: IPage;
 
     constructor (private apiService: AppService, private router: Router) {}
 
@@ -75,6 +76,10 @@ export class CabinetComponent implements OnInit{
             console.log(data)
 
             this.isStatisticsDataAvailable = true;
+        });
+
+        this.apiService.pageReadByName('main').subscribe((data: IPage) => {
+            this.page = data;
         });
     }
 

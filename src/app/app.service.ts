@@ -163,4 +163,33 @@ export class AppService {
     pageReadAll () {
         return this.http.get(`${config.API_BASE_URL}/page/all`);
     }
+
+    getStatistics (data: any) {
+        let query = `${config.BOT_BASE_URL}/users/all?search=${data.search ?? ''}`;
+        if (data.contactSeen) {
+            query += '&contactsSeen';
+        }
+        if (data.consultationOrdering) {
+            query += '&consultationOrdering';
+        }
+        if (data.contact) {
+            query += '&contact';
+        }
+        if (data.noncooperation) {
+            query += '&noncooperation';
+        }
+        if (data.client) {
+            query += '&client';
+        }
+        if (data.partner) {
+            query += '&partner';
+        }
+        if (data.telegram) {
+            query += '&telegram';
+        }
+        if (data.facebook) {
+            query += '&facebook';
+        }
+        return this.http.get(query);
+    }
 }

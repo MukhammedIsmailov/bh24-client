@@ -180,8 +180,28 @@ export class StatisticsComponent implements OnInit {
         const endTimestamp = Math.round(endDate.getTime() / 1000).toString();
         this.options.startDateFilter = startTimestamp;
         this.options.endDateFilter = endTimestamp;
-        this.apiService.wardsRead(this.options).subscribe((data: IWard[]) => {
+        /*this.apiService.wardsRead(this.options).subscribe((data: IWard[]) => {
             this.wards = data;
+            this.isWardsDataAvailable = true;
+        });*/
+        this.apiService.getStatistics({}).subscribe((data: any) => {
+            this.wards = data.map((item: any) => ({
+                id: item.id,
+                first_name: item.firstName,
+                second_name: item.lastName,
+                icon_url: '',
+                country: item.country,
+                note: item.note,
+                status: item.status,
+                from: 'telegram',
+                step: item.lessons.length,
+                created_date: item.subscriptionDate,
+                phone_number: '',
+                last_send_time: new Date(),
+                role: 'user',
+                username: item.messengerInfo.username,
+                active: false
+            } as IWard));
             this.isWardsDataAvailable = true;
         });
     }

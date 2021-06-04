@@ -43,6 +43,7 @@ export interface IWard {
     username: string;
     mobiPartnerInfoActive?: boolean;
     active: boolean;
+    lessons: any
 }
 
 export interface IWardOptions {

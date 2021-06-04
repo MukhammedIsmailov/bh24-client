@@ -180,11 +180,16 @@ export class StatisticsComponent implements OnInit {
         const endTimestamp = Math.round(endDate.getTime() / 1000).toString();
         this.options.startDateFilter = startTimestamp;
         this.options.endDateFilter = endTimestamp;
-        /*this.apiService.wardsRead(this.options).subscribe((data: IWard[]) => {
-            this.wards = data;
-            this.isWardsDataAvailable = true;
-        });*/
-        this.apiService.getStatistics({}).subscribe((data: any) => {
+        this.apiService.getStatistics({
+            search: this.options.searchFilter,
+            facebook: this.options.facebookFilter,
+            client: this.options.clientFilter,
+            partner: this.options.clientFilter,
+            noncooperation: this.options.renouncementFilter,
+            contact: this.options.contactFilter,
+            contactsSeen: this.options.contactsSeeFilter,
+            consultationOrdering: this.options.feedbackFilter
+        }).subscribe((data: any) => {
             this.wards = data.map((item: any) => ({
                 id: item.id,
                 first_name: item.firstName,
@@ -197,10 +202,11 @@ export class StatisticsComponent implements OnInit {
                 step: item.lessons.length,
                 created_date: item.subscriptionDate,
                 phone_number: '',
-                last_send_time: new Date(),
+                last_send_time: item.lessons[item.lessons.length - 1].sentDate,
                 role: 'user',
                 username: item.messengerInfo.username,
-                active: false
+                active: false,
+                lessons: item.lessons
             } as IWard));
             this.isWardsDataAvailable = true;
         });
@@ -216,9 +222,18 @@ export class StatisticsComponent implements OnInit {
 
     openLessonsPopup(id: number) {
         this.lessonPopupStatus = true;
-        this.apiService.lessonEventsRead(id).subscribe((data: ILessonInfo) => {
+        const user = this.wards.find(item => item.id == id);
+        this.lessonsInfo = {
+            firstName: user.first_name,
+            secondName: user.second_name,
+            iconUrl: '',
+            lessons: user.lessons.map((item: any) => ({
+                lessonNumber: item.lessonId, readingDate: item.readingDate
+            }))
+        };
+        /*this.apiService.lessonEventsRead(id).subscribe((data: ILessonInfo) => {
             this.lessonsInfo = data;
-        });
+        });*/
     }
 
     openStatusPopup(ward: IWard) {

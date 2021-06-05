@@ -183,12 +183,15 @@ export class StatisticsComponent implements OnInit {
         this.apiService.getStatistics({
             search: this.options.searchFilter,
             facebook: this.options.facebookFilter,
+            telegram: this.options.telegramFilter,
             client: this.options.clientFilter,
-            partner: this.options.clientFilter,
+            partner: this.options.partnerFilter,
             noncooperation: this.options.renouncementFilter,
             contact: this.options.contactFilter,
             contactsSeen: this.options.contactsSeeFilter,
-            consultationOrdering: this.options.feedbackFilter
+            consultationOrdering: this.options.feedbackFilter,
+            dateFrom: this.options.startDateFilter,
+            dateTo: this.options.endDateFilter
         }).subscribe((data: any) => {
             this.wards = data.map((item: any) => ({
                 id: item.id,

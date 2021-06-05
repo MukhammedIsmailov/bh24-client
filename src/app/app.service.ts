@@ -166,7 +166,7 @@ export class AppService {
 
     getStatistics (data: any) {
         let query = `${config.BOT_BASE_URL}/users/all?search=${data.search ?? ''}`;
-        if (data.contactSeen) {
+        if (data.contactsSeen) {
             query += '&contactsSeen';
         }
         if (data.consultationOrdering) {
@@ -189,6 +189,12 @@ export class AppService {
         }
         if (data.facebook) {
             query += '&facebook';
+        }
+        if (data.dateFrom) {
+            query += `&dateFrom=${data.dateFrom}`;
+        }
+        if (data.dateTo) {
+            query += `&dateTo=${data.dateTo}`;
         }
         return this.http.get(query);
     }

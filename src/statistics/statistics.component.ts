@@ -260,7 +260,7 @@ export class StatisticsComponent implements OnInit {
 
     saveStatus() {
         this.statusPopupStatus = false;
-        this.apiService.wardUpdate(this.currentWard.id, {
+        this.apiService.updateSubscriber(this.currentWard.id, {
             status: this.currentWard.status,
             note: this.currentWard.note
         }).subscribe(() => {

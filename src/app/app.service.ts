@@ -198,4 +198,8 @@ export class AppService {
         }
         return this.http.get(query);
     }
+
+    updateSubscriber (id: number|string, data: any) {
+        return this.http.put(`${config.BOT_BASE_URL}/users?id=${id}`, data);
+    }
 }

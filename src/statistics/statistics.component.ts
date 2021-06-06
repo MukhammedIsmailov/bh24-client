@@ -210,7 +210,13 @@ export class StatisticsComponent implements OnInit {
                 username: item.messengerInfo.username,
                 active: false,
                 lessons: item.lessons
-            } as IWard));
+            } as IWard)).filter((item: IWard) => {
+                if (this.options.lessonFilter == 'any') {
+                    return true;
+                } else {
+                    return !!item.lessons[this.options.lessonFilter].readingDate;
+                }
+            });
             this.isWardsDataAvailable = true;
         });
     }

@@ -193,24 +193,29 @@ export class StatisticsComponent implements OnInit {
             dateFrom: this.options.startDateFilter,
             dateTo: this.options.endDateFilter
         }).subscribe((data: any) => {
-            this.wards = data.map((item: any) => ({
-                id: item.id,
-                first_name: item.firstName,
-                second_name: item.lastName,
-                icon_url: '',
-                country: item.country,
-                note: item.note,
-                status: item.status,
-                from: 'telegram',
-                step: item.lessons.length,
-                created_date: item.subscriptionDate,
-                phone_number: '',
-                last_send_time: item.lessons[item.lessons.length - 1].sentDate,
-                role: 'user',
-                username: item.messengerInfo.username,
-                active: false,
-                lessons: item.lessons
-            } as IWard)).filter((item: IWard) => {
+            this.wards = data.map((item: any) => {
+                if (item.status == 'noncooperation') {
+                    item.status = 'renouncement';
+                }
+                return {
+                    id: item.id,
+                    first_name: item.firstName,
+                    second_name: item.lastName,
+                    icon_url: '',
+                    status: item.status,
+                    country: item.country,
+                    note: item.note,
+                    from: 'telegram',
+                    step: item.lessons.length,
+                    created_date: item.subscriptionDate,
+                    phone_number: '',
+                    last_send_time: item.lessons[item.lessons.length - 1].sentDate,
+                    role: 'user',
+                    username: item.messengerInfo.username,
+                    active: false,
+                    lessons: item.lessons
+                } as IWard;
+            }).filter((item: IWard) => {
                 if (this.options.lessonFilter == 'any') {
                     return true;
                 } else {
@@ -219,6 +224,7 @@ export class StatisticsComponent implements OnInit {
             });
             this.isWardsDataAvailable = true;
         });
+
     }
 
     onChangeFilter (): void {
@@ -240,9 +246,6 @@ export class StatisticsComponent implements OnInit {
                 lessonNumber: item.lessonId, readingDate: item.readingDate
             }))
         };
-        /*this.apiService.lessonEventsRead(id).subscribe((data: ILessonInfo) => {
-            this.lessonsInfo = data;
-        });*/
     }
 
     openStatusPopup(ward: IWard) {

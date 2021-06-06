@@ -14,6 +14,7 @@ export class PromoComponent {
 
     ngOnInit (): void {
         this.apiService.pageReadByName('promo').subscribe((data: IPage) => {
+            data.content.sort((a, b) => a.id - b.id);
             this.page = data;
         });
     }

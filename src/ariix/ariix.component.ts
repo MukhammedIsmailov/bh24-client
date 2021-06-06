@@ -14,6 +14,7 @@ export class AriixComponent implements OnInit {
 
     ngOnInit (): void {
         this.apiService.pageReadByName('ariix').subscribe((data: IPage) => {
+            data.content.sort((a, b) => a.id - b.id);
             this.page = data;
         });
     }

@@ -13,6 +13,7 @@ export class CalendarComponent {
 
     ngOnInit (): void {
         this.apiService.pageReadByName('calendar').subscribe((data: IPage) => {
+            data.content.sort((a, b) => a.id - b.id);
             this.page = data;
         });
     }

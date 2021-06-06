@@ -13,6 +13,7 @@ export class EducationComponent {
 
     ngOnInit (): void {
         this.apiService.pageReadByName('education').subscribe((data: IPage) => {
+            data.content.sort((a, b) => a.id - b.id);
             this.page = data;
         });
     }

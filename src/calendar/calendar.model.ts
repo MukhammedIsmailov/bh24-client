@@ -8,5 +8,5 @@ export interface IPage {
 
 export interface IContent {
     id: number;
-    body: string;
+    body: any;
 }

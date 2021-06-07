@@ -13,3 +13,8 @@ config.json
 public/
 
 config1.json
+
+content/img/logo.png
+content/img/logo@2x.png
+content/img/logo-white.png
+content/img/logo-white@2x.png

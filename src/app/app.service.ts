@@ -165,7 +165,7 @@ export class AppService {
     }
 
     getStatistics (data: any) {
-        let query = `${config.BOT_BASE_URL}/users/all?search=${data.search ?? ''}`;
+        let query = `${config.BOT_BASE_URL}/users/all?referId=${localStorage.userId}&search=${data.search ?? ''}`;
         if (data.contactsSeen) {
             query += '&contactsSeen';
         }

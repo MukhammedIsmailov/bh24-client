@@ -4,6 +4,7 @@ import { Socket } from 'ngx-socket-io';
 
 import { TokenStorage } from './token-storage.service';
 import { IFeedbackNotificationDTO } from './app.model';
+import * as config  from '../../config.json';
 
 @Component({
     selector: 'bh24-app',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit {
     onNotification: boolean = false;
 
     notificationInfo: IFeedbackNotificationDTO;
+    appName: string = config.NAME;
 
     constructor (private router: Router, private tokenStorage: TokenStorage, private socket: Socket) {
         router.events.subscribe(() => {

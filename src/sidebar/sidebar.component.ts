@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 
 import {TokenStorage} from '../app/token-storage.service';
 import {MenuItems, routes} from './sidebar.model';
+import * as config from '../../config.json';
 
 @Component({
     selector: 'bh24-sidebar',
@@ -13,6 +14,7 @@ export class SidebarComponent {
     activeMenuItem = MenuItems.Cabinet;
     active = false;
     promotionDrop = false;
+    config = config;
 
     constructor (private router: Router, private tokenStorage: TokenStorage) { }
 

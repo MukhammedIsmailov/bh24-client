@@ -24,6 +24,7 @@ export class ProfileComponent implements OnInit {
     uploadForm: FormGroup;
     isCopied: boolean;
     dataBaseUrl: string = config.DATA_BASE_URL;
+    config = config;
 
     constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute,
                  private formBuilder: FormBuilder, private notificationService: NotificationService,

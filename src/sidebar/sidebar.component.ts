@@ -14,7 +14,8 @@ export class SidebarComponent {
     activeMenuItem = MenuItems.Cabinet;
     active = false;
     promotionDrop = false;
-    config = config;
+    appName: string = config.NAME
+    secondPageName: string = config.ADDITIONAL_PAGE_NAME;
 
     constructor (private router: Router, private tokenStorage: TokenStorage) { }
 

@@ -35,10 +35,33 @@ export class CabinetComponent implements OnInit{
         }
     ];
     page: IPage;
+    users: Array<any>;
 
     constructor (private apiService: AppService, private router: Router) {}
 
     ngOnInit(): void {
+        this.apiService.getStatistics({
+            search: '',
+            contact: true,
+            noncooperation: true,
+            client: true,
+            partner: true,
+            telegram: true,
+            facebook: true,
+            dateFrom: 1,
+            dateTo: 9999999999
+        }).subscribe((data: any) => {
+            this.latestRegistrations = {
+                registrations: data.map((item: any) => ({
+                    firstName: item.firstName,
+                    secondName: item.lastName,
+                    createdDate: item.subscriptionDate,
+                    country: item.country
+                })),
+                count: this.latestRegistrations.registrations.length.toString()
+            }
+            this.users = data;
+        });
         this.apiService.latestRegistrationsRead().subscribe((data: ILatestRegistration) => {
             this.latestRegistrations = data;
             this.isRegistrationsDataAvailable = true;
@@ -51,31 +74,39 @@ export class CabinetComponent implements OnInit{
         this.apiService.statisticsRead(null, null, null).subscribe((data: IStatistics) => {
             const vl = data.counts[0].VL;
             const percent = 100;
+            const stat = {
+                vl,
+                sc: this.users.length,
+                cf: this.users.filter(item =>
+                    item.lessons.filter((lesson: any) => !!lesson.readingDate).length == 4
+                ).length,
+                fb: this.users.filter(user => !!user.consultationOrderingDate).length,
+                pa: this.users.filter(user => user.status == 'client' || user.status == 'partner').length
+            }
             this.statistics = {
                 vl: {
-                    value: vl,
-                    percent,
+                    value: stat.vl,
+                    percent
                 },
                 sc: {
-                    value: data.counts[1].SC - data.counts[2].CF,
-                    percent: ((data.counts[1].SC - data.counts[2].CF) / vl) * percent,
+                    value: stat.sc,
+                    percent: ((stat.sc - stat.cf) / vl) * percent,
                 },
                 cf: {
-                    value: data.courseFinished,
-                    percent: (+data.courseFinished / vl) * percent,
+                    value: stat.cf,
+                    percent: (stat.cf / vl) * percent,
                 },
                 fb: {
-                    value: data.counts[3].FB,
-                    percent: (data.counts[3].FB / vl) * percent,
+                    value: stat.fb,
+                    percent: (stat.fb / vl) * percent,
                 },
                 pa: {
-                    value: data.counts[4].NP + data.counts[5].NC,
-                    percent: ((data.counts[4].NP + data.counts[5].NC) / vl) * percent
+                    value: stat.pa,
+                    percent: (stat.pa / vl) * percent
                 }
             };
-            console.log(data)
-
             this.isStatisticsDataAvailable = true;
+
         });
 
         this.apiService.pageReadByName('main').subscribe((data: IPage) => {

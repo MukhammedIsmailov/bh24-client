@@ -261,7 +261,7 @@ export class StatisticsComponent implements OnInit {
     saveStatus() {
         this.statusPopupStatus = false;
         this.apiService.updateSubscriber(this.currentWard.id, {
-            status: this.currentWard.status,
+            status: this.currentWard.status == 'renouncement' ? 'noncooperation' : this.currentWard.status,
             note: this.currentWard.note
         }).subscribe(() => {
             this.onChangeFilter();

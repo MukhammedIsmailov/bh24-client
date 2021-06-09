@@ -212,7 +212,7 @@ export class StatisticsComponent implements OnInit {
                     last_send_time: item.lessons[item.lessons.length - 1].sentDate,
                     role: 'user',
                     username: item.messengerInfo.username,
-                    active: false,
+                    active: !!item.consultationOrderingDate,
                     lessons: item.lessons
                 } as IWard;
             }).filter((item: IWard) => {

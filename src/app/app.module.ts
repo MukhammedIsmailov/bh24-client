@@ -39,6 +39,8 @@ import {PromoComponent} from "../promo/promo.component";
 import {AboutComponent} from "../about/about.component";
 import {BugreportComponent} from "../bugreport/bugreport.component";
 import {CommentComponent} from "../comment/comment.component";
+import {PageComponent} from "../page/page.component";
+
 
 const appRoutes: Routes =[
     { path: 'sign-in', component: LoginComponent, },
@@ -58,7 +60,8 @@ const appRoutes: Routes =[
     { path: 'promo', component: PromoComponent },
     { path: 'about', component: AboutComponent },
     { path: 'bugreport', component: BugreportComponent },
-    { path: 'comment', component: CommentComponent }
+    { path: 'comment', component: CommentComponent },
+    { path: 'page', component: PageComponent }
 ];
 
 const socketConfig: SocketIoConfig = { url: config.SERVER };
@@ -69,7 +72,7 @@ const socketConfig: SocketIoConfig = { url: config.SERVER };
         ChartsModule, Ng2FlatpickrModule, SocketIoModule.forRoot(socketConfig) ],
     declarations: [ AppComponent, LoginComponent, CreateComponent, ProfileComponent, StatisticsComponent,
         SidebarComponent, CabinetComponent, CalendarComponent, EducationComponent, UserMenuComponent, LinksComponent,
-        LessonsComponent, IndexComponent, AriixComponent, PaymentComponent, PasswordResetQueryComponent, PasswordResetComponent, PromoComponent, AboutComponent, BugreportComponent, CommentComponent ],
+        LessonsComponent, IndexComponent, AriixComponent, PaymentComponent, PasswordResetQueryComponent, PasswordResetComponent, PromoComponent, AboutComponent, BugreportComponent, CommentComponent, PageComponent ],
     bootstrap: [ AppComponent ],
     providers: [ AppService, NotificationService, { provide: APP_BASE_HREF, useValue : '/' }, TokenStorage, UtilsService, ThemeService ]
 })

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Socket } from 'ngx-socket-io';
+//import { Socket } from 'ngx-socket-io';
 import { DatePipe } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -27,7 +27,7 @@ export class UserMenuComponent implements OnInit {
     prepareSocialNetworking: any = null;
 
     constructor (private router: Router, private tokenStorage: TokenStorage, private apiService: AppService,
-                 private socket: Socket, utilsService: UtilsService, private sanitizer: DomSanitizer) {
+                 /*private socket: Socket,*/ utilsService: UtilsService, private sanitizer: DomSanitizer) {
         this.prepareSocialNetworking = utilsService.prepareSocialNetworking;
     }
 
@@ -38,14 +38,14 @@ export class UserMenuComponent implements OnInit {
             this.tokenStorage.setSubEnd(data.subscription_end);
         });
 
-        this.socket.on('feedbackClick', (msg: IFeedbackNotificationDTO) => {
+        /*this.socket.on('feedbackClick', (msg: IFeedbackNotificationDTO) => {
             this.tokenStorage.getUserId().subscribe((userId) => {
                 if (userId === msg.partnerId) {
                     this.notifications.push(msg);
                     this.onNotifications = true;
                 }
             });
-        });
+        });*/
     }
 
     async logout() {

@@ -9,7 +9,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ChartsModule, ThemeService} from 'ng2-charts';
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+//import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from '../login/login.component';
@@ -64,12 +64,12 @@ const appRoutes: Routes =[
     { path: 'page', component: PageComponent }
 ];
 
-const socketConfig: SocketIoConfig = { url: config.SERVER };
+//const socketConfig: SocketIoConfig = { url: config.SERVER };
 
 @NgModule({
     imports: [ BrowserModule, FormsModule, HttpClientModule, TooltipModule, RouterModule.forRoot(appRoutes),
         ReactiveFormsModule, SimpleNotificationsModule.forRoot(), BrowserAnimationsModule,
-        ChartsModule, Ng2FlatpickrModule, SocketIoModule.forRoot(socketConfig) ],
+        ChartsModule, Ng2FlatpickrModule/*, SocketIoModule.forRoot(socketConfig) */],
     declarations: [ AppComponent, LoginComponent, CreateComponent, ProfileComponent, StatisticsComponent,
         SidebarComponent, CabinetComponent, CalendarComponent, EducationComponent, UserMenuComponent, LinksComponent,
         LessonsComponent, IndexComponent, AriixComponent, PaymentComponent, PasswordResetQueryComponent, PasswordResetComponent, PromoComponent, AboutComponent, BugreportComponent, CommentComponent, PageComponent ],

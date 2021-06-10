@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Socket } from 'ngx-socket-io';
+//import { Socket } from 'ngx-socket-io';
 
 import { TokenStorage } from './token-storage.service';
 import { IFeedbackNotificationDTO } from './app.model';
@@ -18,14 +18,14 @@ export class AppComponent implements OnInit {
     notificationInfo: IFeedbackNotificationDTO;
     appName: string = config.NAME;
 
-    constructor (private router: Router, private tokenStorage: TokenStorage, private socket: Socket) {
+    constructor (private router: Router, private tokenStorage: TokenStorage/*, private socket: Socket*/) {
         router.events.subscribe(() => {
             this.authorized = tokenStorage.isAuthorized();
         });
     }
 
     ngOnInit(): void {
-        this.socket.on('feedbackClick', (msg: IFeedbackNotificationDTO) => {
+        /*this.socket.on('feedbackClick', (msg: IFeedbackNotificationDTO) => {
             this.tokenStorage.getUserId().subscribe((userId) => {
                 if (userId === msg.partnerId) {
                     this.notificationInfo = msg;
@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
                     }, 10000);
                 }
             });
-        });
+        });*/
     }
 
     authorized = this.tokenStorage.isAuthorized();

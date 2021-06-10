@@ -17,9 +17,10 @@ export class CabinetComponent implements OnInit{
     isRegistrationsDataAvailable: boolean = false;
     isRegistrationsByLeadersDataAvailable: boolean = false;
     isStatisticsDataAvailable: boolean = false;
+    isPageDataAvailable: boolean = false;
     latestRegistrations: ILatestRegistration;
     laatestRegistrationByLeaders: ILatestRegistrationByLeaders[];
-    statistics: {};
+    statistics: any;
     registrationByLeadersConfig = [
         {
             active: true,
@@ -36,6 +37,7 @@ export class CabinetComponent implements OnInit{
     ];
     page: IPage;
     users: Array<any>;
+    stat: any;
 
     constructor (private apiService: AppService, private router: Router) {}
 
@@ -58,24 +60,10 @@ export class CabinetComponent implements OnInit{
                     createdDate: item.subscriptionDate,
                     country: item.country
                 })),
-                count: this.latestRegistrations.registrations.length.toString()
+                count: data.length
             }
             this.users = data;
-        });
-        this.apiService.latestRegistrationsRead().subscribe((data: ILatestRegistration) => {
-            this.latestRegistrations = data;
-            this.isRegistrationsDataAvailable = true;
-        });
-        this.apiService.latestRegistrationsByLeadersRead(this.registrationByLeadersConfig[0].interval)
-            .subscribe((data: ILatestRegistrationByLeaders[]) => {
-            this.laatestRegistrationByLeaders = data;
-            this.isRegistrationsByLeadersDataAvailable = true;
-        });
-        this.apiService.statisticsRead(null, null, null).subscribe((data: IStatistics) => {
-            const vl = data.counts[0].VL;
-            const percent = 100;
-            const stat = {
-                vl,
+            this.stat = {
                 sc: this.users.length,
                 cf: this.users.filter(item =>
                     item.lessons.filter((lesson: any) => !!lesson.readingDate).length == 4
@@ -83,34 +71,49 @@ export class CabinetComponent implements OnInit{
                 fb: this.users.filter(user => !!user.consultationOrderingDate).length,
                 pa: this.users.filter(user => user.status == 'client' || user.status == 'partner').length
             }
-            this.statistics = {
-                vl: {
-                    value: stat.vl,
-                    percent
-                },
-                sc: {
-                    value: stat.sc,
-                    percent: ((stat.sc - stat.cf) / vl) * percent,
-                },
-                cf: {
-                    value: stat.cf,
-                    percent: (stat.cf / vl) * percent,
-                },
-                fb: {
-                    value: stat.fb,
-                    percent: (stat.fb / vl) * percent,
-                },
-                pa: {
-                    value: stat.pa,
-                    percent: (stat.pa / vl) * percent
-                }
-            };
-            this.isStatisticsDataAvailable = true;
+            this.apiService.statisticsRead(null, null, null).subscribe((data: any) => {
+                const vl = data.counts[0].VL;
+                const percent = 100;
 
+                this.statistics = {
+                    vl: {
+                        value: vl,
+                        percent
+                    },
+                    sc: {
+                        value: this.stat.sc,
+                        percent: ((this.stat.sc - this.stat.cf) / vl) * percent,
+                    },
+                    cf: {
+                        value: this.stat.cf,
+                        percent: (this.stat.cf / vl) * percent,
+                    },
+                    fb: {
+                        value: this.stat.fb,
+                        percent: (this.stat.fb / vl) * percent,
+                    },
+                    pa: {
+                        value: this.stat.pa,
+                        percent: (this.stat.pa / vl) * percent
+                    }
+                };
+                this.isStatisticsDataAvailable = true;
+                this.isRegistrationsDataAvailable = true;
+            });
         });
+        /*this.apiService.latestRegistrationsRead().subscribe((data: ILatestRegistration) => {
+            this.latestRegistrations = data;
+            this.isRegistrationsDataAvailable = true;
+        });
+        this.apiService.latestRegistrationsByLeadersRead(this.registrationByLeadersConfig[0].interval)
+            .subscribe((data: ILatestRegistrationByLeaders[]) => {
+            this.laatestRegistrationByLeaders = data;
+            this.isRegistrationsByLeadersDataAvailable = true;
+        });*/
 
         this.apiService.pageReadByName('main').subscribe((data: IPage) => {
             this.page = data;
+            this.isPageDataAvailable = true;
         });
     }
 

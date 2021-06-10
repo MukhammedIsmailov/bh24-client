@@ -1,8 +1,10 @@
 <div *ngIf="isRegistrationsDataAvailable">
-    <div class="content__item content__item_center" *ngFor="let item of page.content" [innerHTML]="item.body">
+    <div *ngIf="isPageDataAvailable">
+        <div class="content__item content__item_center" *ngFor="let item of page.content" [innerHTML]="item.body">
 
+        </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="isStatisticsDataAvailable">
         <div class="col-6">
             <div class="content__item">
                 <h2 class="content__title">Воронка продаж</h2>
@@ -77,7 +79,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-6" *ngIf="isStatisticsDataAvailable">
             <div class="content__item">
                 <h2 class="content__title">Последние регистрации на курс</h2>
                 <p class="content__desc">Всего получили курс: {{users.length}} чел.</p>

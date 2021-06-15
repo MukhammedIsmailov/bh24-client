@@ -199,6 +199,10 @@ export class AppService {
         return this.http.get(query);
     }
 
+    getAllStatistics () {
+        return this.http.get(`${config.BOT_BASE_URL}/users/all?search=&contact&noncooperation&client&partner&telegram&facebook&dateFrom=1&dateTo=9999999999`);
+    }
+
     updateSubscriber (id: number|string, data: any) {
         return this.http.put(`${config.BOT_BASE_URL}/users?id=${id}`, data);
     }

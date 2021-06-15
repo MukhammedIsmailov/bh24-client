@@ -52,7 +52,7 @@ export class CabinetComponent implements OnInit{
             facebook: true,
             dateFrom: 1,
             dateTo: 9999999999
-        }).subscribe((data: any) => {
+        }).subscribe(async (data: any) => {
             this.latestRegistrations = {
                 registrations: data.map((item: any) => ({
                     firstName: item.firstName,
@@ -71,7 +71,7 @@ export class CabinetComponent implements OnInit{
                 fb: this.users.filter(user => !!user.consultationOrderingDate).length,
                 pa: this.users.filter(user => user.status == 'client' || user.status == 'partner').length
             }
-            this.apiService.statisticsRead(null, null, null).subscribe((data: any) => {
+            this.apiService.statisticsRead(null, null, null).subscribe(async (data: any) => {
                 const vl = data.counts[0].VL;
                 const percent = 100;
 
@@ -115,6 +115,41 @@ export class CabinetComponent implements OnInit{
             this.page = data;
             this.isPageDataAvailable = true;
         });
+        this.setTopLeaders(0);
+    }
+
+    setTopLeaders (tabItem: number) {
+        this.apiService.getAllStatistics().subscribe(async (data: any) => {
+            let leaders: Array<any> = [];
+            for (const item of data) {
+                const leaderId = item.referId;
+                const leaderIndex = leaders.findIndex(item => item.id == leaderId);
+                const date = new Date();
+                if (tabItem == 0) {
+                    date.setDate(date.getDate() - 7);
+                } else if (tabItem == 1) {
+                    date.setDate(date.getDate() - 30);
+                } else if (tabItem == 2) {
+                    date.setDate(date.getDate() - 90);
+                }
+                if (new Date(item.subscriptionDate) > date) {
+                    if (leaderIndex != -1) {
+                        leaders[leaderIndex].count++;
+                    } else {
+                        const leader: any = await this.apiService.partnerReadById(leaderId).toPromise();
+                        leaders.push({
+                            id: leaderId,
+                            firstName: leader.firstName,
+                            secondName: leader.secondName,
+                            iconUrl: leader.iconUrl,
+                            count: 1
+                        });
+                    }
+                }
+            }
+            this.laatestRegistrationByLeaders = leaders;
+            this.isRegistrationsByLeadersDataAvailable = true;
+        });
     }
 
     goToStatisticsPage() {
@@ -126,9 +161,6 @@ export class CabinetComponent implements OnInit{
             configItem.active = false;
         });
         this.registrationByLeadersConfig[tabItem].active = true;
-        this.apiService.latestRegistrationsByLeadersRead(this.registrationByLeadersConfig[tabItem].interval)
-            .subscribe((data: ILatestRegistrationByLeaders[]) => {
-                this.laatestRegistrationByLeaders = data;
-            });
+        this.setTopLeaders(tabItem);
     }
 }

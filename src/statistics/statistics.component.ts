@@ -171,7 +171,7 @@ export class StatisticsComponent implements OnInit {
             this.chartLabels = data.plotData.labels;
             this.chartData = data.plotData.dataset;
 
-            //this.isStatisticsDataAvailable = true;
+            this.isStatisticsDataAvailable = true;
         });
     }
 

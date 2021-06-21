@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {TokenStorage} from '../app/token-storage.service';
 import {MenuItems, routes} from './sidebar.model';
 import * as config from '../../config.json';
+import { AppService } from '../app/app.service';
 
 @Component({
     selector: 'bh24-sidebar',
@@ -16,8 +17,15 @@ export class SidebarComponent {
     promotionDrop = false;
     appName: string = config.NAME
     secondPageName: string = config.ADDITIONAL_PAGE_NAME;
+    pages: Array<any>;
 
-    constructor (private router: Router, private tokenStorage: TokenStorage) { }
+    constructor (private router: Router, private tokenStorage: TokenStorage, private apiService: AppService) { }
+
+    ngOnInit () {
+        this.apiService.pageReadAll().subscribe((data: any) => {
+            this.pages = data;
+        });
+    }
 
     isEnabled (): boolean {
         let result = false;

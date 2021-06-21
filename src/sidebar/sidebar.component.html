@@ -118,7 +118,7 @@
             </div>
         </div>
         <div class="sidebar__separator"></div>
-        <div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Ariix.valueOf()}" (click)="goTo(menuItemsEnum.Ariix, true)">
+        <div *ngFor="let page of pages" class="sidebar__item" (click)="redirect(page.name, page.isFree)">
             <div class="sidebar__icon">
                 <div class="svg-icon svg-icon_icon-round">
                     <svg>
@@ -126,17 +126,7 @@
                     </svg>
                 </div>
             </div>
-            <div class="sidebar__name">{{secondPageName}}</div>
-        </div>
-        <div class="sidebar__item" (click)="goTo(menuItemsEnum.About, true)">
-            <div class="sidebar__icon">
-                <div class="svg-icon svg-icon_icon-round">
-                    <svg>
-                        <use xlink:href="#icon-round"></use>
-                    </svg>
-                </div>
-            </div>
-            <div class="sidebar__name">{{appName}}</div>
+            <div class="sidebar__name">{{page.verboseName}}</div>
         </div>
     </div>
 </div>

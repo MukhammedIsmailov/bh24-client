@@ -23,7 +23,7 @@ export class SidebarComponent {
 
     ngOnInit () {
         this.apiService.pageReadAll().subscribe((data: any) => {
-            this.pages = data;
+            this.pages = data.filter((item: any) => !item.isSystem);
         });
     }
 
@@ -55,6 +55,18 @@ export class SidebarComponent {
             await this.router.navigateByUrl(routes[item.valueOf()]);
         } else {
             await this.router.navigateByUrl(routes[MenuItems.Payment]);
+        }
+    }
+
+    async redirect (pageKey: string, allowUnpayed: boolean) {
+        if (allowUnpayed) {
+            await this.router.navigateByUrl(`/page?key=${pageKey}`);
+        } else {
+            if (+new Date(localStorage.subEnd) - +new Date() > 0) {
+                await this.router.navigateByUrl(`/page?key=${pageKey}`);
+            } else {
+                await this.router.navigateByUrl(`/payment`);
+            }
         }
     }
 }

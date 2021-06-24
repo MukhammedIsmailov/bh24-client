@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import * as config from '../../config.json';
 import { AppService } from '../app/app.service';
 import { ILatestRegistration, IStatistics, ILatestRegistrationByLeaders, IPage } from './cabinet.model';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'bh24-cabinet',
@@ -39,7 +40,7 @@ export class CabinetComponent implements OnInit{
     users: Array<any>;
     stat: any;
 
-    constructor (private apiService: AppService, private router: Router) {}
+    constructor (private apiService: AppService, private router: Router, private sanitizer: DomSanitizer) {}
 
     ngOnInit(): void {
         this.apiService.getStatistics({
@@ -112,6 +113,7 @@ export class CabinetComponent implements OnInit{
         });*/
 
         this.apiService.pageReadByName('main').subscribe((data: IPage) => {
+            data.content.forEach((item: any) => item.body = this.sanitizer.bypassSecurityTrustHtml(item.body))
             this.page = data;
             this.isPageDataAvailable = true;
         });

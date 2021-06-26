@@ -79,7 +79,7 @@
                     </div>
                     </div>
                     <div class="form__wrap form__wrap_link">
-                        <div class="form__name form__name_gray">{{config.DATA_BASE_URL}}/</div>
+                        <div class="form__name form__name_gray">{{createPartnerUrl}}/</div>
                         <input class="form__control" type="text" name="referId" [(ngModel)]="profile.referId" [ngClass]="{error:emptyReferId || invalidReferId || notUniqueReferId}" [disabled]="disabledReferId"/>
                     </div>
                 </div>

@@ -451,7 +451,7 @@
                             <div class="partners__date">{{ ward.created_date | date: 'dd.MM.yyyy' }}</div>
                             <div class="partners__time">{{ ward.created_date | date: 'hh:mm a' }}</div>
                         </div>
-                        <div class="partners__td">{{ ward.contact }}</div>
+                        <div class="partners__td">{{ ward.phone_number }}</div>
                         <div class="partners__td">
                             <a class="partners__social" [href]="'https://t.me/' + ward.username" target="_blank">
                                 <div *ngIf="ward.from === 'telegram'" class="svg-icon svg-icon_icon-tg">

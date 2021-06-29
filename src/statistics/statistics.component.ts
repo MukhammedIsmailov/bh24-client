@@ -208,7 +208,7 @@ export class StatisticsComponent implements OnInit {
                     from: 'telegram',
                     step: item.lessons.length,
                     created_date: item.subscriptionDate,
-                    phone_number: '',
+                    phone_number: item.contact,
                     last_send_time: item.lessons[item.lessons.length - 1].sentDate,
                     role: 'user',
                     username: item.messengerInfo.username,

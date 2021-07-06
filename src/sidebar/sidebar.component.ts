@@ -23,7 +23,7 @@ export class SidebarComponent {
 
     ngOnInit () {
         this.apiService.pageReadAll().subscribe((data: any) => {
-            this.pages = data.filter((item: any) => !item.isSystem);
+            this.pages = data.filter((item: any) => !item.isSystem && item.isPublic);
         });
     }
 

@@ -18,12 +18,14 @@ export class SidebarComponent {
     appName: string = config.NAME
     secondPageName: string = config.ADDITIONAL_PAGE_NAME;
     pages: Array<any>;
+    systemPages: Array<any>;
 
     constructor (private router: Router, private tokenStorage: TokenStorage, private apiService: AppService) { }
 
     ngOnInit () {
         this.apiService.pageReadAll().subscribe((data: any) => {
             this.pages = data.filter((item: any) => !item.isSystem && item.isPublic);
+            this.systemPages = data.filter((item: any) => item.isSystem)
         });
     }
 
@@ -68,5 +70,10 @@ export class SidebarComponent {
                 await this.router.navigateByUrl(`/payment`);
             }
         }
+    }
+
+    async redirectSystemPage (pageKey: string) {
+        let allow = this.systemPages.find(item => item.name == pageKey).isFree;
+        await this.redirect(pageKey, allow);
     }
 }

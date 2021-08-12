@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-        <div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Cabinet.valueOf()}" (click)="redirectSystemPage('main')">
+        <div class="sidebar__item" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Cabinet.valueOf()}" (click)="goTo(menuItemsEnum.Cabinet)">
             <div class="sidebar__icon">
                 <div class="svg-icon svg-icon_icon-home">
                     <svg>
@@ -27,7 +27,7 @@
             <div class="sidebar__name">Мой кабинет</div>
         </div>
         <!--<div class="sidebar__item sidebar__item_dropdown" [ngClass]="{active: activeMenuItem.valueOf() === menuItemsEnum.Education.valueOf()}" (click)="goTo(menuItemsEnum.Education)">-->
-        <div class="sidebar__item" (click)="redirectSystemPage('education')">
+        <div class="sidebar__item" (click)="goTo(menuItemsEnum.Education)">
             <div class="sidebar__icon">
                 <div class="svg-icon svg-icon_icon-study">
                     <svg>

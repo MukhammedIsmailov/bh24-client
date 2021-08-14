@@ -53,6 +53,7 @@ export class StatisticsComponent implements OnInit {
             this.fromPlotDate = !!this.plotDate[0] ? this.plotDate[0] : this.fromPlotDate;
             this.toPlotDate = !!this.plotDate[1] ? this.plotDate[1] : this.toPlotDate;
             this.getStatistics(this.fromPlotDate, this.toPlotDate, null);
+            this.getWards(this.fromPlotDate, this.toPlotDate);
             this.intervalsConfig = this.intervalsConfig.map(interval => {
                 interval.active = false;
                 return interval;
@@ -228,7 +229,7 @@ export class StatisticsComponent implements OnInit {
     }
 
     onChangeFilter (): void {
-        this.getWards(this.fromWardsDate, this.toWardsDate);
+        this.getWards(this.fromPlotDate, this.toPlotDate);
     }
 
     searchChanged(searchQueryEvent: any): void {
@@ -295,6 +296,21 @@ export class StatisticsComponent implements OnInit {
             configItem.active = false;
         });
         this.intervalsConfig[tabItem].active = true;
-        this.getStatistics(this.fromPlotDate, this.toPlotDate, this.intervalsConfig[tabItem].interval)
+        const dateFrom = new Date();
+        switch (tabItem) {
+            case 0:
+                dateFrom.setMonth(dateFrom.getMonth() - 1);
+                break;
+            case 1:
+                dateFrom.setMonth(dateFrom.getMonth() - 3);
+                break;
+            case 2:
+                dateFrom.setMonth(dateFrom.getMonth() - 12);
+                break;
+        }
+        this.fromPlotDate = dateFrom;
+        this.toPlotDate = new Date();
+        this.getStatistics(this.fromPlotDate, this.toPlotDate, null);
+        this.getWards(this.fromPlotDate, this.toPlotDate);
     }
 }

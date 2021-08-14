@@ -41,8 +41,8 @@
             <div class="chart__header">
                 <div class="chart__header-block chart__header-block_dates">
                     <div class="chart__dates">
-                        <div class="chart__date" (click)="tabClick(0)" [ngClass]="{active: intervalsConfig[0].active}">Неделя</div>
-                        <div class="chart__date" (click)="tabClick(1)" [ngClass]="{active: intervalsConfig[1].active}">Месяц</div>
+                        <div class="chart__date" (click)="tabClick(0)" [ngClass]="{active: intervalsConfig[0].active}">Месяц</div>
+                        <div class="chart__date" (click)="tabClick(1)" [ngClass]="{active: intervalsConfig[1].active}">Квартал</div>
                         <div class="chart__date" (click)="tabClick(2)" [ngClass]="{active: intervalsConfig[2].active}">Год</div>
                     </div>
                 </div>
@@ -343,7 +343,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="partners__filter">
+                        <!--div class="partners__filter">
                             <div [formGroup]="rangeWardsGroup" class="range">
                                 <ng2-flatpickr [(ngModel)]="wardsDate" class="range__input flatpickr-input" [config]="wardsFlatpickrOptions"
                                                formControlName="rangeWards"></ng2-flatpickr>
@@ -355,7 +355,7 @@
                                 <div class="range__from">{{ fromWardsDate | date:'dd.MM.yyy' }}</div>
                                 <div class="range__to">{{ toWardsDate | date:'dd.MM.yyy' }}</div>
                             </div>
-                        </div>
+                        </div-->
                     </div>
                 </div>
             </div>
@@ -860,7 +860,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="partners__filter">
+                        <!--div class="partners__filter">
                             <div [formGroup]="rangeWardsGroup" class="range">
                                 <ng2-flatpickr [(ngModel)]="wardsDate" class="range__input flatpickr-input" [config]="wardsFlatpickrOptions"
                                                formControlName="rangeWards"></ng2-flatpickr>
@@ -872,7 +872,7 @@
                                 <div class="range__from">{{ fromWardsDate | date:'dd.MM.yyy' }}</div>
                                 <div class="range__to">{{ toWardsDate | date:'dd.MM.yyy' }}</div>
                             </div>
-                        </div>
+                        </div-->
                     </div>
                 </div>
             </div>

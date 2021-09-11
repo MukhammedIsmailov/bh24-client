@@ -165,42 +165,12 @@ export class AppService {
     }
 
     getStatistics (data: any) {
-        let query = `${config.BOT_BASE_URL}/users/all?referId=${localStorage.userId}&search=${data.search ?? ''}`;
-        if (data.contactsSeen) {
-            query += '&contactsSeen';
-        }
-        if (data.consultationOrdering) {
-            query += '&consultationOrdering';
-        }
-        if (data.contact) {
-            query += '&contact';
-        }
-        if (data.noncooperation) {
-            query += '&noncooperation';
-        }
-        if (data.client) {
-            query += '&client';
-        }
-        if (data.partner) {
-            query += '&partner';
-        }
-        if (data.telegram) {
-            query += '&telegram';
-        }
-        if (data.facebook) {
-            query += '&facebook';
-        }
-        if (data.dateFrom) {
-            query += `&dateFrom=${data.dateFrom}`;
-        }
-        if (data.dateTo) {
-            query += `&dateTo=${data.dateTo}`;
-        }
+        let query = `${config.BOT_BASE_URL}/users-mailings?mailingId=8`;
         return this.http.get(query);
     }
 
     getAllStatistics () {
-        return this.http.get(`${config.BOT_BASE_URL}/users/all?search=&contact&noncooperation&client&partner&telegram&facebook&dateFrom=1&dateTo=9999999999`);
+        return this.http.get(`${config.BOT_BASE_URL}/users-mailings/mailingId=8`);
     }
 
     updateSubscriber (id: number|string, data: any) {

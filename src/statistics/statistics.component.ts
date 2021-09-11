@@ -199,29 +199,23 @@ export class StatisticsComponent implements OnInit {
                     item.status = 'renouncement';
                 }
                 return {
-                    id: item.id,
-                    first_name: item.firstName,
-                    second_name: item.lastName,
+                    id: item.user.id,
+                    first_name: item.user.firstName,
+                    second_name: item.user.lastName,
                     icon_url: '',
                     status: item.status,
-                    country: item.country,
+                    country: 'ua',
                     note: item.note,
                     from: 'telegram',
-                    step: item.lessons.length,
+                    step: 1,
                     created_date: item.subscriptionDate,
-                    phone_number: item.contact,
-                    last_send_time: item.lessons[item.lessons.length - 1].sentDate,
+                    phone_number: '',
+                    last_send_time: null,
                     role: 'user',
-                    username: item.messengerInfo.username,
+                    username: item.user.messengerInfo.username,
                     active: !!item.consultationOrderingDate,
-                    lessons: item.lessons
+                    lessons: []
                 } as IWard;
-            }).filter((item: IWard) => {
-                if (this.options.lessonFilter == 'any') {
-                    return true;
-                } else {
-                    return !!item.lessons[this.options.lessonFilter].readingDate;
-                }
             });
             this.isWardsDataAvailable = true;
         });

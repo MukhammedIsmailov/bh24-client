@@ -29,8 +29,9 @@ export class AppService {
     }
 
     login (data: ILogin) {
-        return this.http.post(`${config.API_BASE_URL}/login`, data);
+        return this.http.post(`${config.BOT_BASE_URL}/auth/login`, data);
     }
+
     resetPasswordQuery (email: string){
         return this.http.put(`${config.API_BASE_URL}/reset-password-query`, { email });
     }

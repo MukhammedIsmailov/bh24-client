@@ -33,19 +33,27 @@ export class UserMenuComponent implements OnInit {
 
     ngOnInit(): void {
         this.apiService.me().subscribe((data: any) => {
-            this.me = data;
+            this.me = {
+               firstName: data.firstName,
+               secondName: data.lastName,
+               login: data.login,
+               iconUrl: data.avatarUrl,
+               leaderFirstName: data.refer.firstName,
+               leaderSecondName: data.refer.lastName,
+               leaderIconUrl: data.refer.avatarUrl,
+               leaderLogin: data.refer.login,
+               leaderEmail: data.refer.email,
+               leaderPhoneNumber: data.refer.phoneNumber,
+               telegram: data.contacts.telegram,
+               facebook: data.contacts.facebook,
+               skype: data.contacts.skype,
+               viber: data.contacts.viber,
+               vk: data.contacts.vk,
+               whatsapp: data.contacts.whatsapp,
+            };
             this.isDataAvailable = true;
             this.tokenStorage.setSubEnd(data.subscription_end);
         });
-
-        /*this.socket.on('feedbackClick', (msg: IFeedbackNotificationDTO) => {
-            this.tokenStorage.getUserId().subscribe((userId) => {
-                if (userId === msg.partnerId) {
-                    this.notifications.push(msg);
-                    this.onNotifications = true;
-                }
-            });
-        });*/
     }
 
     async logout() {

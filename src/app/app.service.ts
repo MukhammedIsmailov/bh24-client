@@ -25,7 +25,7 @@ export class AppService {
 
     me () {
         this.setOptions();
-        return this.http.get(`${config.API_BASE_URL}/me`, this._options);
+        return this.http.get(`${config.BOT_BASE_URL}/consultants/me`, this._options);
     }
 
     login (data: ILogin) {

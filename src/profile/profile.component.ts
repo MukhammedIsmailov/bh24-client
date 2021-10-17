@@ -237,9 +237,30 @@ export class ProfileComponent implements OnInit {
     }
 
     private getProfileData (apiService: AppService, id: number) {
-        apiService.partnerReadById(id).subscribe((data: IProfile) => {
+        apiService.me().subscribe((data: any) => {
             this.disabledReferId = this.tokenStorage.isAuthorized();
-            this.profile = data;
+            this.profile = {
+                id: data.id,
+                firstName: data.firstName,
+                secondName: data.lastName,
+                iconUrl: data.avatarUrl,
+                referId: data.refer.id,
+                phoneNumber: data.phoneNumber,
+                email: data.email,
+                password: data.login,
+                questionWhoAreYou: data.questions.whoAreYou,
+                questionWhy: data.questions.why,
+                questionValue: data.questions.value,
+                questionStaff: data.questions.staff,
+                questionResults: data.questions.results,
+                login: data.login,
+                facebook: data.contacts.facebook,
+                telegram: data.contacts.telegram,
+                skype: data.contacts.skype,
+                viber: data.contacts.viber,
+                vk: data.contacts.vk,
+                whatsapp: data.contacts.whatsapp,
+            };
             this.setMessengersModel(data);
             this.disabledLogin = !!this.profile.login && this.profile.login.length > 0;
             this.passwordIsExist = this.checkPasswordFromServer(data.password);

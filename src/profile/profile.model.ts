@@ -19,6 +19,6 @@ export interface IProfile {
     viber?: string;
     vk?: string;
     whatsapp?: string;
-    subscription_end: string;
-    subscription_name: string;
+    subscription_end?: string;
+    subscription_name?: string;
 }

@@ -40,15 +40,15 @@ export class AppService {
         return this.http.put(`${config.API_BASE_URL}/reset-password`, data);
     }
 
-    partnerCreate (data: ICreate) {
-        return this.http.put(`${config.API_BASE_URL}/partner`, data);
+    partnerCreate (data: any) {
+        return this.http.post(`${config.BOT_BASE_URL}/consultants`, data);
     }
 
     partnerReadById (id: number) {
-        return this.http.get(`${config.API_BASE_URL}/partner/byId?id=${id}`);
+        return this.http.get(`${config.BOT_BASE_URL}/consultants?id=${id}`);
     }
     partnerReadByReferId (referId: string) {
-        return this.http.get(`${config.API_BASE_URL}/partner/byReferId?referId=${referId}`);
+        return this.http.get(`${config.BOT_BASE_URL}/consultants?login=${referId}`);
     }
 
     partnerUpdate (id: number, data: any, token?: string) {

@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
     dataBaseUrl: string = config.DATA_BASE_URL;
     createPartnerUrl: string = config.CREATE_PARTNER_URL;
     config = config;
+    partnerInfo: any;
 
     constructor (private apiService: AppService, private router: Router, private aRouter: ActivatedRoute,
                  private formBuilder: FormBuilder, private notificationService: NotificationService,
@@ -34,9 +35,12 @@ export class ProfileComponent implements OnInit {
     ngOnInit(): void {
         this.aRouter.queryParams.subscribe(params => {
             this.partnerId = Number.parseInt(params.id);
+            this.partnerInfo = JSON.parse(atob(params.p))
             this.getProfileData(this.apiService, this.partnerId);
             this.messengers = this.setInitialMessengersModel();
             this.profile = this.setInitialProfileModel();
+            this.profile.firstName = this.partnerInfo.firstName;
+                        this.profile.secondName = this.partnerInfo.lastName;
             this.confirmPassword = '';
             this.isCopied = false;
         });
@@ -118,7 +122,7 @@ export class ProfileComponent implements OnInit {
             this.invalidEmail || this.wrongConfirmPassword || this.invalidPassword || this.invalidLogin ||
             this.invalidReferId;
 
-        if (!this.errorEmptyMessage && !this.errorInvalidDataMessage && !this.emptyIconUrl) {
+        if (true || !this.errorEmptyMessage && !this.errorInvalidDataMessage && !this.emptyIconUrl) {
             const data = this.profile;
             const { password, ...dataWithoutPassword } = data;
             const requestData = !this.passwordIsExist ? data : dataWithoutPassword;
@@ -128,26 +132,31 @@ export class ProfileComponent implements OnInit {
             requestData.vk = this.messengers[3].value;
             requestData.viber = this.messengers[4].value;
             requestData.whatsapp = this.messengers[5].value;
-            this.apiService.partnerUpdate(this.partnerId, requestData, localStorage.token).subscribe((response: IProfile) => {
-                if (!!this.tokenStorage.isAuthorized()) {
-                    this.profile = response;
-                    this.setMessengersModel(response);
-                    this.passwordIsExist = this.checkPasswordFromServer(response.password);
-                    this.disabledLogin = !this.emptyLogin;
-                    this.disabledReferId = true;
-                    this.router.navigateByUrl('/index')
-                } else {
-                    this.router.navigateByUrl('/sign-in');
-                }
-            }, error => {
-                if (error.status === 400 && error.error.length > 0) {
-                    this.notUniqueLogin = error.error.find((item: any) => item.field === 'login' && item.error === 'not unique');
-                    this.notUniqueEmail = error.error.find((item: any) => item.field === 'email' && item.error === 'not unique');
-                    this.showErrorAlert();
-                }
-            });
-            this.errorEmptyMessage = false;
-            this.errorInvalidDataMessage = false;
+            console.log(requestData)
+            this.apiService.partnerCreate({ ...requestData, lastName: requestData.secondName }).subscribe(response => {
+
+            })
+//             this.apiService.partnerCreate()
+//             this.apiService.partnerUpdate(this.partnerId, requestData, localStorage.token).subscribe((response: IProfile) => {
+//                 if (!!this.tokenStorage.isAuthorized()) {
+//                     this.profile = response;
+//                     this.setMessengersModel(response);
+//                     this.passwordIsExist = this.checkPasswordFromServer(response.password);
+//                     this.disabledLogin = !this.emptyLogin;
+//                     this.disabledReferId = true;
+//                     this.router.navigateByUrl('/index')
+//                 } else {
+//                     this.router.navigateByUrl('/sign-in');
+//                 }
+//             }, error => {
+//                 if (error.status === 400 && error.error.length > 0) {
+//                     this.notUniqueLogin = error.error.find((item: any) => item.field === 'login' && item.error === 'not unique');
+//                     this.notUniqueEmail = error.error.find((item: any) => item.field === 'email' && item.error === 'not unique');
+//                     this.showErrorAlert();
+//                 }
+//             });
+//             this.errorEmptyMessage = false;
+//             this.errorInvalidDataMessage = false;
         } else {
             this.showErrorAlert();
         }

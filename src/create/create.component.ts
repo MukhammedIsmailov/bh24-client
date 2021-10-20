@@ -60,14 +60,8 @@ export class CreateComponent implements OnInit {
             } else {
                 this.apiService.getCountry().subscribe((response: any) => {
                     this.partnerInfo.country = response.country.toLowerCase();
-                    console.log(response.country)
                     const data = {...this.partnerInfo, leaderId: this.leader.id};
-                    this.apiService.partnerCreate(data).subscribe(async (data: any) => {
-                        localStorage.setItem('token', data.token);
-                        this.router.navigateByUrl(`/profile?id=${data.id}`);
-                    }, error => {
-                        this.viewErrorMessage = true;
-                    });
+                    this.router.navigateByUrl(`profile?p=${btoa(JSON.stringify(data))}`);
                 });
             }
         } else {
@@ -76,8 +70,31 @@ export class CreateComponent implements OnInit {
     }
 
     private getLeader (apiService: AppService, referId: string) {
-        apiService.partnerReadByReferId(referId).subscribe((data: IProfile) => {
-            this.leader = data;
+        apiService.partnerReadByReferId(referId).subscribe((data: any) => {
+            this.leader = {
+                id: data.id,
+                firstName: data.firstName,
+                secondName: data.lastName,
+                iconUrl: data.avatarUrl,
+                referId: data.refer?.id,
+                phoneNumber: data.phoneNumber,
+                email: data.email,
+                password: '******',
+                questionWhoAreYou: data.questions.whoAreYou,
+                questionWhy: data.questions.why,
+                questionValue: data.questions.value,
+                questionStaff: data.questions.staff,
+                questionResults: data.questions.results,
+                login: data.questions.login,
+                facebook: data.contacts.facebook,
+                telegram: data.contacts.telegram,
+                skype: data.contacts.skype,
+                viber: data.contacts.viber,
+                vk: data.contacts.vk,
+                whatsapp: data.contacts.whatsapp,
+                subscription_end: null,
+                subscription_name: null,
+            }
             this.isLeaderDataAvailable = true;
             this.viewErrorMessage = false;
         });

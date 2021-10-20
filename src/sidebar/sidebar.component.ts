@@ -52,24 +52,26 @@ export class SidebarComponent {
     }
 
     async goTo(item: MenuItems, allowUnpayed?: boolean) {
-        if (this.isEnabled() || allowUnpayed) {
-            this.activeMenuItem = item;
-            await this.router.navigateByUrl(routes[item.valueOf()]);
-        } else {
-            await this.router.navigateByUrl(routes[MenuItems.Payment]);
-        }
+        await this.router.navigateByUrl(routes[item.valueOf()]);
+//         if (this.isEnabled() || allowUnpayed) {
+//             this.activeMenuItem = item;
+//             await this.router.navigateByUrl(routes[item.valueOf()]);
+//         } else {
+//             await this.router.navigateByUrl(routes[MenuItems.Payment]);
+//         }
     }
 
     async redirect (pageKey: string, allowUnpayed: boolean) {
-        if (allowUnpayed) {
-            await this.router.navigateByUrl(`/page?key=${pageKey}`);
-        } else {
-            if (+new Date(localStorage.subEnd) - +new Date() > 0) {
-                await this.router.navigateByUrl(`/page?key=${pageKey}`);
-            } else {
-                await this.router.navigateByUrl(`/payment`);
-            }
-        }
+        await this.router.navigateByUrl(`/page?key=${pageKey}`);
+//         if (allowUnpayed) {
+//             await this.router.navigateByUrl(`/page?key=${pageKey}`);
+//         } else {
+//             if (+new Date(localStorage.subEnd) - +new Date() > 0) {
+//                 await this.router.navigateByUrl(`/page?key=${pageKey}`);
+//             } else {
+//                 await this.router.navigateByUrl(`/payment`);
+//             }
+//         }
     }
 
     async redirectSystemPage (pageKey: string) {

@@ -189,10 +189,10 @@ export class StatisticsComponent implements OnInit {
             partner: this.options.partnerFilter,
             noncooperation: this.options.renouncementFilter,
             contact: this.options.contactFilter,
-            contactsSeen: this.options.contactsSeeFilter,
-            consultationOrdering: this.options.feedbackFilter,
-            dateFrom: this.options.startDateFilter,
-            dateTo: this.options.endDateFilter
+            contacts: this.options.contactsSeeFilter,
+            consultation: this.options.feedbackFilter,
+            startDate: parseInt(this.options.startDateFilter, 10) * 1000,
+            endDate: parseInt(this.options.endDateFilter, 10) * 1000
         }).subscribe((data: any) => {
             this.wards = data.map((item: any) => {
                 if (item.status == 'noncooperation') {
@@ -204,7 +204,7 @@ export class StatisticsComponent implements OnInit {
                     second_name: item.user.lastName,
                     icon_url: '',
                     status: item.status,
-                    country: 'ua',
+                    country: item.user.country,
                     note: item.note,
                     from: 'telegram',
                     step: 1,

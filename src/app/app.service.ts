@@ -166,8 +166,32 @@ export class AppService {
     }
 
     getStatistics (data: any) {
-        let query = `${config.BOT_BASE_URL}/users-mailings?mailingId=8`;
-        return this.http.get(query);
+        let query = `${config.BOT_BASE_URL}/users-mailings/all?telegram=1`;
+        if (data.mailingId) {
+            query += `&mid=${data.mailingId}`
+        }
+        if (data.startDate && data.endDate) {
+            query += `&start=${data.startDate}&end=${data.endDate}`;
+        }
+        if (data.contacts) {
+            query += `&contacts=1`;
+        }
+        if (data.consultation) {
+            query += `&consultation=1`;
+        }
+        if (data.contact) {
+            query += '&contact=1';
+        }
+        if (data.partner) {
+            query += '&partner=1';
+        }
+        if (data.client) {
+            query +='&partner=1';
+        }
+        if (data.noncooperation) {
+            query += '&noncooperation=1';
+        }
+        return this.http.get(query, this._options);
     }
 
     getAllStatistics () {

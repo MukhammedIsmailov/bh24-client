@@ -27,6 +27,7 @@ export class LoginComponent {
             this.tokenStorage.setAccessToken(data.jwt);
             this.tokenStorage.setUserId(data.userId);
             this.tokenStorage.setReferId(data.referId);
+            this.tokenStorage.setLogin(this.login);
             await this.router.navigateByUrl('/index');
         }, error => {
             if(error.status === 403) {

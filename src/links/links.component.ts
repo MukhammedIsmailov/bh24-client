@@ -19,9 +19,10 @@ export class LinksComponent implements OnInit {
     createUrl: string;
 
     ngOnInit(): void {
+        const login = localStorage.login;
         this.tokenStorage.getReferId().subscribe((referId: string) => {
-            this.createUrl = `${config.CREATE_PARTNER_URL}?referId=${referId}`;
-            this.landingUrl = `${config.LANDING_URL}?referId=${referId}`;
+            this.createUrl = `${config.CREATE_PARTNER_URL}?referId=${login}`;
+            this.landingUrl = `${config.LANDING_URL}?referId=${login}`;
             this.isLinksDataAvailable = true;
         });
     }

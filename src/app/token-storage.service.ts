@@ -57,6 +57,11 @@ export class TokenStorage {
         return this;
     }
 
+    public setLogin (login: string): TokenStorage {
+        localStorage.setItem('login', login);
+        return this;
+    }
+
     /**
      * Remove token and userId
      */

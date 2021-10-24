@@ -60,8 +60,35 @@ export class CreateComponent implements OnInit {
             } else {
                 this.apiService.getCountry().subscribe((response: any) => {
                     this.partnerInfo.country = response.country.toLowerCase();
-                    const data = {...this.partnerInfo, leaderId: this.leader.id};
-                    this.router.navigateByUrl(`profile?p=${btoa(JSON.stringify(data))}`);
+                    const login = Math.random().toString();
+                    this.apiService.partnerCreate({
+                            firstName: this.partnerInfo.firstName,
+                            lastName: this.partnerInfo.secondName,
+                            phoneNumber: '',
+                            email: '',
+                            login,
+                            password: '',
+                            facebook: '',
+                            telegram: '',
+                            skype: null,
+                            viber: null,
+                            vk: null,
+                            whatsapp: null,
+                            questionWhoAreYou: '',
+                            questionWhy: '',
+                            questionValue: '',
+                            questionStaff: '',
+                            questionResults: '',
+                            referId: this.leader.id
+                    }).subscribe(response => {
+                        this.apiService.login({login, password: ''}).subscribe((data: any) => {
+                            this.tokenService.setAccessToken(data.jwt);
+                            this.tokenService.setUserId(data.userId);
+                            this.tokenService.setReferId(data.referId);
+                            this.tokenService.setLogin(login);
+                            this.router.navigateByUrl('/profile');
+                        })
+                    })
                 });
             }
         } else {

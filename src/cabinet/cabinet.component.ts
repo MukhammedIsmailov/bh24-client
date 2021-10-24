@@ -43,64 +43,76 @@ export class CabinetComponent implements OnInit{
     constructor (private apiService: AppService, private router: Router, private sanitizer: DomSanitizer) {}
 
     ngOnInit(): void {
-        this.apiService.getStatistics({
-            search: '',
-            contact: true,
-            noncooperation: true,
-            client: true,
-            partner: true,
-            telegram: true,
-            facebook: true,
-            dateFrom: 1,
-            dateTo: 9999999999
-        }).subscribe(async (data: any) => {
+        this.apiService.getStatistics({}).subscribe(async (data: any) => {
             this.latestRegistrations = {
                 registrations: data.map((item: any) => ({
-                    firstName: item.firstName,
-                    secondName: item.lastName,
+                    firstName: item.user.firstName,
+                    secondName: item.user.lastName,
                     createdDate: item.subscriptionDate,
-                    country: item.country
+                    country: item.user.country
                 })),
                 count: data.length
             }
             this.users = data;
             this.stat = {
                 sc: this.users.length,
-                cf: this.users.filter(item =>
-                    item.lessons.filter((lesson: any) => !!lesson.readingDate).length == 4
-                ).length,
+                cf: 0,
                 fb: this.users.filter(user => !!user.consultationOrderingDate).length,
                 pa: this.users.filter(user => user.status == 'client' || user.status == 'partner').length
             }
-            this.apiService.statisticsRead(null, null, null).subscribe(async (data: any) => {
-                const vl = data.counts[0].VL;
-                const percent = 100;
-
-                this.statistics = {
-                    vl: {
-                        value: vl,
-                        percent
-                    },
-                    sc: {
-                        value: this.stat.sc,
-                        percent: ((this.stat.sc - this.stat.cf) / vl) * percent,
-                    },
-                    cf: {
-                        value: this.stat.cf,
-                        percent: (this.stat.cf / vl) * percent,
-                    },
-                    fb: {
-                        value: this.stat.fb,
-                        percent: (this.stat.fb / vl) * percent,
-                    },
-                    pa: {
-                        value: this.stat.pa,
-                        percent: (this.stat.pa / vl) * percent
-                    }
-                };
-                this.isStatisticsDataAvailable = true;
-                this.isRegistrationsDataAvailable = true;
-            });
+            this.statistics = {
+                                vl: {
+                                    value: 'н/д',
+                                    percent: 1
+                                },
+                                sc: {
+                                    value: this.stat.sc,
+                                    percent: 100,
+                                },
+                                cf: {
+                                    value: 'н/д',
+                                    percent: 0,
+                                },
+                                fb: {
+                                    value: this.stat.fb,
+                                    percent: this.stat.fb / this.stat.sc * 100,
+                                },
+                                pa: {
+                                    value: this.stat.pa,
+                                    percent: this.stat.pa / this.stat.sc * 100
+                                }
+            };
+            this.isStatisticsDataAvailable = true;
+            this.isRegistrationsDataAvailable = true;
+//             this.apiService.statisticsRead(null, null, null).subscribe(async (data: any) => {
+//                 const vl = data.counts[0].VL;
+//                 const percent = 100;
+//
+//                 this.statistics = {
+//                     vl: {
+//                         value: vl,
+//                         percent
+//                     },
+//                     sc: {
+//                         value: this.stat.sc,
+//                         percent: ((this.stat.sc - this.stat.cf) / vl) * percent,
+//                     },
+//                     cf: {
+//                         value: this.stat.cf,
+//                         percent: (this.stat.cf / vl) * percent,
+//                     },
+//                     fb: {
+//                         value: this.stat.fb,
+//                         percent: (this.stat.fb / vl) * percent,
+//                     },
+//                     pa: {
+//                         value: this.stat.pa,
+//                         percent: (this.stat.pa / vl) * percent
+//                     }
+//                 };
+//                 this.isStatisticsDataAvailable = true;
+//                 this.isRegistrationsDataAvailable = true;
+//             });
         });
         /*this.apiService.latestRegistrationsRead().subscribe((data: ILatestRegistration) => {
             this.latestRegistrations = data;
@@ -138,7 +150,7 @@ export class CabinetComponent implements OnInit{
                     if (leaderIndex != -1) {
                         leaders[leaderIndex].count++;
                     } else {
-                        const leader: any = await this.apiService.partnerReadById(leaderId).toPromise();
+                        const leader: any = await this.apiService.partnerReadById(localStorage.userId).toPromise();
                         leaders.push({
                             id: leaderId,
                             firstName: leader.firstName,

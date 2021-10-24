@@ -195,7 +195,7 @@ export class AppService {
     }
 
     getAllStatistics () {
-        return this.http.get(`${config.BOT_BASE_URL}/users-mailings/mailingId=8`);
+        return this.http.get(`${config.BOT_BASE_URL}/users-mailings/all`, this._options);
     }
 
     updateSubscriber (id: number|string, data: any) {

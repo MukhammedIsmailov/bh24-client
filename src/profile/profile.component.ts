@@ -35,12 +35,11 @@ export class ProfileComponent implements OnInit {
     ngOnInit(): void {
         this.aRouter.queryParams.subscribe(params => {
             this.partnerId = Number.parseInt(params.id);
-            this.partnerInfo = JSON.parse(atob(params.p))
             this.getProfileData(this.apiService, this.partnerId);
             this.messengers = this.setInitialMessengersModel();
             this.profile = this.setInitialProfileModel();
             this.profile.firstName = this.partnerInfo.firstName;
-                        this.profile.secondName = this.partnerInfo.lastName;
+            this.profile.secondName = this.partnerInfo.lastName;
             this.confirmPassword = '';
             this.isCopied = false;
         });
@@ -133,8 +132,8 @@ export class ProfileComponent implements OnInit {
             requestData.viber = this.messengers[4].value;
             requestData.whatsapp = this.messengers[5].value;
             console.log(requestData)
-            this.apiService.partnerCreate({ ...requestData, lastName: requestData.secondName }).subscribe(response => {
-
+            this.apiService.partnerUpdate({ ...requestData, lastName: requestData.secondName }).subscribe(response => {
+                    alert('sent')
             })
 //             this.apiService.partnerCreate()
 //             this.apiService.partnerUpdate(this.partnerId, requestData, localStorage.token).subscribe((response: IProfile) => {
@@ -308,7 +307,7 @@ export class ProfileComponent implements OnInit {
             this.notificationService.error('Ошибка!', 'Все поля обязательны для заполнения!');
         } else {
             if (this.emptyIconUrl) {
-                this.notificationService.error('Ошибка!', 'Звгрузите пожалуйста фотографию профиля!')
+                this.notificationService.error('Ошибка!', 'Загрузите, пожалуйста, фотографию профиля!')
             } else {
                 if (this.errorInvalidDataMessage) {
                     this.notificationService.error('Ошибка!', 'Проверьте правильность введенных данных и повторите попытку!');

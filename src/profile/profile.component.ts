@@ -125,15 +125,15 @@ export class ProfileComponent implements OnInit {
             const data = this.profile;
             const { password, ...dataWithoutPassword } = data;
             const requestData = !this.passwordIsExist ? data : dataWithoutPassword;
-            requestData.facebook = this.messengers[0].value;
-            requestData.telegram = this.messengers[1].value;
-            requestData.skype = this.messengers[2].value;
-            requestData.vk = this.messengers[3].value;
-            requestData.viber = this.messengers[4].value;
-            requestData.whatsapp = this.messengers[5].value;
+            requestData.facebook = this.messengers[0].value ?? '';
+            requestData.telegram = this.messengers[1].value ?? '';
+            requestData.skype = this.messengers[2].value ?? '';
+            requestData.vk = this.messengers[3].value ?? '';
+            requestData.viber = this.messengers[4].value ?? '';
+            requestData.whatsapp = this.messengers[5].value ?? '';
             console.log(requestData)
             this.apiService.partnerUpdate({ ...requestData, lastName: requestData.secondName }).subscribe(response => {
-                    alert('sent')
+                
             })
 //             this.apiService.partnerCreate()
 //             this.apiService.partnerUpdate(this.partnerId, requestData, localStorage.token).subscribe((response: IProfile) => {
@@ -161,13 +161,13 @@ export class ProfileComponent implements OnInit {
         }
     }
 
-    private setMessengersModel (data: IProfile) {
-        this.messengers[0].value = data.facebook;
-        this.messengers[1].value = data.telegram;
-        this.messengers[2].value = data.skype;
-        this.messengers[3].value = data.vk;
-        this.messengers[4].value = data.viber;
-        this.messengers[5].value = data.whatsapp;
+    private setMessengersModel (data: any) {
+        this.messengers[0].value = data.contacts.facebook;
+        this.messengers[1].value = data.contacts.telegram;
+        this.messengers[2].value = data.contacts.skype;
+        this.messengers[3].value = data.contacts.vk;
+        this.messengers[4].value = data.contacts.viber;
+        this.messengers[5].value = data.contacts.whatsapp;
     }
 
     private setInitialMessengersModel () : IMessenger[] {

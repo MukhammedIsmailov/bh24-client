@@ -44,6 +44,7 @@ export interface IWard {
     mobiPartnerInfoActive?: boolean;
     active: boolean;
     lessons: any
+    mailing: string;
 }
 
 export interface IWardOptions {

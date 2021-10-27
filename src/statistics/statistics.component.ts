@@ -214,7 +214,8 @@ export class StatisticsComponent implements OnInit {
                     role: 'user',
                     username: item.user.messengerInfo.username,
                     active: !!item.consultationOrderingDate,
-                    lessons: []
+                    lessons: [],
+                    mailing: item.mailing.key
                 } as IWard;
             });
             this.isWardsDataAvailable = true;

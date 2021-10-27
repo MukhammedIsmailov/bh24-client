@@ -385,7 +385,7 @@
                     <div class="partners__td">Телефон</div>
                     <div class="partners__td">Переход</div>
                     <div class="partners__td">Текущий урок</div>
-                    <div class="partners__td">Источник трафика</div>
+                    <div class="partners__td">Рассылка</div>
                     <div class="partners__td"></div>
                 </div>
                 <div class="partners__tbody">
@@ -479,7 +479,7 @@
                                 <div class="partners__lesson-date">{{ ward.last_send_time | date: 'dd.MM.yyyy' }}</div>
                             </div>
                         </div>
-                        <div class="partners__td">utm_1</div>
+                        <div class="partners__td">{{ward.mailing}}</div>
                         <div class="partners__td">
                             <div class="partners__comment">{{ ward.note }}</div>
                             <div class="partners__drop-toggle" [ngClass]="{active: ward.mobiPartnerInfoActive}" (click)="ward.mobiPartnerInfoActive = !ward.mobiPartnerInfoActive">
@@ -552,7 +552,7 @@
                                 <div class="partners__drop-tr">
                                     <div class="partners__drop-td">
                                         <div class="partners__drop-title">Источник</div>
-                                        <div class="partners__drop-value">utm_1</div>
+                                        <div class="partners__drop-value">{{ward.mailing}}</div>
                                     </div>
                                 </div>
                                 <div class="partners__drop-tr">
